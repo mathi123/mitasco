@@ -1,0 +1,23 @@
+{
+  "name": "test_node",
+  "version": "0.0.1",
+  "description": "Testing node application",
+  "main": "bin/app.js",
+  "bin": {
+    "test_node": "app.js"
+  },
+  "dependencies": {
+    "express": "^4.13.4",
+    "pg": "^4.5.3"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-copy": "0.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mathias Colpaert",
+  "license": "MIT"
+}
