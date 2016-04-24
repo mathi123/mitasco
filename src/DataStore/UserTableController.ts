@@ -1,4 +1,4 @@
-import { QueryConfig } from 'pg'; 
+import { QueryConfig } from 'pg';
 import { QueryResult } from 'pg';
 
 import { AbstractTableController } from './AbstractTableController';
@@ -7,17 +7,17 @@ import { SearchArgument } from '../DTOs/SearchArgument';
 import { QueryNames } from './QueryNames';
 
 export class UserTableController extends AbstractTableController {
-    public defaultSortColumn : string = 'email';
-    public sortColumnOptions : string[] = ['email', 'fullname'];
-    
+    public defaultSortColumn: string = 'email';
+    public sortColumnOptions: string[] = ['email', 'fullname'];
+
     constructor() {
         super();
     }
-    
-    public search(argument : SearchArgument, success : (results : User[]) => void, failed : (err : Error) => void) : void {
-        let preparedStatement : QueryConfig = {
-            name : QueryNames.UserTable_Search,
-            text : 
+
+    public search(argument: SearchArgument, success: (results: User[]) => void, failed: (err: Error) => void): void {
+        let preparedStatement: QueryConfig = {
+            name: QueryNames.UserTable_Search,
+            text:
             `SELECT * FROM users 
             WHERE email LIKE $1 OR fullname LIKE $1 
             ORDER BY 
@@ -34,28 +34,25 @@ export class UserTableController extends AbstractTableController {
                     END
                 ELSE '' END DESC
             OFFSET $4 LIMIT $5`,
-            values : [ '%' + argument.query + '%', argument.sortColumn, argument.sortDirection, argument.skip, argument.take]
-        }; 
-        
+            values: ['%' + argument.query + '%', argument.sortColumn, argument.sortDirection, argument.skip, argument.take]
+        };
+
         let query = this._client.query(preparedStatement, (err, result) => {
-            
-            if(err)
-            {
+
+            if (err) {
                 failed(err);
             }
-            else
-            {
-                let searchResult = result.rows.map((row) => 
-                { 
+            else {
+                let searchResult = result.rows.map((row) => {
                     let rec = new User();
                     rec.id = row['id'];
                     rec.email = row['email'];
                     rec.fullname = row['fullname'];
                     return rec;
                 });
-                
+
                 success(searchResult);
             }
         });
-    }      
+    }
 }

@@ -1,9 +1,9 @@
 export class CompanyTag {
     public id: number;
     public tag: string;
-    
+
     constructor() {
-        
+
     }
 
     public validate(): boolean {

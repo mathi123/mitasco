@@ -5,7 +5,7 @@ export class SupplierReview {
     constructor() {
 
     }
-    
+
     public toString(): string {
         return `${this.rating} - ${this.message}`;
     }

@@ -10,18 +10,18 @@ import * as route_user from './routes/user.route';
 
 class StartUp {
     public static main(): number {
-        let app =  express();
-        
+        let app = express();
+
         app.set('port', process.env.PORT || 3000);
-        
+
         // Configure routes
         route_index.configureRoute(app);
         route_company.configureRoute(app);
         route_user.configureRoute(app);
-        
-        http.createServer(app).listen(app.get('port'), function(){
+
+        http.createServer(app).listen(app.get('port'), function () {
             console.log("Express server listening on port " + app.get('port'));
-            });
+        });
         /*console.log('Hello world!');
 
         let customerQueryer = new CustomerTableController();
@@ -41,11 +41,11 @@ class StartUp {
                 
             }, StartUp.dataBaseErrorHandler);
         });*/
-        
+
         return 0;
     }
-    
-    public static dataBaseErrorHandler(err : Error) : void {
+
+    public static dataBaseErrorHandler(err: Error): void {
         console.log("error in handling database request");
         console.log(err);
     }

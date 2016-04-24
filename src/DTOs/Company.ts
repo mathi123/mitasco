@@ -13,7 +13,7 @@ export class Company {
     constructor() {
 
     }
-    
+
     public validate(): boolean {
         if (this.name) {
             return this.name.length > 3;

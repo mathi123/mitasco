@@ -5,9 +5,9 @@ export class User {
 
     constructor() {
 
-    }  
-    
-    public toString() : string {
+    }
+
+    public toString(): string {
         return `${this.email} (${this.fullname})`;
-    }  
+    }
 }
