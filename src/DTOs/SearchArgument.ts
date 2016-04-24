@@ -12,6 +12,10 @@ export class SearchArgument {
     public sortColumn: string;
 
     constructor() {
-
+        this.query = '';
+        this.skip = 0;
+        this.take = 20;
+        this.sortDirection = SortDirection.Acscending;
+        this.sortColumn = '';
     }
 }
