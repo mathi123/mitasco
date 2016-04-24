@@ -1,6 +1,6 @@
 {
     "user" : "pg-mitasco",
     "password": "pg-mitasco",
-    "database": "DBTest01",
+    "database": "mitasco-dev",
     "host": "localhost"
 }
