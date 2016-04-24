@@ -6,6 +6,7 @@ import * as http from 'http';
 // Routes
 import * as route_index from './routes/index.route';
 import * as route_company from './routes/company.route';
+import * as route_user from './routes/user.route';
 
 class StartUp {
     public static main(): number {
@@ -16,7 +17,7 @@ class StartUp {
         // Configure routes
         route_index.configureRoute(app);
         route_company.configureRoute(app);
-        
+        route_user.configureRoute(app);
         
         http.createServer(app).listen(app.get('port'), function(){
             console.log("Express server listening on port " + app.get('port'));
