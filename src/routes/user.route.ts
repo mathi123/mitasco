@@ -34,9 +34,10 @@ function search(req: Request, resp: Response) {
 
     databaseSource.connect((err: Error) => {
         let res = databaseSource.search(argument, (users) => {
-            var data = "";
-            users.forEach(user => {
-                data = `${data} \n ${user.toString()}`;
+            var data = "resultaten: " + users.count;
+            users.results.forEach(user => {
+                data = `${data}
+                ${user.toString()}`;
             });
 
             databaseSource.close();
