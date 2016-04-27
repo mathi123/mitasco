@@ -34,12 +34,11 @@ function search(req: Request, resp: Response) {
 
     databaseSource.connect((err: Error) => {
         let res = databaseSource.search(argument, (users) => {
-            var data = "resultaten: " + users.count;
+            var data = `resultaten:  <b>${ users.count }</b><lu> `;
             users.results.forEach(user => {
-                data = `${data}
-                ${user.toString()}`;
+                data += `<li>${user.toString()}</li>`;
             });
-
+            data += '</ul>'
             databaseSource.close();
 
             resp.send(data);
