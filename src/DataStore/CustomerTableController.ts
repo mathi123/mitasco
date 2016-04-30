@@ -1,5 +1,4 @@
 import { QueryConfig } from 'pg';
-import { QueryResult } from 'pg';
 
 import { AbstractTableController } from './AbstractTableController';
 import { Company } from '../DTOs/Company';

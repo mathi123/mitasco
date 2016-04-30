@@ -1,5 +1,3 @@
-import { CustomerTableController } from './DataStore/CustomerTableController';
-import { SearchArgument } from './DTOs/SearchArgument';
 import * as express from 'express';
 import * as http from 'http';
 

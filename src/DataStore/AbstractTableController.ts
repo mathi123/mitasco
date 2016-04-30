@@ -1,4 +1,4 @@
-import { Client, ClientConfig } from 'pg';
+import { Client } from 'pg';
 import * as fs from 'fs';
 
 export abstract class AbstractTableController {

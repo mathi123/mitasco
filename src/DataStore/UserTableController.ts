@@ -1,5 +1,4 @@
 import { QueryConfig } from 'pg';
-import { QueryResult } from 'pg';
 
 import { AbstractTableController } from './AbstractTableController';
 import { User } from '../DTOs/User';
@@ -28,6 +27,11 @@ export class UserTableController extends AbstractTableController {
             if (err0) {
                 failed(err0);
             } else {
+                let total = result0.rows[0]['count'];
+                if(total <= argument.skip){
+                    argument.skip = 0;
+                }
+                
                 let selectQuery: QueryConfig = {
                     name: QueryNames.UserTable_Search,
                     text:
@@ -56,8 +60,8 @@ export class UserTableController extends AbstractTableController {
                     }
                     else {
                         let searchResult = new PartialResultList<User>();
-                        searchResult.count = result0.rows[0]['count'];
-                        
+                        searchResult.count = total;
+                        searchResult.skipped = argument.skip;
                         searchResult.results = result.rows.map((row) => {
                             let rec = new User();
                             rec.id = row['id'];
