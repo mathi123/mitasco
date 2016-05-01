@@ -1,11 +1,17 @@
 export class Utils {
     public static isPositiveInteger(obj: any): boolean {
+        if(Array.isArray(obj)){
+            return false;
+        }
+
         let nr = parseFloat(obj);
 
         if (!isNaN(nr)) {
             if (isFinite(nr)) {
-                if (nr >= 0) {
-                    return true;
+                if(nr % 1 == 0) {
+                    if (nr >= 0) {
+                        return true;
+                    }
                 }
             }
         }
