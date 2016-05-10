@@ -5,7 +5,7 @@
         "sourceMap": true,
         "rootDir": "src",
         "outDir": "bin",
-        "moduleResolution": "node"
+        "moduleResolution": "classic"
     },
     "exclude": [
         "typings",
