@@ -2,4 +2,5 @@ language: node_js
 node_js:
   - "5.10"
 before_install:
+  - "npm install -g typings"
   - "typings install"
