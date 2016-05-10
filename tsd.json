@@ -22,6 +22,15 @@
     },
     "mime/mime.d.ts": {
       "commit": "94d8775a947f626269b06ccadd6f5e61839389d0"
+    },
+    "mocha/mocha.d.ts": {
+      "commit": "6bcec67b84f8b9b107ed722a16bc8c9a61b5a453"
+    },
+    "chai/chai.d.ts": {
+      "commit": "6bcec67b84f8b9b107ed722a16bc8c9a61b5a453"
+    },
+    "assertion-error/assertion-error.d.ts": {
+      "commit": "6bcec67b84f8b9b107ed722a16bc8c9a61b5a453"
     }
   }
 }
