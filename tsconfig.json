@@ -6,5 +6,9 @@
         "rootDir": "src",
         "outDir": "bin",
         "moduleResolution": "node"
-    }
+    },
+    "exclude": [
+        "typings",
+        "node_modules"
+    ]
 }

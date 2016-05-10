@@ -1,36 +1,12 @@
 {
-  "version": "v4",
-  "repo": "borisyankov/DefinitelyTyped",
-  "ref": "master",
-  "path": "typings",
-  "bundle": "typings/tsd.d.ts",
-  "installed": {
-    "pg/pg.d.ts": {
-      "commit": "94d8775a947f626269b06ccadd6f5e61839389d0"
-    },
-    "node/node.d.ts": {
-      "commit": "94d8775a947f626269b06ccadd6f5e61839389d0"
-    },
-    "express/express.d.ts": {
-      "commit": "94d8775a947f626269b06ccadd6f5e61839389d0"
-    },
-    "serve-static/serve-static.d.ts": {
-      "commit": "94d8775a947f626269b06ccadd6f5e61839389d0"
-    },
-    "express-serve-static-core/express-serve-static-core.d.ts": {
-      "commit": "94d8775a947f626269b06ccadd6f5e61839389d0"
-    },
-    "mime/mime.d.ts": {
-      "commit": "94d8775a947f626269b06ccadd6f5e61839389d0"
-    },
-    "mocha/mocha.d.ts": {
-      "commit": "6bcec67b84f8b9b107ed722a16bc8c9a61b5a453"
-    },
-    "chai/chai.d.ts": {
-      "commit": "6bcec67b84f8b9b107ed722a16bc8c9a61b5a453"
-    },
-    "assertion-error/assertion-error.d.ts": {
-      "commit": "6bcec67b84f8b9b107ed722a16bc8c9a61b5a453"
-    }
+  "name": "test_node",
+  "version": false,
+  "dependencies": {
+    "pg": "registry:npm/pg#4.5.1+20160505155734"
+  },
+  "ambientDependencies": {
+    "chai": "registry:dt/chai#3.4.0+20160317120654",
+    "express": "registry:dt/express#4.0.0+20160317120654",
+    "mocha": "registry:dt/mocha#2.2.5+20160317120654"
   }
 }
