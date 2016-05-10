@@ -15,5 +15,8 @@ Mitasco project repository
 # Develop
 - tsc -w
 
+# Test
+- npm test
+
 # Run
-node bin/app.js
+- node bin/app.js
