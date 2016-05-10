@@ -5,6 +5,6 @@ before_install:
   - npm install -g typings gulp typescript
 before_script:
   - npm install
-  - typings install
+  - tsd install
   - tsc
   - gulp
