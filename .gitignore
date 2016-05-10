@@ -42,5 +42,8 @@ typings
 # Visual studio code configuration
 .vscode
 
+# Webstorm configuration
+.idea
+
 # Apple files
 .DS_Store
