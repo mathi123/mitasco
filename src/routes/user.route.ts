@@ -1,8 +1,8 @@
 import { Application, Request, Response } from 'express';
 import { UserTableController } from '../DataStore/UserTableController';
 import { SearchArgument, SortDirection } from '../DTOs/SearchArgument';
+import { Utils } from "../utils";
 
-import { Utils } from '../Utils';
 
 export function configureRoute(app: Application) {
     app.get('/user', search);

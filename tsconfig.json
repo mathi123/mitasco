@@ -3,8 +3,11 @@
         "target": "es5",
         "module": "commonjs",
         "sourceMap": true,
-        "rootDir": "src",
-        "outDir": "bin",
-        "moduleResolution": "node"
-    }
+        "outDir": "bin"
+    },
+    "exclude": [
+        "typings/browser.d.ts",
+        "typings/browser",
+        "node_modules"
+    ]
 }

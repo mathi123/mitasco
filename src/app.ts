@@ -21,7 +21,7 @@ class StartUp {
             console.log("Express server listening on port " + app.get('port'));
         });
         /*console.log('Hello world!');
-
+  
         let customerQueryer = new CustomerTableController();
         let argument = new SearchArgument();
         

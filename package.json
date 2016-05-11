@@ -18,9 +18,11 @@
     "gulp-copy": "0.0.2",
     "karma": "^0.13.22",
     "karma-mocha": "^0.2.2",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "typings": "^0.8.1"
   },
   "scripts": {
+    "postinstall": "typings install",
     "test": "./node_modules/.bin/mocha --reporter spec",
     "start": "node bin/app.js"
   },
