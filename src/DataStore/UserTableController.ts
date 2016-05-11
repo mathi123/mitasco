@@ -1,10 +1,9 @@
-import { QueryConfig } from 'pg';
-
-import { AbstractTableController } from './AbstractTableController';
-import { User } from '../DTOs/User';
-import { PartialResultList } from '../DTOs/PartialResultList';
-import { SearchArgument } from '../DTOs/SearchArgument';
-import { QueryNames } from './QueryNames';
+import { QueryConfig } from "pg";
+import { AbstractTableController } from "./AbstractTableController";
+import { User } from "../DTOs/User";
+import { PartialResultList } from "../DTOs/PartialResultList";
+import { SearchArgument } from "../DTOs/SearchArgument";
+import { QueryNames } from "./QueryNames";
 
 export class UserTableController extends AbstractTableController {
     public defaultSortColumn: string = 'email';
@@ -17,8 +16,7 @@ export class UserTableController extends AbstractTableController {
     public search(argument: SearchArgument, success: (results: PartialResultList<User>) => void, failed: (err: Error) => void): void {
         let countQuery: QueryConfig = {
             name: QueryNames.UserTable_SearchCount,
-            text:
-            `SELECT COUNT(*) FROM users 
+            text: `SELECT COUNT(*) FROM users 
             WHERE email LIKE $1 OR fullname LIKE $1`,
             values: ['%' + argument.query + '%']
         };
@@ -28,14 +26,13 @@ export class UserTableController extends AbstractTableController {
                 failed(err0);
             } else {
                 let total = result0.rows[0]['count'];
-                if(total <= argument.skip){
+                if (total <= argument.skip) {
                     argument.skip = 0;
                 }
-                
+
                 let selectQuery: QueryConfig = {
                     name: QueryNames.UserTable_Search,
-                    text:
-                    `SELECT * FROM users 
+                    text: `SELECT * FROM users 
             WHERE email LIKE $1 OR fullname LIKE $1 
             ORDER BY 
                 CASE WHEN $3 = 0 THEN 

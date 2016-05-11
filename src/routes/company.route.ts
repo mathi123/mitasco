@@ -1,6 +1,6 @@
-import { Application, Request, Response } from 'express';
-import { CustomerTableController } from '../DataStore/CustomerTableController';
-import { SearchArgument } from '../DTOs/SearchArgument';
+import { Application, Request, Response } from "express";
+import { CustomerTableController } from "../DataStore/CustomerTableController";
+import { SearchArgument } from "../DTOs/SearchArgument";
 
 export function configureRoute(app: Application) {
     app.get('/company/:query', route);

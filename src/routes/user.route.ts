@@ -1,6 +1,6 @@
-import { Application, Request, Response } from 'express';
-import { UserTableController } from '../DataStore/UserTableController';
-import { SearchArgument, SortDirection } from '../DTOs/SearchArgument';
+import { Application, Request, Response } from "express";
+import { UserTableController } from "../DataStore/UserTableController";
+import { SearchArgument, SortDirection } from "../DTOs/SearchArgument";
 import { Utils } from "../utils";
 
 

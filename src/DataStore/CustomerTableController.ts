@@ -1,9 +1,8 @@
-import { QueryConfig } from 'pg';
-
-import { AbstractTableController } from './AbstractTableController';
-import { Company } from '../DTOs/Company';
-import { SearchArgument } from '../DTOs/SearchArgument';
-import { QueryNames } from './QueryNames';
+import { QueryConfig } from "pg";
+import { AbstractTableController } from "./AbstractTableController";
+import { Company } from "../DTOs/Company";
+import { SearchArgument } from "../DTOs/SearchArgument";
+import { QueryNames } from "./QueryNames";
 
 export class CustomerTableController extends AbstractTableController {
 

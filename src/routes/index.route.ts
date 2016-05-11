@@ -1,4 +1,4 @@
-import { Application, Request, Response } from 'express';
+import { Application, Request, Response } from "express";
 
 export function configureRoute(app: Application) {
     app.get('/', route);

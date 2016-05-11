@@ -1,5 +1,5 @@
-import { Company } from './Company';
-import { SupplierReview } from './SupplierReview';
+import { Company } from "./Company";
+import { SupplierReview } from "./SupplierReview";
 
 export class Supplier extends Company {
     public reviews: SupplierReview[];
