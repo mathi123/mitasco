@@ -6,12 +6,11 @@ Mitasco project repository
 
 - node & npm
 - typescript compiler: npm install -g typescript
-- typescript definition manager (tsd): npm install -g tsd
+- typescript definition manager (typings): npm install -g typings
 
 # Setup
 - git clone https://github.com/mathi123/mitasco
 - npm install
-- tsd install
 
 # Develop
 - tsc -w
@@ -20,4 +19,5 @@ Mitasco project repository
 - npm test
 
 # Run
+- gulp
 - node bin/app.js
