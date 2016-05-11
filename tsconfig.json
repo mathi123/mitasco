@@ -3,12 +3,11 @@
         "target": "es5",
         "module": "commonjs",
         "sourceMap": true,
-        "rootDir": "src",
-        "outDir": "bin",
-        "moduleResolution": "classic"
+        "outDir": "bin"
     },
     "exclude": [
-        "typings",
+        "typings/browser.d.ts",
+        "typings/browser",
         "node_modules"
     ]
 }
