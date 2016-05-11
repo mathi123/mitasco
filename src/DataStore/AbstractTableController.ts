@@ -1,5 +1,5 @@
-import { Client } from 'pg';
-import * as fs from 'fs';
+import { Client } from "pg";
+import * as fs from "fs";
 
 export abstract class AbstractTableController {
     protected _client: Client;

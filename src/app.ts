@@ -1,10 +1,10 @@
-import * as express from 'express';
-import * as http from 'http';
+import * as express from "express";
+import * as http from "http";
+import * as route_index from "./routes/index.route";
+import * as route_company from "./routes/company.route";
+import * as route_user from "./routes/user.route";
 
 // Routes
-import * as route_index from './routes/index.route';
-import * as route_company from './routes/company.route';
-import * as route_user from './routes/user.route';
 
 class StartUp {
     public static main(): number {
@@ -21,24 +21,24 @@ class StartUp {
             console.log("Express server listening on port " + app.get('port'));
         });
         /*console.log('Hello world!');
-  
-        let customerQueryer = new CustomerTableController();
-        let argument = new SearchArgument();
-        
-        customerQueryer.connect((err : Error) => {
-            console.log('verbinding gemaakt gelukt');
-        
-            argument.query = "Mat";
-            let res = customerQueryer.search(argument, (companies) => {
-                companies.forEach(company => {
-                    console.log(company.toString());
-                }); 
-                
-                console.log("klaar");
-                customerQueryer.close();
-                
-            }, StartUp.dataBaseErrorHandler);
-        });*/
+
+         let customerQueryer = new CustomerTableController();
+         let argument = new SearchArgument();
+
+         customerQueryer.connect((err : Error) => {
+         console.log('verbinding gemaakt gelukt');
+
+         argument.query = "Mat";
+         let res = customerQueryer.search(argument, (companies) => {
+         companies.forEach(company => {
+         console.log(company.toString());
+         }); 
+
+         console.log("klaar");
+         customerQueryer.close();
+
+         }, StartUp.dataBaseErrorHandler);
+         });*/
 
         return 0;
     }
