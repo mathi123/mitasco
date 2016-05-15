@@ -3,7 +3,7 @@
     "driver": "pg",
     "user": "pg-mitasco",
     "password": "pg-mitasco",
-    "database": "mitasco-dev2",
+    "database": "mitasco-dev3",
     "host": "localhost"
   },
   "test": {
