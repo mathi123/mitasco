@@ -5,7 +5,7 @@ export abstract class AbstractTableController {
     protected _client: Client;
 
     constructor() {
-        var pgconfig = JSON.parse(fs.readFileSync("pgconf.json", "utf8"));
+        var pgconfig = JSON.parse(fs.readFileSync("bin/pgconf.json", "utf8"));
 
         this._client = new Client(pgconfig);
     }
