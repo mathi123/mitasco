@@ -1,0 +1,1 @@
+ALTER TABLE users ADD fullname VARCHAR(50) NULL;
