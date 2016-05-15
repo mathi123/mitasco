@@ -7,4 +7,4 @@ before_script:
   - npm install -g db-migrate db-migrate-pg
   - tsc
   - gulp
-  - psql -c 'create database mitasco-test;' -U postgres
+  - psql -c "create database 'mitasco-test';" -U postgres
