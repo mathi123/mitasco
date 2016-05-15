@@ -10,7 +10,7 @@
     "driver": "pg",
     "user": "postgres",
     "password": "",
-    "database": "mitasco-test",
+    "database": "mitasco_test",
     "host": "localhost"
   }
 }
