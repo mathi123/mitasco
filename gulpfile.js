@@ -20,6 +20,7 @@ gulp.task('db-dev', function () {
   };
 
   fs.writeFileSync('bin/pgconf.json', JSON.stringify(data));
+  fs.writeFileSync('test/pgconf.json', JSON.stringify(data));
 
   console.info("done");
 });
@@ -37,6 +38,7 @@ gulp.task('db-test', function () {
   };
 
   fs.writeFileSync('bin/pgconf.json', JSON.stringify(data));
+  fs.writeFileSync('test/pgconf.json', JSON.stringify(data));
 
   console.info("done");
 });
