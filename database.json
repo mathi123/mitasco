@@ -12,5 +12,6 @@
     "password": "",
     "database": "mitasco_test",
     "host": "localhost"
-  }
+  },
+  "sql-file": true
 }
