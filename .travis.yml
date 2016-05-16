@@ -8,3 +8,4 @@ before_script:
   - tsc
   - gulp db-test
   - psql -c 'create database mitasco_test;' -U postgres
+  - db-migrate -e test up

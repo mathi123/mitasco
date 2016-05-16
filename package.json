@@ -23,7 +23,7 @@
   },
   "scripts": {
     "postinstall": "typings install",
-    "test": "db-migrate -e test up & ./node_modules/.bin/mocha --reporter spec",
+    "test": "./node_modules/.bin/mocha --reporter spec",
     "start": "node bin/app.js"
   },
   "author": "Mathias Colpaert",
