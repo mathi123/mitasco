@@ -13,7 +13,7 @@ describe("UserTableController class", function () {
         });
         it("can run a query", function (done) {
             var searchArg = {
-                query: "abc",
+                query: "at",
                 skip: 0,
                 take: 50,
                 sortColumn: "name",
@@ -21,14 +21,15 @@ describe("UserTableController class", function () {
             };
 
             var result = controller.search(searchArg, function (data) {
+                expect(data.count).to.be.greaterThan(0);
                 console.log(data);
                 done();
             }, function (err) {
                 done(err);
             });
         });
-        //it("closes database connection", function () {
-        //    controller.close();
-        //});
+        it("closes database connection", function () {
+            controller.close();
+        });
     });
 });
