@@ -1,0 +1,1 @@
+DROP FUNCTION func_permission_create_acl();
