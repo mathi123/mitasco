@@ -1,0 +1,17 @@
+{
+  "dev": {
+    "driver": "pg",
+    "user": "pg-mitasco",
+    "password": "pg-mitasco",
+    "database": "mitasco-dev3",
+    "host": "localhost"
+  },
+  "test": {
+    "driver": "pg",
+    "user": "postgres",
+    "password": "",
+    "database": "mitasco_test",
+    "host": "localhost"
+  },
+  "sql-file": true
+}

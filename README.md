@@ -7,6 +7,8 @@ Mitasco project repository
 - node & npm
 - typescript compiler: npm install -g typescript
 - typescript definition manager (typings): npm install -g typings
+- postgresql
+- db-migrate: npm install -g db-migrate db-migrate-postgresql
 
 # Setup
 - git clone https://github.com/mathi123/mitasco

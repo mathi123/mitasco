@@ -1,6 +1,11 @@
 language: node_js
 node_js:
   - "5.10"
+services:
+  - postgresql
 before_script:
+  - npm install -g db-migrate db-migrate-pg
   - tsc
-  - gulp
+  - gulp db-test
+  - psql -c 'create database mitasco_test;' -U postgres
+  - db-migrate -e test up
