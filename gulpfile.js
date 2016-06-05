@@ -1,7 +1,5 @@
-var clean = require('gulp-clean');
 var gulp = require('gulp');
 var fs = require('fs');
-var gulpCopy = require('gulp-copy');
 
 gulp.task('default', function() {
   console.info("Empty task");
