@@ -4,7 +4,7 @@ node_js:
 services:
   - postgresql
 before_script:
-  - npm install -g db-migrate@0.9.25 db-migrate-pg@0.1.10
+  - npm install -g db-migrate@@v0.10.0-beta.12 db-migrate-pg
   - tsc
   - gulp db-test
   - psql -c 'create database mitasco_test;' -U postgres
