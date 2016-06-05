@@ -29,7 +29,7 @@ Mitasco project repository
 - database (postgresql)
 - server (nodeJS/express)
 - client (angular2 + bootstrap)
-- tests (karma)
+- tests
 
 ### Database
 The database model is maintained in the solution dir */migrations*. Db-migrate is used to create and run database changes.
