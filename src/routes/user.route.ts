@@ -6,6 +6,7 @@ import { Utils } from "../utils";
 
 export function configureRoute(app: Application) {
     app.get('/user', search);
+    app.post('/user');
 }
 
 function search(req: Request, resp: Response) {
