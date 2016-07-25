@@ -2,15 +2,19 @@ import { Application, Request, Response } from "express";
 import { UserTableController } from "../DataStore/UserTableController";
 import { SearchArgument, SortDirection } from "../DTOs/SearchArgument";
 import { Utils } from "../utils";
-
+import { User } from "../DTOs/User";
 
 export function configureRoute(app: Application) {
     app.get('/user', search);
-    app.post('/user');
+    app.get('/user/:id', read);
+    app.post('/user', create);
+    app.put('/user', create);
 }
 
+let databaseSource = new UserTableController();
+databaseSource.connect(dataBaseErrorHandler);
+
 function search(req: Request, resp: Response) {
-    let databaseSource = new UserTableController();
     let argument = new SearchArgument();
 
     if (req.query.query) {
@@ -33,18 +37,46 @@ function search(req: Request, resp: Response) {
         argument.sortColumn = databaseSource.defaultSortColumn;
     }
 
-    databaseSource.connect((err: Error) => {
-        let res = databaseSource.search(argument, (users) => {
-            var data = `resultaten:  <b>${ users.count }</b><ul> `;
-            users.results.forEach(user => {
-                data += `<li>${user.toString()}</li>`;
-            });
-            data += '</ul>';
-            databaseSource.close();
 
-            resp.send(data);
-        }, dataBaseErrorHandler);
-    });
+    let res = databaseSource.search(argument, (users) => {
+        resp.json(users);
+    }, () => resp.send(500));
+
+
+}
+
+function read(req: Request, resp: Response) {
+    let id = req.params.id;
+    if (Utils.isPositiveInteger(id)) {
+        databaseSource.read(id, (user) => resp.json(user), () => resp.sendStatus(500));
+    } else {
+        resp.sendStatus(500);
+    }
+}
+
+function create(req: Request, resp: Response) {
+    var data = req.body;
+    let user = new User();
+
+    if (data.fullname) {
+        user.fullname = data.fullname;
+    }
+
+    if (data.email) {
+        user.email = data.email;
+    }
+
+    if (data.id) {
+        user.id = data.id;
+    }
+
+    console.log(data);
+
+    if (data.id) {
+        databaseSource.update(user, () => resp.sendStatus(202), () => resp.sendStatus(500));
+    } else {
+        databaseSource.create(user, (id) => resp.json(id), () => resp.sendStatus(500));
+    }
 }
 
 function dataBaseErrorHandler(err: Error): void {
