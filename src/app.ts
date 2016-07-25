@@ -3,6 +3,7 @@ import * as http from "http";
 import * as route_index from "./routes/index.route";
 import * as route_company from "./routes/company.route";
 import * as route_user from "./routes/user.route";
+import * as bodyparser from "body-parser";
 
 // Routes
 
@@ -11,6 +12,7 @@ class StartUp {
         let app = express();
 
         app.set('port', process.env.PORT || 3000);
+        app.use(bodyparser.json());
 
         // Configure routes
         route_index.configureRoute(app);
