@@ -94,6 +94,7 @@ Production packages:
 - express: server framework
 - pg: js library to read/write to postgresql database
 - request: needed by express
+- body-parser: needed by express. This parses the post body of a request.
 
 Development packages:
 - chai: Behaviour driving test assertions
