@@ -13,9 +13,6 @@ describe("UserTableController class", function () {
         it("calls constructor correctly", function () {
             controller = new UserTableController();
         });
-        it("connects to database", function () {
-            controller.connect();
-        });
         it("can run a query", function (done) {
             var searchArg = {
                 query: "at",
@@ -25,56 +22,28 @@ describe("UserTableController class", function () {
                 sortDirection: 0
             };
 
-            var result = controller.search(searchArg, function (data) {
-                //expect(data.count).to.be.greaterThan(0);
-                console.log(data);
-                done();
-            }, function (err) {
-                done(err);
-            });
-        });
-        it("closes database connection", function () {
-            controller.close();
+            var result = controller.search(searchArg)
+                .then(function (data) {
+                    done();
+                })
+                .catch(function (err) {
+                    done(err);
+                });
         });
     });
 
     describe("when create is called", function () {
         var controller = new UserTableController();
 
-        controller.connect();
-
         it("an id is returned", function (done) {
-            controller.create(userToAdd, function (id) {
+            controller.create(userToAdd).then(function (id) {
                 console.info("create succes " + id);
                 id.should.not.equal(0);
-
-                controller.read(id, function (data) {
-                    console.info("read succes " + data);
-
-                    userToAdd.email.should.equal(data.email);
-                    userToAdd.fullname.should.equal(data.fullname);
-
-                    data.fullname = "testname";
-
-                    controller.update(data, function () {
-                        controller.read(id, function (dataupdated) {
-                            console.info("update succes");
-
-                            dataupdated.fullname.should.equal(data.fullname);
-
-                            done();
-                        }, function (err) {
-                            done(err);
-                        });
-                    }, function (err) {
-                        done(err);
-                    });
-                }, function (err) {
-                    done(err);
-                });
-            }, function (err) {
+                    done();
+                })
+                .catch(function (err) {
                 done(err);
-            })
+                });
         });
     });
 });

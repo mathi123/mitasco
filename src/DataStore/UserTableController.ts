@@ -70,7 +70,7 @@ export class UserTableController {
 
         let result = await DbClient.Instance().query(query);
 
-        return result.rows[0]['id'];
+        return result[0]['id'];
     }
 
     public async remove(id: number): Promise<boolean> {
@@ -93,7 +93,7 @@ export class UserTableController {
         };
 
         let result = await DbClient.Instance().query(query);
-        let row = result.rows[0];
+        let row = result[0];
         let rec = new User();
         rec.id = row['id'];
         rec.email = row['email'];
