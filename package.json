@@ -18,10 +18,9 @@
     "istanbul": "^0.4.3",
     "mocha": "^2.4.5",
     "should": "^9.0.2",
-    "typings": "^0.8.1"
+    "typings": "^1.3.2"
   },
   "scripts": {
-    "postinstall": "typings install",
     "test": "./node_modules/.bin/mocha --reporter spec",
     "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --ui bdd -R spec -t 5000",
     "start": "node bin/app.js"
