@@ -103,6 +103,7 @@ Development packages:
 - istanbul: library to determine coverage of testing code
 - mocha: unit testing framework to test server code
 - typings: used to get typescript definitions of existing libraries like express and pg.
+- run-sequence: needed to run gulp tasks in sequence
 
 To install a package, type:
 
