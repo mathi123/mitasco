@@ -6,10 +6,6 @@
         "outDir": "bin"
     },
     "exclude": [
-        "typings/browser.d.ts",
-        "typings/globals/pg-promise/index.d.ts",
-        "typings/globals",
-        "typings/browser",
         "node_modules"
     ]
 }
