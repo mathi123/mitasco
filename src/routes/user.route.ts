@@ -2,11 +2,13 @@ import { Application, Request, Response } from "express";
 import { UserTableController } from "../DataStore/UserTableController";
 import { SearchArgument, SortDirection } from "../DTOs/SearchArgument";
 import { Utils } from "../utils";
-
+import { User } from "../DTOs/User";
 
 export function configureRoute(app: Application) {
     app.get('/user', search);
-    app.post('/user');
+    app.get('/user/:id', read);
+    app.post('/user', create);
+    app.put('/user', create);
 }
 
 async function search(req: Request, resp: Response) {
@@ -41,9 +43,43 @@ async function search(req: Request, resp: Response) {
     data += '</ul>';
 
     resp.send(data);
+
 }
 
-function dataBaseErrorHandler(err: Error): void {
-    console.log("error in handling database request");
-    console.log(err);
+async function read(req: Request, resp: Response) {
+    let id = req.params.id;
+    if (Utils.isPositiveInteger(id)) {
+        let databaseSource = new UserTableController();
+        let user = await databaseSource.read(id);
+        resp.json(user);
+    } else {
+        resp.sendStatus(500);
+    }
+}
+
+async function create(req: Request, resp: Response) {
+    var data = req.body;
+    let user = new User();
+
+    if (data.fullname) {
+        user.fullname = data.fullname;
+    }
+
+    if (data.email) {
+        user.email = data.email;
+    }
+
+    if (data.id) {
+        user.id = data.id;
+    }
+
+    console.log(data);
+    let databaseSource = new UserTableController();
+    if (data.id) {
+        await databaseSource.update(user);
+        resp.sendStatus(202);
+    } else {
+        let id = await databaseSource.create(user);
+        resp.json(id);
+    }
 }
