@@ -104,6 +104,7 @@ Development packages:
 - mocha: unit testing framework to test server code
 - typings: used to get typescript definitions of existing libraries like express and pg.
 - run-sequence: needed to run gulp tasks in sequence
+- del: needed to delete files during build
 
 To install a package, type:
 
