@@ -46,16 +46,18 @@ async function search(req: Request, resp: Response) {
 
 }
 
-function read(req: Request, resp: Response) {
+async function read(req: Request, resp: Response) {
     let id = req.params.id;
     if (Utils.isPositiveInteger(id)) {
-        databaseSource.read(id, (user) => resp.json(user), () => resp.sendStatus(500));
+        let databaseSource = new UserTableController();
+        let user = await databaseSource.read(id);
+        resp.json(user);
     } else {
         resp.sendStatus(500);
     }
 }
 
-function create(req: Request, resp: Response) {
+async function create(req: Request, resp: Response) {
     var data = req.body;
     let user = new User();
 
@@ -72,15 +74,12 @@ function create(req: Request, resp: Response) {
     }
 
     console.log(data);
-
+    let databaseSource = new UserTableController();
     if (data.id) {
-        databaseSource.update(user, () => resp.sendStatus(202), () => resp.sendStatus(500));
+        await databaseSource.update(user);
+        resp.sendStatus(202);
     } else {
-        databaseSource.create(user, (id) => resp.json(id), () => resp.sendStatus(500));
+        let id = await databaseSource.create(user);
+        resp.json(id);
     }
-}
-
-function dataBaseErrorHandler(err: Error): void {
-    console.log("error in handling database request");
-    console.log(err);
 }
