@@ -9,7 +9,7 @@ export function configureRoute(app: Application) {
     app.post('/user');
 }
 
-function search(req: Request, resp: Response) {
+async function search(req: Request, resp: Response) {
     let databaseSource = new UserTableController();
     let argument = new SearchArgument();
 
@@ -33,18 +33,14 @@ function search(req: Request, resp: Response) {
         argument.sortColumn = databaseSource.defaultSortColumn;
     }
 
-    databaseSource.connect((err: Error) => {
-        let res = databaseSource.search(argument, (users) => {
-            var data = `resultaten:  <b>${ users.count }</b><ul> `;
-            users.results.forEach(user => {
-                data += `<li>${user.toString()}</li>`;
-            });
-            data += '</ul>';
-            databaseSource.close();
-
-            resp.send(data);
-        }, dataBaseErrorHandler);
+    let users = await databaseSource.search(argument);
+    var data = `resultaten:  <b>${ users.count }</b><ul> `;
+    users.results.forEach(user => {
+        data += `<li>${user.toString()}</li>`;
     });
+    data += '</ul>';
+
+    resp.send(data);
 }
 
 function dataBaseErrorHandler(err: Error): void {

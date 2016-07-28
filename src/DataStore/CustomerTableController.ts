@@ -1,38 +1,28 @@
 import { QueryConfig } from "pg";
-import { AbstractTableController } from "./AbstractTableController";
 import { Company } from "../DTOs/Company";
 import { SearchArgument } from "../DTOs/SearchArgument";
 import { QueryNames } from "./QueryNames";
+import { DbClient } from "./DbClient";
 
-export class CustomerTableController extends AbstractTableController {
+export class CustomerTableController {
 
-    constructor() {
-        super();
-    }
-
-    public search(argument: SearchArgument, success: (results: Company[]) => void, failed: (err: Error) => void): void {
+    public async search(argument: SearchArgument): Promise<Company[]> {
         let preparedStatement: QueryConfig = {
             name: QueryNames.CustomerTable_Search,
             text: 'SELECT * FROM Customer WHERE Name Like $1',
             values: ['%' + argument.query + '%']
         };
 
-        let query = this._client.query(preparedStatement, (err, result) => {
+        let result = await DbClient.Instance().query(preparedStatement);
 
-            if (err) {
-                failed(err);
-            }
-            else {
-                let searchResult = result.rows.map((row) => {
-                    let rec = new Company();
-                    rec.email = row['email'];
-                    rec.name = row['name'];
-                    rec.fax = row['fax'];
-                    return rec;
-                });
-
-                success(searchResult);
-            }
+        let searchResult = result.rows.map((row) => {
+            let rec = new Company();
+            rec.email = row['email'];
+            rec.name = row['name'];
+            rec.fax = row['fax'];
+            return rec;
         });
+
+        return searchResult;
     }
 }

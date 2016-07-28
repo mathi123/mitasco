@@ -2,15 +2,17 @@
   "name": "test_node",
   "version": false,
   "dependencies": {
+    "chai": "registry:npm/chai#3.5.0+20160723033700",
     "pg": "registry:npm/pg#4.5.1+20160505155734"
   },
-  "ambientDependencies": {
-    "chai": "registry:dt/chai#3.4.0+20160317120654",
-    "express": "registry:dt/express#4.0.0+20160317120654",
-    "express-serve-static-core": "registry:dt/express-serve-static-core#0.0.0+20160322035842",
+  "globalDependencies": {
+    "express": "registry:dt/express#4.0.0+20160708185218",
+    "express-serve-static-core": "registry:dt/express-serve-static-core#4.0.0+20160715232503",
     "mime": "registry:dt/mime#0.0.0+20160316155526",
-    "mocha": "registry:dt/mocha#2.2.5+20160317120654",
-    "node": "registry:dt/node#4.0.0+20160509154515",
-    "serve-static": "registry:dt/serve-static#0.0.0+20160501131543"
+    "mocha": "registry:dt/mocha#2.2.5+20160720003353",
+    "node": "registry:env/node#6.0.0+20160723033700",
+    "pg-promise": "github:vitaly-t/pg-promise",
+    "serve-static": "registry:dt/serve-static#0.0.0+20160606155157",
+    "spex": "github:vitaly-t/spex"
   }
 }
