@@ -7,6 +7,6 @@ before_script:
   - npm install -g db-migrate@v0.10.0-beta.12 db-migrate-pg typescript@next typings
   - typings install
   - tsc
-  - gulp db-test
+  - gulp build --env test
   - psql -c 'create database mitasco_test;' -U postgres
   - db-migrate -e test up
