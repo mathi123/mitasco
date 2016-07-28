@@ -1,19 +1,15 @@
 import { QueryConfig } from "pg";
-import { AbstractTableController } from "./AbstractTableController";
 import { User } from "../DTOs/User";
 import { PartialResultList } from "../DTOs/PartialResultList";
 import { SearchArgument } from "../DTOs/SearchArgument";
 import { QueryNames } from "./QueryNames";
+import { DbClient } from "./DbClient";
 
-export class UserTableController extends AbstractTableController {
+export class UserTableController {
     public defaultSortColumn: string = 'email';
     public sortColumnOptions: string[] = ['email', 'fullname'];
 
-    constructor() {
-        super();
-    }
-
-    public search(argument: SearchArgument, success: (results: PartialResultList<User>) => void, failed: (err: Error) => void): void {
+    public async search(argument: SearchArgument): Promise<PartialResultList<User>> {
         let countQuery: QueryConfig = {
             name: QueryNames.UserTable_SearchCount,
             text: `SELECT COUNT(*) FROM users 
@@ -21,21 +17,20 @@ export class UserTableController extends AbstractTableController {
             values: ['%' + argument.query + '%']
         };
 
-        this._client.query(countQuery, (err0, result0) => {
-            if (err0) {
-                failed(err0);
-            } else {
-                let total = result0.rows[0]['count'];
-                if (total <= argument.skip) {
-                    argument.skip = 0;
-                }
+        let countResult = await DbClient.Instance().query(countQuery);
 
-                let selectQuery: QueryConfig = {
-                    name: QueryNames.UserTable_Search,
-                    text: `SELECT * FROM users 
-            WHERE email LIKE $1 OR fullname LIKE $1 
-            ORDER BY 
-                CASE WHEN $3 = 0 THEN 
+        let total = countResult[0]['count'];
+
+        if (total <= argument.skip) {
+            argument.skip = 0;
+        }
+
+        let selectQuery: QueryConfig = {
+            name: QueryNames.UserTable_Search,
+            text: `SELECT * FROM users
+            WHERE email LIKE $1 OR fullname LIKE $1
+            ORDER BY
+                CASE WHEN $3 = 0 THEN
                     CASE WHEN $2 = 'email' THEN email
                          WHEN $2 = 'fullname' THEN fullname
                          ELSE fullname
@@ -48,97 +43,72 @@ export class UserTableController extends AbstractTableController {
                     END
                 ELSE '' END DESC
             OFFSET $4 LIMIT $5`,
-                    values: ['%' + argument.query + '%', argument.sortColumn, argument.sortDirection, argument.skip, argument.take]
-                };
+            values: ['%' + argument.query + '%', argument.sortColumn, argument.sortDirection, argument.skip, argument.take]
+        };
 
-                this._client.query(selectQuery, (err, result) => {
-                    if (err) {
-                        failed(err);
-                    } else {
-                        let searchResult = new PartialResultList<User>();
-                        searchResult.count = total;
-                        searchResult.skipped = argument.skip;
-                        searchResult.results = result.rows.map((row) => {
-                            let rec = new User();
-                            rec.id = row['id'];
-                            rec.email = row['email'];
-                            rec.fullname = row['fullname'];
-                            return rec;
-                        });
+        let selectResult = await DbClient.Instance().query(selectQuery);
 
-                        success(searchResult);
-                    }
+        let searchResult = new PartialResultList<User>();
+        searchResult.count = total;
+        searchResult.skipped = argument.skip;
+        searchResult.results = selectResult.map((row) => {
+            let rec = new User();
+            rec.id = row['id'];
+            rec.email = row['email'];
+            rec.fullname = row['fullname'];
+            return rec;
                 });
-            }
-        });
+        return searchResult;
     }
 
-    public create(user: User, success: (id: number) => void, failed: (err: Error) => void) {
-        let queryConfig: QueryConfig = {
+    public async create(user: User): Promise<number> {
+        let query: QueryConfig = {
             name: QueryNames.UserTable_Create,
             text: "INSERT INTO users (fullname, email) VALUES ($1, $2) RETURNING id",
             values: [user.fullname, user.email]
         };
 
-        this._client.query(queryConfig, (err, result) => {
-            if (err) {
-                failed(err);
-            } else {
-                success(result.rows[0]['id']);
-            }
-        })
+        let result = await DbClient.Instance().query(query);
+
+        return result[0]['id'];
     }
 
-    public remove(id: number, success: () => void, failed: (err: Error) => void) {
-        let queryConfig: QueryConfig = {
+    public async remove(id: number): Promise<boolean> {
+        let query: QueryConfig = {
             name: QueryNames.UserTable_Remove,
             text: "DELETE FROM users WHERE id = $1",
             values: [id]
         };
 
-        this._client.query(queryConfig, (err, result) => {
-            if (err) {
-                failed(err);
-            } else {
-                success();
-            }
-        })
+        await DbClient.Instance().query(query);
+
+        return true;
     }
 
-    public read(id: number, success: (user: User) => void, failed: (err: Error) => void) {
-        let queryConfig: QueryConfig = {
+    public async read(id: number): Promise<User> {
+        let query: QueryConfig = {
             name: QueryNames.UserTable_Read,
             text: "SELECT * FROM users WHERE id = $1",
             values: [id]
         };
 
-        this._client.query(queryConfig, (err, result) => {
-            if (err) {
-                failed(err);
-            } else {
-                let row = result.rows[0];
-                let rec = new User();
-                rec.id = row['id'];
-                rec.email = row['email'];
-                rec.fullname = row['fullname'];
-                success(rec);
-            }
-        })
+        let result = await DbClient.Instance().query(query);
+        let row = result[0];
+        let rec = new User();
+        rec.id = row['id'];
+        rec.email = row['email'];
+        rec.fullname = row['fullname'];
+        return rec;
     }
 
-    public update(user: User, success: () => void, failed: (err: Error) => void) {
-        let queryConfig: QueryConfig = {
+    public async update(user: User): Promise<boolean> {
+        let query: QueryConfig = {
             name: QueryNames.UserTable_Update,
             text: "UPDATE users SET email = $1, fullname = $2 WHERE id = $3",
             values: [user.email, user.fullname, user.id]
         };
 
-        this._client.query(queryConfig, (err, result) => {
-            if (err) {
-                failed(err);
-            } else {
-                success();
-            }
-        })
+        await DbClient.Instance().query(query);
+        return true;
     }
 }

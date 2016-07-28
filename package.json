@@ -10,6 +10,7 @@
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "pg": "^4.5.3",
+    "pg-promise": "^5.2.5",
     "request": "^2.72.0"
   },
   "devDependencies": {
@@ -17,11 +18,9 @@
     "gulp": "^3.9.1",
     "istanbul": "^0.4.3",
     "mocha": "^2.4.5",
-    "should": "^9.0.2",
-    "typings": "^0.8.1"
+    "should": "^9.0.2"
   },
   "scripts": {
-    "postinstall": "typings install",
     "test": "./node_modules/.bin/mocha --reporter spec",
     "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --ui bdd -R spec -t 5000",
     "start": "node bin/app.js"

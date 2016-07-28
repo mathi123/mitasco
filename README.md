@@ -13,6 +13,7 @@ Mitasco project repository
 ### Setup
 - git clone https://github.com/mathi123/mitasco
 - npm install
+- typings install
 
 ### Develop
 - tsc -w
