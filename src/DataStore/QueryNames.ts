@@ -7,4 +7,9 @@ export class QueryNames {
     public static UserTable_Remove: string = "UserTable_Remove";
     public static UserTable_Read: string = "UserTable_Read";
     public static UserTable_Update: string = "UserTable_Update";
+    public static TodoTable_Search: string = "TodoTable_Search";
+    public static TodoTable_Create: string = "TodoTable_Create";
+    public static TodoTable_Remove: string = "TodoTable_Remove";
+    public static TodoTable_Read: string = "TodoTable_Read";
+    public static TodoTable_Update: string = "TodoTable_Update";
 }
