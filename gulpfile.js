@@ -36,7 +36,7 @@ gulp.task('copy-db-config', function () {
       host: database[environment].host
     };
 
-    fs.writeFileSync(config[environment].buildDir + '/pgconf.json', JSON.stringify(data));
+    fs.writeFileSync(path.join(config[environment].buildDir,'/pgconf.json'), JSON.stringify(data));
   }
 });
 
@@ -73,9 +73,9 @@ gulp.task('test', function (callback) {
 });
 
 gulp.task('run-tests', function () {
-    var copyTestPath = path.join(config[environment].buildDir, "test");
+    var executeTestPath = path.join(config[environment].buildDir, "test");
     
-    return gulp.src(copyTestPath + '/**/*.test.js', {read: false})
+    return gulp.src(executeTestPath + '/**/*.test.js', {read: false})
         .pipe(mocha({reporter: 'spec'}));
 });
 
