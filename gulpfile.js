@@ -1,42 +1,88 @@
-var gulp = require('gulp');
-var fs = require('fs');
+var gulp = require('gulp'),
+    fs = require('fs'),
+    runSequence = require('run-sequence'),
+    del = require('del'),
+    ts = require('gulp-typescript'),
+    mocha = require('gulp-mocha'),
+    environments = require('gulp-environments'),
+    path = require('path');
 
-gulp.task('default', function() {
-  console.info("Empty task");
-});
+// Configuration
+var config = require('./gulp.config.js');
 
-gulp.task('db-dev', function () {
+// Environments
+var development = environments.development;
+var production = environments.production;
+var test = environments.make("test");
+
+// Current environment
+var environment = 'development';
+if(test()){
+  environment = 'test';
+}else if(production()){
+  environment = 'production';
+}
+
+gulp.task('copy-db-config', function () {
   console.info("Copy pgconf.json to bin folder");
 
   var database = JSON.parse(fs.readFileSync('database.json'));
 
-  var data = {
-    user: database.dev.user,
-    password: database.dev.password,
-    database: database.dev.database,
-    host: database.dev.host
-  };
+  if(!production()){
+    var data = {
+      user: database[environment].user,
+      password: database[environment].password,
+      database: database[environment].database,
+      host: database[environment].host
+    };
 
-  fs.writeFileSync('bin/pgconf.json', JSON.stringify(data));
-  //fs.writeFileSync('test/pgconf.json', JSON.stringify(data));
-
-  console.info("done");
+    fs.writeFileSync(config[environment].buildDir + '/pgconf.json', JSON.stringify(data));
+  }
 });
 
-gulp.task('db-test', function () {
-  console.info("Copy pgconf.json to bin folder");
+gulp.task('build', function(callback){
+  runSequence('clean', 'compile', 'copy-db-config', callback);
+});
 
-  var database = JSON.parse(fs.readFileSync('database.json'));
+gulp.task('clean', function () {
+  del([config[environment].buildDir], {force: true});
+});
 
-  var data = {
-    user: database.test.user,
-    password: database.test.password,
-    database: database.test.database,
-    host: database.test.host
-  };
+gulp.task('compile', function () {
+  return gulp.src(['src/**/*.ts', 'typings/**/*.d.ts'])
+      .pipe(development(ts({
+        target: "ES6",
+        module: "commonjs",
+        sourceMap: true
+      })))
+      .pipe(test(ts({
+          target: "ES6",
+          module: "commonjs",
+          sourceMap: false
+      })))
+      .pipe(production(ts({
+          target: "ES6",
+          module: "commonjs",
+          sourceMap: false
+      })))
+      .pipe(gulp.dest(config[environment].buildDir));
+});
 
-  fs.writeFileSync('bin/pgconf.json', JSON.stringify(data));
-  //fs.writeFileSync('test/pgconf.json', JSON.stringify(data));
+gulp.task('test', function (callback) {
+    runSequence('copy-tests', 'run-tests', callback);
+});
 
-  console.info("done");
+gulp.task('run-tests', function () {
+    var copyTestPath = path.join(config[environment].buildDir, "test");
+    
+    return gulp.src(copyTestPath + '/**/*.test.js', {read: false})
+        .pipe(mocha({reporter: 'spec'}));
+});
+
+gulp.task('copy-tests', function(){
+    var copyTestPath = path.join(config[environment].buildDir, "test");
+
+    return gulp.src("test/**/*.test.js")
+        .pipe(gulp.dest(copyTestPath));
+
 });

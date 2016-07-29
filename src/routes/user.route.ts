@@ -1,17 +1,10 @@
-import { Application, Request, Response } from "express";
+import { Request, Response } from "express";
 import { UserTableController } from "../DataStore/UserTableController";
 import { SearchArgument, SortDirection } from "../DTOs/SearchArgument";
 import { Utils } from "../utils";
 import { User } from "../DTOs/User";
 
-export function configureRoute(app: Application) {
-    app.get('/user', search);
-    app.get('/user/:id', read);
-    app.post('/user', create);
-    app.put('/user', create);
-}
-
-async function search(req: Request, resp: Response) {
+export async function search(req: Request, resp: Response) {
     let databaseSource = new UserTableController();
     let argument = new SearchArgument();
 
@@ -46,7 +39,7 @@ async function search(req: Request, resp: Response) {
 
 }
 
-async function read(req: Request, resp: Response) {
+export async function read(req: Request, resp: Response) {
     let id = req.params.id;
     if (Utils.isPositiveInteger(id)) {
         let databaseSource = new UserTableController();
@@ -57,7 +50,7 @@ async function read(req: Request, resp: Response) {
     }
 }
 
-async function create(req: Request, resp: Response) {
+export async function create(req: Request, resp: Response) {
     var data = req.body;
     let user = new User();
 
