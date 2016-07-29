@@ -53,6 +53,11 @@ gulp.task('compile', function () {
         module: "commonjs",
         sourceMap: true
       })))
+      .pipe(test(ts({
+          target: "ES6",
+          module: "commonjs",
+          sourceMap: false
+      })))
       .pipe(production(ts({
           target: "ES6",
           module: "commonjs",

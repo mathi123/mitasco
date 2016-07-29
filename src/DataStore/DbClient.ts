@@ -10,7 +10,6 @@ export class DbClient {
 
     public static Instance(): IDatabase<any> {
         if (!this._client) {
-            console.log(path.join(__dirname, "../pgconf.json"));
             let pgconfig = JSON.parse(fs.readFileSync(path.join(__dirname, "../pgconf.json"), "utf8"));
             this._client = pgp(pgconfig);
         }
