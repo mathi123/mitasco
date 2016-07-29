@@ -1,4 +1,4 @@
-var utils = require("../bin/utils").Utils;
+var utils = require("../utils").Utils;
 var expect = require("chai").expect;
 
 describe("Utils class", function() {

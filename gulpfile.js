@@ -3,7 +3,9 @@ var gulp = require('gulp'),
     runSequence = require('run-sequence'),
     del = require('del'),
     ts = require('gulp-typescript'),
-    environments = require('gulp-environments');
+    mocha = require('gulp-mocha'),
+    environments = require('gulp-environments'),
+    path = require('path');
 
 // Configuration
 var config = require('./gulp.config.js');
@@ -64,4 +66,23 @@ gulp.task('compile', function () {
           sourceMap: false
       })))
       .pipe(gulp.dest(config[environment].buildDir));
+});
+
+gulp.task('test', function (callback) {
+    runSequence('copy-tests', 'run-tests', callback);
+});
+
+gulp.task('run-tests', function () {
+    var copyTestPath = path.join(config[environment].buildDir, "test");
+    
+    return gulp.src(copyTestPath + '/**/*.test.js', {read: false})
+        .pipe(mocha({reporter: 'spec'}));
+});
+
+gulp.task('copy-tests', function(){
+    var copyTestPath = path.join(config[environment].buildDir, "test");
+
+    return gulp.src("test/**/*.test.js")
+        .pipe(gulp.dest(copyTestPath));
+
 });
