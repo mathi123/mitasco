@@ -1,6 +1,7 @@
 import * as pgPromise from "pg-promise";
 import { IDatabase } from "pg-promise";
 import * as fs from "fs";
+import * as path from "path";
 
 var pgp = pgPromise({});
 

@@ -4,8 +4,10 @@ import * as route_index from "./routes/index.route";
 import * as route_company from "./routes/company.route";
 import * as route_user from "./routes/user.route";
 import * as bodyparser from "body-parser";
+import * as path from "path";
 
 // Routes
+console.log(path.join(__dirname, "../pgconf.json"));
 
 class StartUp {
     public static main(): number {
