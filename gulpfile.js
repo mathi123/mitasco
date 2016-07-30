@@ -49,7 +49,7 @@ gulp.task('clean', function () {
 });
 
 gulp.task('compile', function () {
-  return gulp.src(['src/**/*.ts', 'typings/**/*.d.ts'])
+  return gulp.src(['src/server/**/*.ts', 'typings/**/*.d.ts'])
       .pipe(development(ts({
         target: "ES6",
         module: "commonjs",
