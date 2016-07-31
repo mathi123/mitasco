@@ -1,10 +1,9 @@
 import { QueryConfig } from "pg";
-import { PartialResultList } from "../DTOs/PartialResultList";
-import { SearchArgument } from "../DTOs/SearchArgument";
+import { PartialResultList } from "../shared/PartialResultList";
+import { SearchArgument } from "../shared/SearchArgument";
 import { QueryNames } from "./QueryNames";
 import { DbClient } from "./DbClient";
-import { Todo } from "../DTOs/Todo";
-import { User } from "../DTOs/User";
+import { Todo } from "../shared/Todo";
 
 export class TodoTableController {
     public async search(argument: SearchArgument): Promise<PartialResultList<Todo>> {

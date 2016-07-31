@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { UserTableController } from "../DataStore/UserTableController";
-import { SearchArgument, SortDirection } from "../DTOs/SearchArgument";
+import { UserTableController } from "../database/UserTableController";
+import { SearchArgument, SortDirection } from "../shared/SearchArgument";
 import { Utils } from "../utils";
-import { User } from "../DTOs/User";
-import { TodoTableController } from "../DataStore/TodoTableController";
-import { Todo } from "../DTOs/Todo";
+import { User } from "../shared/User";
+import { TodoTableController } from "../database/TodoTableController";
+import { Todo } from "../shared/Todo";
 
 export async function search(req: Request, resp: Response) {
     let databaseSource = new TodoTableController();

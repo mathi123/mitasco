@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { UserTableController } from "../DataStore/UserTableController";
-import { SearchArgument, SortDirection } from "../DTOs/SearchArgument";
+import { UserTableController } from "../database/UserTableController";
+import { SearchArgument, SortDirection } from "../shared/SearchArgument";
 import { Utils } from "../utils";
-import { User } from "../DTOs/User";
+import { User } from "../shared/User";
 
 export async function search(req: Request, resp: Response) {
     let databaseSource = new UserTableController();

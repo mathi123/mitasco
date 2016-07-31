@@ -2,13 +2,15 @@ module.exports = {
     src_files:{
         server:{
             all: "./src/server/**/*",
-            ts: "./src/server/**/*.ts"
+            ts: "./src/server/**/*.ts",
+            shared: "./src/server/shared/**/*.ts" // Define shared files here
         },
         client: {
             all: "./src/client/**/*",
             ts: "./src/client/**/*.ts",
             js: "./src/client/**/*.js",
-            non_scripts: ["./src/client/**/*.html", "./src/client/**/*.css"]
+            non_scripts: ["./src/client/**/*.html", "./src/client/**/*.css"],
+            shared: "./src/client/shared" // Read only folder
         }
     },
     development: {

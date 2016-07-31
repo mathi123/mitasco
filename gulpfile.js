@@ -34,6 +34,7 @@ gulp.task('watch', ['default'], function (cb) {
     other_client_files.push(config.src_files.client.js);
 
     gulp.watch([config.src_files.server.ts], ['compile-server']);
+    gulp.watch([config.src_files.server.shared], ['copy-shared-files']);
     gulp.watch([config.src_files.client.ts], ['compile-client']);
     gulp.watch(other_client_files, ['copy-other']);
 });
@@ -67,7 +68,7 @@ gulp.task('clean-server', function () {
   var files =[config[environment].buildDir+'/**/*',
       '!'+config[environment].buildDir+'/app',
       '!'+config[environment].buildDir+'/app/**/*'];
-    del(files, {force: true});
+    return del(files, {force: true});
 });
 
 gulp.task('compile-server', function () {
@@ -88,18 +89,17 @@ gulp.task('compile-server', function () {
 ////////////////////////
 
 gulp.task('build-client', function (callback) {
-   runSequence('clean-client', 'copy-imwa', 'copy-rxjs', 'copy-libs', 'copy-angular-libs', 'copy-other', 'compile-client', callback);
+   runSequence('clean-client', 'copy-imwa', 'copy-rxjs', 'copy-libs', 'copy-shared-files', 'copy-angular-libs', 'copy-other', 'compile-client', callback);
 });
-gulp.task('clean-client', function (callback) {
-    del([path.join(config[environment].buildDir, 'app')], {force: true});
-    callback();
+gulp.task('clean-client', function () {
+    return del([path.join(config[environment].buildDir, 'app')], {force: true});
 });
 gulp.task('copy-angular-libs', function () {
     return gulp.src(['node_modules/@angular/**'])
         .pipe(gulp.dest(path.join(config[environment].buildDirClient, 'libs', 'angular2')));
 });
 gulp.task('copy-imwa', function () {
-    return gulp.src(['node_modules/angular2-in-memory-web-api/**'])
+    return gulp.src(['node_modules/angular2-in-memory-web-api/**/*.js'])
         .pipe(gulp.dest(path.join(config[environment].buildDirClient, 'libs', 'angular2-in-memory-web-api')));
 });
 gulp.task('copy-rxjs', function () {
@@ -129,7 +129,10 @@ gulp.task('compile-client', function () {
         .pipe(ts(tsConfig))
         .pipe(gulp.dest(config[environment].buildDirClient));
 });
-
+gulp.task('copy-shared-files', function () {
+    return gulp.src([config.src_files.server.shared])
+        .pipe(gulp.dest(config.src_files.client.shared));
+});
 
 ///////////////////////
 /// TESTING

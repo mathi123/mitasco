@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { CustomerTableController } from "../DataStore/CustomerTableController";
-import { SearchArgument } from "../DTOs/SearchArgument";
+import { CustomerTableController } from "../database/CustomerTableController";
+import { SearchArgument } from "../shared/SearchArgument";
 
 export async function search(req: Request, resp: Response) {
     var query = req.params.query;
