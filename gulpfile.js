@@ -148,7 +148,7 @@ gulp.task('run-tests', function () {
     var executeTestPath = path.join(config[environment].buildDir, "test");
     
     return gulp.src(executeTestPath + '/**/*.test.js', {read: false})
-        .pipe(mocha({reporter: 'spec'}));
+        .pipe(mocha({reporter: 'mocha-circleci-reporter'}));
 });
 
 gulp.task('copy-tests', function(){
