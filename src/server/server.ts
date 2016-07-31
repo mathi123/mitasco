@@ -24,6 +24,7 @@ class StartUp {
         app.get('/todo/:id', todoRoutes.read);
         app.post('/todo', todoRoutes.create);
         app.put('/todo', todoRoutes.create);
+        app.use('/app', express.static(__dirname + '/app'));
 
         http.createServer(app).listen(app.get('port'), function () {
             console.log("Express server listening on port " + app.get('port'));
