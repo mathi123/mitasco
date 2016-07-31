@@ -47,3 +47,6 @@ typings
 
 # Apple files
 .DS_Store
+
+# Test results
+/test-results.xml
