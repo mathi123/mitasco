@@ -15,15 +15,16 @@ class StartUp {
         // Configure routes
         app.get('/', indexRoutes.route);
 
-        app.get('/user', userRoutes.search);
-        app.get('/user/:id', userRoutes.read);
-        app.post('/user', userRoutes.create);
-        app.put('/user', userRoutes.create);
+        app.get('/api/user', userRoutes.search);
+        app.get('/api/user/:id', userRoutes.read);
+        app.post('/api/user', userRoutes.create);
+        app.put('/api/user', userRoutes.create);
 
-        app.get('/todo', todoRoutes.search);
-        app.get('/todo/:id', todoRoutes.read);
-        app.post('/todo', todoRoutes.create);
-        app.put('/todo', todoRoutes.create);
+        app.get('/api/todo', todoRoutes.search);
+        app.get('/api/todo/:id', todoRoutes.read);
+        app.post('/api/todo', todoRoutes.create);
+        app.put('/api/todo', todoRoutes.create);
+
         app.use('/app', express.static(__dirname + '/app'));
 
         http.createServer(app).listen(app.get('port'), function () {
