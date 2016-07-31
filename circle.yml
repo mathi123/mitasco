@@ -1,7 +1,6 @@
 machine:
   node:
     version: 6.2.1
-configure:
   post:
     npm install -g db-migrate@v0.10.0-beta.12 db-migrate-pg typescript@next typings
     typings install
