@@ -13,7 +13,4 @@ test:
   pre:
     - gulp --env test
   override:
-    - gulp test --env test:
-      environment:
-        MOCHA_FILE: test-results.xml
-
+    - gulp test --env test
