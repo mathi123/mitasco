@@ -39,6 +39,10 @@ gulp.task('watch', ['default'], function (cb) {
     gulp.watch(other_client_files, ['copy-other']);
 });
 
+gulp.task('test', function (callback) {
+    runSequence('test-server', callback);
+});
+
 /////////////////////////
 // SERVER CONFIGURATION
 /////////////////////////
@@ -82,6 +86,24 @@ gulp.task('compile-server', function () {
     return gulp.src(files)
         .pipe(ts(tsConfig))
         .pipe(gulp.dest(config[environment].buildDir));
+});
+
+gulp.task('test-server', function (callback) {
+    runSequence('copy-server-tests', 'run-server-tests', callback);
+});
+
+gulp.task('copy-server-tests', function(){
+    var copyTestPath = path.join(config[environment].buildDir, "test");
+
+    return gulp.src([config.server.path_tests])
+        .pipe(gulp.dest(copyTestPath));
+});
+
+gulp.task('run-server-tests', function () {
+    var executeTestPath = path.join(config[environment].buildDir, "test");
+
+    return gulp.src(executeTestPath + '/**/*.test.js', {read: false})
+        .pipe(mocha({reporter: 'mocha-circleci-reporter'}));
 });
 
 ////////////////////////
@@ -132,27 +154,4 @@ gulp.task('compile-client', function () {
 gulp.task('copy-shared-files', function () {
     return gulp.src([config.src_files.server.shared])
         .pipe(gulp.dest(config.src_files.client.shared));
-});
-
-///////////////////////
-/// TESTING
-///////////////////////
-
-gulp.task('test', function (callback) {
-    runSequence('copy-tests', 'run-tests', callback);
-});
-
-gulp.task('run-tests', function () {
-    var executeTestPath = path.join(config[environment].buildDir, "test");
-
-    return gulp.src(executeTestPath + '/**/*.test.js', {read: false})
-        .pipe(mocha({reporter: 'mocha-circleci-reporter'}));
-});
-
-gulp.task('copy-tests', function(){
-    var copyTestPath = path.join(config[environment].buildDir, "test");
-
-    return gulp.src("test/**/*.test.js")
-        .pipe(gulp.dest(copyTestPath));
-
 });

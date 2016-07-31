@@ -35,7 +35,8 @@ module.exports = {
         ts_configuration: {
             target: "ES6",
             module: "commonjs"
-        }
+        },
+        path_tests: "test/server/**/*.test.js"
     },
     client: {
         ts_dependencies: ['typings/globals/core-js/*.d.ts',
@@ -54,6 +55,7 @@ module.exports = {
             'node_modules/zone.js/dist/zone.js',
             'node_modules/reflect-metadata/Reflect.js',
             'node_modules/systemjs/dist/system.src.js'],
-        vendor_folder: "lib"
+        vendor_folder: "lib",
+        path_tests: "test/client/**/*.test.js"
     }
 };

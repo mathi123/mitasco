@@ -1,4 +1,4 @@
-var UserTableController = require("../DataStore/UserTableController").UserTableController;
+var UserTableController = require("../database/UserTableController").UserTableController;
 var expect = require("chai").expect;
 var should = require("should");
 
