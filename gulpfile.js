@@ -53,7 +53,12 @@ gulp.task('build-server', function(callback){
 });
 
 gulp.task('clean-server', function () {
-  del([config[environment].buildDir], {force: true});
+  var files =[config[environment].buildDir+'/**/*',
+      '!'+config[environment].buildDir+'/app',
+      '!'+config[environment].buildDir+'/app/**/*'];
+
+    console.log(files);
+    del(files, {force: true});
 });
 
 gulp.task('compile-server', function () {
