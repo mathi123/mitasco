@@ -5,10 +5,12 @@ var gulp = require('gulp'),
     ts = require('gulp-typescript'),
     mocha = require('gulp-mocha'),
     environments = require('gulp-environments'),
-    path = require('path');
+    path = require('path'),
+    config = require('./configuration.js');
 
-// Configuration
-var config = require('./gulp.config.js');
+/////////////////////////
+// GENERAL CONFIGURATION
+/////////////////////////
 
 // Environments
 var development = environments.development;
@@ -27,12 +29,21 @@ gulp.task('default', function (callback) {
     runSequence('build-server', 'build-client', callback);
 });
 
+gulp.task('watch', ['default'], function (cb) {
+    var other_client_files = config.src_files.client.non_scripts;
+    other_client_files.push(config.src_files.client.js);
+
+    gulp.watch([config.src_files.server.ts], ['compile-server']);
+    gulp.watch([config.src_files.client.ts], ['compile-client']);
+    gulp.watch(other_client_files, ['copy-other']);
+});
+
 /////////////////////////
 // SERVER CONFIGURATION
 /////////////////////////
 
 gulp.task('copy-db-config', function () {
-  console.info("Copy pgconf.json to bin folder");
+  console.info("Copy pgconf.json to build folder");
 
   var database = JSON.parse(fs.readFileSync('database.json'));
 
@@ -56,35 +67,20 @@ gulp.task('clean-server', function () {
   var files =[config[environment].buildDir+'/**/*',
       '!'+config[environment].buildDir+'/app',
       '!'+config[environment].buildDir+'/app/**/*'];
-
-    console.log(files);
     del(files, {force: true});
 });
 
 gulp.task('compile-server', function () {
-  return gulp.src(['src/server/**/*.ts', 'typings/globals/pg-promise/*.d.ts',
-          'typings/globals/body-parser/*.d.ts','typings/globals/express/*.d.ts',
-          'typings/globals/express-serve-static-core/*.d.ts',
-          'typings/globals/node/*.d.ts', 'typings/globals/serve-static/*.d.ts',
-          'typings/globals/spex/*.d.ts', 'typings/globals/mime/*.d.ts',
-          'typings/modules/pg/*.d.ts'
-  ])
-      .pipe(development(ts({
-        target: "ES6",
-        module: "commonjs",
-        sourceMap: true
-      })))
-      .pipe(test(ts({
-          target: "ES6",
-          module: "commonjs",
-          sourceMap: false
-      })))
-      .pipe(production(ts({
-          target: "ES6",
-          module: "commonjs",
-          sourceMap: false
-      })))
-      .pipe(gulp.dest(config[environment].buildDir));
+    var files = config.server.ts_dependencies;
+    files.push(config.src_files.server.ts);
+
+    var tsConfig = config.server.ts_configuration;
+    tsConfig.sourceMap = development();
+    tsConfig.removeComments = !development();
+
+    return gulp.src(files)
+        .pipe(ts(tsConfig))
+        .pipe(gulp.dest(config[environment].buildDir));
 });
 
 ////////////////////////
@@ -100,44 +96,38 @@ gulp.task('clean-client', function (callback) {
 });
 gulp.task('copy-angular-libs', function () {
     return gulp.src(['node_modules/@angular/**'])
-        .pipe(gulp.dest(path.join(config[environment].buildDir, 'app', 'libs', 'angular2')));
+        .pipe(gulp.dest(path.join(config[environment].buildDirClient, 'libs', 'angular2')));
 });
 gulp.task('copy-imwa', function () {
     return gulp.src(['node_modules/angular2-in-memory-web-api/**'])
-        .pipe(gulp.dest(path.join(config[environment].buildDir, 'app', 'libs', 'angular2-in-memory-web-api')));
+        .pipe(gulp.dest(path.join(config[environment].buildDirClient, 'libs', 'angular2-in-memory-web-api')));
 });
 gulp.task('copy-rxjs', function () {
     return gulp.src(['node_modules/rxjs/**'])
-        .pipe(gulp.dest(path.join(config[environment].buildDir, 'app', 'libs', 'rxjs')));
+        .pipe(gulp.dest(path.join(config[environment].buildDirClient, 'libs', 'rxjs')));
 });
 gulp.task('copy-libs', function () {
-    return gulp.src(['node_modules/core-js/client/shim.min.js',
-        'node_modules/zone.js/dist/zone.js',
-        'node_modules/reflect-metadata/Reflect.js',
-        'node_modules/systemjs/dist/system.src.js'])
-            .pipe(gulp.dest(path.join(config[environment].buildDir, 'app', 'libs')));
+    return gulp.src(config.client.js_dependencies)
+            .pipe(gulp.dest(path.join(config[environment].buildDirClient, 'libs')));
 });
 gulp.task('copy-other', function () {
-   return gulp.src(['src/client/**/*.html', 'src/client/**/*.css', 'src/client/**/*.conf.js'])
-       .pipe(gulp.dest(path.join(config[environment].buildDir, 'app')));
+    var files = config.src_files.client.non_scripts;
+    files.push(config.src_files.client.js);
+
+   return gulp.src(files)
+       .pipe(gulp.dest(config[environment].buildDirClient));
 });
 gulp.task('compile-client', function () {
-    return gulp.src(['src/client/**/*.ts',
-            'typings/globals/core-js/*.d.ts',
-            'typings/globals/jasmine/*.d.ts',
-            'typings/globals/node/*.d.ts'
-    ])
-        .pipe(development(ts({
-            target: "ES5",
-            module: "commonjs",
-            sourceMap: true,
-            emitDecoratorMetadata: true,
-            experimentalDecorators: true,
-            removeComments: false,
-            noImplicitAny: false,
-            moduleResolution: "node"
-        })))
-        .pipe(gulp.dest(path.join(config[environment].buildDir, 'app')));
+    var files = config.client.ts_dependencies;
+    files.push(config.src_files.client.ts);
+
+    var tsConfig =  config.client.ts_configuration;
+    tsConfig.sourceMap = development();
+    tsConfig.removeComments = !development();
+
+    return gulp.src(files)
+        .pipe(ts(tsConfig))
+        .pipe(gulp.dest(config[environment].buildDirClient));
 });
 
 
@@ -151,7 +141,7 @@ gulp.task('test', function (callback) {
 
 gulp.task('run-tests', function () {
     var executeTestPath = path.join(config[environment].buildDir, "test");
-    
+
     return gulp.src(executeTestPath + '/**/*.test.js', {read: false})
         .pipe(mocha({reporter: 'mocha-circleci-reporter'}));
 });
