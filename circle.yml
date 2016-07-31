@@ -11,6 +11,6 @@ database:
     - db-migrate -e test up
 test:
   pre:
-    - gulp build --env test
+    - gulp --env test
   override:
     - gulp test --env test
