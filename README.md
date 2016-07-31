@@ -23,12 +23,12 @@ Mitasco project repository
 
 ### Run
 - gulp
-- node bin/app.js
+- node bin/debug/server.js
 
 ## Mitasco application stack
 ### Overview
 - database (postgresql)
-- server (nodeJS/express)
+- server (nodeJS with express)
 - client (angular2 + bootstrap)
 - tests
 
@@ -86,7 +86,7 @@ Other build tasks are managed by [Gulp](https://github.com/gulpjs/gulp) :
 - You can define tests in the folder */test*
 - [Mocha](https://mochajs.org/#getting-started) and is used in combination with [Chai](http://chaijs.com/) for testing server code.
 
-Application is deployed and tested to a Travis server on every push. The .travis.yml file configures the travis build and test configuration.
+Application is deployed and tested on a CircleCI server on every push. The circle.yml file configures the build and test configuration.
 
 ### package.json
 The *package.json* file defines the dependencies needed by this project. Some dependencies are needed for development/testing only.
@@ -100,9 +100,7 @@ Production packages:
 Development packages:
 - chai: Behaviour driving test assertions
 - gulp: used for build configuration
-- istanbul: library to determine coverage of testing code
 - mocha: unit testing framework to test server code
-- typings: used to get typescript definitions of existing libraries like express and pg.
 - run-sequence: needed to run gulp tasks in sequence
 - del: needed to delete files during build
 - gulp-typescript: needed to run typescript from gulp
