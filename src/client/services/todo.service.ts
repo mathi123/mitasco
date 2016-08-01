@@ -2,22 +2,26 @@ import { Injectable } from '@angular/core'
 import { Todo } from "../shared/Todo";
 import { SearchArgument } from "../shared/SearchArgument";
 import { PartialResultList } from "../shared/PartialResultList";
+import { Http, Response } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class TodoService{
-    public SearchTodos(arg: SearchArgument) : PartialResultList<Todo>{
-        let a = new Todo();
-        a.description = "code";
-        a.isDone = true;
-        let b = new Todo();
-        b.description = "test";
-        let c = new Todo();
-        c.description = "deploy";
+    public constructor(private http: Http){
 
-        let result = new PartialResultList<Todo>();
-        result.skipped = 0;
-        result.count = 3;
-        result.results = [a,b,c];
-        return result;
+    }
+    public SearchTodos(arg: SearchArgument) : Promise<PartialResultList<Todo>>{
+        console.log("searching");
+        let result = this.http.get(`http://localhost:3000/api/todo?query=${arg.query}&skip=${arg.skip}&take=${arg.take}`);
+            //result.map((r: Response) => r.json().data as PartialResultList<Todo>);
+        return result.toPromise()
+            .then((r: Response) => r.json() as PartialResultList<Todo>)
+            .catch((err: Error) => console.log(err));
+    }
+    public CreateTodo(todo: Todo): number{
+        return 0;
+    }
+    public remove(id: number){
+
     }
 }
