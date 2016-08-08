@@ -33,7 +33,7 @@ export class TodoListComponent {
     todos: Todo[] = [];
     selected: Todo;
 
-    constructor(private todoService: TodoService){
+    constructor(private _todoService: TodoService){
 
     }
 
@@ -51,15 +51,25 @@ export class TodoListComponent {
 
     public addTodo(){
         let newTodo = new Todo();
-        newTodo.id = this.todoService.CreateTodo(newTodo);
+        newTodo.description = "test new todo";
+        newTodo.isDone = false;
+        newTodo.id = 0;
 
-        this.todos.push(newTodo);
-        this.selected = newTodo;
+        this._todoService.create(newTodo)
+            .then((id) => {
+                newTodo.id = id;
+                this.todos.push(newTodo);
+                this.selected = newTodo;
+            });
     }
 
     public remove(todo: Todo){
-        this.todoService.remove(todo.id);
-        this.todos.splice(this.todos.indexOf(todo, 0), 1);
+        this._todoService.remove(todo.id)
+            .then((success: boolean) => {
+                if(success){
+                    this.todos.splice(this.todos.indexOf(todo, 0), 1);
+                }
+            });
     }
 
     private search(){
@@ -68,7 +78,7 @@ export class TodoListComponent {
         arg.skip = 0;
         arg.take = 15;
 
-        this.todoService.SearchTodos(arg)
+        this._todoService.search(arg)
             .then((results: PartialResultList<Todo>) => {
                 this.todos = results.results;
 

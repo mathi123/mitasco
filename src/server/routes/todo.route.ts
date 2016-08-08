@@ -37,27 +37,45 @@ export async function read(req: Request, resp: Response) {
 
 export async function create(req: Request, resp: Response) {
     var data = req.body;
+
     let todo = new Todo();
 
     if (data.description) {
         todo.description = data.description;
+    }else{
+        todo.description = '';
     }
 
     if (data.isDone) {
         todo.isDone = data.isDone;
+    }else{
+        todo.isDone = false;
     }
 
     if (data.id) {
         todo.id = data.id;
+    }else{
+        todo.id = 0;
     }
 
     console.log(data);
     let databaseSource = new TodoTableController();
     if (data.id) {
-        await databaseSource.update(todo);
-        resp.sendStatus(202);
+        let result = await databaseSource.update(todo);
+        resp.json(result);
     } else {
         let id = await databaseSource.create(todo);
         resp.json(id);
+    }
+}
+
+export async function remove(req: Request, resp: Response){
+    let id = req.params.id;
+    if (Utils.isPositiveInteger(id)) {
+        let databaseSource = new TodoTableController();
+        let result = await databaseSource.remove(id);
+        resp.json(result);
+    } else {
+        resp.json(false);
     }
 }
