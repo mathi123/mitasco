@@ -1,4 +1,5 @@
 import { ISerializable } from "./ISerializable";
+import { DeserializeUtil } from "./DeserializeUtil";
 export class Todo implements ISerializable{
     public id: number = 0;
     public description: string = "";
@@ -19,8 +20,8 @@ export class Todo implements ISerializable{
     public deserialize(json: string) {
         let values = JSON.parse(json);
 
-        this.id = values.id;
-        this.description = values.description;
+        this.id = DeserializeUtil.StrictNumber(values.id);
+        this.description = DeserializeUtil.StrictString(values.description);
         this.isDone = values.isDone;
     }
 }
