@@ -1,4 +1,5 @@
-export class Company {
+import { ISerializable } from "./ISerializable";
+export class Company implements ISerializable{
     public id: number;
     public name: string;
     public email: string;
@@ -34,5 +35,24 @@ export class Company {
         }
 
         return this.name + nummer;
+    }
+
+    public serialize(): string {
+        return JSON.stringify(this);
+    }
+
+    public deserialize(json: string) {
+        let values = JSON.parse(json);
+
+        this.id = values.id;
+        this.name = values.name;
+        this.email = values.email;
+        this.phone = values.phone;
+        this.fax = values.fax;
+        this.gsm = values.gsm;
+        this.isCustomer = values.isCustomer;
+        this.isSupplier = values.isSupplier;
+        this.isCompetitor = values.isCompetitor;
+        this.vat = values.vat;
     }
 }
