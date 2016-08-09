@@ -61,8 +61,7 @@ export class TodoTableController implements ITodoService {
             return result[0]['id'];
         }catch(err){
             console.error(err);
-
-            return undefined;
+            throw err;
         }
     }
 

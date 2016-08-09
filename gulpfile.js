@@ -82,6 +82,7 @@ gulp.task('compile-server', function () {
     var tsConfig = config.server.ts_configuration;
     tsConfig.sourceMap = development();
     tsConfig.removeComments = !development();
+    tsConfig.typescript = require('typescript');
 
     return gulp.src(files)
         .pipe(ts(tsConfig))

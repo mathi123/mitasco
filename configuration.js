@@ -34,7 +34,8 @@ module.exports = {
         'typings/modules/pg/*.d.ts'],
         ts_configuration: {
             target: "ES6",
-            module: "commonjs"
+            module: "commonjs",
+            strictNullChecks: true
         },
         path_tests: "test/server/**/*.test.js"
     },
