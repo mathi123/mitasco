@@ -1,5 +1,5 @@
-import { ISerializable } from "./ISerializable";
-export class Company implements ISerializable{
+import { IDeserializable } from "./IDeserializable";
+export class Company implements IDeserializable{
     public id: number;
     public name: string;
     public email: string;
@@ -37,13 +37,7 @@ export class Company implements ISerializable{
         return this.name + nummer;
     }
 
-    public serialize(): string {
-        return JSON.stringify(this);
-    }
-
-    public deserialize(json: string) {
-        let values = JSON.parse(json);
-
+    public deserialize(values: any) {
         this.id = values.id;
         this.name = values.name;
         this.email = values.email;
