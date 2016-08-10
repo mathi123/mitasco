@@ -3,7 +3,8 @@ module.exports = {
         server:{
             all: "./src/server/**/*",
             ts: "./src/server/**/*.ts",
-            shared: "./src/server/shared/**/*.ts" // Define shared files here
+            shared: "./src/server/shared/**/*.ts", // Define shared files here
+            tests: "./test/server/**/*.test.js"
         },
         client: {
             all: "./src/client/**/*",
