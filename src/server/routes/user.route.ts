@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserTableController } from "../database/UserTableController";
+import { UserTableController } from "../controllers/UserTableController";
 import { SearchArgument, SortDirection } from "../shared/SearchArgument";
 import { Utils } from "../utils";
 import { User } from "../shared/User";

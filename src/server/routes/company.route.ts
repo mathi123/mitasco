@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CustomerTableController } from "../database/CustomerTableController";
+import { CustomerTableController } from "../controllers/CustomerTableController";
 import { SearchArgument } from "../shared/SearchArgument";
 
 export async function search(req: Request, resp: Response) {

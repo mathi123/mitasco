@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { UserTableController } from "../database/UserTableController";
+import { UserTableController } from "../controllers/UserTableController";
 import { SearchArgument } from "../shared/SearchArgument";
 import { Utils } from "../utils";
-import { TodoTableController } from "../database/TodoTableController";
+import { TodoTableController } from "../controllers/TodoTableController";
 import { Todo } from "../shared/Todo";
 
 export async function search(req: Request, resp: Response) {
