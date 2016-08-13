@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import { UserTableController } from "../database/UserTableController";
-import { SearchArgument, SortDirection } from "../shared/SearchArgument";
+import { SearchArgument } from "../shared/SearchArgument";
 import { Utils } from "../utils";
-import { User } from "../shared/User";
 import { TodoTableController } from "../database/TodoTableController";
 import { Todo } from "../shared/Todo";
 
@@ -36,27 +35,10 @@ export async function read(req: Request, resp: Response) {
 }
 
 export async function create(req: Request, resp: Response) {
-    var data = req.body;
-
+    let data = req.body;
     let todo = new Todo();
 
-    if (data.description) {
-        todo.description = data.description;
-    }else{
-        todo.description = '';
-    }
-
-    if (data.isDone) {
-        todo.isDone = data.isDone;
-    }else{
-        todo.isDone = false;
-    }
-
-    if (data.id) {
-        todo.id = data.id;
-    }else{
-        todo.id = 0;
-    }
+    todo.deserialize(data);
 
     console.log(data);
     let databaseSource = new TodoTableController();

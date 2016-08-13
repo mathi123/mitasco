@@ -41,9 +41,9 @@ export class TodoTableController implements ITodoService {
             let rec = new Todo();
             rec.id = row['id'];
             rec.description = row['description'];
-            rec.isDone = row['isDone']
+            rec.isDone = row['isDone'];
             return rec;
-                });
+            });
         return searchResult;
     }
 
@@ -53,7 +53,6 @@ export class TodoTableController implements ITodoService {
             text: "INSERT INTO todo (description, isDone) VALUES ($1, $2) RETURNING id",
             values: [todo.description, todo.isDone ? 1 : 0]
         };
-        console.log("running insert query");
         try{
             let result = await DbClient.Instance().query(query);
             console.log(result);
