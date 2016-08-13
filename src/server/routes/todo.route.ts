@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
-import { UserTableController } from "../DataStore/UserTableController";
-import { SearchArgument, SortDirection } from "../DTOs/SearchArgument";
+import { UserTableController } from "../database/UserTableController";
+import { SearchArgument } from "../shared/SearchArgument";
 import { Utils } from "../utils";
-import { User } from "../DTOs/User";
-import { TodoTableController } from "../DataStore/TodoTableController";
-import { Todo } from "../DTOs/Todo";
+import { TodoTableController } from "../database/TodoTableController";
+import { Todo } from "../shared/Todo";
 
 export async function search(req: Request, resp: Response) {
     let databaseSource = new TodoTableController();
@@ -36,28 +35,29 @@ export async function read(req: Request, resp: Response) {
 }
 
 export async function create(req: Request, resp: Response) {
-    var data = req.body;
+    let data = req.body;
     let todo = new Todo();
 
-    if (data.description) {
-        todo.description = data.description;
-    }
-
-    if (data.isDone) {
-        todo.isDone = data.isDone;
-    }
-
-    if (data.id) {
-        todo.id = data.id;
-    }
+    todo.deserialize(data);
 
     console.log(data);
     let databaseSource = new TodoTableController();
     if (data.id) {
-        await databaseSource.update(todo);
-        resp.sendStatus(202);
+        let result = await databaseSource.update(todo);
+        resp.json(result);
     } else {
         let id = await databaseSource.create(todo);
         resp.json(id);
+    }
+}
+
+export async function remove(req: Request, resp: Response){
+    let id = req.params.id;
+    if (Utils.isPositiveInteger(id)) {
+        let databaseSource = new TodoTableController();
+        let result = await databaseSource.remove(id);
+        resp.json(result);
+    } else {
+        resp.json(false);
     }
 }

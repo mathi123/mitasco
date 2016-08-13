@@ -50,3 +50,6 @@ typings
 
 # Test results
 /test-results.xml
+
+# Auto generated
+/src/client/shared

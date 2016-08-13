@@ -1,7 +1,7 @@
 import { QueryConfig } from "pg";
-import { User } from "../DTOs/User";
-import { PartialResultList } from "../DTOs/PartialResultList";
-import { SearchArgument } from "../DTOs/SearchArgument";
+import { User } from "../shared/User";
+import { PartialResultList } from "../shared/PartialResultList";
+import { SearchArgument } from "../shared/SearchArgument";
 import { QueryNames } from "./QueryNames";
 import { DbClient } from "./DbClient";
 

@@ -23,7 +23,8 @@ class StartUp {
         app.get('/api/todo', todoRoutes.search);
         app.get('/api/todo/:id', todoRoutes.read);
         app.post('/api/todo', todoRoutes.create);
-        app.put('/api/todo', todoRoutes.create);
+        //app.put('/api/todo', todoRoutes.create);
+        app.delete('/api/todo/:id', todoRoutes.remove);
 
         app.use('/app', express.static(__dirname + '/app'));
 

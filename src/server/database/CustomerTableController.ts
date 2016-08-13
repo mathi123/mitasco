@@ -1,6 +1,6 @@
 import { QueryConfig } from "pg";
-import { Company } from "../DTOs/Company";
-import { SearchArgument } from "../DTOs/SearchArgument";
+import { Company } from "../shared/Company";
+import { SearchArgument } from "../shared/SearchArgument";
 import { QueryNames } from "./QueryNames";
 import { DbClient } from "./DbClient";
 

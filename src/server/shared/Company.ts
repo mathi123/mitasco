@@ -1,4 +1,5 @@
-export class Company {
+import { IDeserializable } from "./IDeserializable";
+export class Company implements IDeserializable{
     public id: number;
     public name: string;
     public email: string;
@@ -34,5 +35,18 @@ export class Company {
         }
 
         return this.name + nummer;
+    }
+
+    public deserialize(values: any) {
+        this.id = values.id;
+        this.name = values.name;
+        this.email = values.email;
+        this.phone = values.phone;
+        this.fax = values.fax;
+        this.gsm = values.gsm;
+        this.isCustomer = values.isCustomer;
+        this.isSupplier = values.isSupplier;
+        this.isCompetitor = values.isCompetitor;
+        this.vat = values.vat;
     }
 }

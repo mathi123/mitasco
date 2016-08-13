@@ -1,12 +1,12 @@
 import { QueryConfig } from "pg";
-import { PartialResultList } from "../DTOs/PartialResultList";
-import { SearchArgument } from "../DTOs/SearchArgument";
+import { PartialResultList } from "../shared/PartialResultList";
+import { SearchArgument } from "../shared/SearchArgument";
 import { QueryNames } from "./QueryNames";
 import { DbClient } from "./DbClient";
-import { Todo } from "../DTOs/Todo";
-import { User } from "../DTOs/User";
+import { Todo } from "../shared/Todo";
+import { ITodoService } from "../shared/ITodoService";
 
-export class TodoTableController {
+export class TodoTableController implements ITodoService {
     public async search(argument: SearchArgument): Promise<PartialResultList<Todo>> {
         let countQuery: QueryConfig = {
             name: QueryNames.TodoTable_Search,
@@ -41,9 +41,9 @@ export class TodoTableController {
             let rec = new Todo();
             rec.id = row['id'];
             rec.description = row['description'];
-            rec.isDone = row['isDone']
+            rec.isDone = row['isDone'];
             return rec;
-                });
+            });
         return searchResult;
     }
 
@@ -51,12 +51,17 @@ export class TodoTableController {
         let query: QueryConfig = {
             name: QueryNames.TodoTable_Create,
             text: "INSERT INTO todo (description, isDone) VALUES ($1, $2) RETURNING id",
-            values: [todo.description, todo.isDone]
+            values: [todo.description, todo.isDone ? 1 : 0]
         };
+        try{
+            let result = await DbClient.Instance().query(query);
+            console.log(result);
 
-        let result = await DbClient.Instance().query(query);
-
-        return result[0]['id'];
+            return result[0]['id'];
+        }catch(err){
+            console.error(err);
+            throw err;
+        }
     }
 
     public async remove(id: number): Promise<boolean> {
@@ -91,10 +96,16 @@ export class TodoTableController {
         let query: QueryConfig = {
             name: QueryNames.TodoTable_Update,
             text: "UPDATE todo SET description = $1, isDone = $2 WHERE id = $3",
-            values: [todo.description, todo.isDone, todo.id]
+            values: [todo.description, todo.isDone ? 1 : 0, todo.id]
         };
 
-        await DbClient.Instance().query(query);
+        try
+        {
+            await DbClient.Instance().query(query);
+        }
+        catch(err){
+            console.error(err);
+        }
         return true;
     }
 }
