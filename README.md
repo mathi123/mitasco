@@ -100,10 +100,14 @@ Production packages:
 Development packages:
 - chai: Behaviour driving test assertions
 - gulp: used for build configuration
+- gulp-environments: allows gulp to user -e development/test/production flags
 - mocha: unit testing framework to test server code
+- mocha-circleci-reporter: used to report mocha test to 'test-results.xml', loaded by circleCI
 - run-sequence: needed to run gulp tasks in sequence
-- del: needed to delete files during build
+- del: needed to delete files during gulp build
 - gulp-typescript: needed to run typescript from gulp
+- typescript: needed to compile server with typescrit 2.0 beta, and pass typescript lib to gulp-typescript.
+- should: not needed?!
 
 To install a package, type:
 
