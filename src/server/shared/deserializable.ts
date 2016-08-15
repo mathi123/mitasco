@@ -1,3 +1,3 @@
-export interface deserializable{
+export interface Deserializable{
     deserialize(obj:any);
 }

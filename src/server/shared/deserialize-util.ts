@@ -1,4 +1,4 @@
-import { deserializable } from "./deserializable";
+import { Deserializable } from "./deserializable";
 
 export class DeserializeUtil{
     public static StrictString(obj:any):string{
@@ -61,14 +61,14 @@ export class DeserializeUtil{
 
         return obj as Array<boolean>;
     }
-    public static StrictObjectArray(obj:any, createInstance: () => deserializable):deserializable[]{
+    public static StrictObjectArray(obj:any, createInstance: () => Deserializable):Deserializable[]{
         if(obj === null || obj === undefined){
             throw new KeyNotFoundException();
         }else if(obj.constructor !== Array){
             throw new InvalidTypeException();
         }
 
-        let result:Array<deserializable> = [];
+        let result:Array<Deserializable> = [];
         for(let a of obj){
             let b = createInstance();
             b.deserialize(a);
