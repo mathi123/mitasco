@@ -1,7 +1,4 @@
-export enum SortDirection {
-    Acscending,
-    Descending
-}
+import { SortDirection } from "./sort-direction";
 
 export class SearchArgument {
     public query: string;

@@ -1,11 +1,11 @@
 import { QueryConfig } from "pg";
-import { User } from "../shared/User";
-import { PartialResultList } from "../shared/PartialResultList";
-import { SearchArgument } from "../shared/SearchArgument";
-import { QueryNames } from "./QueryNames";
-import { DbClient } from "./DbClient";
+import { User } from "../shared/user";
+import { PartialResultList } from "../shared/partial-result-list";
+import { SearchArgument } from "../shared/search-argument";
+import { QueryNames } from "./query-names";
+import { DbClient } from "./db-client";
 
-export class UserTableController {
+export class UserController {
     public defaultSortColumn: string = 'email';
     public sortColumnOptions: string[] = ['email', 'fullname'];
 

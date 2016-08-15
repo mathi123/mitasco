@@ -1,4 +1,4 @@
-var Todo = new require("../shared/Todo").Todo;
+var Todo = new require("../shared/todo").Todo;
 var expect = require("chai").expect;
 
 describe("deep compare", function () {
