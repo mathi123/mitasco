@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { UserController } from "../controllers/user.controller";
-import { SearchArgument, SortDirection } from "../shared/search-argument";
+import { SearchArgument } from "../shared/search-argument";
+import { SortDirection } from "../shared/sort-direction";
 import { Utils } from "../utils";
 import { User } from "../shared/user";
 

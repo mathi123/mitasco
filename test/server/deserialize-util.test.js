@@ -1,7 +1,7 @@
-var util = require("../shared/DeserializeUtil").DeserializeUtil;
-var KeyNotFoundException = require("../shared/DeserializeUtil").KeyNotFoundException;
-var InvalidTypeException = require("../shared/DeserializeUtil").InvalidTypeException;
-var Todo = new require("../shared/Todo").Todo;
+var util = require("../shared/deserialize-util").DeserializeUtil;
+var KeyNotFoundException = require("../shared/deserialize-util").KeyNotFoundException;
+var InvalidTypeException = require("../shared/deserialize-util").InvalidTypeException;
+var Todo = new require("../shared/todo").Todo;
 var expect = require("chai").expect;
 
 describe("DeserializeUtil", function() {
