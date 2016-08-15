@@ -1,5 +1,5 @@
-import { IDeserializable } from "./IDeserializable";
-export class Company implements IDeserializable{
+import { deserializable } from "./deserializable";
+export class Company implements deserializable{
     public id: number;
     public name: string;
     public email: string;

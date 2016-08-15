@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { UserTableController } from "../controllers/UserTableController";
-import { SearchArgument, SortDirection } from "../shared/SearchArgument";
+import { UserController } from "../controllers/user.controller";
+import { SearchArgument, SortDirection } from "../shared/search-argument";
 import { Utils } from "../utils";
-import { User } from "../shared/User";
+import { User } from "../shared/user";
 
 export async function search(req: Request, resp: Response) {
-    let databaseSource = new UserTableController();
+    let databaseSource = new UserController();
     let argument = new SearchArgument();
 
     if (req.query.query) {
@@ -42,7 +42,7 @@ export async function search(req: Request, resp: Response) {
 export async function read(req: Request, resp: Response) {
     let id = req.params.id;
     if (Utils.isPositiveInteger(id)) {
-        let databaseSource = new UserTableController();
+        let databaseSource = new UserController();
         let user = await databaseSource.read(id);
         resp.json(user);
     } else {
@@ -67,7 +67,7 @@ export async function create(req: Request, resp: Response) {
     }
 
     console.log(data);
-    let databaseSource = new UserTableController();
+    let databaseSource = new UserController();
     if (data.id) {
         await databaseSource.update(user);
         resp.sendStatus(202);
