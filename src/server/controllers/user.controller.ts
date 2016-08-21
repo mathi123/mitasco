@@ -64,7 +64,7 @@ export class UserController {
     public async create(user: User): Promise<number> {
         let query: QueryConfig = {
             name: QueryNames.UserTable_Create,
-            text: "INSERT INTO users (fullname, email) VALUES ($1, $2) RETURNING id",
+            text: "INSERT INTO users (fullname, email, password) VALUES ($1, $2, 'test') RETURNING id",
             values: [user.fullname, user.email]
         };
 
