@@ -32,7 +32,7 @@ module.exports = {
         'typings/globals/express-serve-static-core/*.d.ts',
         'typings/globals/node/*.d.ts', 'typings/globals/serve-static/*.d.ts',
         'typings/globals/spex/*.d.ts', 'typings/globals/mime/*.d.ts',
-        'typings/modules/pg/*.d.ts'],
+            'typings/globals/bcrypt/*.d.ts','typings/modules/pg/*.d.ts'],
         ts_configuration: {
             target: "ES6",
             module: "commonjs",
