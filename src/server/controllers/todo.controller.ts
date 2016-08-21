@@ -8,7 +8,6 @@ import { TodoService } from "../shared/todo.service";
 
 export class TodoController implements TodoService {
     public async search(argument: SearchArgument): Promise<PartialResultList<Todo>> {
-        console.debug("search");
         let countQuery: QueryConfig = {
             name: QueryNames.TodoTable_Search,
             text: `SELECT COUNT(*) FROM todo 
