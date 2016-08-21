@@ -3,7 +3,7 @@ import * as bodyParser from "body-parser";
 import * as http from "http";
 import { RouteType } from "./route-type"
 import { Request,Response } from "express";
-//var oauth2 = require('node-oauth2-server');
+var oauth2 = require('node-oauth2-server');
 
 
 export class WebServer{
@@ -21,9 +21,9 @@ export class WebServer{
         this._port = port;
         this._app.set('port', port);
         this._app.use(bodyParser.json());
-        //this.configureSecurityRoutes();
+        this.configureSecurityRoutes();
     }
-/*
+
     public configureSecurityRoutes(){
         let config={
             model: require('./security/oauth2'),
@@ -105,7 +105,7 @@ export class WebServer{
         // Error handling
         this._app.use(this._app.oauth.errorHandler());
     }
-*/
+
     public start(){
         this._app.use('/app', express.static(__dirname + '/app'));
         console.log(`setting up server on port ${this._port}`);
@@ -143,7 +143,7 @@ export class WebServer{
         suffix = this.trimDashes(suffix);
         entity = this.trimDashes(entity);
 
-        let route = this._routePrefix;
+        let route = `/${this._routePrefix}`;
 
         if(entity != ''){
             route = `${route}/${entity}`;
