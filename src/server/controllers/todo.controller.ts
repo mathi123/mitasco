@@ -1,13 +1,14 @@
 import { QueryConfig } from "pg";
-import { PartialResultList } from "../shared/PartialResultList";
-import { SearchArgument } from "../shared/SearchArgument";
-import { QueryNames } from "./QueryNames";
-import { DbClient } from "./DbClient";
-import { Todo } from "../shared/Todo";
-import { ITodoService } from "../shared/ITodoService";
+import { PartialResultList } from "../shared/partial-result-list";
+import { SearchArgument } from "../shared/search-argument";
+import { QueryNames } from "./query-names";
+import { DbClient } from "../db-client";
+import { Todo } from "../shared/todo";
+import { TodoService } from "../shared/todo.service";
 
-export class TodoTableController implements ITodoService {
+export class TodoController implements TodoService {
     public async search(argument: SearchArgument): Promise<PartialResultList<Todo>> {
+        console.debug("search");
         let countQuery: QueryConfig = {
             name: QueryNames.TodoTable_Search,
             text: `SELECT COUNT(*) FROM todo 
@@ -37,13 +38,7 @@ export class TodoTableController implements ITodoService {
         let searchResult = new PartialResultList<Todo>();
         searchResult.count = total;
         searchResult.skipped = argument.skip;
-        searchResult.results = selectResult.map((row) => {
-            let rec = new Todo();
-            rec.id = row['id'];
-            rec.description = row['description'];
-            rec.isDone = row['isDone'];
-            return rec;
-            });
+        searchResult.results = selectResult.map(this.ArrayToTodo);
         return searchResult;
     }
 
@@ -53,15 +48,8 @@ export class TodoTableController implements ITodoService {
             text: "INSERT INTO todo (description, isDone) VALUES ($1, $2) RETURNING id",
             values: [todo.description, todo.isDone ? 1 : 0]
         };
-        try{
-            let result = await DbClient.Instance().query(query);
-            console.log(result);
-
-            return result[0]['id'];
-        }catch(err){
-            console.error(err);
-            throw err;
-        }
+        let result = await DbClient.Instance().query(query);
+        return result[0]['id'];
     }
 
     public async remove(id: number): Promise<boolean> {
@@ -84,11 +72,7 @@ export class TodoTableController implements ITodoService {
         };
 
         let result = await DbClient.Instance().query(query);
-        let row = result[0];
-        let rec = new Todo();
-        rec.id = row['id'];
-        rec.description = row['description'];
-        rec.isDone = row['isDone'];
+        let rec = this.ArrayToTodo(result[0]);
         return rec;
     }
 
@@ -107,5 +91,13 @@ export class TodoTableController implements ITodoService {
             console.error(err);
         }
         return true;
+    }
+
+    private ArrayToTodo(row:any):Todo{
+        let rec = new Todo();
+        rec.id = row['id'];
+        rec.description = row['description'];
+        rec.isDone = row['isDone'];
+        return rec;
     }
 }

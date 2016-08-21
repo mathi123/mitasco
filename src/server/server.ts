@@ -1,36 +1,27 @@
-import * as express from "express";
-import * as http from "http";
-import * as bodyParser from "body-parser";
+import { WebServer } from "./web-server";
+import { RouteType } from "./route-type";
 import * as userRoutes from "./routes/user.route";
-import * as indexRoutes from "./routes/index.route";
 import * as todoRoutes from "./routes/todo.route";
 
-class StartUp {
+class StartUp{
     public static main(): number {
-        var app = express();
+        let server = new WebServer();
+        server.init(3000);
 
-        app.set('port', process.env.PORT || 3000);
-        app.use(bodyParser.json());
+        // user routes
+        server.configureRoute(RouteType.GET, 'user', userRoutes.search);
+        server.configureRoute(RouteType.GET, 'user', userRoutes.read, ':id');
+        server.configureRoute(RouteType.POST, 'user', userRoutes.create);
+        server.configureRoute(RouteType.PUT, 'user', userRoutes.create); // TODO: create -> update
 
-        // Configure routes
-        app.get('/', indexRoutes.route);
+        // todo routes
+        server.configureRoute(RouteType.GET, 'todo', todoRoutes.search);
+        server.configureRoute(RouteType.GET, 'todo', todoRoutes.read, ':id');
+        server.configureRoute(RouteType.POST, 'todo', todoRoutes.create);
+        server.configureRoute(RouteType.PUT, 'todo', todoRoutes.create); // TODO: create -> update
+        server.configureRoute(RouteType.DELETE, 'todo', todoRoutes.remove, ':id');
 
-        app.get('/api/user', userRoutes.search);
-        app.get('/api/user/:id', userRoutes.read);
-        app.post('/api/user', userRoutes.create);
-        app.put('/api/user', userRoutes.create);
-
-        app.get('/api/todo', todoRoutes.search);
-        app.get('/api/todo/:id', todoRoutes.read);
-        app.post('/api/todo', todoRoutes.create);
-        //app.put('/api/todo', todoRoutes.create);
-        app.delete('/api/todo/:id', todoRoutes.remove);
-
-        app.use('/app', express.static(__dirname + '/app'));
-
-        http.createServer(app).listen(app.get('port'), function () {
-            console.log("Express server listening on port " + app.get('port'));
-        });
+        server.start();
 
         return 0;
     }

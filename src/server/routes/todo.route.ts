@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
-import { UserTableController } from "../database/UserTableController";
-import { SearchArgument } from "../shared/SearchArgument";
+import { UserController } from "../controllers/user.controller";
+import { SearchArgument } from "../shared/search-argument";
 import { Utils } from "../utils";
-import { TodoTableController } from "../database/TodoTableController";
-import { Todo } from "../shared/Todo";
+import { TodoController } from "../controllers/todo.controller";
+import { Todo } from "../shared/todo";
 
 export async function search(req: Request, resp: Response) {
-    let databaseSource = new TodoTableController();
+    console.debug("search route");
+    let databaseSource = new TodoController();
     let argument = new SearchArgument();
 
     if (req.query.query) {
@@ -26,7 +27,7 @@ export async function search(req: Request, resp: Response) {
 export async function read(req: Request, resp: Response) {
     let id = req.params.id;
     if (Utils.isPositiveInteger(id)) {
-        let databaseSource = new UserTableController();
+        let databaseSource = new UserController();
         let result = await databaseSource.read(id);
         resp.json(result);
     } else {
@@ -41,7 +42,7 @@ export async function create(req: Request, resp: Response) {
     todo.deserialize(data);
 
     console.log(data);
-    let databaseSource = new TodoTableController();
+    let databaseSource = new TodoController();
     if (data.id) {
         let result = await databaseSource.update(todo);
         resp.json(result);
@@ -54,7 +55,7 @@ export async function create(req: Request, resp: Response) {
 export async function remove(req: Request, resp: Response){
     let id = req.params.id;
     if (Utils.isPositiveInteger(id)) {
-        let databaseSource = new TodoTableController();
+        let databaseSource = new TodoController();
         let result = await databaseSource.remove(id);
         resp.json(result);
     } else {

@@ -1,5 +1,5 @@
-import { IDeserializable } from "./IDeserializable";
-export class Company implements IDeserializable{
+import { Deserializable } from "./deserializable";
+export class Company implements Deserializable{
     public id: number;
     public name: string;
     public email: string;
@@ -11,7 +11,7 @@ export class Company implements IDeserializable{
     public isCompetitor: boolean;
     public vat: string;
 
-    constructor() {
+    constructor() { 
 
     }
 

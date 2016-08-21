@@ -1,8 +1,8 @@
-import { Todo } from "./Todo";
-import { PartialResultList } from "./PartialResultList";
-import { SearchArgument } from "./SearchArgument";
+import { Todo } from "./todo";
+import { PartialResultList } from "./partial-result-list";
+import { SearchArgument } from "./search-argument";
 
-export interface ITodoService{
+export interface TodoService{
     search(argument: SearchArgument): Promise<PartialResultList<Todo>>;
     create(todo: Todo): Promise<number>;
     remove(id: number): Promise<boolean>;
