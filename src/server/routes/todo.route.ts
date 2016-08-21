@@ -6,6 +6,7 @@ import { TodoController } from "../controllers/todo.controller";
 import { Todo } from "../shared/todo";
 
 export async function search(req: Request, resp: Response) {
+    console.debug("search route");
     let databaseSource = new TodoController();
     let argument = new SearchArgument();
 

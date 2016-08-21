@@ -3,7 +3,7 @@ import { User } from "../shared/user";
 import { PartialResultList } from "../shared/partial-result-list";
 import { SearchArgument } from "../shared/search-argument";
 import { QueryNames } from "./query-names";
-import { DbClient } from "./db-client";
+import { DbClient } from "../db-client";
 
 export class UserController {
     public defaultSortColumn: string = 'email';

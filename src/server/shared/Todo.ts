@@ -1,7 +1,7 @@
-import { deserializable } from "./deserializable";
+import { Deserializable } from "./deserializable";
 import { DeserializeUtil } from "./deserialize-util";
 
-export class Todo implements deserializable{
+export class Todo implements Deserializable{
     public id: number = 0;
     public description: string = "";
     public isDone: boolean = false;

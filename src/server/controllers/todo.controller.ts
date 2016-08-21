@@ -2,12 +2,13 @@ import { QueryConfig } from "pg";
 import { PartialResultList } from "../shared/partial-result-list";
 import { SearchArgument } from "../shared/search-argument";
 import { QueryNames } from "./query-names";
-import { DbClient } from "./db-client";
+import { DbClient } from "../db-client";
 import { Todo } from "../shared/todo";
 import { TodoService } from "../shared/todo.service";
 
 export class TodoController implements TodoService {
     public async search(argument: SearchArgument): Promise<PartialResultList<Todo>> {
+        console.debug("search");
         let countQuery: QueryConfig = {
             name: QueryNames.TodoTable_Search,
             text: `SELECT COUNT(*) FROM todo 
