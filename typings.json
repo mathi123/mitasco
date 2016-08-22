@@ -3,6 +3,7 @@
   "version": false,
   "dependencies": {
     "chai": "registry:npm/chai#3.5.0+20160723033700",
+    "jsonwebtoken": "registry:npm/jsonwebtoken#7.1.8+20160811031426",
     "pg": "registry:npm/pg#4.5.1+20160505155734"
   },
   "globalDependencies": {
