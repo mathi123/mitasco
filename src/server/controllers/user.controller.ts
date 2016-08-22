@@ -72,8 +72,9 @@ export class UserController {
         };
 
         let result = await DbClient.Instance().query(query);
-
-        return result[0]['id'];
+        let id = result[0]['id'] as number;
+        user.id = id;
+        return id;
     }
 
     public async remove(id: number): Promise<boolean> {
