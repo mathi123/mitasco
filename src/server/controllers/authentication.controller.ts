@@ -5,6 +5,10 @@ import { DbClient } from "../db-client";
 
 export class AuthenticationController{
     public async isValid(credentials:Credentials):Promise<boolean>{
+        if(credentials === null || credentials === undefined ||
+            credentials.password === null || credentials.password === undefined)
+            return false;
+
         let query: QueryConfig = {
             name: "Authentication.GetUser",
             text: `SELECT * FROM users 

@@ -21,7 +21,7 @@ describe("UserController class", function () {
                 sortDirection: 0
             };
 
-            var result = controller.search(searchArg)
+            controller.search(searchArg)
                 .then(function (data) {
                     done();
                 })
@@ -35,7 +35,7 @@ describe("UserController class", function () {
         var controller = new UserController();
 
         it("an id is returned", function (done) {
-            controller.create(userToAdd).then(function (id) {
+            controller.create(userToAdd, "test").then(function (id) {
                 console.info("create succes " + id);
                 id.should.not.equal(0);
                     done();
