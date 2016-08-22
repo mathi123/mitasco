@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { Credentials } from "../shared/credentials";
 import { AuthenticationController } from "../controllers/authentication.controller";
 
-
 export async function getToken(req: Request, res: Response) {
     let data = req.body;
     let credentials = new Credentials();
@@ -11,7 +10,7 @@ export async function getToken(req: Request, res: Response) {
     try{
         credentials.deserialize(data);
         let isValid = controller.credentialsAreValid(credentials);
-        
+
         if(isValid){
             let userId = await controller.getUserIdByEmail(credentials.email);
             let token = await controller.createToken(userId);
