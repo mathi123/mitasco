@@ -2,11 +2,15 @@ import { WebServer } from "./web-server";
 import { RouteType } from "./route-type";
 import * as userRoutes from "./routes/user.route";
 import * as todoRoutes from "./routes/todo.route";
+import * as authenticationRoutes from "./routes/authentication.route";
 
 class StartUp{
     public static main(): number {
         let server = new WebServer();
         server.init(3000);
+
+        // token
+        server.configureRoute(RouteType.POST, 'token', authenticationRoutes.getToken);
 
         // user routes
         server.configureRoute(RouteType.GET, 'user', userRoutes.search);

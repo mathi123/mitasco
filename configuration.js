@@ -28,11 +28,12 @@ module.exports = {
     },
     server: {
         ts_dependencies: ['typings/globals/pg-promise/*.d.ts',
-        'typings/globals/body-parser/*.d.ts','typings/globals/express/*.d.ts',
-        'typings/globals/express-serve-static-core/*.d.ts',
-        'typings/globals/node/*.d.ts', 'typings/globals/serve-static/*.d.ts',
-        'typings/globals/spex/*.d.ts', 'typings/globals/mime/*.d.ts',
-        'typings/modules/pg/*.d.ts'],
+            'typings/globals/body-parser/*.d.ts','typings/globals/express/*.d.ts',
+            'typings/globals/express-serve-static-core/*.d.ts',
+            'typings/globals/node/*.d.ts', 'typings/globals/serve-static/*.d.ts',
+            'typings/globals/spex/*.d.ts', 'typings/globals/mime/*.d.ts',
+            'typings/globals/bcrypt/*.d.ts', 'typings/modules/pg/*.d.ts',
+            'typings/modules/jsonwebtoken/*.d.ts'],
         ts_configuration: {
             target: "ES6",
             module: "commonjs",

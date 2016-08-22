@@ -4,6 +4,7 @@ import { PartialResultList } from "../shared/partial-result-list";
 import { SearchArgument } from "../shared/search-argument";
 import { QueryNames } from "./query-names";
 import { DbClient } from "../db-client";
+import * as bcrypt from "bcrypt";
 
 export class UserController {
     public defaultSortColumn: string = 'email';
@@ -61,16 +62,19 @@ export class UserController {
         return searchResult;
     }
 
-    public async create(user: User): Promise<number> {
+    public async create(user: User, password:string): Promise<number> {
+        let hashedPassword = await bcrypt.hashSync(password, 10);
+
         let query: QueryConfig = {
             name: QueryNames.UserTable_Create,
-            text: "INSERT INTO users (fullname, email, password) VALUES ($1, $2, 'test') RETURNING id",
-            values: [user.fullname, user.email]
+            text: "INSERT INTO users (fullname, email, password) VALUES ($1, $2, $3) RETURNING id",
+            values: [user.fullname, user.email, hashedPassword]
         };
 
         let result = await DbClient.Instance().query(query);
-
-        return result[0]['id'];
+        let id = result[0]['id'] as number;
+        user.id = id;
+        return id;
     }
 
     public async remove(id: number): Promise<boolean> {

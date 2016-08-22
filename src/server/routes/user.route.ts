@@ -73,7 +73,7 @@ export async function create(req: Request, resp: Response) {
         await databaseSource.update(user);
         resp.sendStatus(202);
     } else {
-        let id = await databaseSource.create(user);
+        let id = await databaseSource.create(user, 'test');
         resp.json(id);
     }
 }
