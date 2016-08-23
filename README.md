@@ -5,10 +5,10 @@ Mitasco project repository
 ## Quick start
 ### Requirements
 - [node](https://nodejs.org/en/) & npm
-- [typescript](http://www.typescriptlang.org/) compiler: npm install -g typescript
-- typescript definition manager ( [typings](https://github.com/typings/typings) ): npm install -g typings
+- [typescript](http://www.typescriptlang.org/) compiler: npm install -g typescript@next
+- typescript definition manager ([typings](https://github.com/typings/typings)): npm install -g typings
 - [postgresql](https://www.postgresql.org/) database
-- [db-migrate](https://db-migrate.readthedocs.io/en/latest/) : npm install -g db-migrate db-migrate-postgresql
+- [db-migrate](https://db-migrate.readthedocs.io/en/latest/): npm install -g db-migrate db-migrate-postgresql
 
 ### Setup
 - git clone https://github.com/mathi123/mitasco
@@ -16,20 +16,24 @@ Mitasco project repository
 - typings install
 
 ### Develop
-- tsc -w
+Build all:
+
+    gulp
+Or to develop and build automatically: 
+
+    gulp watch
 
 ### Test
-- npm test
+- gulp test
 
 ### Run
-- gulp
 - node bin/debug/server.js
 
 ## Mitasco application stack
 ### Overview
 - database (postgresql)
-- server (nodeJS with express)
-- client (angular2 + bootstrap)
+- server (nodeJS with expressJS API)
+- client (angular2)
 - tests
 
 ### Database
@@ -64,29 +68,36 @@ Remove all migrations:
 
 Note:
 - db-migrate creates a table *migrations* in the database.
-- To switch from branch *dev-new-table* to *dev*, first perform a *db-migrate down* or *db-migrate reset*.
+- :exclamation: To switch from branch *dev-new-table* to *dev*, first perform a *db-migrate down* or *db-migrate reset*.
 - Always provide seed data, so the test server can create the db from scratch.
 
 ### Server
 The server runs on NodeJS. It provides a API to read/write data and a static folder to return client resources and static web pages.
 
 - The source code for the server is under */src*, and is compiled with the typescript compiler to the */bin* folder.
-- Data is read/written to the postgresql database using [*pg*](https://github.com/brianc/node-postgres).
-- Data is formatted into Data Transfer Objects (DTOs) before returned.
-- [ExpressJS](http://expressjs.com/) framework is used to receive requests and return values.
-- Entrypoint is /bin/app.js.
+- Data is read/written to the postgresql database using [*pg*](https://github.com/brianc/node-postgres) and [*pg-promise*](https://github.com/vitaly-t/pg-promise).
+- Data is formatted into Data Transfer Objects (DTOs) before returned, the typescript definitions of these object are in *shared* folder.
+- [ExpressJS](http://expressjs.com/) 4.x framework is used to receive requests and return values.
+- Entrypoint is /bin/debug/server.js.
 
-### Building
-Application code is compiled from typescript to JS (src -> bin) using typescript compiler. 
-Other build tasks are managed by [Gulp](https://github.com/gulpjs/gulp) :
+### Tasks
+Build tasks are managed by [Gulp](https://github.com/gulpjs/gulp), and are defined in gulpfile.js and configuration.js. Following tasks are defined in Gulp:
+- 'compile' typescript files to javascript for server and client
 - copy other files to */bin* folder
-- create production release
+- build production release
+- build test release
+- run tests
+
+Gulp takes an '--env' argument for the environment:
+- development
+- test
+- production
 
 ### Testing
 - You can define tests in the folder */test*
 - [Mocha](https://mochajs.org/#getting-started) and is used in combination with [Chai](http://chaijs.com/) for testing server code.
 
-Application is deployed and tested on a CircleCI server on every push. The circle.yml file configures the build and test configuration.
+The application is deployed and tested on a CircleCI server on every push. The circle.yml file configures the build and test configuration.
 
 ### package.json
 The *package.json* file defines the dependencies needed by this project. Some dependencies are needed for development/testing only.
@@ -109,8 +120,29 @@ Development packages:
 - typescript: needed to compile server with typescrit 2.0 beta, and pass typescript lib to gulp-typescript.
 - should: not needed?!
 
-To install a package, type:
+:exclamation: Only install packages with good reason, and document what they are for.
+
+To install a package:
 
     npm install --saveDev package
-    
-Only install packages with good reason, and document what they are for.
+
+To install a package for production environment:
+
+    npm install --save package
+ 
+Look for typings packages:
+
+    typings search package
+
+Install typing if you found it
+
+    typings install --save [env/dt]~package [--global]
+
+Add the new typing to the server/client typescript dependencies in *configuration.js*.
+
+### Update production server
+- stop application
+- git pull
+- gulp --env production
+- db-migrate up
+- start application
