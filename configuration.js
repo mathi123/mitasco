@@ -4,7 +4,7 @@ module.exports = {
             all: "./src/server/**/*",
             ts: "./src/server/**/*.ts",
             shared: "./src/server/shared/**/*.ts", // Define shared files here
-            tests: "./test/server/**/*.test.js"
+            tests: ["./test/server/**/*.test.js", "./test/rest-api/**/*.test.js"]
         },
         client: {
             all: "./src/client/**/*",
@@ -39,7 +39,7 @@ module.exports = {
             module: "commonjs",
             strictNullChecks: true
         },
-        path_tests: "test/server/**/*.test.js"
+        path_tests: ["test/server/**/*.test.js", "test/rest-api/**/*.test.js"]
     },
     client: {
         ts_dependencies: ['typings/globals/core-js/*.d.ts',
