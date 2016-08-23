@@ -6,7 +6,6 @@ import { TodoController } from "../controllers/todo.controller";
 import { Todo } from "../shared/todo";
 
 export async function search(req: Request, resp: Response) {
-    console.debug("search route");
     let databaseSource = new TodoController();
     let argument = new SearchArgument();
 
@@ -20,8 +19,12 @@ export async function search(req: Request, resp: Response) {
         argument.take = Number(req.query.take);
     }
 
-    let results = await databaseSource.search(argument);
-    resp.json(results);
+    try {
+        let results = await databaseSource.search(argument);
+        resp.json(results);
+    }catch (error){
+        resp.sendStatus(500);
+    }
 }
 
 export async function read(req: Request, resp: Response) {

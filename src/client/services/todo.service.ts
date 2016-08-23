@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core'
 import { Todo } from "../shared/Todo";
-import { SearchArgument } from "../shared/SearchArgument";
-import { PartialResultList } from "../shared/PartialResultList";
+import { SearchArgument } from "../shared/search-argument";
+import { PartialResultList } from "../shared/partial-result-list";
 import { Http, Response, Headers,RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { ITodoService } from "../shared/ITodoService";
 
 @Injectable()
-export class TodoService implements ITodoService{
+export class TodoService{
     private _headers: Headers = new Headers();
     private _options: RequestOptions;
 
