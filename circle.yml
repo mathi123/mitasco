@@ -12,6 +12,9 @@ database:
 test:
   pre:
     - gulp --env test
+    - |
+      node ./bin/test/server.js
+      background: true
   override:
     - gulp test --env test
   post:
