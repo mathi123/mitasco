@@ -12,9 +12,9 @@ database:
 test:
   pre:
     - gulp --env test
-    - |
-      node ./bin/test/server.js
-      background: true
+    - node ./bin/test/server.js :
+        background: true
+    - sleep 5
   override:
     - gulp test --env test
   post:
