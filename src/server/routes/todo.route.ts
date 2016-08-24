@@ -31,8 +31,13 @@ export async function read(req: Request, resp: Response) {
     let id = req.params.id;
     if (Utils.isPositiveInteger(id)) {
         let databaseSource = new UserController();
-        let result = await databaseSource.read(id);
-        resp.json(result);
+        try{
+
+            let result = await databaseSource.read(id);
+            resp.json(result);
+        }catch(err){
+            resp.sendStatus(500);
+        }
     } else {
         resp.sendStatus(500);
     }
@@ -42,16 +47,23 @@ export async function create(req: Request, resp: Response) {
     let data = req.body;
     let todo = new Todo();
 
-    todo.deserialize(data);
+    try{
+        todo.deserialize(data);
+    }catch(err){
+        resp.sendStatus(400);
+    }
 
-    console.log(data);
     let databaseSource = new TodoController();
-    if (data.id) {
-        let result = await databaseSource.update(todo);
-        resp.json(result);
-    } else {
-        let id = await databaseSource.create(todo);
-        resp.json(id);
+    try{
+        if (data.id) {
+            let result = await databaseSource.update(todo);
+            resp.json(result);
+        } else {
+            let id = await databaseSource.create(todo);
+            resp.json(id);
+        }
+    }catch(err){
+        resp.sendStatus(500);
     }
 }
 
@@ -59,9 +71,14 @@ export async function remove(req: Request, resp: Response){
     let id = req.params.id;
     if (Utils.isPositiveInteger(id)) {
         let databaseSource = new TodoController();
-        let result = await databaseSource.remove(id);
-        resp.json(result);
+
+        try{
+            let result = await databaseSource.remove(id);
+            resp.json(result);
+        }catch(err){
+            resp.sendStatus(500);
+        }
     } else {
-        resp.json(false);
+        resp.sendStatus(400);
     }
 }
