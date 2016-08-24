@@ -37,7 +37,7 @@ gulp.task('watch', ['default'], function (cb) {
     gulp.watch([config.src_files.server.shared], ['copy-shared-files']);
     gulp.watch([config.src_files.client.ts], ['compile-client']);
     gulp.watch(other_client_files, ['copy-other']);
-    gulp.watch([config.src_files.server.tests], ['test-server']);
+    gulp.watch(config.src_files.server.tests, ['test-server']);
 });
 
 gulp.task('test', function (callback) {
@@ -98,7 +98,7 @@ gulp.task('test-server', function (callback) {
 gulp.task('copy-server-tests', function(){
     var copyTestPath = path.join(config[environment].buildDir, "test");
 
-    return gulp.src([config.server.path_tests])
+    return gulp.src(config.server.path_tests)
         .pipe(gulp.dest(copyTestPath));
 });
 

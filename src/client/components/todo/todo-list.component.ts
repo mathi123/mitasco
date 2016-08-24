@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Todo } from "../../shared/Todo";
 import { TodoDetailComponent } from "./todo-detail.component";
 import { TodoService } from "../../services/todo.service";
-import { SearchArgument } from "../../shared/SearchArgument";
-import { PartialResultList } from "../../shared/PartialResultList";
+import { SearchArgument } from "../../shared/search-argument";
+import { PartialResultList } from "../../shared/partial-result-list";
 
 @Component({
     selector: 'todo-list',

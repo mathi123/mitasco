@@ -124,7 +124,7 @@ Development packages:
 
 To install a package:
 
-    npm install --saveDev package
+    npm install --save-dev package
 
 To install a package for production environment:
 
