@@ -74,11 +74,17 @@ Note:
 ### Server
 The server runs on NodeJS. It provides a API to read/write data and a static folder to return client resources and static web pages.
 
-- The source code for the server is under */src*, and is compiled with the typescript compiler to the */bin* folder.
+- The source code for the server is under */src*, and is compiled with the typescript compiler to javascrit (ES6) in the */bin* folder.
 - Data is read/written to the postgresql database using [*pg*](https://github.com/brianc/node-postgres) and [*pg-promise*](https://github.com/vitaly-t/pg-promise).
 - Data is formatted into Data Transfer Objects (DTOs) before returned, the typescript definitions of these object are in *shared* folder.
 - [ExpressJS](http://expressjs.com/) 4.x framework is used to receive requests and return values.
 - Entrypoint is /bin/debug/server.js.
+
+### Client
+The client is build in Angular2 (HTML + CSS + javascript).
+ 
+- Angular2 typescript code is compiled to javascript (ES5) with typescript compiler.
+- Styling is defined with *sass* and compiled down to plain css
 
 ### Tasks
 Build tasks are managed by [Gulp](https://github.com/gulpjs/gulp), and are defined in gulpfile.js and configuration.js. Following tasks are defined in Gulp:
@@ -118,7 +124,7 @@ Development packages:
 - del: needed to delete files during gulp build
 - gulp-typescript: needed to run typescript from gulp
 - typescript: needed to compile server with typescrit 2.0 beta, and pass typescript lib to gulp-typescript.
-- should: not needed?!
+- gulp-sass and sass: compiles sass to css
 
 :exclamation: Only install packages with good reason, and document what they are for.
 
