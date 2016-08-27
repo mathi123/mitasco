@@ -11,7 +11,8 @@ module.exports = {
             ts: "./src/client/**/*.ts",
             js: "./src/client/**/*.js",
             non_scripts: ["./src/client/**/*.html", "./src/client/**/*.css"],
-            shared: "./src/client/shared" // Read only folder
+            shared: "./src/client/shared", // Read only folder
+            sass: "./src/client/sass/**/*.scss"
         }
     },
     development: {
