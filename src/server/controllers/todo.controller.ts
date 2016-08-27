@@ -4,9 +4,9 @@ import { SearchArgument } from "../shared/search-argument";
 import { QueryNames } from "./query-names";
 import { DbClient } from "../db-client";
 import { Todo } from "../shared/todo";
-import { TodoService } from "../shared/todo.service";
+import { TodoServiceInterface } from "../shared/todo-service-interface";
 
-export class TodoController implements TodoService {
+export class TodoController implements TodoServiceInterface {
     public async search(argument: SearchArgument): Promise<PartialResultList<Todo>> {
         let countQuery: QueryConfig = {
             name: QueryNames.TodoTable_Search,

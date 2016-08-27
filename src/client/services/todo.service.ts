@@ -4,9 +4,10 @@ import { SearchArgument } from "../shared/search-argument";
 import { PartialResultList } from "../shared/partial-result-list";
 import { Http, Response, Headers,RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { TodoServiceInterface } from "../shared/todo-service-interface";
 
 @Injectable()
-export class TodoService{
+export class TodoService implements TodoServiceInterface{
     private _headers: Headers = new Headers();
     private _options: RequestOptions;
 
