@@ -69,8 +69,13 @@ gulp.task('copy-db-config', function () {
   }
 });
 
+gulp.task('copy-https-config', function () {
+    return gulp.src(['cert.pem','key.pem'])
+        .pipe(gulp.dest(config[environment].buildDir));
+});
+
 gulp.task('build-server', function(callback){
-  runSequence('clean-server', 'compile-server', 'copy-db-config', callback);
+  runSequence('clean-server', 'compile-server', 'copy-db-config', 'copy-https-config', callback);
 });
 
 gulp.task('clean-server', function () {

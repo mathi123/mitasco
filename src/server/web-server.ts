@@ -1,8 +1,10 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
-import * as http from "http";
+import * as https from "https";
+import * as fs from "fs";
 import { RouteType } from "./route-type"
 import { Request,Response } from "express";
+
 
 export class WebServer{
     private _app:any;
@@ -22,9 +24,17 @@ export class WebServer{
     }
 
     public start(){
+        let pkey = fs.readFileSync('key.pem');
+        let pcert = fs.readFileSync('cert.pem')
+
+        let options = {
+            key: pkey,
+            cert: pcert
+        };
+
         this._app.use('/app', express.static(__dirname + '/app'));
         console.log(`setting up server on port ${this._port}`);
-        http.createServer(this._app).listen(this._port, () => console.log("server up and running"));
+        https.createServer(options, this._app).listen(this._port, () => console.log("server up and running"));
     }
     
     public configureRoute(type:RouteType, entity:string,
