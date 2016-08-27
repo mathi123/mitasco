@@ -29,7 +29,9 @@ if(test()){
 gulp.task('default', function (callback) {
     runSequence('build-server', 'build-client', callback);
 });
-
+gulp.task('clean', function (callback) {
+    runSequence('clean-server', 'clean-client', callback);
+});
 gulp.task('watch', ['default'], function (cb) {
     var other_client_files = config.src_files.client.non_scripts;
     other_client_files.push(config.src_files.client.js);
