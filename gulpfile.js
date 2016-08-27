@@ -6,7 +6,8 @@ var gulp = require('gulp'),
     mocha = require('gulp-mocha'),
     environments = require('gulp-environments'),
     path = require('path'),
-    config = require('./configuration.js');
+    config = require('./configuration.js'),
+    sass = require('gulp-sass');
 
 /////////////////////////
 // GENERAL CONFIGURATION
@@ -38,6 +39,7 @@ gulp.task('watch', ['default'], function (cb) {
     gulp.watch([config.src_files.client.ts], ['compile-client']);
     gulp.watch(other_client_files, ['copy-other']);
     gulp.watch(config.src_files.server.tests, ['test-server']);
+    gulp.watch(config.src_files.client.sass, ['sass']);
 });
 
 gulp.task('test', function (callback) {
@@ -157,4 +159,10 @@ gulp.task('compile-client', function () {
 gulp.task('copy-shared-files', function () {
     return gulp.src([config.src_files.server.shared])
         .pipe(gulp.dest(config.src_files.client.shared));
+});
+gulp.task('sass', function () {
+    var targetPath = path.join(config[environment].buildDirClient, "style");
+    return gulp.src(config.src_files.client.sass)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest(targetPath));
 });
