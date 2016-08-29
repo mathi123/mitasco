@@ -17,3 +17,6 @@ Sign it yourself:
     openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
 Common name is 'localhost'
+
+## production certificate
+Sign the production certificate with [let's encrypt](https://letsencrypt.org/).
