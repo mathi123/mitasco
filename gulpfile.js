@@ -70,7 +70,7 @@ gulp.task('copy-db-config', function () {
 });
 
 gulp.task('copy-https-config', function () {
-    return gulp.src(['cert.pem','key.pem'])
+    return gulp.src(['server.key','server.crt'])
         .pipe(gulp.dest(config[environment].buildDir));
 });
 
@@ -112,6 +112,11 @@ gulp.task('copy-server-tests', function(){
 });
 
 gulp.task('run-server-tests', function () {
+    // allow self signed certificates
+    if(environment != 'production'){
+        process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+    }
+
     var executeTestPath = path.join(config[environment].buildDir, "test");
 
     return gulp.src(executeTestPath + '/**/*.test.js', {read: false})

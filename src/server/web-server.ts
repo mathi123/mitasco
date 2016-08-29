@@ -24,8 +24,8 @@ export class WebServer{
     }
 
     public start(){
-        let pkey = fs.readFileSync('key.pem');
-        let pcert = fs.readFileSync('cert.pem')
+        let pkey = fs.readFileSync('server.key');
+        let pcert = fs.readFileSync('server.crt');
 
         let options = {
             key: pkey,
