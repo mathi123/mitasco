@@ -1,4 +1,4 @@
-# Git workflow
+# git workflow
 ## branching
 Always create a local branch, dont push directly to the master. After your work is done, create a pull request on github. 
 
@@ -35,3 +35,7 @@ If you already pushed to the remote branch, you will need to override it the har
 
     git push --force
  
+### undo commit and throw away changes
+If you want a clean reset to the same version of the remote:
+
+    git reset --hard origin/master
