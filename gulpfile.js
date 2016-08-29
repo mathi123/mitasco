@@ -69,8 +69,13 @@ gulp.task('copy-db-config', function () {
   }
 });
 
+gulp.task('copy-https-config', function () {
+    return gulp.src(['server.key','server.crt'])
+        .pipe(gulp.dest(config[environment].buildDir));
+});
+
 gulp.task('build-server', function(callback){
-  runSequence('clean-server', 'compile-server', 'copy-db-config', callback);
+  runSequence('clean-server', 'compile-server', 'copy-db-config', 'copy-https-config', callback);
 });
 
 gulp.task('clean-server', function () {
@@ -107,6 +112,11 @@ gulp.task('copy-server-tests', function(){
 });
 
 gulp.task('run-server-tests', function () {
+    // allow self signed certificates
+    if(environment != 'production'){
+        process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+    }
+
     var executeTestPath = path.join(config[environment].buildDir, "test");
 
     return gulp.src(executeTestPath + '/**/*.test.js', {read: false})
