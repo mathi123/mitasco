@@ -70,6 +70,7 @@ Note:
 - db-migrate creates a table *migrations* in the database.
 - :exclamation: To switch from branch *dev-new-table* to *dev*, first perform a *db-migrate down* or *db-migrate reset*.
 - Always provide seed data, so the test server can create the db from scratch.
+- postgresql is case-insensitive, always use '_', e.g. 'user_id'
 
 ### Server
 The server runs on NodeJS. It provides a API to read/write data and a static folder to return client resources and static web pages.
