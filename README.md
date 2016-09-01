@@ -14,6 +14,7 @@ Mitasco project repository
 - git clone https://github.com/mathi123/mitasco
 - npm install
 - typings install
+- db-migrate db:create pg-mitasco
 
 ### Develop
 Build all:
