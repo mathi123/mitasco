@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ComponentMetadataType } from '@angular/core';
 import { TodoListComponent } from "../todo/todo-list.component";
 
 @Component({
@@ -7,6 +7,6 @@ import { TodoListComponent } from "../todo/todo-list.component";
         <h1>Mitasco</h1>
         <router-outlet></router-outlet>
         `,
-    directives: [TodoListComponent]
+    viewProviders: [TodoListComponent]
 })
 export class AppComponent { }
