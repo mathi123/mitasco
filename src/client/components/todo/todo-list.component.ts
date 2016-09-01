@@ -25,7 +25,7 @@ import { PartialResultList } from "../../shared/partial-result-list";
             <todo-detail [todo]="selected"></todo-detail>
         </div>
         `,
-    directives: [TodoDetailComponent],
+    viewProviders: [TodoDetailComponent],
     providers: [TodoService]
 })
 export class TodoListComponent {

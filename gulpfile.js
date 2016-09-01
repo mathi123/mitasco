@@ -128,7 +128,7 @@ gulp.task('run-server-tests', function () {
 ////////////////////////
 
 gulp.task('build-client', function (callback) {
-   runSequence('clean-client', 'copy-imwa', 'copy-rxjs', 'copy-libs', 'copy-shared-files', 'copy-angular-libs', 'copy-other', 'compile-client', callback);
+   runSequence('clean-client', 'copy-imwa', 'copy-rxjs', 'copy-libs', 'copy-shared-files', 'copy-angular-libs', 'copy-other', 'sass', 'compile-client', callback);
 });
 gulp.task('clean-client', function () {
     return del([path.join(config[environment].buildDir, 'app')], {force: true});
@@ -173,7 +173,7 @@ gulp.task('copy-shared-files', function () {
         .pipe(gulp.dest(config.src_files.client.shared));
 });
 gulp.task('sass', function () {
-    var targetPath = path.join(config[environment].buildDirClient, "style");
+    var targetPath = path.join(config[environment].buildDirClient, "styles");
     return gulp.src(config.src_files.client.sass)
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest(targetPath));

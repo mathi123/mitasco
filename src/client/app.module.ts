@@ -7,10 +7,12 @@ import { routing } from './routing';
 import { TodoDetailComponent } from "./components/todo/todo-detail.component";
 import { TodoListComponent } from "./components/todo/todo-list.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { TodoService } from "./services/todo.service";
 
 @NgModule({
-    imports:      [ BrowserModule, FormsModule, HttpModule, routing ],
-    declarations: [ AppComponent, TodoListComponent,TodoDetailComponent,DashboardComponent ],
-    bootstrap:    [ AppComponent ]
+    imports: [ BrowserModule, FormsModule, HttpModule, routing ],
+    declarations: [ AppComponent, TodoListComponent, TodoDetailComponent, DashboardComponent],
+    providers: [TodoService],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

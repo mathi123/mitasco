@@ -4,6 +4,7 @@ import { SearchArgument } from "../shared/search-argument";
 import { Utils } from "../utils";
 import { TodoController } from "../controllers/todo.controller";
 import { Todo } from "../shared/todo";
+import { Logger } from "../logger";
 
 export async function search(req: Request, resp: Response) {
     let databaseSource = new TodoController();
@@ -23,6 +24,7 @@ export async function search(req: Request, resp: Response) {
         let results = await databaseSource.search(argument);
         resp.json(results);
     }catch (error){
+        Logger.routeException(req, error);
         resp.sendStatus(500);
     }
 }
@@ -35,7 +37,8 @@ export async function read(req: Request, resp: Response) {
 
             let result = await databaseSource.read(id);
             resp.json(result);
-        }catch(err){
+        }catch(error){
+            Logger.routeException(req, error);
             resp.sendStatus(500);
         }
     } else {
@@ -49,7 +52,8 @@ export async function create(req: Request, resp: Response) {
 
     try{
         todo.deserialize(data);
-    }catch(err){
+    }catch(error){
+        Logger.routeException(req, error);
         resp.sendStatus(400);
     }
 
@@ -62,7 +66,8 @@ export async function create(req: Request, resp: Response) {
             let id = await databaseSource.create(todo);
             resp.json(id);
         }
-    }catch(err){
+    }catch(error){
+        Logger.routeException(req, error);
         resp.sendStatus(500);
     }
 }
@@ -75,7 +80,8 @@ export async function remove(req: Request, resp: Response){
         try{
             let result = await databaseSource.remove(id);
             resp.json(result);
-        }catch(err){
+        }catch(error){
+            Logger.routeException(req, error);
             resp.sendStatus(500);
         }
     } else {
