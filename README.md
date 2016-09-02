@@ -8,27 +8,30 @@ Mitasco project repository
 - [typescript](http://www.typescriptlang.org/) compiler: npm install -g typescript@next
 - typescript definition manager ([typings](https://github.com/typings/typings)): npm install -g typings
 - [postgresql](https://www.postgresql.org/) database
-- [db-migrate](https://db-migrate.readthedocs.io/en/latest/): npm install -g db-migrate db-migrate-postgresql
+- [db-migrate](https://db-migrate.readthedocs.io/en/latest/): npm install -g db-migrate db-migrate-pg
 
 ### Setup
 - git clone https://github.com/mathi123/mitasco
 - npm install
 - typings install
-- db-migrate db:create pg-mitasco
+- db-migrate db:create mitasco-dev3
 
 ### Develop
 Build all:
 
     gulp
+
 Or to develop and build automatically: 
 
     gulp watch
 
 ### Test
-- gulp test
+
+    gulp test
 
 ### Run
-- node bin/debug/server.js
+
+    node bin/debug/server.js
 
 ## Mitasco application stack
 ### Overview
