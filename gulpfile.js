@@ -7,7 +7,8 @@ var gulp = require('gulp'),
     environments = require('gulp-environments'),
     path = require('path'),
     config = require('./configuration.js'),
-    sass = require('gulp-sass');
+    sass = require('gulp-sass'),
+    server = require('gulp-develop-server');
 
 /////////////////////////
 // GENERAL CONFIGURATION
@@ -32,11 +33,11 @@ gulp.task('default', function (callback) {
 gulp.task('clean', function (callback) {
     runSequence('clean-server', 'clean-client', callback);
 });
-gulp.task('watch', ['default'], function (cb) {
+gulp.task('watch', ['build-and-start'], function (cb) {
     var other_client_files = config.src_files.client.non_scripts;
     other_client_files.push(config.src_files.client.js);
 
-    gulp.watch([config.src_files.server.ts], ['compile-server']);
+    gulp.watch([config.src_files.server.ts], ['build-restart-server']);
     gulp.watch([config.src_files.server.shared], ['copy-shared-files']);
     gulp.watch([config.src_files.client.ts], ['compile-client']);
     gulp.watch(other_client_files, ['copy-other']);
@@ -44,8 +45,21 @@ gulp.task('watch', ['default'], function (cb) {
     gulp.watch(config.src_files.client.sass, ['sass']);
 });
 
+gulp.task('build-and-start', function (callback) {
+   runSequence('default', 'start', callback);
+});
+
 gulp.task('test', function (callback) {
     runSequence('test-server', callback);
+});
+
+gulp.task('start', function () {
+    var options = { path:config[environment].runScript };
+    server.listen(options);
+});
+
+gulp.task('restart', function () {
+    server.restart();
 });
 
 /////////////////////////
@@ -72,6 +86,10 @@ gulp.task('copy-db-config', function () {
 gulp.task('copy-https-config', function () {
     return gulp.src(['server.key','server.crt'])
         .pipe(gulp.dest(config[environment].buildDir));
+});
+
+gulp.task('build-restart-server', function(callback) {
+   runSequence('build-server', 'restart', callback);
 });
 
 gulp.task('build-server', function(callback){

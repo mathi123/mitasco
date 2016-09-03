@@ -17,15 +17,18 @@ module.exports = {
     },
     development: {
         buildDir: "./bin/debug",
-        buildDirClient: "./bin/debug/app"
+        buildDirClient: "./bin/debug/app",
+        runScript: "./bin/debug/server.js"
     },
     production: {
         buildDir: "./bin/release",
-        buildDirClient: "./bin/release/app"
+        buildDirClient: "./bin/release/app",
+        runScript: "./bin/release/server.js"
     },
     test: {
         buildDir: "./bin/test",
-        buildDirClient: "./bin/test/app"
+        buildDirClient: "./bin/test/app",
+        runScript: "./bin/test/server.js"
     },
     server: {
         ts_dependencies: ['typings/globals/pg-promise/*.d.ts',
