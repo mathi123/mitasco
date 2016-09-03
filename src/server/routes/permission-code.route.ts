@@ -47,7 +47,7 @@ export async function read(req: Request, resp: Response) {
             resp.sendStatus(500);
         }
     }else{
-        Logger.routeException(req, null);
+        Logger.logRequest(req);
         resp.sendStatus(500);
     }
 }
@@ -80,7 +80,7 @@ export async function remove(req: Request, resp: Response) {
             resp.sendStatus(500);
         }
     }else{
-        Logger.routeException(req, null);
+        Logger.logRequest(req);
         resp.sendStatus(500);
     }
 }
