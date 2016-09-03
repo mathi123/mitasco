@@ -51,7 +51,8 @@
     "start": "node bin/debug/server.js"
   },
   "author": "Mathias Colpaert",
-  "license": "MIT",
+  "license": "unlicensed",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git://github.com/mathi123/mitasco.git"
