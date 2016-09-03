@@ -29,7 +29,7 @@ class StartUp{
         // permissionCode routes
         server.configureRoute(RouteType.GET, 'permissioncode', permissionCodeRoutes.getAll);
         server.configureRoute(RouteType.GET, 'permissioncode',permissionCodeRoutes.read, ':id');
-        server.configureRoute(RouteType.POST, 'permissioncode', permissionCodeRoutes.update, ':id');
+        server.configureRoute(RouteType.POST, 'permissioncode', permissionCodeRoutes.update);
         server.configureRoute(RouteType.PUT, 'permissioncode', permissionCodeRoutes.create);
         server.configureRoute(RouteType.DELETE, 'permissioncode', permissionCodeRoutes.remove, ':id');
 
