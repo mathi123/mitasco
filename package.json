@@ -42,6 +42,7 @@
     "mocha-circleci-reporter": "0.0.1",
     "run-sequence": "^1.2.2",
     "sass": "^0.5.0",
+    "should": "^11.1.0",
     "typescript": "^2.0.0"
   },
   "scripts": {
