@@ -9,4 +9,7 @@ export class Logger{
         console.error("inputs:"+JSON.stringify(req.params));
         console.error(JSON.stringify(req.body));
     }
+    public static logRequest(req:Request){
+        console.error(`error in route ${req.method} ${req.url}`);
+    }
 }
