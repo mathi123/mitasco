@@ -2,6 +2,7 @@ import { WebServer } from "./web-server";
 import { RouteType } from "./route-type";
 import * as userRoutes from "./routes/user.route";
 import * as todoRoutes from "./routes/todo.route";
+import * as permissionCodeRoutes from "./routes/permission-code.route";
 import * as authenticationRoutes from "./routes/authentication.route";
 
 class StartUp{
@@ -24,6 +25,13 @@ class StartUp{
         server.configureRoute(RouteType.POST, 'todo', todoRoutes.create);
         server.configureRoute(RouteType.PUT, 'todo', todoRoutes.create); // TODO: create -> update
         server.configureRoute(RouteType.DELETE, 'todo', todoRoutes.remove, ':id');
+
+        // permissionCode routes
+        server.configureRoute(RouteType.GET, 'permissioncode', permissionCodeRoutes.getAll);
+        server.configureRoute(RouteType.GET, 'permissioncode',permissionCodeRoutes.read, ':id');
+        server.configureRoute(RouteType.POST, 'permissioncode', permissionCodeRoutes.update, ':id');
+        server.configureRoute(RouteType.PUT, 'permissioncode', permissionCodeRoutes.create);
+        server.configureRoute(RouteType.DELETE, 'permissioncode', permissionCodeRoutes.remove, ':id');
 
         server.start();
 

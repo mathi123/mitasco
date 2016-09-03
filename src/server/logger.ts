@@ -6,5 +6,7 @@ export class Logger{
         // Todo: load log configuration from config file
         console.error(`error in route ${req.url}`);
         console.error(err);
+        console.error("inputs:"+req.params);
+        console.error(req.body);
     }
 }
