@@ -8,7 +8,7 @@ var json = 'application/json';
 
 chai.use(chaiHttp);
 
-describe('Todo', function () {
+describe('Permission Codes', function () {
     var randomPermissionCode = "code" + Math.random();
 
     it('GET /api/permissioncode', function (done) {
