@@ -41,7 +41,7 @@ gulp.task('watch', ['build-and-start'], function (cb) {
     gulp.watch([config.src_files.server.shared], ['copy-shared-files']);
     gulp.watch([config.src_files.client.ts], ['compile-client']);
     gulp.watch(other_client_files, ['copy-other']);
-    gulp.watch(config.src_files.server.tests, ['test-server']);
+    //gulp.watch(config.src_files.server.tests, ['test-server']);
     gulp.watch(config.src_files.client.sass, ['sass']);
 });
 

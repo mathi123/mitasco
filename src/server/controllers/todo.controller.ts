@@ -9,7 +9,7 @@ import { TodoServiceInterface } from "../shared/todo-service-interface";
 export class TodoController implements TodoServiceInterface {
     public async search(argument: SearchArgument): Promise<PartialResultList<Todo>> {
         let countQuery: QueryConfig = {
-            name: QueryNames.TodoTable_Search,
+            name: QueryNames.TodoTableSearch,
             text: `SELECT COUNT(*) FROM todo 
             WHERE description LIKE $1`,
             values: ['%' + argument.query + '%']
@@ -24,7 +24,7 @@ export class TodoController implements TodoServiceInterface {
         }
 
         let selectQuery: QueryConfig = {
-            name: QueryNames.UserTable_Search,
+            name: QueryNames.UserTableSearch,
             text: `SELECT * FROM todo
             WHERE description LIKE $1
             ORDER BY description ASC
@@ -43,7 +43,7 @@ export class TodoController implements TodoServiceInterface {
 
     public async create(todo: Todo): Promise<number> {
         let query: QueryConfig = {
-            name: QueryNames.TodoTable_Create,
+            name: QueryNames.TodoTableCreate,
             text: "INSERT INTO todo (description, isDone) VALUES ($1, $2) RETURNING id",
             values: [todo.description, todo.isDone ? 1 : 0]
         };
@@ -53,7 +53,7 @@ export class TodoController implements TodoServiceInterface {
 
     public async remove(id: number): Promise<boolean> {
         let query: QueryConfig = {
-            name: QueryNames.TodoTable_Remove,
+            name: QueryNames.TodoTableRemove,
             text: "DELETE FROM todo WHERE id = $1",
             values: [id]
         };
@@ -65,7 +65,7 @@ export class TodoController implements TodoServiceInterface {
 
     public async read(id: number): Promise<Todo> {
         let query: QueryConfig = {
-            name: QueryNames.TodoTable_Read,
+            name: QueryNames.TodoTableRead,
             text: "SELECT * FROM todo WHERE id = $1",
             values: [id]
         };
@@ -77,7 +77,7 @@ export class TodoController implements TodoServiceInterface {
 
     public async update(todo: Todo): Promise<boolean> {
         let query: QueryConfig = {
-            name: QueryNames.TodoTable_Update,
+            name: QueryNames.TodoTableUpdate,
             text: "UPDATE todo SET description = $1, isDone = $2 WHERE id = $3",
             values: [todo.description, todo.isDone ? 1 : 0, todo.id]
         };
