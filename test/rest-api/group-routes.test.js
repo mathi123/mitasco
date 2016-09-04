@@ -9,7 +9,7 @@ var json = 'application/json';
 chai.use(chaiHttp);
 
 describe('Group', function () {
-    var randomstuff = "description " + Math.random();
+    var data = {id: 0, description: "test new group", users: [], permissionCodes:[]};
 
     it('GET /api/group', function (done) {
         chai.request(localhost)
@@ -23,7 +23,6 @@ describe('Group', function () {
             });
     });
 
-    var data = {id: 0, description: "test new group", users: [], permissionCodes:[]};
     it('PUT /api/group', function (done) {
         chai.request(localhost)
             .put('/api/group')
@@ -41,18 +40,45 @@ describe('Group', function () {
             });
     });
 
+    var userId;
+    var permissionCodeId;
     it('POST /api/group', function (done) {
-        data.description = data.description + 'changed';
         chai.request(localhost)
-            .post('/api/group')
+            .put('/api/user')
             .set('content-type', json)
-            .send(data)
+            .send({id:0, fullname:"testUser",email:Math.random()+"test@usergroup.be"})
             .end(function(err, res){
                 if(err){
                     done(err);
                 }
-                expect(res).to.have.status(200);
-                done();
+                userId = res.body;
+
+                chai.request(localhost)
+                    .put('/api/permissioncode')
+                    .set('content-type', json)
+                    .send({id:0, description:"testUser",code:Math.random()+"test4groups"})
+                    .end(function(err, res) {
+                        if (err) {
+                            done(err);
+                        }
+                        permissionCodeId = res.body;
+
+                        data.description = data.description + 'changed';
+                        data.users = [{key: userId, value: "test user"}];
+                        data.permissionCodes = [{id:permissionCodeId,code:"",description:""}];
+
+                        chai.request(localhost)
+                            .post('/api/group')
+                            .set('content-type', json)
+                            .send(data)
+                            .end(function (err, res) {
+                                if (err) {
+                                    done(err);
+                                }
+                                expect(res).to.have.status(200);
+                                done();
+                            });
+                    });
             });
     });
 
@@ -65,6 +91,8 @@ describe('Group', function () {
                 }
                 expect(res).to.have.status(200);
                 expect(res.body.description).to.equal(data.description);
+                expect(res.body.users[0].key).to.equal(userId);
+                expect(res.body.permissionCodes[0].id).to.equal(permissionCodeId);
                 done();
             });
     });
