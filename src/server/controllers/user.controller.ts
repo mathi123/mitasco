@@ -12,7 +12,7 @@ export class UserController {
 
     public async search(argument: SearchArgument): Promise<PartialResultList<User>> {
         let countQuery: QueryConfig = {
-            name: QueryNames.UserTable_SearchCount,
+            name: QueryNames.UserTableSearchCount,
             text: `SELECT COUNT(*) FROM users 
             WHERE email LIKE $1 OR fullname LIKE $1`,
             values: ['%' + argument.query + '%']
@@ -27,7 +27,7 @@ export class UserController {
         }
 
         let selectQuery: QueryConfig = {
-            name: QueryNames.UserTable_Search,
+            name: QueryNames.UserTableSearch,
             text: `SELECT * FROM users
             WHERE email LIKE $1 OR fullname LIKE $1
             ORDER BY
@@ -66,7 +66,7 @@ export class UserController {
         let hashedPassword = await bcrypt.hashSync(password, 10);
 
         let query: QueryConfig = {
-            name: QueryNames.UserTable_Create,
+            name: QueryNames.UserTableCreate,
             text: "INSERT INTO users (fullname, email, password) VALUES ($1, $2, $3) RETURNING id",
             values: [user.fullname, user.email, hashedPassword]
         };
@@ -79,7 +79,7 @@ export class UserController {
 
     public async remove(id: number): Promise<boolean> {
         let query: QueryConfig = {
-            name: QueryNames.UserTable_Remove,
+            name: QueryNames.UserTableRemove,
             text: "DELETE FROM users WHERE id = $1",
             values: [id]
         };
@@ -107,7 +107,7 @@ export class UserController {
 
     public async update(user: User): Promise<boolean> {
         let query: QueryConfig = {
-            name: QueryNames.UserTable_Update,
+            name: QueryNames.UserTableUpdate,
             text: "UPDATE users SET email = $1, fullname = $2 WHERE id = $3",
             values: [user.email, user.fullname, user.id]
         };
