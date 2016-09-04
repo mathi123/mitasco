@@ -5,7 +5,7 @@ import { DbClient } from "../db-client";
 import { KeyValuePair } from "../shared/key-value-pair";
 import { PermissionCode } from "../shared/permission-code";
 import { QueryNames } from "./query-names";
-import { DbHelpers } from "../DbHelpers";
+import { DbHelpers } from "../db-helpers";
 
 export class GroupController implements GroupServiceInterface{
     public async getAll(): Promise<Group[]> {
