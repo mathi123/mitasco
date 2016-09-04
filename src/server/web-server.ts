@@ -4,6 +4,9 @@ import * as https from "https";
 import * as fs from "fs";
 import { RouteType } from "./route-type"
 import { Request,Response } from "express";
+import { AuthenticationController } from "./controllers/authentication.controller";
+import { Logger } from "./logger";
+import { TokenPayload } from "./security/token-payload";
 
 
 export class WebServer{
@@ -23,6 +26,25 @@ export class WebServer{
         this._app.use(bodyParser.json());
     }
 
+    public configureAuthentication(){
+        this._app.use((req:Request, res:Response, next) => {
+            if(req.url.startsWith(`/${this._routePrefix}`)){
+                let token = req.get("token");
+                let auth = new AuthenticationController();
+                auth.verifyToken(token)
+                    .then((data:TokenPayload)=>{
+                        next();
+                    })
+                    .catch((err)=>{
+                        Logger.routeException(req,err);
+                        res.sendStatus(401);
+                    });
+            }else{
+                next();
+            }
+        });
+    }
+
     public start(){
         let pkey = fs.readFileSync('server.key');
         let pcert = fs.readFileSync('server.crt');
@@ -33,6 +55,7 @@ export class WebServer{
         };
 
         this._app.use('/app', express.static(__dirname + '/app'));
+
         console.log(`setting up server on port ${this._port}`);
         https.createServer(options, this._app).listen(this._port, () => console.log("server up and running"));
     }

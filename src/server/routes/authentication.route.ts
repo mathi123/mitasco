@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Credentials } from "../shared/credentials";
 import { AuthenticationController } from "../controllers/authentication.controller";
+import { Logger } from "../logger";
 
 export async function getToken(req: Request, res: Response) {
     let data = req.body;
@@ -19,6 +20,7 @@ export async function getToken(req: Request, res: Response) {
             res.sendStatus(401);
         }
     }catch(error) {
+        Logger.routeException(req, error);
         res.sendStatus(401);
     }
 }
