@@ -7,6 +7,7 @@ import { Request,Response } from "express";
 import { AuthenticationController } from "./controllers/authentication.controller";
 import { Logger } from "./logger";
 import { TokenPayload } from "./security/token-payload";
+import { Utils } from "./utils";
 
 
 export class WebServer{
@@ -14,7 +15,6 @@ export class WebServer{
     private _port:number;
     private _routePrefix="api";
     private _apiVersion="v1.0";
-    private _oauth:any;
 
     constructor(){
         this._app = express();
@@ -24,25 +24,6 @@ export class WebServer{
         this._port = port;
         this._app.set('port', port);
         this._app.use(bodyParser.json());
-    }
-
-    public configureAuthentication(){
-        this._app.use((req:Request, res:Response, next) => {
-            if(req.url.startsWith(`/${this._routePrefix}`)){
-                let token = req.get("token");
-                let auth = new AuthenticationController();
-                auth.verifyToken(token)
-                    .then((data:TokenPayload)=>{
-                        next();
-                    })
-                    .catch((err)=>{
-                        Logger.routeException(req,err);
-                        res.sendStatus(401);
-                    });
-            }else{
-                next();
-            }
-        });
     }
 
     public start(){
@@ -55,33 +36,73 @@ export class WebServer{
         };
 
         this._app.use('/app', express.static(__dirname + '/app'));
+        this._app.get('/app/*', (req:Request,res:Response)=>{
+            res.redirect('/app');
+        });
 
-        console.log(`setting up server on port ${this._port}`);
-        https.createServer(options, this._app).listen(this._port, () => console.log("server up and running"));
+        Logger.log(`setting up server on port ${this._port}`);
+        https.createServer(options, this._app).listen(this._port, () => Logger.log("server up and running"));
     }
     
     public configureRoute(type:RouteType, entity:string,
                           controller:(req: Request, resp: Response) => void,
-                          suffix:string = ''){
+                          suffix:string = '', authenticationRequired:boolean = true){
 
         let route = this.buildRoute(entity, suffix);
 
+        if(authenticationRequired){
+            this.registerRouteSecurity(type, route);
+        }
+
+        this.registerRoute(type, route, controller);
+
+        Logger.log(`route ${Utils.routeToString(type, route)} is up`);
+    }
+
+    private registerRouteSecurity(type:RouteType, route:string){
+        let tokenCheckFunc = (req:Request,res:Response,next) => {
+            let token = req.get("token");
+            let auth = new AuthenticationController();
+            auth.verifyToken(token)
+                .then((data:TokenPayload)=>{
+                    next();
+                })
+                .catch((err)=>{
+                    Logger.routeException(req,err);
+                    res.sendStatus(401);
+                });
+        };
+
+        switch(type){
+            case RouteType.GET:
+                this._app.get(route, tokenCheckFunc);
+                break;
+            case RouteType.POST:
+                this._app.post(route, tokenCheckFunc);
+                break;
+            case RouteType.PUT:
+                this._app.put(route, tokenCheckFunc);
+                break;
+            case RouteType.DELETE:
+                this._app.delete(route, tokenCheckFunc);
+                break;
+            default: throw new Error();
+        }
+    }
+
+    private registerRoute(type:RouteType, route:string, controller:(req: Request, resp: Response) => void){
         switch(type){
             case RouteType.GET:
                 this._app.get(route, controller);
-                console.info(`route GET ${route} is up`);
                 break;
             case RouteType.POST:
                 this._app.post(route, controller);
-                console.info(`route POST ${route} is up`);
                 break;
             case RouteType.PUT:
                 this._app.put(route, controller);
-                console.info(`route PUT ${route} is up`);
                 break;
             case RouteType.DELETE:
                 this._app.delete(route, controller);
-                console.info(`route DELETE ${route} is up`);
                 break;
             default: throw new Error();
         }

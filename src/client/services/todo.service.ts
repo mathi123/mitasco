@@ -11,15 +11,16 @@ export class TodoService implements TodoServiceInterface{
     private _headers: Headers = new Headers();
     private _options: RequestOptions;
     private _baseUrl: string;
+    private _token:string = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE2LCJpYXQiOjE0NzMwODY3MDZ9.bYbOezSuiT3wonwFK_VwsUrMwbl8JtZweNK4yf9z4bY";
 
     public constructor(private http: Http){
-        this._headers = new Headers({ 'Content-Type': 'application/json' });
+        this._headers = new Headers({ 'Content-Type': 'application/json', 'token':this._token });
         this._options = new RequestOptions({ headers: this._headers });
         this._baseUrl = 'https://localhost:3000/api';
     }
 
     public search(arg: SearchArgument): Promise<PartialResultList<Todo>> {
-        return this.http.get(`${this._baseUrl}/todo?query=${arg.query}&skip=${arg.skip}&take=${arg.take}`)
+        return this.http.get(`${this._baseUrl}/todo?query=${arg.query}&skip=${arg.skip}&take=${arg.take}`, this._headers)
             .toPromise()
             .then((r: Response) => r.json() as PartialResultList<Todo>)
             .catch((err: Error) => console.log(err));
@@ -33,7 +34,7 @@ export class TodoService implements TodoServiceInterface{
     }
 
     public read(id: number): Promise<Todo> {
-        return this.http.get(`${this._baseUrl}/todo/${id}`)
+        return this.http.get(`${this._baseUrl}/todo/${id}`, this._options)
             .toPromise()
             .then((r: Response) => r.json() as Todo)
             .catch((err: Error) => console.log(err));
@@ -47,7 +48,7 @@ export class TodoService implements TodoServiceInterface{
     }
 
     public remove(id: number): Promise<boolean> {
-        return this.http.delete(`${this._baseUrl}/todo/${id}`)
+        return this.http.delete(`${this._baseUrl}/todo/${id}`, this._options)
             .toPromise()
             .then((r: Response) => r.json() as boolean)
             .catch((err: Error) => console.log(err));

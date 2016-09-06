@@ -1,3 +1,4 @@
+import { RouteType } from "./route-type";
 export class Utils {
     public static isPositiveInteger(obj: any): boolean {
         if (Array.isArray(obj)) {
@@ -21,5 +22,15 @@ export class Utils {
 
     public static arrayContains(array: any[], obj: any) {
         return array.indexOf(obj) > -1;
+    }
+
+    public static routeToString(type:RouteType,route:string){
+        switch (type){
+            case RouteType.GET: return `GET ${route}`;
+            case RouteType.POST: return `POST ${route}`;
+            case RouteType.PUT: return `PUT ${route}`;
+            case RouteType.DELETE: return `DELETE ${route}`;
+        }
+        return "";
     }
 }

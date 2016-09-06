@@ -12,4 +12,7 @@ export class Logger{
     public static logRequest(req:Request){
         console.error(`error in route ${req.method} ${req.url}`);
     }
+    public static log(message:string){
+
+    }
 }
