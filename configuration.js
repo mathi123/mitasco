@@ -63,14 +63,17 @@ module.exports = {
                 target:'libs',
                 libs:
                     ['node_modules/core-js/client/shim.min.js',
-                    'node_modules/zone.js/dist/zone.js',
-                    'node_modules/reflect-metadata/Reflect.js',
-                    'node_modules/systemjs/dist/system.src.js']
+                        'node_modules/core-js/client/shim.min.js.map',
+                        'node_modules/zone.js/dist/zone.js',
+                        'node_modules/reflect-metadata/Reflect.js',
+                        'node_modules/reflect-metadata/Reflect.js.map',
+                        'node_modules/systemjs/dist/system.src.js']
             },
             {
                 target: 'libs/deserialize-json-strict',
                 libs:
-                    ['node_modules/deserialize-json-strict/**.js']
+                    ['node_modules/deserialize-json-strict/**.js',
+                        'node_modules/deserialize-json-strict/**.map']
             }
             ],
         vendor_folder: "lib",
