@@ -10,7 +10,7 @@ export class AuthenticationService{
     }
 
     public Authenticate(credentials:Credentials):Promise<boolean>{
-        return this.http.post(`${this.config.getBaseUrl()}/token`, JSON.stringify(credentials))
+        return this.http.post(`${this.config.getBaseUrl()}/token`, JSON.stringify(credentials), this.config.getHttpOptions())
             .toPromise()
             .then((r: Response) => {
                 let token = r.json() as string;

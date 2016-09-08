@@ -68,6 +68,7 @@ export class WebServer{
                     next();
                 })
                 .catch((err)=>{
+                    Logger.log("token missing or invalid");
                     Logger.routeException(req,err);
                     res.sendStatus(401);
                 });

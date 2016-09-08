@@ -23,6 +23,7 @@ export class ConfigurationProvider{
     }
 
     public setToken(token: string) {
+        console.log("token was received");
         this._token = token;
         this.addTokenToHeaders();
     }

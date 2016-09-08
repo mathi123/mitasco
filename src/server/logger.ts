@@ -13,6 +13,6 @@ export class Logger{
         console.error(`error in route ${req.method} ${req.url}`);
     }
     public static log(message:string){
-
+        console.info(message);
     }
 }

@@ -5,7 +5,7 @@
         '@angular':                   'libs/angular2',
         'angular2-in-memory-web-api': 'libs/angular2-in-memory-web-api',
         'rxjs':                       'libs/rxjs',
-        'deserialize-json-strict': 'libs/deserialize-json-strict'
+        'deserialize-json-strict': 'libs/deserialize-json-strict',
     };
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
