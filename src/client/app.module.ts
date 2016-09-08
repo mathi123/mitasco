@@ -8,11 +8,13 @@ import { TodoDetailComponent } from "./components/todo/todo-detail.component";
 import { TodoListComponent } from "./components/todo/todo-list.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { TodoService } from "./services/todo.service";
+import { ConfigurationProvider } from "./providers/configuration.provider";
+import { AuthenticationService } from "./services/authentication.service";
 
 @NgModule({
     imports: [ BrowserModule, FormsModule, HttpModule, routing ],
     declarations: [ AppComponent, TodoListComponent, TodoDetailComponent, DashboardComponent],
-    providers: [TodoService],
+    providers: [ConfigurationProvider,TodoService,AuthenticationService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
