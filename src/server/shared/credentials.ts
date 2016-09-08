@@ -1,5 +1,5 @@
-import { Deserializable } from "./deserializable";
-import { DeserializeUtil } from "./deserialize-util";
+import { Deserializable,DeserializeUtil } from "deserialize-json-strict";
+
 export class Credentials implements Deserializable{
     public email:string;
     public password:string;
