@@ -1,4 +1,5 @@
-import { Deserializable } from "./deserializable";
+import { Deserializable,DeserializeUtil } from "deserialize-json-strict";
+
 export class Company implements Deserializable{
     public id: number;
     public name: string;

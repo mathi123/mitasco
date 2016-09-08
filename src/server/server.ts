@@ -12,19 +12,19 @@ class StartUp{
         server.init(3000);
 
         // token
-        server.configureRoute(RouteType.POST, 'token', authenticationRoutes.getToken);
+        server.configureRoute(RouteType.POST, 'token', authenticationRoutes.getToken, '', false);
 
         // user routes
         server.configureRoute(RouteType.GET, 'user', userRoutes.search);
         server.configureRoute(RouteType.GET, 'user', userRoutes.read, ':id');
         server.configureRoute(RouteType.POST, 'user', userRoutes.create);
-        server.configureRoute(RouteType.PUT, 'user', userRoutes.create); // TODO: create -> update
+        server.configureRoute(RouteType.PUT, 'user', userRoutes.create);
 
         // todo routes
-        server.configureRoute(RouteType.GET, 'todo', todoRoutes.search);
+        server.configureRoute(RouteType.GET, 'todo', todoRoutes.search, '');
         server.configureRoute(RouteType.GET, 'todo', todoRoutes.read, ':id');
-        server.configureRoute(RouteType.POST, 'todo', todoRoutes.create);
-        server.configureRoute(RouteType.PUT, 'todo', todoRoutes.create); // TODO: create -> update
+        server.configureRoute(RouteType.POST, 'todo', todoRoutes.create, '');
+        server.configureRoute(RouteType.PUT, 'todo', todoRoutes.create, '');
         server.configureRoute(RouteType.DELETE, 'todo', todoRoutes.remove, ':id');
 
         // permissionCode routes

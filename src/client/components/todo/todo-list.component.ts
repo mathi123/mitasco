@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Todo } from "../../shared/Todo";
+import { Todo } from "../../shared/todo";
 import { TodoDetailComponent } from "./todo-detail.component";
 import { TodoService } from "../../services/todo.service";
 import { SearchArgument } from "../../shared/search-argument";

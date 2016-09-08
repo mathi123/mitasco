@@ -1,7 +1,6 @@
 import { KeyValuePair } from "./key-value-pair";
 import { PermissionCode } from "./permission-code";
-import { Deserializable } from "./deserializable";
-import { DeserializeUtil } from "./deserialize-util";
+import { Deserializable,DeserializeUtil } from "deserialize-json-strict";
 
 export class Group implements Deserializable{
     public id:number;

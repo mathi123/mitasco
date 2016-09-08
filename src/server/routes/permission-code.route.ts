@@ -2,7 +2,6 @@ import { Request,Response } from "express-serve-static-core";
 import { PermissionCodeController } from "../controllers/permission-code.controller";
 import { Logger } from "../logger";
 import { PermissionCode } from "../shared/permission-code";
-import { DeserializeUtil } from "../shared/deserialize-util";
 import { Utils } from "../utils";
 
 export async function getAll(req: Request, resp: Response) {

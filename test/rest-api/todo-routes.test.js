@@ -9,9 +9,12 @@ var json = 'application/json';
 chai.use(chaiHttp);
 
 describe('Todo', function () {
+    var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE2LCJpYXQiOjE0NzMwODY3MDZ9.bYbOezSuiT3wonwFK_VwsUrMwbl8JtZweNK4yf9z4bY";
+
     it('GET /api/todo', function (done) {
         chai.request(localhost)
             .get('/api/todo')
+            .set('token', token)
             .query({query: '', skip:0, take:10})
             .end(function(err, res){
                 if(err){
@@ -28,6 +31,7 @@ describe('Todo', function () {
             .post('/api/todo')
             .send(data)
             .set('content-type', json)
+            .set('token', token)
             .end(function(err, res){
                 if(err){
                     done(err);

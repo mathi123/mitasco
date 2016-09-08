@@ -10,10 +10,12 @@ chai.use(chaiHttp);
 
 describe('Group', function () {
     var data = {id: 0, description: "test new group", users: [], permissionCodes:[]};
+    var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE2LCJpYXQiOjE0NzMwODY3MDZ9.bYbOezSuiT3wonwFK_VwsUrMwbl8JtZweNK4yf9z4bY";
 
     it('GET /api/group', function (done) {
         chai.request(localhost)
             .get('/api/group')
+            .set('token', token)
             .end(function(err, res){
                 if(err){
                     done(err);
@@ -27,6 +29,7 @@ describe('Group', function () {
         chai.request(localhost)
             .put('/api/group')
             .set('content-type', json)
+            .set('token', token)
             .send(data)
             .end(function(err, res){
                 if(err){
@@ -46,6 +49,7 @@ describe('Group', function () {
         chai.request(localhost)
             .put('/api/user')
             .set('content-type', json)
+            .set('token', token)
             .send({id:0, fullname:"testUser",email:Math.random()+"test@usergroup.be"})
             .end(function(err, res){
                 if(err){
@@ -56,6 +60,7 @@ describe('Group', function () {
                 chai.request(localhost)
                     .put('/api/permissioncode')
                     .set('content-type', json)
+                    .set('token', token)
                     .send({id:0, description:"testUser",code:Math.random()+"test4groups"})
                     .end(function(err, res) {
                         if (err) {
@@ -70,6 +75,7 @@ describe('Group', function () {
                         chai.request(localhost)
                             .post('/api/group')
                             .set('content-type', json)
+                            .set('token', token)
                             .send(data)
                             .end(function (err, res) {
                                 if (err) {
@@ -85,6 +91,7 @@ describe('Group', function () {
     it('GET /api/group', function (done) {
         chai.request(localhost)
             .get('/api/group/'+data.id)
+            .set('token', token)
             .end(function(err, res){
                 if(err){
                     done(err);
@@ -100,6 +107,7 @@ describe('Group', function () {
     it('DELETE /api/group', function (done) {
         chai.request(localhost)
             .delete('/api/group/'+data.id)
+            .set('token', token)
             .end(function(err, res){
                 if(err){
                     done(err);

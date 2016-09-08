@@ -39,9 +39,8 @@ gulp.task('watch', ['build-and-start'], function (cb) {
 
     gulp.watch([config.src_files.server.ts], ['build-restart-server']);
     gulp.watch([config.src_files.server.shared], ['copy-shared-files']);
-    gulp.watch([config.src_files.client.ts], ['compile-client']);
+    gulp.watch([config.src_files.client.ts], ['compile-client', 'build-restart-server']);
     gulp.watch(other_client_files, ['copy-other']);
-    //gulp.watch(config.src_files.server.tests, ['test-server']);
     gulp.watch(config.src_files.client.sass, ['sass']);
 });
 
@@ -164,8 +163,11 @@ gulp.task('copy-rxjs', function () {
         .pipe(gulp.dest(path.join(config[environment].buildDirClient, 'libs', 'rxjs')));
 });
 gulp.task('copy-libs', function () {
-    return gulp.src(config.client.js_dependencies)
-            .pipe(gulp.dest(path.join(config[environment].buildDirClient, 'libs')));
+    for(var i = 0; i < config.client.js_dependencies.length ; i++){
+        var lib = config.client.js_dependencies[i];
+        gulp.src(lib.libs)
+            .pipe(gulp.dest(path.join(config[environment].buildDirClient, lib.target)));
+    }
 });
 gulp.task('copy-other', function () {
     var files = config.src_files.client.non_scripts;

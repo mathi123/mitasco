@@ -94,6 +94,7 @@ describe("Authentication controller", function () {
         authController.createToken(userToAdd.id)
             .then(function (t) {
                 token = t;
+                console.log(token);
                 done();
             }).catch(function (err) {
                 done(err);
