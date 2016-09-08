@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import { Headers, RequestOptionsArgs } from "@angular/http";
+import { Headers, RequestOptions } from "@angular/http";
 
 @Injectable()
 export class ConfigurationProvider{
     private _baseUrl: string = 'https://localhost:3000/api';
     private _headers: Headers = new Headers();
-    private _options: RequestOptionsArgs = new RequestOptionsArgs();
+    private _options: RequestOptions = new RequestOptions();
     private _token:string;
     public TOKENHEADER: string = 'token';
 
@@ -18,7 +18,7 @@ export class ConfigurationProvider{
         return this._baseUrl;
     }
 
-    public getHttpOptions():RequestOptionsArgs{
+    public getHttpOptions():RequestOptions{
         return this._options;
     }
 

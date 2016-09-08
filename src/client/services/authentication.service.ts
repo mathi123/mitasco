@@ -15,7 +15,11 @@ export class AuthenticationService{
             .then((r: Response) => {
                 let token = r.json() as string;
                 this.config.setToken(token);
+                return true;
             })
-            .catch((err: Error) => console.log(err));
+            .catch((err: Error) => {
+                console.log(err);
+                return false;
+            });
     }
 }
