@@ -58,10 +58,21 @@ module.exports = {
             removeComments: false,
             noImplicitAny: false
         },
-        js_dependencies: ['node_modules/core-js/client/shim.min.js',
-            'node_modules/zone.js/dist/zone.js',
-            'node_modules/reflect-metadata/Reflect.js',
-            'node_modules/systemjs/dist/system.src.js'],
+        js_dependencies: [
+            {
+                target:'libs',
+                libs:
+                    ['node_modules/core-js/client/shim.min.js',
+                    'node_modules/zone.js/dist/zone.js',
+                    'node_modules/reflect-metadata/Reflect.js',
+                    'node_modules/systemjs/dist/system.src.js']
+            },
+            {
+                target: 'libs/deserialize-json-strict',
+                libs:
+                    ['node_modules/deserialize-json-strict/**.js']
+            }
+            ],
         vendor_folder: "lib",
         path_tests: "test/client/**/*.test.js"
     }

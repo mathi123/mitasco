@@ -164,8 +164,12 @@ gulp.task('copy-rxjs', function () {
         .pipe(gulp.dest(path.join(config[environment].buildDirClient, 'libs', 'rxjs')));
 });
 gulp.task('copy-libs', function () {
-    return gulp.src(config.client.js_dependencies)
-            .pipe(gulp.dest(path.join(config[environment].buildDirClient, 'libs')));
+    for(var i = 0; i < config.client.js_dependencies.length ; i++){
+        var lib = config.client.js_dependencies[i];
+        console.log("copying "+lib.libs+" to "+lib.target);
+        gulp.src(lib.libs)
+            .pipe(gulp.dest(path.join(config[environment].buildDirClient, lib.target)));
+    }
 });
 gulp.task('copy-other', function () {
     var files = config.src_files.client.non_scripts;

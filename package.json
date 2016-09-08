@@ -19,7 +19,7 @@
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
     "core-js": "^2.4.0",
-    "deserialize-json-strict": "0.0.4",
+    "deserialize-json-strict": "0.0.6",
     "express": "^4.13.4",
     "jsonwebtoken": "^7.1.9",
     "pg": "^4.5.3",
