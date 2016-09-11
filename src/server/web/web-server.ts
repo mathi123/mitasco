@@ -4,17 +4,17 @@ import * as https from "https";
 import * as fs from "fs";
 import { RouteType } from "./route-type"
 import { Request,Response } from "express";
-import { AuthenticationController } from "./controllers/authentication.controller";
-import { Logger } from "./logger";
-import { TokenPayload } from "./security/token-payload";
-import { Utils } from "./utils";
+import { AuthenticationController } from "../controllers/authentication.controller";
+import { Logger } from "../logger";
+import { TokenPayload } from "../security/token-payload";
+import { Utils } from "../utils";
+import { WebRequest } from "./web-request";
 
 
 export class WebServer{
     private _app:any;
     private _port:number;
     private _routePrefix="api";
-    private _apiVersion="v1.0";
 
     constructor(){
         this._app = express();
@@ -65,6 +65,8 @@ export class WebServer{
             let auth = new AuthenticationController();
             auth.verifyToken(token)
                 .then((data:TokenPayload)=>{
+                    (req as WebRequest).token = data;
+                    (req as WebRequest).permissions = data.per;
                     next();
                 })
                 .catch((err)=>{
