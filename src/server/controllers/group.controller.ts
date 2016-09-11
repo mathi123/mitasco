@@ -115,7 +115,7 @@ export class GroupController implements GroupServiceInterface{
         return true;
     }
 
-    public async create(group: Group): Promise<boolean> {
+    public async create(group: Group): Promise<number> {
         let query: QueryConfig = {
             text: `INSERT INTO groups (description) VALUES ($1) RETURNING id`,
             values: [group.description]
