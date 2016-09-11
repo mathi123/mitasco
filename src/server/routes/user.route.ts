@@ -5,8 +5,13 @@ import { SortDirection } from "../shared/sort-direction";
 import { Utils } from "../utils";
 import { User } from "../shared/user";
 import { WebRequest } from "../web/web-request";
+import { Permissions } from "../security/permissions";
 
 export async function search(req: WebRequest, resp: Response) {
+    if(!req.permissions.indexOf(Permissions.Admin)){
+        resp.sendStatus(550);
+    }
+
     let databaseSource = new UserController();
     let argument = new SearchArgument();
 
@@ -38,10 +43,13 @@ export async function search(req: WebRequest, resp: Response) {
     data += '</ul>';
 
     resp.send(data);
-
 }
 
 export async function read(req: WebRequest, resp: Response) {
+    if(!req.permissions.indexOf(Permissions.Admin)){
+        resp.sendStatus(550);
+    }
+
     let id = req.params.id;
     if (Utils.isPositiveInteger(id)) {
         let databaseSource = new UserController();
@@ -53,6 +61,10 @@ export async function read(req: WebRequest, resp: Response) {
 }
 
 export async function create(req: WebRequest, resp: Response) {
+    if(!req.permissions.indexOf(Permissions.Admin)){
+        resp.sendStatus(550);
+    }
+
     var data = req.body;
     let user = new User();
 
