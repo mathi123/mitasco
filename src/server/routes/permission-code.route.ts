@@ -1,10 +1,16 @@
-import { Request,Response } from "express-serve-static-core";
+import { Response } from "express-serve-static-core";
 import { PermissionCodeController } from "../controllers/permission-code.controller";
 import { Logger } from "../logger";
 import { PermissionCode } from "../shared/permission-code";
 import { Utils } from "../utils";
+import { WebRequest } from "../web/web-request";
+import { Permissions } from "../security/permissions";
 
-export async function getAll(req: Request, resp: Response) {
+export async function getAll(req: WebRequest, resp: Response) {
+    if(req.permissions.indexOf(Permissions.Admin) < 0){
+        resp.sendStatus(550);
+    }
+
     let databaseSource = new PermissionCodeController();
 
     try {
@@ -16,7 +22,11 @@ export async function getAll(req: Request, resp: Response) {
     }
 }
 
-export async function create(req: Request, resp: Response) {
+export async function create(req: WebRequest, resp: Response) {
+    if(req.permissions.indexOf(Permissions.Admin) < 0){
+        resp.sendStatus(550);
+    }
+
     let databaseSource = new PermissionCodeController();
 
     try {
@@ -31,7 +41,11 @@ export async function create(req: Request, resp: Response) {
     }
 }
 
-export async function read(req: Request, resp: Response) {
+export async function read(req: WebRequest, resp: Response) {
+    if(req.permissions.indexOf(Permissions.Admin) < 0){
+        resp.sendStatus(550);
+    }
+
     let databaseSource = new PermissionCodeController();
 
     let id = req.params.id;
@@ -51,7 +65,11 @@ export async function read(req: Request, resp: Response) {
     }
 }
 
-export async function update(req: Request, resp: Response) {
+export async function update(req: WebRequest, resp: Response) {
+    if(req.permissions.indexOf(Permissions.Admin)){
+        resp.sendStatus(550);
+    }
+
     let databaseSource = new PermissionCodeController();
 
     try {
@@ -66,7 +84,11 @@ export async function update(req: Request, resp: Response) {
     }
 }
 
-export async function remove(req: Request, resp: Response) {
+export async function remove(req: WebRequest, resp: Response) {
+    if(req.permissions.indexOf(Permissions.Admin) < 0){
+        resp.sendStatus(550);
+    }
+
     let databaseSource = new PermissionCodeController();
     let id = req.params.id;
 

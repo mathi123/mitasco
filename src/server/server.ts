@@ -1,5 +1,5 @@
-import { WebServer } from "./web-server";
-import { RouteType } from "./route-type";
+import { WebServer } from "./web/web-server";
+import { RouteType } from "./web/route-type";
 import * as userRoutes from "./routes/user.route";
 import * as todoRoutes from "./routes/todo.route";
 import * as permissionCodeRoutes from "./routes/permission-code.route";

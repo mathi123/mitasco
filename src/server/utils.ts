@@ -1,4 +1,4 @@
-import { RouteType } from "./route-type";
+import { RouteType } from "./web/route-type";
 export class Utils {
     public static isPositiveInteger(obj: any): boolean {
         if (Array.isArray(obj)) {

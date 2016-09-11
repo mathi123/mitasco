@@ -1,1 +1,0 @@
-DROP FUNCTION public.func_seed_group_permission();

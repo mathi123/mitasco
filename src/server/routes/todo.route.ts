@@ -1,12 +1,13 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { UserController } from "../controllers/user.controller";
 import { SearchArgument } from "../shared/search-argument";
 import { Utils } from "../utils";
 import { TodoController } from "../controllers/todo.controller";
 import { Todo } from "../shared/todo";
 import { Logger } from "../logger";
+import { WebRequest } from "../web/web-request";
 
-export async function search(req: Request, resp: Response) {
+export async function search(req: WebRequest, resp: Response) {
     let databaseSource = new TodoController();
     let argument = new SearchArgument();
 
@@ -29,7 +30,7 @@ export async function search(req: Request, resp: Response) {
     }
 }
 
-export async function read(req: Request, resp: Response) {
+export async function read(req: WebRequest, resp: Response) {
     let id = req.params.id;
     if (Utils.isPositiveInteger(id)) {
         let databaseSource = new UserController();
@@ -46,7 +47,7 @@ export async function read(req: Request, resp: Response) {
     }
 }
 
-export async function create(req: Request, resp: Response) {
+export async function create(req: WebRequest, resp: Response) {
     let data = req.body;
     let todo = new Todo();
 
@@ -72,7 +73,7 @@ export async function create(req: Request, resp: Response) {
     }
 }
 
-export async function remove(req: Request, resp: Response){
+export async function remove(req: WebRequest, resp: Response){
     let id = req.params.id;
     if (Utils.isPositiveInteger(id)) {
         let databaseSource = new TodoController();

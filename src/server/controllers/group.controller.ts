@@ -6,6 +6,7 @@ import { KeyValuePair } from "../shared/key-value-pair";
 import { PermissionCode } from "../shared/permission-code";
 import { QueryNames } from "./query-names";
 import { DbHelpers } from "../db-helpers";
+import { Logger } from "../logger";
 
 export class GroupController implements GroupServiceInterface{
     public async getAll(): Promise<Group[]> {
@@ -115,7 +116,7 @@ export class GroupController implements GroupServiceInterface{
         return true;
     }
 
-    public async create(group: Group): Promise<boolean> {
+    public async create(group: Group): Promise<number> {
         let query: QueryConfig = {
             text: `INSERT INTO groups (description) VALUES ($1) RETURNING id`,
             values: [group.description]

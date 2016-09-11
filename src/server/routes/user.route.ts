@@ -1,11 +1,17 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { UserController } from "../controllers/user.controller";
 import { SearchArgument } from "../shared/search-argument";
 import { SortDirection } from "../shared/sort-direction";
 import { Utils } from "../utils";
 import { User } from "../shared/user";
+import { WebRequest } from "../web/web-request";
+import { Permissions } from "../security/permissions";
 
-export async function search(req: Request, resp: Response) {
+export async function search(req: WebRequest, resp: Response) {
+    if(req.permissions.indexOf(Permissions.Admin) < 0){
+        resp.sendStatus(550);
+    }
+
     let databaseSource = new UserController();
     let argument = new SearchArgument();
 
@@ -37,10 +43,13 @@ export async function search(req: Request, resp: Response) {
     data += '</ul>';
 
     resp.send(data);
-
 }
 
-export async function read(req: Request, resp: Response) {
+export async function read(req: WebRequest, resp: Response) {
+    if(req.permissions.indexOf(Permissions.Admin) < 0){
+        resp.sendStatus(550);
+    }
+
     let id = req.params.id;
     if (Utils.isPositiveInteger(id)) {
         let databaseSource = new UserController();
@@ -51,7 +60,11 @@ export async function read(req: Request, resp: Response) {
     }
 }
 
-export async function create(req: Request, resp: Response) {
+export async function create(req: WebRequest, resp: Response) {
+    if(req.permissions.indexOf(Permissions.Admin) < 0){
+        resp.sendStatus(550);
+    }
+
     var data = req.body;
     let user = new User();
 
@@ -67,7 +80,6 @@ export async function create(req: Request, resp: Response) {
         user.id = data.id;
     }
 
-    console.log(data);
     let databaseSource = new UserController();
     if (data.id) {
         await databaseSource.update(user);

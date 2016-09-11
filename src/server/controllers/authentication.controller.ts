@@ -4,6 +4,7 @@ import { Credentials } from "../shared/credentials";
 import { QueryConfig } from "pg";
 import { DbClient } from "../db-client";
 import { TokenPayload } from "../security/token-payload";
+import { Logger } from "../logger";
 
 export class AuthenticationController{
     private _secretKey:string = "KJ2kjJK32LKJA'/.SD[]";
@@ -43,6 +44,22 @@ export class AuthenticationController{
     }
     public async createToken(userId:number):Promise<string>{
         let payload = new TokenPayload(userId);
+
+        let query: QueryConfig = {
+            name: "Authentication.GetUserPermissionCodes",
+            text: `select DISTINCT(code) from permissioncode
+                   where id in
+                      (select permissioncode_id
+                       from group_permission
+                       where group_id in (
+                         select group_id from group_user
+                         where user_id = $1))`,
+            values: [userId]
+        };
+
+        let queryResult = await DbClient.Instance().query(query);
+        payload.per = queryResult.map(res => res['code']);
+
         let token = await jwt.sign(payload, this._secretKey);
 
         return token;

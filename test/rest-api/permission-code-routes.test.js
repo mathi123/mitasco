@@ -1,7 +1,7 @@
 var chai = require('chai');
 var chaiHttp = require('chai-http');
-var server = require('../web-server');
 var expect = require('chai').expect;
+var testHelpers = require('../test-helpers').TestHelpers;
 
 var localhost = 'https://localhost:3000';
 var json = 'application/json';
@@ -10,7 +10,15 @@ chai.use(chaiHttp);
 
 describe('Permission Codes', function () {
     var randomPermissionCode = "code" + Math.random();
-    var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE2LCJpYXQiOjE0NzMwODY3MDZ9.bYbOezSuiT3wonwFK_VwsUrMwbl8JtZweNK4yf9z4bY";
+    var token;
+
+    before(function (done) {
+        testHelpers.getAdminToken()
+            .then(function (t) {
+                token = t;
+                done();
+            });
+    });
 
     it('GET /api/permissioncode', function (done) {
         chai.request(localhost)
