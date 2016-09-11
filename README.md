@@ -1,4 +1,4 @@
-# Mitasco [![Build Status](https://travis-ci.com/mathi123/mitasco.svg?token=higJw8z1ADo9Wsy5x1nX&branch=master)](https://travis-ci.com/mathi123/mitasco)
+# Mitasco
 
 Mitasco project repository
 
