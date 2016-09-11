@@ -35,7 +35,7 @@ export class WebServer{
             cert: pcert
         };
 
-        this._app.use('/app', express.static(__dirname + '/app'));
+        this._app.use('/app', express.static(__dirname + '/../app'));
         this._app.get('/app/*', (req:Request,res:Response)=>{
             res.redirect('/app');
         });
