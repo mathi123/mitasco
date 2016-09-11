@@ -59,35 +59,37 @@ export class WebServer{
         Logger.log(`route ${Utils.routeToString(type, route)} is up`);
     }
 
-    private registerRouteSecurity(type:RouteType, route:string){
-        let tokenCheckFunc = (req:Request,res:Response,next) => {
-            let token = req.get("token");
-            let auth = new AuthenticationController();
-            auth.verifyToken(token)
-                .then((data:TokenPayload)=>{
-                    (req as WebRequest).token = data;
-                    (req as WebRequest).permissions = data.per;
-                    next();
-                })
-                .catch((err)=>{
-                    Logger.log("token missing or invalid");
-                    Logger.routeException(req,err);
-                    res.sendStatus(401);
-                });
-        };
+    private async tokenChecker(req:Request, res:Response, next){
+        let token = req.get("token");
+        let auth = new AuthenticationController();
 
+        try{
+            let data:TokenPayload = await auth.verifyToken(token);
+            (req as WebRequest).token = data;
+            (req as WebRequest).permissions = data.per;
+
+            next();
+        }catch (err){
+            Logger.log("token missing or invalid");
+            Logger.log(`token: ${token}`);
+            Logger.routeException(req,err);
+            res.sendStatus(401);
+        }
+    }
+
+    private registerRouteSecurity(type:RouteType, route:string){
         switch(type){
             case RouteType.GET:
-                this._app.get(route, tokenCheckFunc);
+                this._app.get(route, this.tokenChecker);
                 break;
             case RouteType.POST:
-                this._app.post(route, tokenCheckFunc);
+                this._app.post(route, this.tokenChecker);
                 break;
             case RouteType.PUT:
-                this._app.put(route, tokenCheckFunc);
+                this._app.put(route, this.tokenChecker);
                 break;
             case RouteType.DELETE:
-                this._app.delete(route, tokenCheckFunc);
+                this._app.delete(route, this.tokenChecker);
                 break;
             default: throw new Error();
         }
