@@ -1,8 +1,28 @@
-h1 {
-  color: #369;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 250%;
-}
+@import 'base';
+
 body {
-  margin: 2em;
+  margin: 0;
+  font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+  font-size: 13px;
+}
+// Todo: split to separate files
+#wrapper {
+  margin-left: 200px - $dividerThickness;
+  height: 100%;
+}
+#content {
+  float: right;
+  width: 100%;
+}
+#sidebar {
+  float: left;
+  width: 200px - $dividerThickness;
+  margin-left: -200px;
+  background-color: $darkPrimaryColor;
+  height: 100%;
+  border-right: $dividerThickness $dividerColor solid;
+}
+#topbar{
+  height: 35px;
+  background-color: $accentColor;
 }
