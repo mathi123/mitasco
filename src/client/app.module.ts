@@ -13,10 +13,11 @@ import { AuthenticationService } from "./services/authentication.service";
 import { LoginComponent } from "./components/login/login.component";
 import { GroupService } from "./services/group.service";
 import { GroupListComponent } from "./components/group/group-list.component";
+import { GroupDetailComponent } from "./components/group/group-detail.component";
 
 @NgModule({
     imports: [ BrowserModule, FormsModule, HttpModule, routing ],
-    declarations: [ LoginComponent, AppComponent, TodoListComponent, TodoDetailComponent, DashboardComponent, GroupListComponent],
+    declarations: [ LoginComponent, AppComponent, TodoListComponent, TodoDetailComponent, DashboardComponent, GroupListComponent,GroupDetailComponent],
     providers: [ConfigurationProvider, TodoService, AuthenticationService, GroupService],
     bootstrap: [AppComponent]
 })

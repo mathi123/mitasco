@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GroupService } from "../../services/group.service";
 import { Group } from "../../shared/group";
+import { Router } from "@angular/router";
 
 @Component({
     moduleId: module.id,
@@ -14,7 +15,7 @@ import { Group } from "../../shared/group";
                 <td>Permissies</td>
             </tr>
             <tr *ngFor="let record of records">
-                <td>{{record.description}}</td>
+                <td><a (click)="open(record)">{{record.description}}</a></td>
                 <td>{{record.userCount}}</td>
                 <td>{{record.permissionCount}}</td>
             </tr>
@@ -25,10 +26,14 @@ import { Group } from "../../shared/group";
 export class GroupListComponent implements OnInit {
     public records:Group[] = [];
 
-    constructor(private service:GroupService) { }
+    constructor(private service:GroupService, private router: Router) { }
 
     ngOnInit() {
         this.loadData();
+    }
+
+    open(group:Group){
+        this.router.navigate(['/group-detail', group.id]);
     }
 
     private loadData(){
