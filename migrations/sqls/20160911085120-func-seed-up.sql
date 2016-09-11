@@ -8,8 +8,10 @@ $BODY$
         INSERT INTO groups (description) VALUES ('test users');
 
         /* Insert basic permissioncode records */
-        INSERT INTO permissioncode (code) VALUES ('admin');
-        INSERT INTO permissioncode (code) VALUES ('testing');
+        INSERT INTO permissioncode (code, description) VALUES ('admin', 'System administrator permissions.');
+        INSERT INTO permissioncode (code, description) VALUES ('testing', 'Test permissions.');
     END;
 $BODY$
 LANGUAGE plpgsql VOLATILE SECURITY DEFINER;
+
+SELECT func_seed();
