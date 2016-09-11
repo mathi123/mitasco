@@ -8,7 +8,7 @@ import { WebRequest } from "../web/web-request";
 import { Permissions } from "../security/permissions";
 
 export async function search(req: WebRequest, resp: Response) {
-    if(!req.permissions.indexOf(Permissions.Admin)){
+    if(req.permissions.indexOf(Permissions.Admin) < 0){
         resp.sendStatus(550);
     }
 
@@ -46,7 +46,7 @@ export async function search(req: WebRequest, resp: Response) {
 }
 
 export async function read(req: WebRequest, resp: Response) {
-    if(!req.permissions.indexOf(Permissions.Admin)){
+    if(req.permissions.indexOf(Permissions.Admin) < 0){
         resp.sendStatus(550);
     }
 
@@ -61,7 +61,7 @@ export async function read(req: WebRequest, resp: Response) {
 }
 
 export async function create(req: WebRequest, resp: Response) {
-    if(!req.permissions.indexOf(Permissions.Admin)){
+    if(req.permissions.indexOf(Permissions.Admin) < 0){
         resp.sendStatus(550);
     }
 
@@ -80,7 +80,6 @@ export async function create(req: WebRequest, resp: Response) {
         user.id = data.id;
     }
 
-    console.log(data);
     let databaseSource = new UserController();
     if (data.id) {
         await databaseSource.update(user);
