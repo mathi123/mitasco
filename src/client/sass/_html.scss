@@ -1,0 +1,29 @@
+@import '_base';
+
+$dividerThickness: 0px;
+
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+  font-size: 14px;
+}
+#wrapper {
+  margin-left: 200px - $dividerThickness;
+  height: 100%;
+}
+#content {
+  float: right;
+  width: 100%;
+}
+#sidebar {
+  float: left;
+  width: 200px - $dividerThickness;
+  margin-left: -200px;
+  background-color: $darkPrimaryColor;
+  height: 100%;
+  border-right: $dividerThickness $dividerColor solid;
+}
+#topbar{
+  height: 35px;
+  background-color: $accentColor;
+}
