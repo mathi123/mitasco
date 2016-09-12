@@ -1,11 +1,12 @@
 @import '_base';
 
+$dividerThickness: 0px;
+
 body {
   margin: 0;
   font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
-  font-size: 13px;
+  font-size: 14px;
 }
-// Todo: split to separate files
 #wrapper {
   margin-left: 200px - $dividerThickness;
   height: 100%;

@@ -2,6 +2,8 @@
 
 $accordionHeadingHeight: 18px;
 $accordionHeadingPadding: 5px;
+$accordionLeftPadding: 10px;
+$accordionBorderThickness: 1px;
 
 .accordion{
   background-color: $darkPrimaryColor;
@@ -11,22 +13,18 @@ $accordionHeadingPadding: 5px;
   padding-border: 5px;
 }
 .accordion-group-collapse{
-
+  border-top: $accordionBorderThickness solid transparent;
 }
 .accordion-group-heading {
-  padding-left: 10px;
-  margin-top: $accordionHeadingPadding;
-  margin-bottom: $accordionHeadingPadding;
-  height: $accordionHeadingHeight;
+  padding-left: $accordionLeftPadding;
+  padding-top: $accordionHeadingPadding;
+  padding-bottom: $accordionHeadingPadding;
+ // height: $accordionHeadingHeight;
 }
 .accordion-group-title{
-  -webkit-margin-before: 0;
-  -webkit-margin-after: 0;
-  -webkit-margin-start: 0;
-  -webkit-margin-end: 0;
 }
 .accordion-group-heading-open{
-  //background: linear-gradient($darkPrimaryColor, $primaryColor);
+  background-color: $primaryColor;
 }
 .arrow-up {
   float: right;
@@ -36,7 +34,7 @@ $accordionHeadingPadding: 5px;
   border-right: 5px solid transparent;
   border-bottom: 5px solid $textColor;
   margin-right:$accordionHeadingPadding;
-  margin-top: ($accordionHeadingHeight+2*$accordionHeadingPadding)/2 - 5;
+  margin-top: ($accordionHeadingHeight+2*$accordionHeadingPadding)/2 - 8;
 }
 .arrow-down {
   float: right;
@@ -46,19 +44,19 @@ $accordionHeadingPadding: 5px;
   border-right: 5px solid transparent;
   border-top: 5px solid $textColor;
   margin-right:$accordionHeadingPadding;
-  margin-top: ($accordionHeadingHeight+2*$accordionHeadingPadding)/2 - 5;
+  margin-top: ($accordionHeadingHeight+2*$accordionHeadingPadding)/2 - 8;
 }
 .accordion-group-open{
-  border-top: 1px solid $lightPrimaryColor;
-  //border-right: 5px $accentColor solid;
+  //border-top: $accordionBorderThickness solid $lightPrimaryColor;
 }
 .accordion-group-title{
+  font-weight: bold;
 }
 .accordion-group-body{
-  border-top: 1px solid $lightPrimaryColor;
-  //margin-left: 10px;
-  //padding-left: 5px
+  //border-top: $accordionBorderThickness solid $lightPrimaryColor;
+  padding-left: 2*$accordionLeftPadding;
 }
 .accordion-group-body ul{
   list-style-type: none;
+  margin: $accordionHeadingPadding;
 }
