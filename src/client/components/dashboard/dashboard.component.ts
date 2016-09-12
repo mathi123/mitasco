@@ -4,11 +4,7 @@ import { LoginComponent } from "../login/login.component";
 @Component({
     selector: 'dashboard',
     template: `
-    <div>
-        <ul>
-            <li><a routerLink="/todo-list">Todo's</a></li>
-            <li><a routerLink="/group-list">Groepen</a></li>
-        </ul>
+    <div>        
         <login-form></login-form>
     </div>
         `,

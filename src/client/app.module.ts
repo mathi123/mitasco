@@ -14,10 +14,12 @@ import { LoginComponent } from "./components/login/login.component";
 import { GroupService } from "./services/group.service";
 import { GroupListComponent } from "./components/group/group-list.component";
 import { GroupDetailComponent } from "./components/group/group-detail.component";
+import { AccordionComponent } from "./components/accordion/accordion.component";
+import { AccordionGroupComponent } from "./components/accordion/accordion-group.component";
 
 @NgModule({
     imports: [ BrowserModule, FormsModule, HttpModule, routing ],
-    declarations: [ LoginComponent, AppComponent, TodoListComponent, TodoDetailComponent, DashboardComponent, GroupListComponent,GroupDetailComponent],
+    declarations: [ LoginComponent, AppComponent, TodoListComponent, TodoDetailComponent, DashboardComponent, GroupListComponent,GroupDetailComponent,AccordionComponent,AccordionGroupComponent],
     providers: [ConfigurationProvider, TodoService, AuthenticationService, GroupService],
     bootstrap: [AppComponent]
 })
