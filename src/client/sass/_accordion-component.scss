@@ -16,10 +16,14 @@ $accordionBorderThickness: 1px;
   border-top: $accordionBorderThickness solid transparent;
 }
 .accordion-group-heading {
+  height: $accordionHeadingHeight;
   padding-left: $accordionLeftPadding;
   padding-top: $accordionHeadingPadding;
   padding-bottom: $accordionHeadingPadding;
- // height: $accordionHeadingHeight;
+  &:hover{
+    background-color: $lightPrimaryColor;
+    color: $primaryTextColor;
+  }
 }
 .accordion-group-title{
 }
@@ -47,16 +51,24 @@ $accordionBorderThickness: 1px;
   margin-top: ($accordionHeadingHeight+2*$accordionHeadingPadding)/2 - 8;
 }
 .accordion-group-open{
-  //border-top: $accordionBorderThickness solid $lightPrimaryColor;
 }
 .accordion-group-title{
   font-weight: bold;
+  cursor: pointer;
 }
 .accordion-group-body{
-  //border-top: $accordionBorderThickness solid $lightPrimaryColor;
   padding-left: 2*$accordionLeftPadding;
-}
-.accordion-group-body ul{
-  list-style-type: none;
-  margin: $accordionHeadingPadding;
+
+  ul{
+    list-style-type: none;
+
+    li {
+      margin: $accordionHeadingPadding;
+      height: $accordionHeadingHeight;
+      cursor: pointer;
+      &:hover{
+        color: $primaryTextColor;
+      }
+    }
+  }
 }

@@ -1,0 +1,42 @@
+@import 'base';
+
+.underline{
+  text-decoration: underline;
+}
+.link{
+  text-decoration: underline;
+  color: $secondaryTextColor;
+  &:hover{
+    color: $accentColor;
+    cursor: pointer;
+  }
+}
+a{
+  text-decoration: underline;
+  color: $secondaryTextColor;
+  cursor: pointer;
+  &:hover{
+    color: $accentColor;
+    cursor: pointer;
+  }
+}
+h1{
+  font-size:28pt;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+h2{
+  font-size:24pt;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+h3{
+  font-size:20pt;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+h4{
+  font-size:19pt;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}

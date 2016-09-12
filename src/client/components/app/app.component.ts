@@ -6,7 +6,7 @@ import { TodoListComponent } from "../todo/todo-list.component";
     template: `
     <div>
         <div id="topbar">
-            
+            <p class="logo">Mitasco</p>
         </div>
         <div id="wrapper">
             <div id="sidebar">
@@ -14,7 +14,6 @@ import { TodoListComponent } from "../todo/todo-list.component";
                     <accordion-group heading="Algemeen" isGroupOpen="true">
                         <ul>
                             <li><p routerLink="/todo-list">Todo's</p></li>
-                            <li><p routerLink="/todo-list">Zaken</p></li>
                         </ul>
                     </accordion-group>
                     <accordion-group heading="Admin" isGroupOpen="true">

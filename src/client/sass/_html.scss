@@ -1,6 +1,6 @@
 @import '_base';
 
-$dividerThickness: 0px;
+$sideBarWidth: 175px;
 
 body {
   margin: 0;
@@ -8,22 +8,31 @@ body {
   font-size: 14px;
 }
 #wrapper {
-  margin-left: 200px - $dividerThickness;
+  margin-left: $sideBarWidth;
   height: 100%;
 }
 #content {
-  float: right;
   width: 100%;
+  padding: 10px;
 }
 #sidebar {
   float: left;
-  width: 200px - $dividerThickness;
-  margin-left: -200px;
+  width: $sideBarWidth;
+  margin-left: -$sideBarWidth;
   background-color: $darkPrimaryColor;
   height: 100%;
-  border-right: $dividerThickness $dividerColor solid;
 }
 #topbar{
   height: 35px;
   background-color: $accentColor;
+}
+.logo{
+  padding: 5px;
+  font-size:20pt;
+  font-weight: bold;
+  color: white;
+  &:hover{
+    color: $primaryColor;
+    cursor: pointer;
+  }
 }

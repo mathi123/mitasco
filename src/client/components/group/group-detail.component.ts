@@ -13,9 +13,9 @@ import { PermissionCode } from "../../shared/permission-code";
     `
     <div>
         <input type="text" [(ngModel)]="record.description" (input)="changed()"/>
-        <p>Gebruikers</p>
-        <table border="1" *ngIf="record.users">
-            <tr>
+        <h4>Gebruikers</h4>
+        <table border="1" *ngIf="record.users" class="simple-table">
+            <tr class="simple-table-header">
                 <td>Naam</td>
                 <td>Wissen</td>
             </tr>
@@ -26,9 +26,9 @@ import { PermissionCode } from "../../shared/permission-code";
                 </td>
             </tr>
         </table>
-        <p>Permissies</p>
-        <table border="1" *ngIf="record.permissionCodes">
-            <tr>
+        <h4>Permissies</h4>
+        <table border="1" *ngIf="record.permissionCodes" class="simple-table">
+            <tr class="simple-table-header">
                 <td>Code</td>
                 <td>Wissen</td>
             </tr>
@@ -39,7 +39,7 @@ import { PermissionCode } from "../../shared/permission-code";
                 </td>
             </tr>
         </table>
-        <button type="button" (click)="save()" [disabled]="!hasChanged">Opslaan</button>
+        <button type="button" (click)="save()" [disabled]="!hasChanged" class="btn-normal">Opslaan</button>
     </div>
     `
 })

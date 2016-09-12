@@ -21,7 +21,7 @@ import { Credentials } from "../../shared/credentials";
         </tr>
         <tr>
             <td colspan="2">
-                <button type="button"  (click)="login()" name="btnClick">Banaan</button>
+                <button type="button" (click)="login()" name="btnClick" class="btn-normal">Banaan</button>
             </td>
         </tr>
     </table>
