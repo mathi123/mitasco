@@ -21,7 +21,7 @@ import { Credentials } from "../../shared/credentials";
         </tr>
         <tr>
             <td colspan="2">
-                <button type="button"  (click)="login()" name="btnClick">Banaan</button>
+                <button type="button" (click)="login()" name="btnClick" class="btn-normal">Banaan</button>
             </td>
         </tr>
     </table>
@@ -30,8 +30,8 @@ import { Credentials } from "../../shared/credentials";
     providers: [AuthenticationService]
 })
 export class LoginComponent {
-    public username:string="0.5848445783383949@gmail.com";
-    public password:string="";
+    public username:string="0.42208382520671583@gmail.com";
+    public password:string="test";
 
     constructor(private authenticationService:AuthenticationService){
 

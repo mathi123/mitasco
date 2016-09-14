@@ -1,0 +1,27 @@
+@import 'colors';
+@import 'mixins';
+@import 'globals';
+
+$defaultHeight: 28px;
+
+.btn-normal{
+  @include round-borders(2px);
+
+  margin: $defaultMargin;
+
+  min-width: 75px;
+  min-height: $defaultHeight;
+  border: 1px solid $accentColor;
+  background-color: transparent;
+  font-size: 14px;
+
+  &:hover{
+    color: $primaryTextColor;
+    background-color: $lightPrimaryColor;
+  }
+}
+
+input{
+  margin: $defaultMargin;
+  min-height: $defaultHeight;
+}

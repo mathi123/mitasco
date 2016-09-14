@@ -10,14 +10,14 @@ import { PartialResultList } from "../../shared/partial-result-list";
     template: 
         `
         <h2>Todo's</h2>
-        <button (click)="addTodo()">Nieuw</button>
+        <button (click)="addTodo()" class="btn-normal">Nieuw</button>
         <input [(ngModel)]="query" (input)="queryChanged()" placeholder="zoeken..."/>
         <ul>
              <li *ngFor="let todo of todos"
                  (click)="onSelect(todo)">
                 <input type="checkbox" [(ngModel)]="todo.isDone"/>
                 {{todo.description}}
-                <button (click)="remove(todo)">x</button>
+                <a (click)="remove(todo)">x</a>
            </li>
         </ul>
         <div *ngIf="selected">
