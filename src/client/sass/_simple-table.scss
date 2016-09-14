@@ -1,8 +1,11 @@
-@import "_base";
+@import 'mixins';
+@import 'globals';
 
 .simple-table{
-  border: 1px solid $primaryColor;
-
+  @include border;
+  @include round-borders(2px);
+  border-collapse: separate;
+  margin: $defaultMargin;
   tr{
     td{
       padding: 5px;

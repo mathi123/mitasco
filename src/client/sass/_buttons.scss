@@ -1,14 +1,17 @@
-@import 'base';
+@import 'colors';
+@import 'mixins';
+@import 'globals';
 
 $defaultHeight: 28px;
 
 .btn-normal{
+  @include round-borders(2px);
+
+  margin: $defaultMargin;
+
   min-width: 75px;
   min-height: $defaultHeight;
   border: 1px solid $accentColor;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
   background-color: transparent;
   font-size: 14px;
 
@@ -19,5 +22,6 @@ $defaultHeight: 28px;
 }
 
 input{
+  margin: $defaultMargin;
   min-height: $defaultHeight;
 }
