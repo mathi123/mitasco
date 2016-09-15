@@ -1,7 +1,11 @@
 @import 'reset';
-@import 'html';
-@import 'accordion-component';
-@import 'simple-table';
-@import 'text';
-@import 'buttons';
 @import 'helpers';
+@import 'default/html';
+@import 'default/accordion-component';
+@import 'default/simple-table';
+@import 'default/text';
+@import 'default/buttons';
+
+@import 'mobile/text';
+
+@import 'tablet/text';
