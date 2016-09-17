@@ -14,9 +14,20 @@ Mitasco project repository
 - git clone https://github.com/mathi123/mitasco
 - npm install
 - typings install
-- db-migrate db:create mitasco-dev3
+
+If you did not use the requirements script:
+
+- create postgresql user 'mitasco' with psql
+- create database 'mitasco' with psql or with db-migrate
+
+See database.json for development credentials.
+
 
 ### Develop
+Upgrade database:
+
+    db-migrate up
+
 Build all:
 
     gulp
