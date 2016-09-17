@@ -1,7 +1,10 @@
-@import 'colors';
+@import '../colors';
 
 $sideBarWidth: 175px;
 
+html{
+  -webkit-text-size-adjust: none;
+}
 body {
   margin: 0;
   font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;

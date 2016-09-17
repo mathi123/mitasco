@@ -1,4 +1,5 @@
-@import 'colors';
+@import '../colors';
+@import '../globals';
 
 .underline{
   text-decoration: underline;
@@ -22,21 +23,21 @@ a{
 }
 h1{
   font-size:28pt;
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin-top: $defaultMargin;
+  margin-bottom: $defaultMargin;
 }
 h2{
   font-size:24pt;
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin-top: $defaultMargin;
+  margin-bottom: $defaultMargin;
 }
 h3{
   font-size:20pt;
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin-top: $defaultMargin;
+  margin-bottom: $defaultMargin;
 }
 h4{
   font-size:19pt;
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin-top: $defaultMargin;
+  margin-bottom: $defaultMargin;
 }

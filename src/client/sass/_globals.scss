@@ -1,2 +1,6 @@
-
 $defaultMargin: 3px;
+
+$mobileMinWidth: 0px;
+$mobileMaxWidth: 480px;
+$tabletMinWidth: $mobileMaxWidth + 1;
+$tabletMaxWidth: 1024px;
