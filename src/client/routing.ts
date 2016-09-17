@@ -5,9 +5,11 @@ import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { GroupListComponent } from "./components/group/group-list.component";
 import { GroupDetailComponent } from "./components/group/group-detail.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
+import { LoginComponent } from "./components/login/login.component";
 
 const appRoutes: Routes = [
     { path: '', component: DashboardComponent},
+    { path: 'login', component: LoginComponent},
     { path: 'todo-list', component: TodoListComponent },
     { path: 'todo/:id', component: TodoDetailComponent },
     { path: 'group-list', component: GroupListComponent },
