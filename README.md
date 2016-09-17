@@ -9,6 +9,7 @@ Mitasco project repository
 - typescript definition manager ([typings](https://github.com/typings/typings)): npm install -g typings
 - [postgresql](https://www.postgresql.org/) database
 - [db-migrate](https://db-migrate.readthedocs.io/en/latest/): npm install -g db-migrate db-migrate-pg
+- For Windows: [Visual studio](https://www.visualstudio.com/) with Windows 8.1 SDK
 
 ### Setup
 - git clone https://github.com/mathi123/mitasco
