@@ -9,14 +9,27 @@ Mitasco project repository
 - typescript definition manager ([typings](https://github.com/typings/typings)): npm install -g typings
 - [postgresql](https://www.postgresql.org/) database
 - [db-migrate](https://db-migrate.readthedocs.io/en/latest/): npm install -g db-migrate db-migrate-pg
+- [gulp](http://gulpjs.com/): npm install -g gulp
+- For Windows: [Visual studio](https://www.visualstudio.com/) with Windows 8.1 SDK
 
 ### Setup
 - git clone https://github.com/mathi123/mitasco
 - npm install
 - typings install
-- db-migrate db:create mitasco-dev3
+
+If you did not use the requirements script:
+
+- create postgresql user 'mitasco' with psql
+- create database 'mitasco' with psql or with db-migrate
+
+See database.json for development credentials.
+
 
 ### Develop
+Upgrade database:
+
+    db-migrate up
+
 Build all:
 
     gulp
