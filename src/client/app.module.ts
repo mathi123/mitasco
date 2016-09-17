@@ -17,11 +17,13 @@ import { GroupDetailComponent } from "./components/group/group-detail.component"
 import { AccordionComponent } from "./components/accordion/accordion.component";
 import { AccordionGroupComponent } from "./components/accordion/accordion-group.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
+import { MenuProvider } from "./providers/menu.provider";
+import { MenuComponent } from "./components/menu/menu.component";
 
 @NgModule({
     imports: [ BrowserModule, FormsModule, HttpModule, routing ],
-    declarations: [ LoginComponent, AppComponent, TodoListComponent, TodoDetailComponent, DashboardComponent, GroupListComponent,GroupDetailComponent,AccordionComponent,AccordionGroupComponent,PageNotFoundComponent],
-    providers: [ConfigurationProvider, TodoService, AuthenticationService, GroupService, appRoutingProviders],
+    declarations: [ LoginComponent, AppComponent, MenuComponent, TodoListComponent, TodoDetailComponent, DashboardComponent, GroupListComponent,GroupDetailComponent,AccordionComponent,AccordionGroupComponent,PageNotFoundComponent],
+    providers: [ConfigurationProvider, TodoService, AuthenticationService, GroupService, appRoutingProviders, MenuProvider],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
