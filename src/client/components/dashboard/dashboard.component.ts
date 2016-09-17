@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { LoginComponent } from "../login/login.component";
-import { AccordionComponent } from "../accordion/accordion.component";
 
 @Component({
     selector: 'dashboard',
@@ -9,6 +8,6 @@ import { AccordionComponent } from "../accordion/accordion.component";
         <login-form></login-form>
     </div>
         `,
-    viewProviders:[LoginComponent,AccordionComponent]
+    viewProviders:[LoginComponent]
 })
 export class DashboardComponent { }

@@ -30,7 +30,7 @@ import { Credentials } from "../../shared/credentials";
     providers: [AuthenticationService]
 })
 export class LoginComponent {
-    public username:string="0.42208382520671583@gmail.com";
+    public username:string="0.0485660610351879@gmail.com";
     public password:string="test";
 
     constructor(private authenticationService:AuthenticationService){
