@@ -36,9 +36,9 @@ export class WebServer{
         };
 
         this._app.use('/app', express.static(__dirname + '/../app'));
-        this._app.get('/app/*', (req:Request,res:Response)=>{
+        /**this._app.get('/app/*', (req:Request,res:Response)=>{
             res.redirect('/app');
-        });
+        });**/
 
         Logger.log(`setting up server on port ${this._port}`);
         https.createServer(options, this._app).listen(this._port, () => Logger.log("server up and running"));

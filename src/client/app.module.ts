@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule }     from '@angular/http';
 import { AppComponent }  from './components/app/app.component';
-import { routing } from './routing';
+import { routing, appRoutingProviders } from './routing';
 import { TodoDetailComponent } from "./components/todo/todo-detail.component";
 import { TodoListComponent } from "./components/todo/todo-list.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
@@ -16,11 +16,12 @@ import { GroupListComponent } from "./components/group/group-list.component";
 import { GroupDetailComponent } from "./components/group/group-detail.component";
 import { AccordionComponent } from "./components/accordion/accordion.component";
 import { AccordionGroupComponent } from "./components/accordion/accordion-group.component";
+import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 
 @NgModule({
     imports: [ BrowserModule, FormsModule, HttpModule, routing ],
-    declarations: [ LoginComponent, AppComponent, TodoListComponent, TodoDetailComponent, DashboardComponent, GroupListComponent,GroupDetailComponent,AccordionComponent,AccordionGroupComponent],
-    providers: [ConfigurationProvider, TodoService, AuthenticationService, GroupService],
+    declarations: [ LoginComponent, AppComponent, TodoListComponent, TodoDetailComponent, DashboardComponent, GroupListComponent,GroupDetailComponent,AccordionComponent,AccordionGroupComponent,PageNotFoundComponent],
+    providers: [ConfigurationProvider, TodoService, AuthenticationService, GroupService, appRoutingProviders],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
