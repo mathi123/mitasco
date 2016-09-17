@@ -1,9 +1,9 @@
 {
   "development": {
     "driver": "pg",
-    "user": "pg-mitasco",
-    "password": "pg-mitasco",
-    "database": "mitasco-dev3",
+    "user": "mitasco",
+    "password": "mitasco",
+    "database": "mitasco",
     "host": "localhost"
   },
   "test": {
