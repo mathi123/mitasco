@@ -1,4 +1,4 @@
-import { Component,ComponentMetadataType } from '@angular/core';
+import { Component } from '@angular/core';
 import { TodoListComponent } from "../todo/todo-list.component";
 
 @Component({
