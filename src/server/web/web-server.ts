@@ -2,6 +2,7 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as https from "https";
 import * as fs from "fs";
+import * as path from "path";
 import { RouteType } from "./route-type"
 import { Request,Response } from "express";
 import { AuthenticationController } from "../controllers/authentication.controller";
@@ -36,9 +37,9 @@ export class WebServer{
         };
 
         this._app.use('/app', express.static(__dirname + '/../app'));
-        /**this._app.get('/app/*', (req:Request,res:Response)=>{
-            res.redirect('/app');
-        });**/
+        this._app.all('/app/*', (req:Request,res:Response)=>{
+            res.sendFile(path.resolve(__dirname + '/../app/index.html'));
+        });
 
         Logger.log(`setting up server on port ${this._port}`);
         https.createServer(options, this._app).listen(this._port, () => Logger.log("server up and running"));
