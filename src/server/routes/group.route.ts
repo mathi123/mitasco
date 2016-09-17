@@ -9,6 +9,7 @@ import { Permissions } from "../security/permissions";
 export async function getAll(req: WebRequest, resp: Response) {
     if(req.permissions.indexOf(Permissions.Admin) < 0){
         resp.sendStatus(550);
+        return;
     }
 
     let databaseSource = new GroupController();
@@ -25,6 +26,7 @@ export async function getAll(req: WebRequest, resp: Response) {
 export async function create(req: WebRequest, resp: Response) {
     if(req.permissions.indexOf(Permissions.Admin) < 0){
         resp.sendStatus(550);
+        return;
     }
 
     let databaseSource = new GroupController();
@@ -44,6 +46,7 @@ export async function create(req: WebRequest, resp: Response) {
 export async function read(req: WebRequest, resp: Response) {
     if(req.permissions.indexOf(Permissions.Admin) < 0){
         resp.sendStatus(550);
+        return;
     }
 
     let databaseSource = new GroupController();
@@ -68,6 +71,7 @@ export async function read(req: WebRequest, resp: Response) {
 export async function update(req: WebRequest, resp: Response) {
     if(req.permissions.indexOf(Permissions.Admin) < 0){
         resp.sendStatus(550);
+        return;
     }
 
     let databaseSource = new GroupController();
@@ -87,6 +91,7 @@ export async function update(req: WebRequest, resp: Response) {
 export async function remove(req: WebRequest, resp: Response) {
     if(req.permissions.indexOf(Permissions.Admin) < 0){
         resp.sendStatus(550);
+        return;
     }
 
     let databaseSource = new GroupController();
