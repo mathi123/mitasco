@@ -1,34 +1,32 @@
 <html>
-<head>
-    <base href="/app/">
-    <title>Mitasco</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <head>
+        <base href="/app/">
+        <title>Mitasco</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!--[if lt IE 9]>
-    <script src="legacy-browsers/css3-mediaqueries.min.js"></script>
-    <script src="legacy-browsers/html5shiv.min.js"></script>
-    <script src="legacy-browsers/html5shiv-printshiv.min.js"></script>
-    <![endif]-->
+        <!--[if lt IE 9]>
+        <script src="legacy-browsers/css3-mediaqueries.min.js"></script>
+        <script src="legacy-browsers/html5shiv.min.js"></script>
+        <script src="legacy-browsers/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- 1. Load libraries -->
-    <!-- Polyfill(s) for older browsers -->
-    <script src="libs/shim.min.js"></script>
-    <script src="libs/zone.js"></script>
-    <script src="libs/Reflect.js"></script>
-    <script src="libs/system.src.js"></script>
-    <!-- 2. Configure SystemJS -->
-    <script src="systemjs.conf.js"></script>
-    <script>
-        System.import('app').catch(function(err){ console.error(err); });
-    </script>
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="styles/main.css">
 
-
-</head>
-<!-- 3. Display the application -->
-<body>
-<application-root>Loading...</application-root>
-</body>
+        <!-- 1. Load libraries -->
+        <!-- Polyfill(s) for older browsers -->
+        <script src="libs/shim.min.js"></script>
+        <script src="libs/zone.js"></script>
+        <script src="libs/Reflect.js"></script>
+        <script src="libs/system.src.js"></script>
+        <!-- 2. Configure SystemJS -->
+        <script src="systemjs.conf.js"></script>
+        <script>
+            System.import('app').catch(function(err){ console.error(err); });
+        </script>
+    </head>
+    <body>
+        <application-root>Loading...</application-root>
+    </body>
 </html>
