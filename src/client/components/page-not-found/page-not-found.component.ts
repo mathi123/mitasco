@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
     selector: 'page-not-found',
     template: `
 <div>
-    <h1>Deze pagina is niet gevonden!</h1>
+    <h3>Deze pagina is niet gevonden!</h3>
 </div>
         `
 })

@@ -1,6 +1,7 @@
 @import '../colors';
 
 $sideBarWidth: 175px;
+$topBarHeight: 40px;
 
 html{
   -webkit-text-size-adjust: none;
@@ -10,26 +11,10 @@ body {
   font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
   font-size: 14px;
 }
-#wrapper {
-  margin-left: $sideBarWidth;
-  height: 100%;
-}
-#content {
+#header{
+  height: $topBarHeight;
   width: 100%;
-  padding: 10px;
-}
-#sidebar {
-  float: left;
-  width: $sideBarWidth;
-  margin-left: -$sideBarWidth;
-  background-color: $darkPrimaryColor;
-  height: 100%;
-}
-#topbar{
-  height: 35px;
   background-color: $accentColor;
-}
-.logo{
   padding: 5px;
   font-size:20pt;
   font-weight: bold;
@@ -38,4 +23,44 @@ body {
     color: $primaryColor;
     cursor: pointer;
   }
+  .box-shadow-menu {
+    position: relative;
+    padding-left: 1.25em;
+  }
+  .box-shadow-menu:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.25em;
+    width: 1em;
+    height: 0.15em;
+    background: black;
+    box-shadow:
+            0 0.25em 0 0 black,
+            0 0.5em 0 0 black;
+  }
+}
+
+#menu{
+  nav{
+    background-color: $darkPrimaryColor;
+    color: $textColor;
+  }
+
+  .open{
+    float: left;
+    width: $sideBarWidth;
+    height: 100%;
+    -webkit-transition: width 0.5s linear;
+    transition: width 0.5s linear;
+  }
+
+  .closed{
+    display: none;
+  }
+}
+
+#content{
+  float: left;
+  padding: 15px;
 }
