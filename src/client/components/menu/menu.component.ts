@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MenuProvider } from "../../providers/menu.provider";
 
 @Component({
     moduleId: module.id,
     selector: 'menu',
     template: `
-        <nav [class.open]="isOpen" [hidden]="!isOpen"
+        <nav [class.open]="isOpen"
              [class.closed]="!isOpen">
             <accordion>
                 <accordion-group heading="Algemeen" isGroupOpen="true">
@@ -24,15 +24,13 @@ import { MenuProvider } from "../../providers/menu.provider";
         </nav>
     `
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent {
     public isOpen:boolean = true;
 
     constructor(private menu:MenuProvider) {
-        menu.menuToggledAsync.subscribe((isOpen:boolean) => {
+        menu.menuToggled.asObservable().subscribe((isOpen:boolean) => {
             this.isOpen = isOpen;
-        });
+            console.log(isOpen);
+        }, err => { console.error(err) });
     }
-
-    ngOnInit() { }
-
 }

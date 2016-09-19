@@ -7,7 +7,7 @@ import { MenuProvider } from "../../providers/menu.provider";
     template: `
     <div>
         <header id="header">
-            <button type="button" class="box-shadow-menu" (click)="toggleMenu()"></button>
+            <button type="button" (click)="toggleMenu()">menu</button>
         </header>
         
         <menu id="menu"></menu>

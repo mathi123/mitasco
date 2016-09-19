@@ -46,8 +46,9 @@ export class LoginComponent implements OnInit{
             // Already logged in
             this.router.navigate(['/dashboard']);
             return;
+        }else{
+            this.menu.showMenu(false);
         }
-        this.menu.showMenu(false);
     }
 
     public login(){

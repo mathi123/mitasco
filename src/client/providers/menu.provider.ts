@@ -3,11 +3,9 @@ import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class MenuProvider {
-    private isOpen:boolean = false;
+    private isOpen:boolean = true;
 
-    private menuToggled = new Subject<boolean>();
-
-    public menuToggledAsync = this.menuToggled.asObservable();
+    public menuToggled = new Subject<boolean>();
 
     constructor() { }
 
