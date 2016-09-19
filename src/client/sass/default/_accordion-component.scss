@@ -6,11 +6,9 @@ $accordionLeftPadding: 10px;
 $accordionBorderThickness: 1px;
 
 .accordion{
-  background-color: $darkPrimaryColor;
-  color: $textColor;
 }
 .accordion-group{
-  padding-border: 5px;
+  padding-bottom: 5px;
 }
 .accordion-group-collapse{
   border-top: $accordionBorderThickness solid transparent;
@@ -26,6 +24,7 @@ $accordionBorderThickness: 1px;
   }
 }
 .accordion-group-title{
+  padding-bottom:5px;
 }
 .accordion-group-heading-open{
   background-color: $primaryColor;

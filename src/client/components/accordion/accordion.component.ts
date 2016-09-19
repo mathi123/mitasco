@@ -8,8 +8,7 @@ import { AccordionGroupComponent } from "./accordion-group.component";
     <div class="accordion">
         <ng-content></ng-content>
     </div>
-    `,
-    styleUrls: ['../../styles/accordion-component.css']
+    `
 })
 export class AccordionComponent{
     groups: Array<AccordionGroupComponent> = [];

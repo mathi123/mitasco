@@ -6,7 +6,8 @@ export class ConfigurationProvider{
     private _baseUrl: string = 'https://localhost:3000/api';
     private _headers: Headers = new Headers();
     private _options: RequestOptions = new RequestOptions();
-    private _token:string;
+    private _token: string;
+    private _isLoggedIn: boolean;
     public TOKENHEADER: string = 'token';
 
     public constructor(){
@@ -26,6 +27,11 @@ export class ConfigurationProvider{
         console.log("token was received");
         this._token = token;
         this.addTokenToHeaders();
+        this._isLoggedIn = true;
+    }
+
+    public isLoggedIn() : boolean{
+        return this._isLoggedIn;
     }
 
     private addTokenToHeaders(){

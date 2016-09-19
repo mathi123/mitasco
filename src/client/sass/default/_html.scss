@@ -1,35 +1,22 @@
 @import '../colors';
 
 $sideBarWidth: 175px;
+$topBarHeight: 40px;
 
 html{
   -webkit-text-size-adjust: none;
 }
+
 body {
   margin: 0;
   font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
   font-size: 14px;
 }
-#wrapper {
-  margin-left: $sideBarWidth;
-  height: 100%;
-}
-#content {
+
+#header{
+  height: $topBarHeight;
   width: 100%;
-  padding: 10px;
-}
-#sidebar {
-  float: left;
-  width: $sideBarWidth;
-  margin-left: -$sideBarWidth;
-  background-color: $darkPrimaryColor;
-  height: 100%;
-}
-#topbar{
-  height: 35px;
   background-color: $accentColor;
-}
-.logo{
   padding: 5px;
   font-size:20pt;
   font-weight: bold;
@@ -38,4 +25,28 @@ body {
     color: $primaryColor;
     cursor: pointer;
   }
+}
+
+#menu{
+  nav{
+    background-color: $darkPrimaryColor;
+    color: $textColor;
+  }
+
+  .open{
+    float: left;
+    width: $sideBarWidth;
+    height: 100%;
+    -webkit-transition: width 0.5s linear;
+    transition: width 0.5s linear;
+  }
+
+  .closed{
+    display: none;
+  }
+}
+
+#content{
+  float: left;
+  padding: 15px;
 }

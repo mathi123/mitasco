@@ -10,6 +10,7 @@ import { Permissions } from "../security/permissions";
 export async function search(req: WebRequest, resp: Response) {
     if(req.permissions.indexOf(Permissions.Admin) < 0){
         resp.sendStatus(550);
+        return;
     }
 
     let databaseSource = new UserController();
@@ -48,6 +49,7 @@ export async function search(req: WebRequest, resp: Response) {
 export async function read(req: WebRequest, resp: Response) {
     if(req.permissions.indexOf(Permissions.Admin) < 0){
         resp.sendStatus(550);
+        return;
     }
 
     let id = req.params.id;
@@ -63,6 +65,7 @@ export async function read(req: WebRequest, resp: Response) {
 export async function create(req: WebRequest, resp: Response) {
     if(req.permissions.indexOf(Permissions.Admin) < 0){
         resp.sendStatus(550);
+        return;
     }
 
     var data = req.body;

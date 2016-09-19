@@ -2,9 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Group } from "../../shared/group";
 import { GroupService } from "../../services/group.service";
 import { Subscription } from "rxjs";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { KeyValuePair } from "../../shared/key-value-pair";
 import { PermissionCode } from "../../shared/permission-code";
+import { ConfigurationProvider } from "../../providers/configuration.provider";
 
 @Component({
     moduleId: module.id,
@@ -51,9 +52,14 @@ export class GroupDetailComponent implements OnInit {
     public hasChanged:Boolean = false;
     public saving:Boolean = false;
 
-    constructor(private service:GroupService, private route: ActivatedRoute) { }
+    constructor(private service:GroupService, private route: ActivatedRoute,
+                private configuration: ConfigurationProvider, private router: Router) { }
 
     ngOnInit() {
+        if(!this.configuration.isLoggedIn()){
+            this.router.navigate(['/login']);
+            return;
+        }
         this.sub = this.route.params.subscribe(params => {
             this.id = params['id'] as number;
             this.loadData();
