@@ -4,21 +4,7 @@ import { AccordionComponent } from "./accordion.component";
 @Component({
     moduleId: module.id,
     selector: 'accordion-group',
-    template:
-        `
-    <div class="accordion-group" [ngClass]="{'accordion-group-open': isOpen}">
-      <div class="accordion-group-heading" (click)="toggleOpen()" [ngClass]="{'accordion-group-heading-open': isOpen}">
-        <div class="arrow-up" [hidden]="!isOpen"></div>
-        <div class="arrow-down" [hidden]="isOpen"></div>
-        <p class="accordion-group-title">{{heading}}</p>
-      </div>
-      <div class="accordion-group-collapse" [hidden]="!isOpen">
-        <div class="accordion-group-body">
-            <ng-content></ng-content>
-        </div>
-      </div>
-    </div>
-    `
+    templateUrl: 'accordion-group.template.html'
 })
 export class AccordionGroupComponent implements OnDestroy {
     private _isOpen:boolean = false;

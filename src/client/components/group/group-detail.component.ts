@@ -10,39 +10,7 @@ import { ConfigurationProvider } from "../../providers/configuration.provider";
 @Component({
     moduleId: module.id,
     selector: 'group-detail',
-    template:
-    `
-    <div>
-        <input type="text" [(ngModel)]="record.description" (input)="changed()"/>
-        <h4>Gebruikers</h4>
-        <table border="1" *ngIf="record.users" class="simple-table">
-            <tr class="simple-table-header">
-                <td>Naam</td>
-                <td>Wissen</td>
-            </tr>
-            <tr *ngFor="let user of record.users">
-                <td>{{user.value}}</td>
-                <td>
-                    <a (click)="removeUser(user)">x</a>
-                </td>
-            </tr>
-        </table>
-        <h4>Permissies</h4>
-        <table border="1" *ngIf="record.permissionCodes" class="simple-table">
-            <tr class="simple-table-header">
-                <td>Code</td>
-                <td>Wissen</td>
-            </tr>
-            <tr *ngFor="let permission of record.permissionCodes">
-                <td>{{permission.code}}</td>
-                <td>
-                    <a (click)="removePermission(permisson)">x</a>
-                </td>
-            </tr>
-        </table>
-        <button type="button" (click)="save()" [disabled]="!hasChanged" class="btn-normal">Opslaan</button>
-    </div>
-    `
+    templateUrl: 'group-detail.template.html'
 })
 export class GroupDetailComponent implements OnInit {
     private sub: Subscription;

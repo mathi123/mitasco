@@ -6,30 +6,9 @@ import { Router } from "@angular/router";
 import { ConfigurationProvider } from "../../providers/configuration.provider";
 
 @Component({
+    moduleId: module.id,
     selector: 'login-form',
-    template: `
-<div>
-    <table>
-        <tr>
-            <td>Login</td>
-            <td>
-               <input type="text" [(ngModel)]="username"/>
-            </td>
-        </tr>
-        <tr>
-            <td>Paswoord</td>
-            <td>
-               <input type="password" [(ngModel)]="password"/>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <button type="button" (click)="login()" name="btnClick" class="btn-normal">Banaan</button>
-            </td>
-        </tr>
-    </table>
-</div>
-        `,
+    templateUrl: 'login.template.html',
     providers: [AuthenticationService, MenuProvider]
 })
 export class LoginComponent implements OnInit{

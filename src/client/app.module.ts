@@ -2,7 +2,7 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule }     from '@angular/http';
-import { AppComponent }  from './components/app/app.component';
+import { ApplicationRootComponent }  from './components/application-root/application-root.component';
 import { routing, appRoutingProviders } from './routing';
 import { TodoDetailComponent } from "./components/todo/todo-detail.component";
 import { TodoListComponent } from "./components/todo/todo-list.component";
@@ -22,8 +22,8 @@ import { MenuComponent } from "./components/menu/menu.component";
 
 @NgModule({
     imports: [ BrowserModule, FormsModule, HttpModule, routing ],
-    declarations: [ LoginComponent, AppComponent, MenuComponent, TodoListComponent, TodoDetailComponent, DashboardComponent, GroupListComponent,GroupDetailComponent,AccordionComponent,AccordionGroupComponent,PageNotFoundComponent],
+    declarations: [ LoginComponent, ApplicationRootComponent, MenuComponent, TodoListComponent, TodoDetailComponent, DashboardComponent, GroupListComponent,GroupDetailComponent,AccordionComponent,AccordionGroupComponent,PageNotFoundComponent],
     providers: [ConfigurationProvider, TodoService, AuthenticationService, GroupService, appRoutingProviders, MenuProvider],
-    bootstrap: [AppComponent]
+    bootstrap: [ApplicationRootComponent]
 })
 export class AppModule { }

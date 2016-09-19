@@ -4,11 +4,7 @@ import { AccordionGroupComponent } from "./accordion-group.component";
 @Component({
     moduleId: module.id,
     selector: 'accordion',
-    template: `
-    <div class="accordion">
-        <ng-content></ng-content>
-    </div>
-    `
+    templateUrl: 'accordion.template.html'
 })
 export class AccordionComponent{
     groups: Array<AccordionGroupComponent> = [];
