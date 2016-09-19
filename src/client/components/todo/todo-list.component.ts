@@ -9,24 +9,7 @@ import { Router } from "@angular/router";
 
 @Component({
     selector: 'todo-list',
-    template: 
-        `
-        <h2>Todo's</h2>
-        <button (click)="addTodo()" class="btn-normal">Nieuw</button>
-        <input [(ngModel)]="query" (input)="queryChanged()" placeholder="zoeken..."/>
-        <ul>
-             <li *ngFor="let todo of todos"
-                 (click)="onSelect(todo)">
-                <input type="checkbox" [(ngModel)]="todo.isDone"/>
-                {{todo.description}}
-                <a (click)="remove(todo)">x</a>
-           </li>
-        </ul>
-        <div *ngIf="selected">
-            <h3>Edit</h3>
-            <todo-detail [todo]="selected"></todo-detail>
-        </div>
-        `,
+    templateUrl: 'todo-list.template.html',
     viewProviders: [TodoDetailComponent],
     providers: [TodoService]
 })

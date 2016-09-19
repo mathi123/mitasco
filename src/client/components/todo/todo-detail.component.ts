@@ -4,11 +4,7 @@ import { TodoService } from "../../services/todo.service";
 
 @Component({
     selector: 'todo-detail',
-    template: `
-    <div>
-        <input [(ngModel)]="todo.description" (input)="todoChanged()" placeholder="omschrijving"/>
-    </div>
-    `
+    templateUrl: 'todo-detail.template.html'
 })
 export class TodoDetailComponent{
     @Input()
