@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { ConfigurationProvider } from "../../providers/configuration.provider";
 
 @Component({
+    moduleId: module.id,
     selector: 'login-form',
     templateUrl: 'login.template.html',
     providers: [AuthenticationService, MenuProvider]

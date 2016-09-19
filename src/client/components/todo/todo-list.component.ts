@@ -8,6 +8,7 @@ import { ConfigurationProvider } from "../../providers/configuration.provider";
 import { Router } from "@angular/router";
 
 @Component({
+    moduleId: module.id,
     selector: 'todo-list',
     templateUrl: 'todo-list.template.html',
     viewProviders: [TodoDetailComponent],
