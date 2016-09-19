@@ -45,7 +45,12 @@ try{
 	"Postgresql already installed"
 }catch{
 	choco install postgresql -Y
+	choco install pgadmin3 -Y
 }
+
+# Postgresql development user for mitasco project:
+#psql -U postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='mitasco'"
+
 
 #
 # Temporary bugfix for bcrypt rebuild with c++ ...
