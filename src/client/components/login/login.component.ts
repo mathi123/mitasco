@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from "../../services/authentication.service";
 import { Credentials } from "../../shared/credentials";
 import { MenuProvider } from "../../providers/menu.provider";
+import { Router } from "@angular/router";
+import { ConfigurationProvider } from "../../providers/configuration.provider";
 
 @Component({
     selector: 'login-form',
@@ -34,11 +36,17 @@ export class LoginComponent implements OnInit{
     public username:string="0.0485660610351879@gmail.com";
     public password:string="test";
 
-    constructor(private authenticationService:AuthenticationService, private menu:MenuProvider){
+    constructor(private authenticationService:AuthenticationService, private menu:MenuProvider,
+        private router:Router, private config:ConfigurationProvider){
 
     }
 
     ngOnInit(): void {
+        if(this.config.isLoggedIn()){
+            // Already logged in
+            this.router.navigate(['/dashboard']);
+            return;
+        }
         this.menu.showMenu(false);
     }
 
@@ -51,7 +59,7 @@ export class LoginComponent implements OnInit{
             .then((success:Boolean) => {
                 if(success){
                     this.menu.showMenu(true);
-                    console.log("success!")
+                    this.router.navigate(['/dashboard']);
                 }else{
                     console.log("error!")
                 }

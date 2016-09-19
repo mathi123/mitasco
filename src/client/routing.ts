@@ -9,6 +9,7 @@ import { LoginComponent } from "./components/login/login.component";
 
 const appRoutes: Routes = [
     { path: '', component: DashboardComponent},
+    { path: 'dashboard', component: DashboardComponent },
     { path: 'login', component: LoginComponent},
     { path: 'todo-list', component: TodoListComponent },
     { path: 'todo/:id', component: TodoDetailComponent },
