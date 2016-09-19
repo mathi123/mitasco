@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Todo } from "../../shared/todo";
 import { TodoDetailComponent } from "./todo-detail.component";
 import { TodoService } from "../../services/todo.service";
 import { SearchArgument } from "../../shared/search-argument";
 import { PartialResultList } from "../../shared/partial-result-list";
+import { ConfigurationProvider } from "../../providers/configuration.provider";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'todo-list',
@@ -28,13 +30,23 @@ import { PartialResultList } from "../../shared/partial-result-list";
     viewProviders: [TodoDetailComponent],
     providers: [TodoService]
 })
-export class TodoListComponent {
+export class TodoListComponent implements OnInit{
     query: string = "";
     todos: Todo[] = [];
     selected: Todo;
 
-    constructor(private _todoService: TodoService){
+    constructor(private todoService: TodoService, private configuration: ConfigurationProvider,
+        private router: Router){
 
+    }
+
+    public ngOnInit(){
+        if(!this.configuration.isLoggedIn()){
+            this.router.navigate(['/login']);
+            return;
+        }else{
+            this.search();
+        }
     }
 
     public onSelect(todo: Todo){
@@ -45,17 +57,13 @@ export class TodoListComponent {
         this.search();
     }
 
-    public ngOnInit(){
-        this.search();
-    }
-
     public addTodo(){
         let newTodo = new Todo();
         newTodo.description = "test new todo";
         newTodo.isDone = false;
         newTodo.id = 0;
 
-        this._todoService.create(newTodo)
+        this.todoService.create(newTodo)
             .then((id) => {
                 newTodo.id = id;
                 this.todos.push(newTodo);
@@ -64,7 +72,7 @@ export class TodoListComponent {
     }
 
     public remove(todo: Todo){
-        this._todoService.remove(todo.id)
+        this.todoService.remove(todo.id)
             .then((success: boolean) => {
                 if(success){
                     this.todos.splice(this.todos.indexOf(todo, 0), 1);
@@ -78,7 +86,7 @@ export class TodoListComponent {
         arg.skip = 0;
         arg.take = 15;
 
-        this._todoService.search(arg)
+        this.todoService.search(arg)
             .then((results: PartialResultList<Todo>) => {
                 this.todos = results.results;
 
