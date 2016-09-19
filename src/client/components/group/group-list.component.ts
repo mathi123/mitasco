@@ -7,22 +7,7 @@ import { ConfigurationProvider } from "../../providers/configuration.provider";
 @Component({
     moduleId: module.id,
     selector: 'group-list',
-    template: `
-    <div>
-        <table class="simple-table">
-            <tr class="simple-table-header">
-                <td>Omschrijving</td>
-                <td>Gebruikers</td>
-                <td>Permissies</td>
-            </tr>
-            <tr *ngFor="let record of records">
-                <td><a (click)="open(record)" class="link">{{record.description}}</a></td>
-                <td>{{record.userCount}}</td>
-                <td>{{record.permissionCount}}</td>
-            </tr>
-        </table>
-    </div>
-    `
+    templateUrl: 'group-list.template.html'
 })
 export class GroupListComponent implements OnInit {
     public records:Group[] = [];
