@@ -18,7 +18,7 @@ export class GroupDetailComponent implements OnInit {
 
     public record:Group = new Group();
     public hasChanged:Boolean = false;
-    public saving:Boolean = false;
+    public isSaving:Boolean = false;
 
     constructor(private service:GroupService, private route: ActivatedRoute,
                 private configuration: ConfigurationProvider, private router: Router) { }
@@ -69,12 +69,22 @@ export class GroupDetailComponent implements OnInit {
         }
     }
 
+    cancel(){
+        if(this.hasChanged){
+            let confirmed:boolean = window.confirm("Wilt u de wijzigingen ongedaan maken?");
+
+            if(confirmed){
+                this.loadData();
+            }
+        }
+    }
+
     save(){
-        this.saving = true;
+        this.isSaving = true;
 
         this.service.update(this.record)
             .then((success:Boolean) => {
-                this.saving = false;
+                this.isSaving = false;
                 this.hasChanged = false;
             }).catch((err) => console.log(err));
     }
@@ -83,6 +93,7 @@ export class GroupDetailComponent implements OnInit {
         this.service.read(this.id)
             .then((group:Group) => {
                 this.record = group;
+                this.hasChanged = false;
             });
     }
 }

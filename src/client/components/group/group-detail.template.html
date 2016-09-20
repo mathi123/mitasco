@@ -26,5 +26,8 @@
             </td>
         </tr>
     </table>
-    <button type="button" (click)="save()" [disabled]="!hasChanged" class="btn-normal">Opslaan</button>
+
+    <button type="button" (click)="cancel()" [disabled]="isSaving || !hasChanged " class="btn-normal">Cancel</button>
+
+    <button type="button" (click)="save()" [disabled]="!hasChanged || isSaving" class="btn-normal">Opslaan</button>
 </div>
