@@ -40,7 +40,8 @@ export class LoginComponent implements OnInit{
             .then((success:Boolean) => {
                 if(success){
                     this.menu.showMenu(true);
-                    this.router.navigate(['/dashboard']);
+                    console.info(`on my way to ${this.urlTracking.originalUrl}`);
+                    this.router.navigate([this.urlTracking.originalUrl]);
                 }else{
                     console.log("error!")
                 }
