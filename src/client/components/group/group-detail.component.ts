@@ -27,15 +27,18 @@ export class GroupDetailComponent implements OnInit {
         if(!this.configuration.isLoggedIn()){
             this.router.navigate(['/login']);
             return;
+        }else{
+            this.sub = this.route.params.subscribe(params => {
+                this.id = params['id'] as number;
+                this.loadData();
+            });
         }
-        this.sub = this.route.params.subscribe(params => {
-            this.id = params['id'] as number;
-            this.loadData();
-        });
     }
 
     ngOnDestroy() {
-        this.sub.unsubscribe();
+        if(this.sub){
+            this.sub.unsubscribe();
+        }
     }
 
     changed(){
