@@ -27,6 +27,10 @@ export class GroupListComponent implements OnInit {
         this.router.navigate(['/group-detail', group.id]);
     }
 
+    create(){
+        this.router.navigate(['/group-detail', 0]);
+    }
+
     remove(group:Group){
         let confirmed:boolean = window.confirm("Weet u zeker dat u deze wilt wissen?");
 

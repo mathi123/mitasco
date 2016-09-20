@@ -2,33 +2,35 @@
     <h1>Groep aanpassen</h1>
     <p>Naam van de groep:</p>
     <input type="text" [(ngModel)]="record.description" (input)="changed()"/>
-    <h2>Gebruikers</h2>
-    <table border="1" *ngIf="record.users" class="simple-table">
-        <tr class="simple-table-header">
-            <td>Naam</td>
-            <td>Wissen</td>
-        </tr>
-        <tr *ngFor="let user of record.users">
-            <td>{{user.value}}</td>
-            <td>
-                <a (click)="removeUser(user)">x</a>
-            </td>
-        </tr>
-    </table>
-    <h2>Permissies</h2>
-    <table border="1" *ngIf="record.permissionCodes" class="simple-table">
-        <tr class="simple-table-header">
-            <td>Code</td>
-            <td>Wissen</td>
-        </tr>
-        <tr *ngFor="let permission of record.permissionCodes">
-            <td>{{permission.code}}</td>
-            <td>
-                <a (click)="removePermission(permisson)">x</a>
-            </td>
-        </tr>
-    </table>
 
+    <div [hidden]="record.id == 0">
+        <h2>Gebruikers</h2>
+        <table border="1" *ngIf="record.users" class="simple-table">
+            <tr class="simple-table-header">
+                <td>Naam</td>
+                <td>Wissen</td>
+            </tr>
+            <tr *ngFor="let user of record.users">
+                <td>{{user.value}}</td>
+                <td>
+                    <a (click)="removeUser(user)">x</a>
+                </td>
+            </tr>
+        </table>
+        <h2>Permissies</h2>
+        <table border="1" *ngIf="record.permissionCodes" class="simple-table">
+            <tr class="simple-table-header">
+                <td>Code</td>
+                <td>Wissen</td>
+            </tr>
+            <tr *ngFor="let permission of record.permissionCodes">
+                <td>{{permission.code}}</td>
+                <td>
+                    <a (click)="removePermission(permisson)">x</a>
+                </td>
+            </tr>
+        </table>
+    </div>
     <button type="button" (click)="cancel()" [disabled]="isSaving || !hasChanged " class="btn-normal">Cancel</button>
 
     <button type="button" (click)="save()" [disabled]="!hasChanged || isSaving" class="btn-normal">Opslaan</button>

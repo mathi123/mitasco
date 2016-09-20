@@ -30,7 +30,12 @@ export class GroupDetailComponent implements OnInit {
         }else{
             this.sub = this.route.params.subscribe(params => {
                 this.id = params['id'] as number;
-                this.loadData();
+
+                if(this.id == 0){
+                    this.newData();
+                }else{
+                    this.loadData();
+                }
             });
         }
     }
@@ -39,6 +44,11 @@ export class GroupDetailComponent implements OnInit {
         if(this.sub){
             this.sub.unsubscribe();
         }
+    }
+
+    newData(){
+        this.record = new Group();
+        this.hasChanged = true;
     }
 
     changed(){
@@ -82,11 +92,20 @@ export class GroupDetailComponent implements OnInit {
     save(){
         this.isSaving = true;
 
-        this.service.update(this.record)
-            .then((success:Boolean) => {
-                this.isSaving = false;
-                this.hasChanged = false;
-            }).catch((err) => console.log(err));
+        if(this.record.id == 0){
+            this.service.create(this.record)
+                .then((id:number) => {
+                    this.record.id = id;
+                    this.isSaving = false;
+                    this.hasChanged = false;
+                }).catch((err) => console.log(err));
+        }else{
+            this.service.update(this.record)
+                .then((success:Boolean) => {
+                    this.isSaving = false;
+                    this.hasChanged = false;
+                }).catch((err) => console.log(err));
+        }
     }
 
     private loadData(){
