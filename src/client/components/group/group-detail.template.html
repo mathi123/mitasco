@@ -1,6 +1,8 @@
 <div>
+    <h1>Groep aanpassen</h1>
+    <p>Naam van de groep:</p>
     <input type="text" [(ngModel)]="record.description" (input)="changed()"/>
-    <h4>Gebruikers</h4>
+    <h2>Gebruikers</h2>
     <table border="1" *ngIf="record.users" class="simple-table">
         <tr class="simple-table-header">
             <td>Naam</td>
@@ -13,7 +15,7 @@
             </td>
         </tr>
     </table>
-    <h4>Permissies</h4>
+    <h2>Permissies</h2>
     <table border="1" *ngIf="record.permissionCodes" class="simple-table">
         <tr class="simple-table-header">
             <td>Code</td>
