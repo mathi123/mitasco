@@ -48,16 +48,24 @@ export class GroupDetailComponent implements OnInit {
     removeUser(user:KeyValuePair){
         let index = this.record.users.indexOf(user);
         if(index >= 0){
-            this.record.users.splice(index, 1);
-            this.hasChanged = true;
+            let confirmed:boolean = window.confirm("Weet u zeker dat u deze wil wissen?");
+
+            if(confirmed){
+                this.record.users.splice(index, 1);
+                this.hasChanged = true;
+            }
         }
     }
 
     removePermission(permission:PermissionCode){
         let index = this.record.permissionCodes.indexOf(permission);
         if(index >= 0){
-            this.record.permissionCodes.splice(index, 1);
-            this.hasChanged = true;
+            let confirmed:boolean = window.confirm("Weet u zeker dat u deze wil wissen?");
+
+            if(confirmed){
+                this.record.permissionCodes.splice(index, 1);
+                this.hasChanged = true;
+            }
         }
     }
 
