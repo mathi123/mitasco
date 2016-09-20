@@ -4,6 +4,7 @@ import { Credentials } from "../../shared/credentials";
 import { MenuProvider } from "../../providers/menu.provider";
 import { Router } from "@angular/router";
 import { ConfigurationProvider } from "../../providers/configuration.provider";
+import { UrlTrackingService } from "../../services/url-tracking.service";
 
 @Component({
     moduleId: module.id,
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit{
     public password:string="test";
 
     constructor(private authenticationService:AuthenticationService, private menu:MenuProvider,
-        private router:Router, private config:ConfigurationProvider){
+        private router:Router, private config:ConfigurationProvider, private urlTracking: UrlTrackingService){
 
     }
 

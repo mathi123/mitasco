@@ -19,11 +19,12 @@ import { AccordionGroupComponent } from "./components/accordion/accordion-group.
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { MenuProvider } from "./providers/menu.provider";
 import { MenuComponent } from "./components/menu/menu.component";
+import { UrlTrackingService } from "./services/url-tracking.service";
 
 @NgModule({
     imports: [ BrowserModule, FormsModule, HttpModule, routing ],
     declarations: [ LoginComponent, ApplicationRootComponent, MenuComponent, TodoListComponent, TodoDetailComponent, DashboardComponent, GroupListComponent,GroupDetailComponent,AccordionComponent,AccordionGroupComponent,PageNotFoundComponent],
-    providers: [ConfigurationProvider, TodoService, AuthenticationService, GroupService, appRoutingProviders, MenuProvider],
+    providers: [TodoService,GroupService, appRoutingProviders, ConfigurationProvider, AuthenticationService, MenuProvider,UrlTrackingService],
     bootstrap: [ApplicationRootComponent]
 })
 export class AppModule { }
