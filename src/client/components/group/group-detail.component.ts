@@ -18,7 +18,7 @@ export class GroupDetailComponent implements OnInit {
 
     public record:Group = new Group();
     public hasChanged:Boolean = false;
-    public saving:Boolean = false;
+    public isSaving:Boolean = false;
 
     constructor(private service:GroupService, private route: ActivatedRoute,
                 private configuration: ConfigurationProvider, private router: Router) { }
@@ -30,7 +30,12 @@ export class GroupDetailComponent implements OnInit {
         }else{
             this.sub = this.route.params.subscribe(params => {
                 this.id = params['id'] as number;
-                this.loadData();
+
+                if(this.id == 0){
+                    this.newData();
+                }else{
+                    this.loadData();
+                }
             });
         }
     }
@@ -41,6 +46,11 @@ export class GroupDetailComponent implements OnInit {
         }
     }
 
+    newData(){
+        this.record = new Group();
+        this.hasChanged = true;
+    }
+
     changed(){
         this.hasChanged = true;
     }
@@ -48,33 +58,61 @@ export class GroupDetailComponent implements OnInit {
     removeUser(user:KeyValuePair){
         let index = this.record.users.indexOf(user);
         if(index >= 0){
-            this.record.users.splice(index, 1);
-            this.hasChanged = true;
+            let confirmed:boolean = window.confirm("Weet u zeker dat u deze wil wissen?");
+
+            if(confirmed){
+                this.record.users.splice(index, 1);
+                this.hasChanged = true;
+            }
         }
     }
 
     removePermission(permission:PermissionCode){
         let index = this.record.permissionCodes.indexOf(permission);
         if(index >= 0){
-            this.record.permissionCodes.splice(index, 1);
-            this.hasChanged = true;
+            let confirmed:boolean = window.confirm("Weet u zeker dat u deze wil wissen?");
+
+            if(confirmed){
+                this.record.permissionCodes.splice(index, 1);
+                this.hasChanged = true;
+            }
+        }
+    }
+
+    cancel(){
+        if(this.hasChanged){
+            let confirmed:boolean = window.confirm("Wilt u de wijzigingen ongedaan maken?");
+
+            if(confirmed){
+                this.loadData();
+            }
         }
     }
 
     save(){
-        this.saving = true;
+        this.isSaving = true;
 
-        this.service.update(this.record)
-            .then((success:Boolean) => {
-                this.saving = false;
-                this.hasChanged = false;
-            }).catch((err) => console.log(err));
+        if(this.record.id == 0){
+            this.service.create(this.record)
+                .then((id:number) => {
+                    this.record.id = id;
+                    this.isSaving = false;
+                    this.hasChanged = false;
+                }).catch((err) => console.log(err));
+        }else{
+            this.service.update(this.record)
+                .then((success:Boolean) => {
+                    this.isSaving = false;
+                    this.hasChanged = false;
+                }).catch((err) => console.log(err));
+        }
     }
 
     private loadData(){
         this.service.read(this.id)
             .then((group:Group) => {
                 this.record = group;
+                this.hasChanged = false;
             });
     }
 }

@@ -10,6 +10,13 @@ export class Group implements Deserializable{
     public users:KeyValuePair[];
     public permissionCodes:PermissionCode[];
 
+    constructor(){
+        this.id = 0;
+        this.description = "";
+        this.users = [];
+        this.permissionCodes = [];
+    }
+
     public deserialize(obj: any){
         this.id = DeserializeUtil.StrictNumber(obj.id);
         this.description = DeserializeUtil.StrictString(obj.description);
