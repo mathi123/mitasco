@@ -20,10 +20,13 @@ import { PageNotFoundComponent } from "./components/page-not-found/page-not-foun
 import { MenuProvider } from "./providers/menu.provider";
 import { MenuComponent } from "./components/menu/menu.component";
 import { UrlTrackingService } from "./services/url-tracking.service";
+import { SuggestionInputComponent } from "./components/suggestion-input/suggestion-input.component";
 
 @NgModule({
     imports: [ BrowserModule, FormsModule, HttpModule, routing ],
-    declarations: [ LoginComponent, ApplicationRootComponent, MenuComponent, TodoListComponent, TodoDetailComponent, DashboardComponent, GroupListComponent,GroupDetailComponent,AccordionComponent,AccordionGroupComponent,PageNotFoundComponent],
+    declarations: [ LoginComponent, ApplicationRootComponent, MenuComponent, TodoListComponent, TodoDetailComponent,
+        DashboardComponent, GroupListComponent,GroupDetailComponent,AccordionComponent,AccordionGroupComponent,
+        PageNotFoundComponent, SuggestionInputComponent],
     providers: [TodoService,GroupService, appRoutingProviders, ConfigurationProvider, AuthenticationService, MenuProvider,UrlTrackingService],
     bootstrap: [ApplicationRootComponent]
 })
