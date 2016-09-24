@@ -21,23 +21,22 @@ a{
     cursor: pointer;
   }
 }
+p{
+  margin: $defaultMargin;
+}
 h1{
-  font-size:28pt;
-  margin-top: $defaultMargin;
-  margin-bottom: $defaultMargin;
+  font-size:20pt;
+  margin: $defaultTextMargin $defaultMargin;
 }
 h2{
-  font-size:24pt;
-  margin-top: $defaultMargin;
-  margin-bottom: $defaultMargin;
+  font-size:18pt;
+  margin: $defaultTextMargin $defaultMargin;
 }
 h3{
-  font-size:20pt;
-  margin-top: $defaultMargin;
-  margin-bottom: $defaultMargin;
+  font-size:16pt;
+  margin: $defaultTextMargin $defaultMargin;
 }
 h4{
-  font-size:19pt;
-  margin-top: $defaultMargin;
-  margin-bottom: $defaultMargin;
+  font-size:14pt;
+  margin: $defaultTextMargin $defaultMargin;
 }

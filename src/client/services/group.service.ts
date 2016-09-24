@@ -38,7 +38,7 @@ export class GroupService implements GroupServiceInterface{
     }
 
     remove(id: number): Promise<boolean> {
-        return this.http.put(`${this.config.getBaseUrl()}/group/${id}`, this.config.getHttpOptions())
+        return this.http.delete(`${this.config.getBaseUrl()}/group/${id}`, this.config.getHttpOptions())
             .toPromise()
             .then((r: Response) => r.json() as boolean)
             .catch((err: Error) => console.log(err));

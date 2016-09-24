@@ -4,13 +4,16 @@ Mitasco project repository
 
 ## Quick start
 ### Requirements
+Use the scripts for windows and unix to install the requirements.
+
 - [node](https://nodejs.org/en/) & npm
 - [typescript](http://www.typescriptlang.org/) compiler: npm install -g typescript@next
 - typescript definition manager ([typings](https://github.com/typings/typings)): npm install -g typings
 - [postgresql](https://www.postgresql.org/) database
 - [db-migrate](https://db-migrate.readthedocs.io/en/latest/): npm install -g db-migrate db-migrate-pg
 - [gulp](http://gulpjs.com/): npm install -g gulp
-- For Windows: [Visual studio](https://www.visualstudio.com/) with Windows 8.1 SDK
+- For Windows: [Visual studio](https://www.visualstudio.com/) with Visual C++
+- For Windows: upgrade npm to the latest version (npm install -g npm)
 
 ### Setup
 - git clone https://github.com/mathi123/mitasco

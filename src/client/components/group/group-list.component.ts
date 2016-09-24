@@ -27,6 +27,26 @@ export class GroupListComponent implements OnInit {
         this.router.navigate(['/group-detail', group.id]);
     }
 
+    create(){
+        this.router.navigate(['/group-detail', 0]);
+    }
+
+    remove(group:Group){
+        let confirmed:boolean = window.confirm("Weet u zeker dat u deze wilt wissen?");
+
+        if(confirmed){
+            this.service.remove(group.id)
+                .then((success:boolean) => {
+                    if(success){
+                        this.records.splice(this.records.indexOf(group), 1);
+                    }else{
+                        console.debug("het verwijderen is mislukt");
+                    }
+                })
+                .catch((err) => console.error(err));
+        }
+    }
+
     private loadData(){
         this.service.getAll()
             .then((groups:Group[]) => this.records = groups);

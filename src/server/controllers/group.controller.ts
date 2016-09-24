@@ -13,11 +13,11 @@ export class GroupController implements GroupServiceInterface{
         let query: QueryConfig = {
             name: QueryNames.GroupGetAll,
             text: `SELECT a.*, b.permission_count, c.user_count FROM groups a
-            JOIN (
+            LEFT JOIN (
                 SELECT group_id, COUNT(*) AS permission_count FROM group_permission 
                 GROUP BY group_id
             ) b ON a.id = b.group_id
-            JOIN (
+            LEFT JOIN (
                 SELECT group_id, count(*) AS user_count FROM group_user 
                 GROUP BY group_id
             ) c ON a.id = c.group_id
@@ -142,8 +142,8 @@ export class GroupController implements GroupServiceInterface{
         let rec = new Group();
         rec.id = row['id'];
         rec.description = row['description'];
-        rec.userCount = row['user_count'];
-        rec.permissionCount = row['permission_count'];
+        rec.userCount = row['user_count'] || 0;
+        rec.permissionCount = row['permission_count'] || 0;
         return rec;
     }
 }
