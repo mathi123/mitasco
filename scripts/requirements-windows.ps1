@@ -49,8 +49,7 @@ try{
 }
 
 # Postgresql development user for mitasco project:
-#psql -U postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='mitasco'"
-
+# TODO: SQL SCRIPT UITVOEREN
 
 #
 # Temporary bugfix for bcrypt rebuild with c++ ...
