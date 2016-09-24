@@ -1,9 +1,10 @@
-<div class="typeahead">
+<div class="suggestion-input-container">
     <input #inputElement
            [placeholder]="placeholder"
            [(ngModel)]="input"
            type="text"
-           [ngClass]="{'typeahead-input': true, 'typeahead-input-has-selection': hasSelection()}"
+           class="suggestion-input-input-area"
+           [ngClass]="{'suggestion-input.has-selection': hasSelection()}"
            typeahead="off"
            spellcheck="false"
            (keyup)="inputKeyUp($event)"
@@ -11,20 +12,21 @@
            (focus)="inputFocus($event)"
            (blur)="inputBlur($event)">
     <input type="text"
-           class="typeahead-typeahead"
+           class="suggestion-input-typeahead"
            [(ngModel)]="typeahead"
            typeahead="off"
            spellcheck="false"
            disabled="true">
 
     <div #suggestionsContainer
-         class="typeahead-suggestions"
+         class="suggestion-input-suggestions"
          [hidden]="!areSuggestionsVisible">
         <ul (mouseout)="suggestionsMouseOut($event)">
             <li *ngFor="let suggestion of suggestions"
                 (mouseover)="suggestionMouseOver(suggestion)"
                 (mousedown)="suggestionMouseDown(suggestion)"
-                [ngClass]="{'typeahead-suggestion-active': activeSuggestion===suggestion}">{{ suggestion[displayProperty] }}</li>
+
+                [ngClass]="{'suggestion-input-suggestion-active': activeSuggestion===suggestion}">{{ suggestion[displayProperty] }}</li>
         </ul>
     </div>
 
