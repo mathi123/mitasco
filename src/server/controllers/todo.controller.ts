@@ -9,7 +9,7 @@ import { TodoServiceInterface } from "../shared/todo-service-interface";
 export class TodoController implements TodoServiceInterface {
     public async search(argument: SearchArgument): Promise<PartialResultList<Todo>> {
         let countQuery: QueryConfig = {
-            name: QueryNames.TodoTableSearch,
+            name: QueryNames.TodoTableSearchCount,
             text: `SELECT COUNT(*) FROM todo 
             WHERE description LIKE $1`,
             values: ['%' + argument.query + '%']
@@ -24,7 +24,7 @@ export class TodoController implements TodoServiceInterface {
         }
 
         let selectQuery: QueryConfig = {
-            name: QueryNames.UserTableSearch,
+            name: QueryNames.TodoTableSearch,
             text: `SELECT * FROM todo
             WHERE description LIKE $1
             ORDER BY description ASC
