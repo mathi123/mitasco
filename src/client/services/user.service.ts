@@ -14,7 +14,7 @@ export class UserService implements UserServiceInterface{
     }
 
     search(arg: SearchArgument): Promise<PartialResultList<User>> {
-        return this.http.get(`${this.config.getBaseUrl()}/todo?query=${arg.query}&skip=${arg.skip}&take=${arg.take}`, this.config.getHttpOptions())
+        return this.http.get(`${this.config.getBaseUrl()}/user?query=${arg.query}&skip=${arg.skip}&take=${arg.take}`, this.config.getHttpOptions())
             .toPromise()
             .then((r: Response) => r.json() as PartialResultList<User>)
             .catch((err: Error) => console.log(err));

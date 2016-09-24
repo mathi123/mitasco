@@ -19,6 +19,13 @@
             </tr>
         </table>
 
+        <suggestion-input [(ngModel)]="selectedUser"
+                          [list]="users" ngDefaultControl
+                          [searchProperty]="'fullname'" [displayProperty]="'fullname'"
+                          [maxSuggestions]="5"
+                          (suggestionSelected)="userSelected($event)"
+                          placeholder="gebruiker toevoegen..."></suggestion-input>
+
         <h2>Permissies</h2>
         <p *ngIf="record.permissionCodes.length == 0">Er zijn nog geen permissies toegekend aan deze groep.</p>
 

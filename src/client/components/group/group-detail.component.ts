@@ -7,6 +7,9 @@ import { KeyValuePair } from "../../shared/key-value-pair";
 import { PermissionCode } from "../../shared/permission-code";
 import { ConfigurationProvider } from "../../providers/configuration.provider";
 import { User } from "../../shared/user";
+import { UserService } from "../../services/user.service";
+import { SearchArgument } from "../../shared/search-argument";
+import { PartialResultList } from "../../shared/partial-result-list";
 
 @Component({
     moduleId: module.id,
@@ -26,7 +29,8 @@ export class GroupDetailComponent implements OnInit {
     private selectedUser: User;
 
     constructor(private service:GroupService, private route: ActivatedRoute,
-                private configuration: ConfigurationProvider, private router: Router) {
+                private configuration: ConfigurationProvider, private router: Router,
+                private userService:UserService) {
 
         let userA:User = new User();
         userA.fullname = "mathias colpaert";
@@ -121,8 +125,9 @@ export class GroupDetailComponent implements OnInit {
         }
     }
 
-    userSelected(user:User){
+    userSelected(data:any){
         console.info("user selected");
+        console.info(data);
     }
 
     private loadData(){
@@ -131,5 +136,18 @@ export class GroupDetailComponent implements OnInit {
                 this.record = group;
                 this.hasChanged = false;
             });
+        this.searchUsers();
+    }
+
+    private searchUsers(){
+        let arg = new SearchArgument();
+        arg.query = '';
+        arg.skip = 0;
+        arg.take = 15;
+
+        this.userService.search(arg)
+            .then((result:PartialResultList<User>) => {
+                this.users = result.results;
+        }).catch((err) => console.log(err));
     }
 }
