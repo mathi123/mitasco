@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Group } from "../../shared/group";
 import { GroupService } from "../../services/group.service";
 import { Subscription } from "rxjs";
@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { KeyValuePair } from "../../shared/key-value-pair";
 import { PermissionCode } from "../../shared/permission-code";
 import { ConfigurationProvider } from "../../providers/configuration.provider";
+import { User } from "../../shared/user";
 
 @Component({
     moduleId: module.id,
@@ -20,8 +21,22 @@ export class GroupDetailComponent implements OnInit {
     public hasChanged:Boolean = false;
     public saving:Boolean = false;
 
+    // User search
+    private users:User[];
+    private selectedUser: User;
+
     constructor(private service:GroupService, private route: ActivatedRoute,
-                private configuration: ConfigurationProvider, private router: Router) { }
+                private configuration: ConfigurationProvider, private router: Router) {
+
+        let userA:User = new User();
+        userA.fullname = "mathias colpaert";
+        let userB:User = new User();
+        userB.fullname = "tine vande maele";
+
+        this.users = [
+            userA, userB
+        ];
+    }
 
     ngOnInit() {
         if(!this.configuration.isLoggedIn()){
@@ -69,6 +84,10 @@ export class GroupDetailComponent implements OnInit {
                 this.saving = false;
                 this.hasChanged = false;
             }).catch((err) => console.log(err));
+    }
+
+    userSelected(user:User){
+        console.info("user selected");
     }
 
     private loadData(){

@@ -5,8 +5,9 @@ import { SearchArgument } from "../shared/search-argument";
 import { QueryNames } from "./query-names";
 import { DbClient } from "../db-client";
 import * as bcrypt from "bcrypt";
+import { UserServiceInterface } from "../shared/user-service-interface";
 
-export class UserController {
+export class UserController implements UserServiceInterface{
     public defaultSortColumn: string = 'email';
     public sortColumnOptions: string[] = ['email', 'fullname'];
 

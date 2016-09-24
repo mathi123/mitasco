@@ -13,6 +13,14 @@
             </td>
         </tr>
     </table>
+    <br/>
+    <suggestion-input [(ngModel)]="selectedUser"
+                      [list]="users"
+                      [searchProperty]="'searchText'" [displayProperty]="'fullname'"
+                      [maxSuggestions]="5"
+                      (suggestionSelected)="userSelected($event)"
+                      placeholder="search user..."></suggestion-input>
+
     <h4>Permissies</h4>
     <table border="1" *ngIf="record.permissionCodes" class="simple-table">
         <tr class="simple-table-header">
