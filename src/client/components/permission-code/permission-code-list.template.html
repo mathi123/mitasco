@@ -1,0 +1,21 @@
+<div>
+    <h1>Permissies</h1>
+    <table class="simple-table">
+        <tr class="simple-table-header">
+            <td>
+                <p>code</p>
+            </td>
+            <td>
+                <p>Omschrijving</p>
+            </td>
+        </tr>
+        <tr *ngFor="let record of records">
+            <td>
+                <p>{{record.code}}</p>
+            </td>
+            <td>
+                <p>{{record.description}}</p>
+            </td>
+        </tr>
+    </table>
+</div>

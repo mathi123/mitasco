@@ -90,7 +90,9 @@ export class GroupDetailComponent implements OnInit {
     }
 
     cancel(){
-        if(this.hasChanged){
+        if(this.record.id == 0){
+            this.router.navigate(['/group-list']);
+        }else if(this.hasChanged){
             let confirmed:boolean = window.confirm("Wilt u de wijzigingen ongedaan maken?");
 
             if(confirmed){

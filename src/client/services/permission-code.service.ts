@@ -2,7 +2,9 @@ import { PermissionCodeServiceInterface } from "../shared/permission-code-servic
 import { PermissionCode } from "../shared/permission-code";
 import { Http, Response } from "@angular/http";
 import { ConfigurationProvider } from "../providers/configuration.provider";
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class PermissionCodeService implements PermissionCodeServiceInterface{
 
     constructor(private http:Http, private config:ConfigurationProvider){
