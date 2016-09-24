@@ -24,12 +24,13 @@ import { SuggestionInputComponent } from "./components/suggestion-input/suggesti
 import { UserService } from "./services/user.service";
 import { PermissionCodeService } from "./services/permission-code.service";
 import { PermissionCodeListComponent } from "./components/permission-code/permission-code-list.component";
+import { UserListComponent } from "./components/user/user-list.component";
 
 @NgModule({
     imports: [ BrowserModule, FormsModule, HttpModule, routing ],
     declarations: [ LoginComponent, ApplicationRootComponent, MenuComponent, TodoListComponent, TodoDetailComponent,
         DashboardComponent, GroupListComponent,GroupDetailComponent,AccordionComponent,AccordionGroupComponent,
-        PageNotFoundComponent, SuggestionInputComponent, PermissionCodeListComponent],
+        PageNotFoundComponent, SuggestionInputComponent, PermissionCodeListComponent, UserListComponent],
     providers: [TodoService,GroupService, appRoutingProviders, ConfigurationProvider,
         AuthenticationService, MenuProvider,UrlTrackingService, UserService, PermissionCodeService],
     bootstrap: [ApplicationRootComponent]

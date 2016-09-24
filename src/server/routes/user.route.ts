@@ -18,21 +18,29 @@ export async function search(req: WebRequest, resp: Response) {
 
     if (req.query.query) {
         argument.query = req.query.query;
+    }else{
+        argument.query = '';
     }
+
     if (req.query.skip && Utils.isPositiveInteger(req.query.skip)) {
         argument.skip = Number(req.query.skip);
+    }else{
+        argument.skip = 0;
     }
     if (req.query.take && Utils.isPositiveInteger(req.query.take)) {
         argument.take = Number(req.query.take);
+    }else{
+        argument.take = 15;
     }
     if (req.query.sortDirection && Utils.isPositiveInteger(req.query.sortDirection)) {
         let sortD = Number(req.query.sortDirection);
         argument.sortDirection = Math.min(sortD, SortDirection.Descending);
+    }else{
+        argument.sortDirection = SortDirection.Acscending;
     }
     if (req.query.sortColumn && Utils.arrayContains(databaseSource.sortColumnOptions, req.query.sortColumn)) {
         argument.sortColumn = req.query.sortColumn;
-    }
-    else {
+    }else{
         argument.sortColumn = databaseSource.defaultSortColumn;
     }
 
