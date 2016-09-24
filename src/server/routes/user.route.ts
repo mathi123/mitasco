@@ -37,13 +37,8 @@ export async function search(req: WebRequest, resp: Response) {
     }
 
     let users = await databaseSource.search(argument);
-    var data = `resultaten:  <b>${ users.count }</b><ul> `;
-    users.results.forEach(user => {
-        data += `<li>${user.toString()}</li>`;
-    });
-    data += '</ul>';
 
-    resp.send(data);
+    resp.json(users);
 }
 
 export async function read(req: WebRequest, resp: Response) {

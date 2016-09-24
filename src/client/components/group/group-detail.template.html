@@ -5,7 +5,8 @@
 
     <div [hidden]="record.id == 0">
         <h2>Gebruikers</h2>
-        <table border="1" *ngIf="record.users" class="simple-table">
+        <p *ngIf="record.users.length == 0">Er zitten nog geen gebruikers in deze groep.</p>
+        <table border="1" *ngIf="record.users.length > 0" class="simple-table">
             <tr class="simple-table-header">
                 <td>Naam</td>
                 <td>Wissen</td>
@@ -17,8 +18,18 @@
                 </td>
             </tr>
         </table>
+
+        <suggestion-input [(ngModel)]="selectedUser"
+                          [list]="users" ngDefaultControl
+                          [searchProperty]="'fullname'" [displayProperty]="'fullname'"
+                          [maxSuggestions]="5"
+                          (suggestionSelected)="userSelected($event)"
+                          placeholder="gebruiker toevoegen..."></suggestion-input>
+
         <h2>Permissies</h2>
-        <table border="1" *ngIf="record.permissionCodes" class="simple-table">
+        <p *ngIf="record.permissionCodes.length == 0">Er zijn nog geen permissies toegekend aan deze groep.</p>
+
+        <table border="1" *ngIf="record.permissionCodes.length > 0" class="simple-table">
             <tr class="simple-table-header">
                 <td>Code</td>
                 <td>Wissen</td>
@@ -31,6 +42,7 @@
             </tr>
         </table>
     </div>
+
     <button type="button" (click)="cancel()" [disabled]="isSaving || !hasChanged " class="btn-normal">Cancel</button>
 
     <button type="button" (click)="save()" [disabled]="!hasChanged || isSaving" class="btn-normal">Opslaan</button>
