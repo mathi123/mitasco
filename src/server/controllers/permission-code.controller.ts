@@ -1,9 +1,9 @@
-import { PermissionCodeInterface } from "../shared/permission-code-service-interface";
+import { PermissionCodeServiceInterface } from "../shared/permission-code-service-interface";
 import { PermissionCode } from "../shared/permission-code";
 import { QueryConfig } from "pg";
 import { DbClient } from "../db-client";
 
-export class PermissionCodeController implements PermissionCodeInterface{
+export class PermissionCodeController implements PermissionCodeServiceInterface{
     public async getAll(): Promise<PermissionCode[]> {
         let query: QueryConfig = {
             text: `SELECT * FROM permissioncode ORDER BY code ASC`

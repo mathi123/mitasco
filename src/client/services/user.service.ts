@@ -20,20 +20,25 @@ export class UserService implements UserServiceInterface{
             .catch((err: Error) => console.log(err));
     }
 
-    create(user: User, password: string): Promise<number> {
-        return undefined;
-    }
-
     remove(id: number): Promise<boolean> {
-        return undefined;
+        return this.http.delete(`${this.config.getBaseUrl()}/user/${id}`, this.config.getHttpOptions())
+            .toPromise()
+            .then((r: Response) => r.json() as boolean)
+            .catch((err: Error) => console.log(err));
     }
 
     read(id: number): Promise<User> {
-        return undefined;
+        return this.http.get(`${this.config.getBaseUrl()}/user/${id}`, this.config.getHttpOptions())
+            .toPromise()
+            .then((r: Response) => r.json() as User)
+            .catch((err: Error) => console.log(err));
     }
 
     update(user: User): Promise<boolean> {
-        return undefined;
+        return this.http.post(`${this.config.getBaseUrl()}/user`, JSON.stringify(user), this.config.getHttpOptions())
+            .toPromise()
+            .then((r: Response) => r.json() as boolean)
+            .catch((err: Error) => console.log(err));
     }
 
 }
