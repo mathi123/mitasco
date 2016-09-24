@@ -1,5 +1,5 @@
 import { PermissionCode } from "./permission-code";
-export interface PermissionCodeInterface{
+export interface PermissionCodeServiceInterface{
     getAll():Promise<PermissionCode[]>;
     read(id:number):Promise<PermissionCode>;
     update(permissionCode:PermissionCode):Promise<boolean>;

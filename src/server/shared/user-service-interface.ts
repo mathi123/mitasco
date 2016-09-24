@@ -4,7 +4,6 @@ import { User } from "./user";
 
 export interface UserServiceInterface{
     search(argument: SearchArgument): Promise<PartialResultList<User>>;
-    create(user: User, password:string): Promise<number>;
     remove(id: number): Promise<boolean>;
     read(id: number): Promise<User>;
     update(user: User): Promise<boolean>;

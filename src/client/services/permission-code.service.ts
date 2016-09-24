@@ -1,9 +1,9 @@
-import { PermissionCodeInterface } from "../shared/permission-code-service-interface";
+import { PermissionCodeServiceInterface } from "../shared/permission-code-service-interface";
 import { PermissionCode } from "../shared/permission-code";
 import { Http, Response } from "@angular/http";
 import { ConfigurationProvider } from "../providers/configuration.provider";
 
-export class PermissionCodeService implements PermissionCodeInterface{
+export class PermissionCodeService implements PermissionCodeServiceInterface{
 
     constructor(private http:Http, private config:ConfigurationProvider){
 
@@ -40,7 +40,7 @@ export class PermissionCodeService implements PermissionCodeInterface{
     remove(id: number): Promise<boolean> {
         return this.http.delete(`${this.config.getBaseUrl()}/permissioncode/${id}`, this.config.getHttpOptions())
             .toPromise()
-            .then((r: Response) => r.json() as PermissionCode)
+            .then((r: Response) => r.json() as boolean)
             .catch((err: Error) => console.log(err));
     }
 
