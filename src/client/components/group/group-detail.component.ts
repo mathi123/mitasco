@@ -110,9 +110,7 @@ export class GroupDetailComponent implements OnInit {
         if(this.record.id == 0){
             this.service.create(this.record)
                 .then((id:number) => {
-                    this.record.id = id;
-                    this.isSaving = false;
-                    this.hasChanged = false;
+                    this.router.navigate(['/group-detail', id]);
                 }).catch((err) => console.log(err));
         }else{
             this.service.update(this.record)

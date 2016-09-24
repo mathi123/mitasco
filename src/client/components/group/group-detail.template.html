@@ -2,45 +2,11 @@
     <h1>Groep aanpassen</h1>
     <p>Naam van de groep:</p>
     <input type="text" [(ngModel)]="record.description" (input)="changed()"/>
-    <h4>Gebruikers</h4>
-    <table border="1" *ngIf="record.users" class="simple-table">
-        <tr class="simple-table-header">
-            <td>Naam</td>
-            <td>Wissen</td>
-        </tr>
-        <tr *ngFor="let user of record.users">
-            <td>{{user.value}}</td>
-            <td>
-                <a (click)="removeUser(user)">x</a>
-            </td>
-        </tr>
-    </table>
-    <br/>
-    <suggestion-input [(ngModel)]="selectedUser"
-                      [list]="users"
-                      [searchProperty]="'searchText'" [displayProperty]="'fullname'"
-                      [maxSuggestions]="5"
-                      (suggestionSelected)="userSelected($event)"
-                      placeholder="search user..."></suggestion-input>
-
-    <h4>Permissies</h4>
-    <table border="1" *ngIf="record.permissionCodes" class="simple-table">
-        <tr class="simple-table-header">
-            <td>Code</td>
-            <td>Wissen</td>
-        </tr>
-        <tr *ngFor="let permission of record.permissionCodes">
-            <td>{{permission.code}}</td>
-            <td>
-                <a (click)="removePermission(permisson)">x</a>
-            </td>
-        </tr>
-    </table>
-    <button type="button" (click)="save()" [disabled]="!hasChanged" class="btn-normal">Opslaan</button>
 
     <div [hidden]="record.id == 0">
         <h2>Gebruikers</h2>
-        <table border="1" *ngIf="record.users" class="simple-table">
+        <p *ngIf="record.users.length == 0">Er zitten nog geen gebruikers in deze groep.</p>
+        <table border="1" *ngIf="record.users.length > 0" class="simple-table">
             <tr class="simple-table-header">
                 <td>Naam</td>
                 <td>Wissen</td>
@@ -52,8 +18,11 @@
                 </td>
             </tr>
         </table>
+
         <h2>Permissies</h2>
-        <table border="1" *ngIf="record.permissionCodes" class="simple-table">
+        <p *ngIf="record.permissionCodes.length == 0">Er zijn nog geen permissies toegekend aan deze groep.</p>
+
+        <table border="1" *ngIf="record.permissionCodes.length > 0" class="simple-table">
             <tr class="simple-table-header">
                 <td>Code</td>
                 <td>Wissen</td>
@@ -66,6 +35,7 @@
             </tr>
         </table>
     </div>
+
     <button type="button" (click)="cancel()" [disabled]="isSaving || !hasChanged " class="btn-normal">Cancel</button>
 
     <button type="button" (click)="save()" [disabled]="!hasChanged || isSaving" class="btn-normal">Opslaan</button>
