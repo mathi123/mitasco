@@ -67,3 +67,6 @@ $accordionBorderThickness: 1px;
     margin-top: ($accordionHeadingHeight+2*$accordionHeadingPadding)/2 - 5;
   }
 }
+.active-menu{
+  color: $primaryTextColor;
+}
