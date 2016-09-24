@@ -1,35 +1,57 @@
 @import '../colors';
 
 $accordionHeadingHeight: 18px;
-$accordionHeadingPadding: 5px;
+$accordionHeadingPadding: 3px;
 $accordionLeftPadding: 10px;
 $accordionBorderThickness: 1px;
 
 .accordion{
-}
-.accordion-group{
-  padding-bottom: 5px;
-}
-.accordion-group-collapse{
-  border-top: $accordionBorderThickness solid transparent;
-}
-.accordion-group-heading {
-  height: $accordionHeadingHeight;
-  padding-left: $accordionLeftPadding;
-  padding-top: $accordionHeadingPadding;
-  padding-bottom: $accordionHeadingPadding;
-  &:hover{
-    background-color: $lightPrimaryColor;
-    color: $primaryTextColor;
+  &-group{
+    padding-bottom: 5px;
+
+    &-collapse{
+      border-top: $accordionBorderThickness solid transparent;
+    }
+
+    &-heading{
+      padding-left: $accordionLeftPadding;
+      padding-top: $accordionHeadingPadding;
+
+      &:hover{
+        background-color: $lightPrimaryColor;
+        color: $primaryTextColor;
+      }
+
+      &-open{
+        background-color: $primaryColor;
+      }
+    }
+
+    &-title{
+      padding-bottom:5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    &-body{
+      padding-left: 2*$accordionLeftPadding;
+
+      ul{
+        list-style-type: none;
+
+        li{
+          margin: $accordionHeadingPadding;
+          height: $accordionHeadingHeight;
+          cursor: pointer;
+          &:hover{
+            color: $primaryTextColor;
+          }
+        }
+      }
+    }
   }
 }
-.accordion-group-title{
-  padding-bottom:5px;
-}
-.accordion-group-heading-open{
-  background-color: $primaryColor;
-}
-.arrow-up {
+.arrow{
   float: right;
   width: 0;
   height: 0;
@@ -37,37 +59,11 @@ $accordionBorderThickness: 1px;
   border-right: 5px solid transparent;
   border-bottom: 5px solid $textColor;
   margin-right:2*$accordionHeadingPadding;
-  margin-top: ($accordionHeadingHeight+2*$accordionHeadingPadding)/2 - 9;
-}
-.arrow-down {
-  float: right;
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 5px solid $textColor;
-  margin-right:2*$accordionHeadingPadding;
-  margin-top: ($accordionHeadingHeight+2*$accordionHeadingPadding)/2 - 8;
-}
-.accordion-group-open{
-}
-.accordion-group-title{
-  font-weight: bold;
-  cursor: pointer;
-}
-.accordion-group-body{
-  padding-left: 2*$accordionLeftPadding;
 
-  ul{
-    list-style-type: none;
-
-    li {
-      margin: $accordionHeadingPadding;
-      height: $accordionHeadingHeight;
-      cursor: pointer;
-      &:hover{
-        color: $primaryTextColor;
-      }
-    }
+  &-up{
+    margin-top: ($accordionHeadingHeight+2*$accordionHeadingPadding)/2 - 7;
+  }
+  &-down{
+    margin-top: ($accordionHeadingHeight+2*$accordionHeadingPadding)/2 - 5;
   }
 }
