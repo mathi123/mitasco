@@ -31,15 +31,6 @@ export class GroupDetailComponent implements OnInit {
     constructor(private service:GroupService, private route: ActivatedRoute,
                 private configuration: ConfigurationProvider, private router: Router,
                 private userService:UserService) {
-
-        let userA:User = new User();
-        userA.fullname = "mathias colpaert";
-        let userB:User = new User();
-        userB.fullname = "tine vande maele";
-
-        this.users = [
-            userA, userB
-        ];
     }
 
     ngOnInit() {
@@ -125,9 +116,14 @@ export class GroupDetailComponent implements OnInit {
         }
     }
 
-    userSelected(data:any){
-        console.info("user selected");
-        console.info(data);
+    userSelected(user:User){
+        if(user && user.id !== 0){
+            let newUser = new KeyValuePair();
+            newUser.key = user.id;
+            newUser.value = user.fullname;
+            this.record.users.push(newUser);
+            this.selectedUser = null;
+        }
     }
 
     private loadData(){
