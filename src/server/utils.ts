@@ -24,12 +24,16 @@ export class Utils {
         return array.indexOf(obj) > -1;
     }
 
-    public static routeToString(type:RouteType,route:string){
-        switch (type){
-            case RouteType.GET: return `GET ${route}`;
-            case RouteType.POST: return `POST ${route}`;
-            case RouteType.PUT: return `PUT ${route}`;
-            case RouteType.DELETE: return `DELETE ${route}`;
+    public static routeToString(type: RouteType, route: string) {
+        switch (type) {
+            case RouteType.GET:
+                return `GET ${route}`;
+            case RouteType.POST:
+                return `POST ${route}`;
+            case RouteType.PUT:
+                return `PUT ${route}`;
+            case RouteType.DELETE:
+                return `DELETE ${route}`;
         }
         return "";
     }

@@ -6,9 +6,8 @@ import { KeyValuePair } from "../shared/key-value-pair";
 import { PermissionCode } from "../shared/permission-code";
 import { QueryNames } from "./query-names";
 import { DbHelpers } from "../db-helpers";
-import { Logger } from "../logger";
 
-export class GroupController implements GroupServiceInterface{
+export class GroupController implements GroupServiceInterface {
     public async getAll(): Promise<Group[]> {
         let query: QueryConfig = {
             name: QueryNames.GroupGetAll,
@@ -52,7 +51,7 @@ export class GroupController implements GroupServiceInterface{
         };
         queryResult = await DbClient.Instance().query(query);
         result.users = [];
-        for(var i = 0;i<queryResult.length;i++){
+        for (var i = 0; i < queryResult.length; i++) {
             let data = queryResult[i];
             let user = new KeyValuePair();
             user.key = data['id'];
@@ -72,7 +71,7 @@ export class GroupController implements GroupServiceInterface{
         };
         queryResult = await DbClient.Instance().query(query);
         result.permissionCodes = [];
-        for(var i = 0;i<queryResult.length;i++){
+        for (var i = 0; i < queryResult.length; i++) {
             let data = queryResult[i];
             let permissionCode = new PermissionCode();
             permissionCode.id = data['id'];
@@ -90,9 +89,9 @@ export class GroupController implements GroupServiceInterface{
         await DbClient.Instance().query("UPDATE groups SET description = $2 WHERE id = $1", [group.id, group.description]);
 
         let userIds = group.users.map(a => a.key);
-        if(userIds.length == 0){
+        if (userIds.length == 0) {
             await DbClient.Instance().query("DELETE FROM group_user WHERE group_id = $1", [group.id]);
-        }else{
+        } else {
             await DbClient.Instance().query("DELETE FROM group_user WHERE group_id = $1 AND NOT(user_id = ANY ($2))", [group.id, userIds]);
             await DbClient.Instance().query(`
                 INSERT INTO group_user (group_id, user_id)
@@ -102,9 +101,9 @@ export class GroupController implements GroupServiceInterface{
         }
 
         let permissionIds = group.permissionCodes.map(a => a.id);
-        if(permissionIds.length == 0){
+        if (permissionIds.length == 0) {
             await DbClient.Instance().query("DELETE FROM group_permission WHERE group_id = $1", [group.id]);
-        }else{
+        } else {
             await DbClient.Instance().query("DELETE FROM group_permission WHERE group_id = $1 AND NOT (permissioncode_id = ANY ($2))", [group.id, permissionIds]);
             await DbClient.Instance().query(`
                 INSERT INTO group_permission (group_id, permissioncode_id)
@@ -138,7 +137,7 @@ export class GroupController implements GroupServiceInterface{
         return true;
     }
 
-    private ParseArray(row:any):Group{
+    private ParseArray(row: any): Group {
         let rec = new Group();
         rec.id = row['id'];
         rec.description = row['description'];

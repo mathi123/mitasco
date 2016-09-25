@@ -1,6 +1,6 @@
-import { Deserializable,DeserializeUtil } from "deserialize-json-strict";
+import { Deserializable, DeserializeUtil } from "deserialize-json-strict";
 
-export class User implements Deserializable{
+export class User implements Deserializable {
     public id: number;
     public email: string;
     public fullname: string;

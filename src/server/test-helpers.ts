@@ -8,8 +8,8 @@ import { PermissionCode } from "./shared/permission-code";
 import { Group } from "./shared/group";
 import { AuthenticationController } from "./controllers/authentication.controller";
 
-export class TestHelpers{
-    public static async createUser():Promise<User>{
+export class TestHelpers {
+    public static async createUser(): Promise<User> {
         let controller = new UserController();
         let user = new User();
         user.email = Math.random() + "@gmail.com";
@@ -19,7 +19,8 @@ export class TestHelpers{
         user.id = id;
         return user;
     }
-    public static async createAdminUser():Promise<User>{
+
+    public static async createAdminUser(): Promise<User> {
         let user = await this.createUser();
         let userKv = new KeyValuePair();
         userKv.key = user.id;
@@ -29,14 +30,14 @@ export class TestHelpers{
         let groups = await controller.getAll();
         let found = false;
 
-        for(let group of groups){
-            if(found) break;
+        for (let group of groups) {
+            if (found) break;
 
             let fullgroup = await controller.read(group.id);
-            for(let perm of fullgroup.permissionCodes){
-                if(found) break;
+            for (let perm of fullgroup.permissionCodes) {
+                if (found) break;
 
-                if(perm.code == Permissions.Admin){
+                if (perm.code == Permissions.Admin) {
                     found = true;
                     fullgroup.users.push(userKv);
                     await controller.update(fullgroup);
@@ -44,7 +45,7 @@ export class TestHelpers{
             }
         }
 
-        if(!found) {
+        if (!found) {
             // No group with admin permissions?!
             let groupController = new GroupController();
             let permissions: PermissionCode[] = await(new PermissionCodeController()).getAll();
@@ -65,17 +66,20 @@ export class TestHelpers{
 
         return user;
     }
-    public static async getToken():Promise<string>{
+
+    public static async getToken(): Promise<string> {
         let user = await this.createUser();
         let auth = new AuthenticationController();
         return await auth.createToken(user.id);
     }
-    public static async getAdminToken():Promise<string>{
+
+    public static async getAdminToken(): Promise<string> {
         let user = await this.createAdminUser();
         let auth = new AuthenticationController();
         return await auth.createToken(user.id);
     }
-    public static async getTestCredentials():Promise<TestCredentials>{
+
+    public static async getTestCredentials(): Promise<TestCredentials> {
         let user = await this.createUser();
         let auth = new AuthenticationController();
         let token = await auth.createToken(user.id);
@@ -85,7 +89,8 @@ export class TestHelpers{
         result.user = user;
         return result;
     }
-    public static async getAdminTestCredentials():Promise<TestCredentials>{
+
+    public static async getAdminTestCredentials(): Promise<TestCredentials> {
         let user = await this.createAdminUser();
         let auth = new AuthenticationController();
         let token = await auth.createToken(user.id);
@@ -97,7 +102,7 @@ export class TestHelpers{
     }
 }
 
-export class TestCredentials{
+export class TestCredentials {
     public userId: number;
     public token: string;
     public user: User;

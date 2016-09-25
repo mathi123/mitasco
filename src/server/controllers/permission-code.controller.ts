@@ -3,7 +3,7 @@ import { PermissionCode } from "../shared/permission-code";
 import { QueryConfig } from "pg";
 import { DbClient } from "../db-client";
 
-export class PermissionCodeController implements PermissionCodeServiceInterface{
+export class PermissionCodeController implements PermissionCodeServiceInterface {
     public async getAll(): Promise<PermissionCode[]> {
         let query: QueryConfig = {
             text: `SELECT * FROM permissioncode ORDER BY code ASC`
@@ -58,7 +58,7 @@ export class PermissionCodeController implements PermissionCodeServiceInterface{
         return result[0]['id'];
     }
 
-    private ParseArray(row:any):PermissionCode{
+    private ParseArray(row: any): PermissionCode {
         let rec = new PermissionCode();
         rec.id = row['id'];
         rec.description = row['description'];

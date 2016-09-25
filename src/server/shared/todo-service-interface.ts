@@ -2,7 +2,7 @@ import { Todo } from "./todo";
 import { PartialResultList } from "./partial-result-list";
 import { SearchArgument } from "./search-argument";
 
-export interface TodoServiceInterface{
+export interface TodoServiceInterface {
     search(argument: SearchArgument): Promise<PartialResultList<Todo>>;
     create(todo: Todo): Promise<number>;
     remove(id: number): Promise<boolean>;

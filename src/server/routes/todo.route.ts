@@ -24,7 +24,7 @@ export async function search(req: WebRequest, resp: Response) {
     try {
         let results = await databaseSource.search(argument);
         resp.json(results);
-    }catch (error){
+    } catch (error) {
         Logger.routeException(req, error);
         resp.sendStatus(500);
     }
@@ -34,11 +34,11 @@ export async function read(req: WebRequest, resp: Response) {
     let id = req.params.id;
     if (Utils.isPositiveInteger(id)) {
         let databaseSource = new UserController();
-        try{
+        try {
 
             let result = await databaseSource.read(id);
             resp.json(result);
-        }catch(error){
+        } catch (error) {
             Logger.routeException(req, error);
             resp.sendStatus(500);
         }
@@ -51,15 +51,15 @@ export async function create(req: WebRequest, resp: Response) {
     let data = req.body;
     let todo = new Todo();
 
-    try{
+    try {
         todo.deserialize(data);
-    }catch(error){
+    } catch (error) {
         Logger.routeException(req, error);
         resp.sendStatus(400);
     }
 
     let databaseSource = new TodoController();
-    try{
+    try {
         if (data.id) {
             let result = await databaseSource.update(todo);
             resp.json(result);
@@ -67,21 +67,21 @@ export async function create(req: WebRequest, resp: Response) {
             let id = await databaseSource.create(todo);
             resp.json(id);
         }
-    }catch(error){
+    } catch (error) {
         Logger.routeException(req, error);
         resp.sendStatus(500);
     }
 }
 
-export async function remove(req: WebRequest, resp: Response){
+export async function remove(req: WebRequest, resp: Response) {
     let id = req.params.id;
     if (Utils.isPositiveInteger(id)) {
         let databaseSource = new TodoController();
 
-        try{
+        try {
             let result = await databaseSource.remove(id);
             resp.json(result);
-        }catch(error){
+        } catch (error) {
             Logger.routeException(req, error);
             resp.sendStatus(500);
         }
