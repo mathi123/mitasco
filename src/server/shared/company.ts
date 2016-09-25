@@ -1,6 +1,6 @@
-import { Deserializable,DeserializeUtil } from "deserialize-json-strict";
+import { Deserializable } from "deserialize-json-strict";
 
-export class Company implements Deserializable{
+export class Company implements Deserializable {
     public id: number;
     public name: string;
     public email: string;
@@ -12,7 +12,7 @@ export class Company implements Deserializable{
     public isCompetitor: boolean;
     public vat: string;
 
-    constructor() { 
+    constructor() {
 
     }
 

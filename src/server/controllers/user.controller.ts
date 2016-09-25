@@ -7,7 +7,7 @@ import { DbClient } from "../db-client";
 import * as bcrypt from "bcrypt";
 import { UserServiceInterface } from "../shared/user-service-interface";
 
-export class UserController implements UserServiceInterface{
+export class UserController implements UserServiceInterface {
     public defaultSortColumn: string = 'email';
     public sortColumnOptions: string[] = ['email', 'fullname'];
 
@@ -59,11 +59,11 @@ export class UserController implements UserServiceInterface{
             rec.email = row['email'];
             rec.fullname = row['fullname'];
             return rec;
-                });
+        });
         return searchResult;
     }
 
-    public async create(user: User, password:string): Promise<number> {
+    public async create(user: User, password: string): Promise<number> {
         let hashedPassword = await bcrypt.hashSync(password, 10);
 
         let query: QueryConfig = {

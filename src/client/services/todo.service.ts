@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core'
+import { Injectable } from "@angular/core";
 import { Todo } from "../shared/Todo";
 import { SearchArgument } from "../shared/search-argument";
 import { PartialResultList } from "../shared/partial-result-list";
-import { Http, Response} from '@angular/http';
-import 'rxjs/add/operator/toPromise';
+import { Http, Response } from "@angular/http";
+import "rxjs/add/operator/toPromise";
 import { TodoServiceInterface } from "../shared/todo-service-interface";
 import { ConfigurationProvider } from "../providers/configuration.provider";
 
 @Injectable()
-export class TodoService implements TodoServiceInterface{
+export class TodoService implements TodoServiceInterface {
 
-    public constructor(private http:Http, private config:ConfigurationProvider){
+    public constructor(private http: Http, private config: ConfigurationProvider) {
 
     }
 

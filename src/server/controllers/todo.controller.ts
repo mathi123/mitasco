@@ -82,17 +82,16 @@ export class TodoController implements TodoServiceInterface {
             values: [todo.description, todo.isDone ? 1 : 0, todo.id]
         };
 
-        try
-        {
+        try {
             await DbClient.Instance().query(query);
         }
-        catch(err){
+        catch (err) {
             console.error(err);
         }
         return true;
     }
 
-    private ArrayToTodo(row:any):Todo{
+    private ArrayToTodo(row: any): Todo {
         let rec = new Todo();
         rec.id = row['id'];
         rec.description = row['description'];

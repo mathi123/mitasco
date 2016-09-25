@@ -2,7 +2,7 @@
     <h1>Nieuwe account aanmaken</h1>
     <div>
         <p>Uw naam:</p>
-        <input type="text" [(ngModel)]="user.fullname" (keyup)="change()" />
+        <input type="text" [(ngModel)]="user.fullname" (keyup)="change()"/>
         <p class="validation-error" [hidden]="!isValidating || fullNameIsValid">Gelieve dit veld in te vullen!</p>
     </div>
     <div>

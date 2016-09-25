@@ -1,17 +1,17 @@
-(function(global) {
+(function (global) {
     // map tells the System loader where to look for things
     var map = {
-        'app':                        '', // 'dist',
-        '@angular':                   'libs/angular2',
+        'app': '', // 'dist',
+        '@angular': 'libs/angular2',
         'angular2-in-memory-web-api': 'libs/angular2-in-memory-web-api',
-        'rxjs':                       'libs/rxjs',
+        'rxjs': 'libs/rxjs',
         'deserialize-json-strict': 'libs/deserialize-json-strict',
     };
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
-        'app':                        { main: 'main.js',  defaultExtension: 'js' },
-        'rxjs':                       { defaultExtension: 'js' },
-        'deserialize-json-strict': { main: 'index.js', defaultExtension: 'js'},
+        'app': {main: 'main.js', defaultExtension: 'js'},
+        'rxjs': {defaultExtension: 'js'},
+        'deserialize-json-strict': {main: 'index.js', defaultExtension: 'js'},
         //'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
     };
     var ngPackageNames = [
@@ -28,12 +28,14 @@
     ];
     // Individual files (~300 requests):
     function packIndex(pkgName) {
-        packages['@angular/'+pkgName] = { main: 'index.js', defaultExtension: 'js' };
+        packages['@angular/' + pkgName] = {main: 'index.js', defaultExtension: 'js'};
     }
+
     // Bundled (~40 requests):
     function packUmd(pkgName) {
-        packages['@angular/'+pkgName] = { main: '/bundles/' + pkgName + '.umd.js', defaultExtension: 'js' };
+        packages['@angular/' + pkgName] = {main: '/bundles/' + pkgName + '.umd.js', defaultExtension: 'js'};
     }
+
     // Most environments should use UMD; some (Karma) need the individual index files
     var setPackageConfig = System.packageWithIndex ? packIndex : packUmd;
     // Add package entries for angular packages

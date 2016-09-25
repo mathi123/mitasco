@@ -6,14 +6,14 @@ import * as path from "path";
 var pgp = pgPromise({});
 
 export class DbClient {
-    private static _client: IDatabase<any>;
+    private static client: IDatabase<any>;
 
     public static Instance(): IDatabase<any> {
-        if (!this._client) {
+        if (!this.client) {
             let pgconfig = JSON.parse(fs.readFileSync(path.join(__dirname, "/pgconf.json"), "utf8"));
-            this._client = pgp(pgconfig);
+            this.client = pgp(pgconfig);
         }
 
-        return this._client;
+        return this.client;
     }
 }

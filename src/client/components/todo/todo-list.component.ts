@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { Todo } from "../../shared/todo";
 import { TodoDetailComponent } from "./todo-detail.component";
 import { TodoService } from "../../services/todo.service";
@@ -10,38 +10,38 @@ import { Router } from "@angular/router";
 @Component({
     moduleId: module.id,
     selector: 'todo-list',
-    templateUrl: 'todo-list.template.html',
+    templateUrl: 'todo-list.component.html',
     viewProviders: [TodoDetailComponent],
     providers: [TodoService]
 })
-export class TodoListComponent implements OnInit{
+export class TodoListComponent implements OnInit {
     query: string = "";
     todos: Todo[] = [];
     selected: Todo;
 
     constructor(private todoService: TodoService, private configuration: ConfigurationProvider,
-        private router: Router){
+                private router: Router) {
 
     }
 
-    public ngOnInit(){
-        if(!this.configuration.isLoggedIn()){
+    public ngOnInit() {
+        if (!this.configuration.isLoggedIn()) {
             this.router.navigate(['/login']);
             return;
-        }else{
+        } else {
             this.search();
         }
     }
 
-    public onSelect(todo: Todo){
+    public onSelect(todo: Todo) {
         this.selected = todo;
     }
 
-    public queryChanged(){
+    public queryChanged() {
         this.search();
     }
 
-    public addTodo(){
+    public addTodo() {
         let newTodo = new Todo();
         newTodo.description = "test new todo";
         newTodo.isDone = false;
@@ -55,16 +55,16 @@ export class TodoListComponent implements OnInit{
             });
     }
 
-    public remove(todo: Todo){
+    public remove(todo: Todo) {
         this.todoService.remove(todo.id)
             .then((success: boolean) => {
-                if(success){
+                if (success) {
                     this.todos.splice(this.todos.indexOf(todo, 0), 1);
                 }
             });
     }
 
-    private search(){
+    private search() {
         let arg = new SearchArgument();
         arg.query = this.query;
         arg.skip = 0;

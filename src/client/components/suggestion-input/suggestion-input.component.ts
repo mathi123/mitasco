@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, forwardRef } from "@angular/core";
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from "@angular/forms";
 
 export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
@@ -7,12 +7,13 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
     multi: true
 };
 
-const noop = () => {};
+const noop = () => {
+};
 
 @Component({
     moduleId: module.id,
     selector: 'suggestion-input',
-    templateUrl: 'suggestion-input.template.html'
+    templateUrl: 'suggestion-input.component.html'
 })
 export class SuggestionInputComponent implements OnInit, ControlValueAccessor {
     /**

@@ -4,13 +4,12 @@ import { Credentials } from "../shared/credentials";
 import { QueryConfig } from "pg";
 import { DbClient } from "../db-client";
 import { TokenPayload } from "../security/token-payload";
-import { Logger } from "../logger";
 
-export class AuthenticationController{
-    private _secretKey:string = "KJ2kjJK32LKJA'/.SD[]";
+export class AuthenticationController {
+    private _secretKey: string = "KJ2kjJK32LKJA'/.SD[]";
 
-    public async credentialsAreValid(credentials:Credentials):Promise<boolean>{
-        if(credentials === null || credentials === undefined ||
+    public async credentialsAreValid(credentials: Credentials): Promise<boolean> {
+        if (credentials === null || credentials === undefined ||
             credentials.password === null || credentials.password === undefined)
             return false;
 
@@ -23,15 +22,16 @@ export class AuthenticationController{
 
         let queryResult = await DbClient.Instance().query(query);
 
-        if(queryResult.length == 0){
+        if (queryResult.length == 0) {
             return false;
-        }else{
+        } else {
             let isValid = await bcrypt.compareSync(credentials.password, queryResult[0]['password']);
 
             return isValid;
         }
     }
-    public async getUserIdByEmail(email:string){
+
+    public async getUserIdByEmail(email: string) {
         let query: QueryConfig = {
             name: "Authentication.GetUserIdByEmail",
             text: `SELECT id FROM users 
@@ -42,7 +42,8 @@ export class AuthenticationController{
         let queryResult = await DbClient.Instance().query(query);
         return queryResult[0]['id'];
     }
-    public async createToken(userId:number):Promise<string>{
+
+    public async createToken(userId: number): Promise<string> {
         let payload = new TokenPayload(userId);
 
         let query: QueryConfig = {
@@ -64,7 +65,8 @@ export class AuthenticationController{
 
         return token;
     }
-    public async verifyToken(token:string):Promise<TokenPayload>{
+
+    public async verifyToken(token: string): Promise<TokenPayload> {
         return await jwt.verify(token, this._secretKey);
     }
 }

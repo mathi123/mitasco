@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import { GroupServiceInterface } from "../shared/group-service-interface";
 import { Group } from "../shared/group";
 import { Http, Response } from "@angular/http";
 import { ConfigurationProvider } from "../providers/configuration.provider";
 
 @Injectable()
-export class GroupService implements GroupServiceInterface{
+export class GroupService implements GroupServiceInterface {
 
-    constructor(private http:Http, private config:ConfigurationProvider) { }
+    constructor(private http: Http, private config: ConfigurationProvider) {
+    }
 
     getAll(): Promise<Group[]> {
         return this.http.get(`${this.config.getBaseUrl()}/group`, this.config.getHttpOptions())
