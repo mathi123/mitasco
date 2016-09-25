@@ -6,6 +6,8 @@ import { Utils } from "../utils";
 import { User } from "../shared/user";
 import { WebRequest } from "../web/web-request";
 import { Permissions } from "../security/permissions";
+import { RegistrationData } from "../shared/registration-data";
+import { Logger } from "../logger";
 
 export async function search(req: WebRequest, resp: Response) {
     if(req.permissions.indexOf(Permissions.Admin) < 0){
@@ -18,21 +20,29 @@ export async function search(req: WebRequest, resp: Response) {
 
     if (req.query.query) {
         argument.query = req.query.query;
+    }else{
+        argument.query = '';
     }
+
     if (req.query.skip && Utils.isPositiveInteger(req.query.skip)) {
         argument.skip = Number(req.query.skip);
+    }else{
+        argument.skip = 0;
     }
     if (req.query.take && Utils.isPositiveInteger(req.query.take)) {
         argument.take = Number(req.query.take);
+    }else{
+        argument.take = 15;
     }
     if (req.query.sortDirection && Utils.isPositiveInteger(req.query.sortDirection)) {
         let sortD = Number(req.query.sortDirection);
         argument.sortDirection = Math.min(sortD, SortDirection.Descending);
+    }else{
+        argument.sortDirection = SortDirection.Acscending;
     }
     if (req.query.sortColumn && Utils.arrayContains(databaseSource.sortColumnOptions, req.query.sortColumn)) {
         argument.sortColumn = req.query.sortColumn;
-    }
-    else {
+    }else{
         argument.sortColumn = databaseSource.defaultSortColumn;
     }
 
@@ -62,28 +72,34 @@ export async function create(req: WebRequest, resp: Response) {
         resp.sendStatus(550);
         return;
     }
-
-    var data = req.body;
     let user = new User();
+    try{
+        user.deserialize(req.body);
 
-    if (data.fullname) {
-        user.fullname = data.fullname;
-    }
-
-    if (data.email) {
-        user.email = data.email;
-    }
-
-    if (data.id) {
-        user.id = data.id;
-    }
-
-    let databaseSource = new UserController();
-    if (data.id) {
+        let databaseSource = new UserController();
         await databaseSource.update(user);
         resp.sendStatus(202);
-    } else {
-        let id = await databaseSource.create(user, 'test');
+    }catch(error){
+        Logger.routeException(req, error);
+        resp.sendStatus(500);
+    }
+}
+
+export async function register(req: WebRequest, resp: Response){
+    let data = new RegistrationData();
+
+    try{
+        data.deserialize(req.body);
+
+        let controller = new UserController();
+        let user = new User();
+        user.fullname = data.fullName;
+        user.email = data.email;
+
+        var id = await controller.create(user, data.password);
         resp.json(id);
+    }catch (error){
+        Logger.routeException(req, error);
+        resp.sendStatus(500);
     }
 }

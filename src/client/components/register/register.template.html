@@ -1,0 +1,24 @@
+<div>
+    <h1>Nieuwe account aanmaken</h1>
+    <div>
+        <p>Uw naam:</p>
+        <input type="text" [(ngModel)]="user.fullname" (keyup)="change()" />
+        <p class="validation-error" [hidden]="!isValidating || fullNameIsValid">Gelieve dit veld in te vullen!</p>
+    </div>
+    <div>
+        <p>Uw email adres:</p>
+        <input type="text" [(ngModel)]="user.email" (keyup)="change()"/>
+        <p class="validation-error" [hidden]="!isValidating || emailIsValid">Gelieve dit veld in te vullen!</p>
+    </div>
+    <div>
+        <p>Paswoord:</p>
+        <input type="password" [(ngModel)]="password" (keyup)="change()"/>
+        <p class="validation-error" [hidden]="!isValidating || passwordIsValid">Gelieve een paswoord in te vullen!</p>
+    </div>
+    <div>
+        <p>Herhaal paswoord:</p>
+        <input type="password" [(ngModel)]="password2" (keyup)="change()"/>
+        <p class="validation-error" [hidden]="!isValidating || password2IsValid">Paswoorden komen niet overeen!</p>
+    </div>
+    <button type="button" class="btn-normal" (click)="create()" [disabled]="isValidating && !isValid">Aanmaken</button>
+</div>

@@ -1,0 +1,24 @@
+<div>
+    <h1>Gebruikers</h1>
+
+    <input [(ngModel)]="query" (keyup)="queryChanged()" placeholder="zoeken..."/>
+
+    <table class="simple-table">
+        <tr class="simple-table-header">
+            <td>
+                <p>Naam</p>
+            </td>
+            <td>
+                <p>Email</p>
+            </td>
+        </tr>
+        <tr *ngFor="let record of records">
+            <td>
+                <p>{{record.fullname}}</p>
+            </td>
+            <td>
+                <p>{{record.email}}</p>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -5,6 +5,7 @@ import { PartialResultList } from "../shared/partial-result-list";
 import { SearchArgument } from "../shared/search-argument";
 import { Http, Response } from "@angular/http";
 import { ConfigurationProvider } from "../providers/configuration.provider";
+import { RegistrationData } from "../shared/registration-data";
 
 @Injectable()
 export class UserService implements UserServiceInterface{
@@ -41,4 +42,15 @@ export class UserService implements UserServiceInterface{
             .catch((err: Error) => console.log(err));
     }
 
+    create(user: User, password:string): Promise<number>{
+        let data = new RegistrationData();
+        data.fullName = user.fullname;
+        data.email = user.email;
+        data.password = password;
+
+        return this.http.put(`${this.config.getBaseUrl()}/user`, JSON.stringify(data), this.config.getHttpOptions())
+            .toPromise()
+            .then((r: Response) => r.json() as number)
+            .catch((err: Error) => console.log(err));
+    }
 }

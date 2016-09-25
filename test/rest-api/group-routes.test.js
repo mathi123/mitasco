@@ -11,11 +11,13 @@ chai.use(chaiHttp);
 describe('Group', function () {
     var data = {id: 0, description: "test new group", users: [], permissionCodes:[]};
     var token;
+    var userId;
 
     before(function (done) {
-        testHelpers.getAdminToken()
+        testHelpers.getAdminTestCredentials()
             .then(function (t) {
-                token = t;
+                token = t.token;
+                userId = t.userId;
                 done();
             });
     });
@@ -51,47 +53,34 @@ describe('Group', function () {
             });
     });
 
-    var userId;
     var permissionCodeId;
     it('POST /api/group', function (done) {
         chai.request(localhost)
-            .put('/api/user')
+            .put('/api/permissioncode')
             .set('content-type', json)
             .set('token', token)
-            .send({id:0, fullname:"testUser",email:Math.random()+"test@usergroup.be"})
-            .end(function(err, res){
-                if(err){
+            .send({id:0, description:"testUser",code:Math.random()+"test4groups"})
+            .end(function(err, res) {
+                if (err) {
                     done(err);
                 }
-                userId = res.body;
+                permissionCodeId = res.body;
+
+                data.description = data.description + 'changed';
+                data.users = [{key: userId, value: "test user"}];
+                data.permissionCodes = [{id:permissionCodeId,code:"",description:""}];
 
                 chai.request(localhost)
-                    .put('/api/permissioncode')
+                    .post('/api/group')
                     .set('content-type', json)
                     .set('token', token)
-                    .send({id:0, description:"testUser",code:Math.random()+"test4groups"})
-                    .end(function(err, res) {
+                    .send(data)
+                    .end(function (err, res) {
                         if (err) {
                             done(err);
                         }
-                        permissionCodeId = res.body;
-
-                        data.description = data.description + 'changed';
-                        data.users = [{key: userId, value: "test user"}];
-                        data.permissionCodes = [{id:permissionCodeId,code:"",description:""}];
-
-                        chai.request(localhost)
-                            .post('/api/group')
-                            .set('content-type', json)
-                            .set('token', token)
-                            .send(data)
-                            .end(function (err, res) {
-                                if (err) {
-                                    done(err);
-                                }
-                                expect(res).to.have.status(200);
-                                done();
-                            });
+                        expect(res).to.have.status(200);
+                        done();
                     });
             });
     });

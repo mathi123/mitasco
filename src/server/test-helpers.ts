@@ -75,4 +75,30 @@ export class TestHelpers{
         let auth = new AuthenticationController();
         return await auth.createToken(user.id);
     }
+    public static async getTestCredentials():Promise<TestCredentials>{
+        let user = await this.createUser();
+        let auth = new AuthenticationController();
+        let token = await auth.createToken(user.id);
+        let result = new TestCredentials();
+        result.token = token;
+        result.userId = user.id;
+        result.user = user;
+        return result;
+    }
+    public static async getAdminTestCredentials():Promise<TestCredentials>{
+        let user = await this.createAdminUser();
+        let auth = new AuthenticationController();
+        let token = await auth.createToken(user.id);
+        let result = new TestCredentials();
+        result.token = token;
+        result.userId = user.id;
+        result.user = user;
+        return result;
+    }
+}
+
+export class TestCredentials{
+    public userId: number;
+    public token: string;
+    public user: User;
 }

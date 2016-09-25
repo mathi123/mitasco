@@ -5,8 +5,9 @@ export class QueryNames {
     public static UserTableRemove:string = "UserTableRemove";
     public static UserTable_Read:string = "UserTable_Read";
     public static UserTableUpdate:string = "UserTableUpdate";
-    
+
     public static TodoTableSearch:string = "TodoTableSearch";
+    public static TodoTableSearchCount:string = "TodoTableSearchCount";
     public static TodoTableCreate:string = "TodoTableCreate";
     public static TodoTableRemove:string = "TodoTableRemove";
     public static TodoTableRead:string = "TodoTableRead";

@@ -15,7 +15,7 @@ export class UserController implements UserServiceInterface{
         let countQuery: QueryConfig = {
             name: QueryNames.UserTableSearchCount,
             text: `SELECT COUNT(*) FROM users 
-            WHERE email LIKE $1 OR fullname LIKE $1`,
+            WHERE upper(email) LIKE upper($1) OR upper(fullname) LIKE upper($1)`,
             values: ['%' + argument.query + '%']
         };
 
@@ -30,7 +30,7 @@ export class UserController implements UserServiceInterface{
         let selectQuery: QueryConfig = {
             name: QueryNames.UserTableSearch,
             text: `SELECT * FROM users
-            WHERE email LIKE $1 OR fullname LIKE $1
+            WHERE upper(email) LIKE upper($1) OR upper(fullname) LIKE upper($1)
             ORDER BY
                 CASE WHEN $3 = 0 THEN
                     CASE WHEN $2 = 'email' THEN email

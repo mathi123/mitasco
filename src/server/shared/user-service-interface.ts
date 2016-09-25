@@ -7,4 +7,5 @@ export interface UserServiceInterface{
     remove(id: number): Promise<boolean>;
     read(id: number): Promise<User>;
     update(user: User): Promise<boolean>;
+    create(user: User, password:string): Promise<number>;
 }

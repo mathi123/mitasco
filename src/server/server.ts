@@ -18,7 +18,7 @@ class StartUp{
         server.configureRoute(RouteType.GET, 'user', userRoutes.search);
         server.configureRoute(RouteType.GET, 'user', userRoutes.read, ':id');
         server.configureRoute(RouteType.POST, 'user', userRoutes.create);
-        server.configureRoute(RouteType.PUT, 'user', userRoutes.create);
+        server.configureRoute(RouteType.PUT, 'user', userRoutes.register, '', false);
 
         // todo routes
         server.configureRoute(RouteType.GET, 'todo', todoRoutes.search, '');

@@ -51,18 +51,24 @@ $accordionBorderThickness: 1px;
   }
 }
 .arrow{
-  float: right;
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 5px solid $textColor;
-  margin-right:2*$accordionHeadingPadding;
-
   &-up{
+    float: right;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid $textColor;
+    margin-right:2*$accordionHeadingPadding;
     margin-top: ($accordionHeadingHeight+2*$accordionHeadingPadding)/2 - 7;
   }
   &-down{
+    float: right;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid $textColor;
+    margin-right:2*$accordionHeadingPadding;
     margin-top: ($accordionHeadingHeight+2*$accordionHeadingPadding)/2 - 5;
   }
 }

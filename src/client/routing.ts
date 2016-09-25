@@ -7,16 +7,20 @@ import { GroupDetailComponent } from "./components/group/group-detail.component"
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { LoginComponent } from "./components/login/login.component";
 import { PermissionCodeListComponent } from "./components/permission-code/permission-code-list.component";
+import { UserListComponent } from "./components/user/user-list.component";
+import { RegisterComponent } from "./components/register/register.component";
 
 const appRoutes: Routes = [
-    { path: '', component: DashboardComponent},
+    { path: '', component: DashboardComponent },
     { path: 'dashboard', component: DashboardComponent },
-    { path: 'login', component: LoginComponent},
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
     { path: 'todo-list', component: TodoListComponent },
     { path: 'todo/:id', component: TodoDetailComponent },
     { path: 'group-list', component: GroupListComponent },
     { path: 'group-detail/:id', component: GroupDetailComponent},
     { path: 'permission-code-list', component: PermissionCodeListComponent },
+    { path: 'user-list', component: UserListComponent },
     { path: '**', component: PageNotFoundComponent }
 ];
 export const appRoutingProviders: any[] = [

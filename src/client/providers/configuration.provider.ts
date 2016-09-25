@@ -7,7 +7,7 @@ export class ConfigurationProvider{
     private _headers: Headers = new Headers();
     private _options: RequestOptions = new RequestOptions();
     private _token: string;
-    private _isLoggedIn: boolean;
+    private _isLoggedIn: boolean = false;
     public TOKENHEADER: string = 'token';
 
     public constructor(){
