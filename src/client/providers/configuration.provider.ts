@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Headers, RequestOptions } from "@angular/http";
 
 @Injectable()
-export class ConfigurationProvider{
+export class ConfigurationProvider {
     private _baseUrl: string = 'https://localhost:3000/api';
     private _headers: Headers = new Headers();
     private _options: RequestOptions = new RequestOptions();
@@ -10,16 +10,16 @@ export class ConfigurationProvider{
     private _isLoggedIn: boolean = false;
     public TOKENHEADER: string = 'token';
 
-    public constructor(){
+    public constructor() {
         this._headers.append('Content-Type', 'application/json');
         this._options.headers = this._headers;
     }
 
-    public getBaseUrl():string{
+    public getBaseUrl(): string {
         return this._baseUrl;
     }
 
-    public getHttpOptions():RequestOptions{
+    public getHttpOptions(): RequestOptions {
         return this._options;
     }
 
@@ -30,12 +30,12 @@ export class ConfigurationProvider{
         this._isLoggedIn = true;
     }
 
-    public isLoggedIn() : boolean{
+    public isLoggedIn(): boolean {
         return this._isLoggedIn;
     }
 
-    private addTokenToHeaders(){
-        if(this._headers.has(this.TOKENHEADER)){
+    private addTokenToHeaders() {
+        if (this._headers.has(this.TOKENHEADER)) {
             this._headers.delete(this.TOKENHEADER);
         }
         this._headers.append(this.TOKENHEADER, this._token);

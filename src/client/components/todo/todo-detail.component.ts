@@ -1,4 +1,4 @@
-import {Component,Input} from '@angular/core'
+import { Component, Input } from "@angular/core";
 import { Todo } from "../../shared/todo";
 import { TodoService } from "../../services/todo.service";
 
@@ -7,16 +7,16 @@ import { TodoService } from "../../services/todo.service";
     selector: 'todo-detail',
     templateUrl: 'todo-detail.component.html'
 })
-export class TodoDetailComponent{
+export class TodoDetailComponent {
     @Input()
     todo: Todo;
 
-    constructor(private _todoService: TodoService){
+    constructor(private _todoService: TodoService) {
 
     }
 
-    todoChanged(){
+    todoChanged() {
         this._todoService.update(this.todo)
-            .then((success: boolean) => console.info(success?"update gelukt":"update mislukt"));
+            .then((success: boolean) => console.info(success ? "update gelukt" : "update mislukt"));
     }
 }

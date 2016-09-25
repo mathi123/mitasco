@@ -1,4 +1,4 @@
-import { Component, OnDestroy, Input } from '@angular/core';
+import { Component, OnDestroy, Input } from "@angular/core";
 import { AccordionComponent } from "./accordion.component";
 
 @Component({
@@ -7,7 +7,7 @@ import { AccordionComponent } from "./accordion.component";
     templateUrl: 'accordion-group.component.html'
 })
 export class AccordionGroupComponent implements OnDestroy {
-    private _isOpen:boolean = false;
+    private _isOpen: boolean = false;
 
     @Input() heading: string;
 

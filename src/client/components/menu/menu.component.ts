@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component } from "@angular/core";
 import { MenuProvider } from "../../providers/menu.provider";
 
 @Component({
@@ -7,12 +7,14 @@ import { MenuProvider } from "../../providers/menu.provider";
     templateUrl: 'menu.component.html'
 })
 export class MenuComponent {
-    public isOpen:boolean = true;
+    public isOpen: boolean = true;
 
-    constructor(private menu:MenuProvider) {
-        menu.menuToggled.asObservable().subscribe((isOpen:boolean) => {
+    constructor(private menu: MenuProvider) {
+        menu.menuToggled.asObservable().subscribe((isOpen: boolean) => {
             this.isOpen = isOpen;
             console.log(isOpen);
-        }, err => { console.error(err) });
+        }, err => {
+            console.error(err)
+        });
     }
 }

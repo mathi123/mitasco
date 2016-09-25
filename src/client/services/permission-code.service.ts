@@ -5,9 +5,9 @@ import { ConfigurationProvider } from "../providers/configuration.provider";
 import { Injectable } from "@angular/core";
 
 @Injectable()
-export class PermissionCodeService implements PermissionCodeServiceInterface{
+export class PermissionCodeService implements PermissionCodeServiceInterface {
 
-    constructor(private http:Http, private config:ConfigurationProvider){
+    constructor(private http: Http, private config: ConfigurationProvider) {
 
     }
 

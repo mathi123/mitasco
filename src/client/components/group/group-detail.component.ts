@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { Group } from "../../shared/group";
 import { GroupService } from "../../services/group.service";
 import { Subscription } from "rxjs";
@@ -18,32 +18,32 @@ import { PartialResultList } from "../../shared/partial-result-list";
 })
 export class GroupDetailComponent implements OnInit {
     private sub: Subscription;
-    private id:number;
+    private id: number;
 
-    public record:Group = new Group();
-    public hasChanged:Boolean = false;
-    public isSaving:Boolean = false;
+    public record: Group = new Group();
+    public hasChanged: Boolean = false;
+    public isSaving: Boolean = false;
 
     // User search
-    private users:User[];
+    private users: User[];
     private selectedUser: User;
 
-    constructor(private service:GroupService, private route: ActivatedRoute,
+    constructor(private service: GroupService, private route: ActivatedRoute,
                 private configuration: ConfigurationProvider, private router: Router,
-                private userService:UserService) {
+                private userService: UserService) {
     }
 
     ngOnInit() {
-        if(!this.configuration.isLoggedIn()){
+        if (!this.configuration.isLoggedIn()) {
             this.router.navigate(['/login']);
             return;
-        }else{
+        } else {
             this.sub = this.route.params.subscribe(params => {
                 this.id = params['id'] as number;
 
-                if(this.id == 0){
+                if (this.id == 0) {
                     this.newData();
-                }else{
+                } else {
                     this.loadData();
                 }
             });
@@ -51,75 +51,75 @@ export class GroupDetailComponent implements OnInit {
     }
 
     ngOnDestroy() {
-        if(this.sub){
+        if (this.sub) {
             this.sub.unsubscribe();
         }
     }
 
-    newData(){
+    newData() {
         this.record = new Group();
         this.hasChanged = true;
     }
 
-    changed(){
+    changed() {
         this.hasChanged = true;
     }
 
-    removeUser(user:KeyValuePair){
+    removeUser(user: KeyValuePair) {
         let index = this.record.users.indexOf(user);
-        if(index >= 0){
-            let confirmed:boolean = window.confirm("Weet u zeker dat u deze wil wissen?");
+        if (index >= 0) {
+            let confirmed: boolean = window.confirm("Weet u zeker dat u deze wil wissen?");
 
-            if(confirmed){
+            if (confirmed) {
                 this.record.users.splice(index, 1);
                 this.hasChanged = true;
             }
         }
     }
 
-    removePermission(permission:PermissionCode){
+    removePermission(permission: PermissionCode) {
         let index = this.record.permissionCodes.indexOf(permission);
-        if(index >= 0){
-            let confirmed:boolean = window.confirm("Weet u zeker dat u deze wil wissen?");
+        if (index >= 0) {
+            let confirmed: boolean = window.confirm("Weet u zeker dat u deze wil wissen?");
 
-            if(confirmed){
+            if (confirmed) {
                 this.record.permissionCodes.splice(index, 1);
                 this.hasChanged = true;
             }
         }
     }
 
-    cancel(){
-        if(this.record.id == 0){
+    cancel() {
+        if (this.record.id == 0) {
             this.router.navigate(['/group-list']);
-        }else if(this.hasChanged){
-            let confirmed:boolean = window.confirm("Wilt u de wijzigingen ongedaan maken?");
+        } else if (this.hasChanged) {
+            let confirmed: boolean = window.confirm("Wilt u de wijzigingen ongedaan maken?");
 
-            if(confirmed){
+            if (confirmed) {
                 this.loadData();
             }
         }
     }
 
-    save(){
+    save() {
         this.isSaving = true;
 
-        if(this.record.id == 0){
+        if (this.record.id == 0) {
             this.service.create(this.record)
-                .then((id:number) => {
+                .then((id: number) => {
                     this.router.navigate(['/group-detail', id]);
                 }).catch((err) => console.log(err));
-        }else{
+        } else {
             this.service.update(this.record)
-                .then((success:Boolean) => {
+                .then((success: Boolean) => {
                     this.isSaving = false;
                     this.hasChanged = false;
                 }).catch((err) => console.log(err));
         }
     }
 
-    userSelected(user:User){
-        if(user && user.id !== 0){
+    userSelected(user: User) {
+        if (user && user.id !== 0) {
             let newUser = new KeyValuePair();
             newUser.key = user.id;
             newUser.value = user.fullname;
@@ -128,24 +128,24 @@ export class GroupDetailComponent implements OnInit {
         }
     }
 
-    private loadData(){
+    private loadData() {
         this.service.read(this.id)
-            .then((group:Group) => {
+            .then((group: Group) => {
                 this.record = group;
                 this.hasChanged = false;
             });
         this.searchUsers();
     }
 
-    private searchUsers(){
+    private searchUsers() {
         let arg = new SearchArgument();
         arg.query = '';
         arg.skip = 0;
         arg.take = 15;
 
         this.userService.search(arg)
-            .then((result:PartialResultList<User>) => {
+            .then((result: PartialResultList<User>) => {
                 this.users = result.results;
-        }).catch((err) => console.log(err));
+            }).catch((err) => console.log(err));
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { ConfigurationProvider } from "../../providers/configuration.provider";
 import { Router } from "@angular/router";
 import { UserService } from "../../services/user.service";
@@ -12,28 +12,29 @@ import { Credentials } from "../../shared/credentials";
     templateUrl: 'register.component.html'
 })
 export class RegisterComponent implements OnInit {
-    private isValidating:boolean = false;
-    private isValid:boolean = false;
+    private isValidating: boolean = false;
+    private isValid: boolean = false;
 
-    public user:User = new User();
-    public password:string='';
-    public password2:string='';
+    public user: User = new User();
+    public password: string = '';
+    public password2: string = '';
 
-    public fullNameIsValid:boolean=false;
-    public emailIsValid:boolean=false;
-    public passwordIsValid:boolean=false;
-    public password2IsValid:boolean=false;
+    public fullNameIsValid: boolean = false;
+    public emailIsValid: boolean = false;
+    public passwordIsValid: boolean = false;
+    public password2IsValid: boolean = false;
 
-    constructor(private config:ConfigurationProvider, private router:Router,
-    private service:UserService, private authenticationService: AuthenticationService) { }
+    constructor(private config: ConfigurationProvider, private router: Router,
+                private service: UserService, private authenticationService: AuthenticationService) {
+    }
 
     ngOnInit() {
-        if(this.config.isLoggedIn()){
+        if (this.config.isLoggedIn()) {
             this.router.navigate(['dashboard']);
         }
     }
 
-    private validate(){
+    private validate() {
         this.emailIsValid = !(this.user.email == null || this.user.email == '');
         this.fullNameIsValid = !(this.user.fullname == null || this.user.fullname == '');
         this.passwordIsValid = !(this.password == null || this.password == '');
@@ -48,31 +49,31 @@ export class RegisterComponent implements OnInit {
         credentials.password = password;
 
         this.authenticationService.Authenticate(credentials)
-            .then((success:Boolean) => {
-                if(success){
+            .then((success: Boolean) => {
+                if (success) {
                     this.router.navigate(['dashboard']);
-                }else{
+                } else {
                     console.log("error!")
                 }
             })
             .catch(() => console.log("error!"));
     }
 
-    public change(){
-        if(this.isValidating){
+    public change() {
+        if (this.isValidating) {
             this.validate();
         }
     }
 
-    public create(){
+    public create() {
         this.isValidating = true;
 
         this.validate();
 
-        if(this.isValid){
+        if (this.isValid) {
             this.service.create(this.user, this.password)
-                .then((id:number) => {
-                    if(id !== 0){
+                .then((id: number) => {
+                    if (id !== 0) {
                         this.login(this.user.email, this.password);
                     }
                 })

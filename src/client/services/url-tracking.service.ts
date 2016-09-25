@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Router, NavigationStart } from '@angular/router';
-import 'rxjs/add/operator/filter';
+import { Injectable } from "@angular/core";
+import { Router, NavigationStart } from "@angular/router";
+import "rxjs/add/operator/filter";
 
 @Injectable()
 export class UrlTrackingService {

@@ -8,9 +8,9 @@ import { ConfigurationProvider } from "../providers/configuration.provider";
 import { RegistrationData } from "../shared/registration-data";
 
 @Injectable()
-export class UserService implements UserServiceInterface{
+export class UserService implements UserServiceInterface {
 
-    constructor(private http:Http, private config:ConfigurationProvider){
+    constructor(private http: Http, private config: ConfigurationProvider) {
 
     }
 
@@ -42,7 +42,7 @@ export class UserService implements UserServiceInterface{
             .catch((err: Error) => console.log(err));
     }
 
-    create(user: User, password:string): Promise<number>{
+    create(user: User, password: string): Promise<number> {
         let data = new RegistrationData();
         data.fullName = user.fullname;
         data.email = user.email;

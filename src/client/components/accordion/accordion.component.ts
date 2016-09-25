@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 import { AccordionGroupComponent } from "./accordion-group.component";
 
 @Component({
@@ -6,7 +6,7 @@ import { AccordionGroupComponent } from "./accordion-group.component";
     selector: 'accordion',
     templateUrl: 'accordion.component.html'
 })
-export class AccordionComponent{
+export class AccordionComponent {
     groups: Array<AccordionGroupComponent> = [];
 
     addGroup(group: AccordionGroupComponent): void {
