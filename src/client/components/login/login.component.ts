@@ -48,4 +48,8 @@ export class LoginComponent implements OnInit{
             })
             .catch(() => console.log("error!"));
     }
+
+    public register(){
+        this.router.navigate(['register']);
+    }
 }

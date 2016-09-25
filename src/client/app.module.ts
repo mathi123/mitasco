@@ -25,10 +25,11 @@ import { UserService } from "./services/user.service";
 import { PermissionCodeService } from "./services/permission-code.service";
 import { PermissionCodeListComponent } from "./components/permission-code/permission-code-list.component";
 import { UserListComponent } from "./components/user/user-list.component";
+import { RegisterComponent } from "./components/register/register.component";
 
 @NgModule({
     imports: [ BrowserModule, FormsModule, HttpModule, routing ],
-    declarations: [ LoginComponent, ApplicationRootComponent, MenuComponent, TodoListComponent, TodoDetailComponent,
+    declarations: [ LoginComponent, RegisterComponent, ApplicationRootComponent, MenuComponent, TodoListComponent, TodoDetailComponent,
         DashboardComponent, GroupListComponent,GroupDetailComponent,AccordionComponent,AccordionGroupComponent,
         PageNotFoundComponent, SuggestionInputComponent, PermissionCodeListComponent, UserListComponent],
     providers: [TodoService,GroupService, appRoutingProviders, ConfigurationProvider,

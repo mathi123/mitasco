@@ -40,3 +40,9 @@ h4{
   font-size:14pt;
   margin: $defaultTextMargin $defaultMargin;
 }
+.validation-error{
+  background-color: #fcf8e3;
+  border-color: #faf2cc;
+  color: #8a6d3b;
+  padding:5px;
+}
