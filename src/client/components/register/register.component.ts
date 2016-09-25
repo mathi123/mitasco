@@ -9,7 +9,7 @@ import { Credentials } from "../../shared/credentials";
 @Component({
     moduleId: module.id,
     selector: 'register',
-    templateUrl: 'register.template.html'
+    templateUrl: 'register.component.html'
 })
 export class RegisterComponent implements OnInit {
     private isValidating:boolean = false;

@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
 @Component({
     moduleId: module.id,
     selector: 'todo-list',
-    templateUrl: 'todo-list.template.html',
+    templateUrl: 'todo-list.component.html',
     viewProviders: [TodoDetailComponent],
     providers: [TodoService]
 })

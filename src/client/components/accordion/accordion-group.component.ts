@@ -4,7 +4,7 @@ import { AccordionComponent } from "./accordion.component";
 @Component({
     moduleId: module.id,
     selector: 'accordion-group',
-    templateUrl: 'accordion-group.template.html'
+    templateUrl: 'accordion-group.component.html'
 })
 export class AccordionGroupComponent implements OnDestroy {
     private _isOpen:boolean = false;

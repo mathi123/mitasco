@@ -14,7 +14,7 @@ import { PartialResultList } from "../../shared/partial-result-list";
 @Component({
     moduleId: module.id,
     selector: 'group-detail',
-    templateUrl: 'group-detail.template.html'
+    templateUrl: 'group-detail.component.html'
 })
 export class GroupDetailComponent implements OnInit {
     private sub: Subscription;

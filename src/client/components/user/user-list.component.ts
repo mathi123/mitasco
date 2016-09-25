@@ -9,7 +9,7 @@ import { User } from "../../shared/user";
 @Component({
     moduleId: module.id,
     selector: 'user-list',
-    templateUrl: 'user-list.template.html'
+    templateUrl: 'user-list.component.html'
 })
 export class UserListComponent implements OnInit {
     public query:string='test';

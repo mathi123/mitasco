@@ -7,7 +7,7 @@ import { ConfigurationProvider } from "../../providers/configuration.provider";
 @Component({
     moduleId: module.id,
     selector: 'group-list',
-    templateUrl: 'group-list.template.html'
+    templateUrl: 'group-list.component.html'
 })
 export class GroupListComponent implements OnInit {
     public records:Group[] = [];

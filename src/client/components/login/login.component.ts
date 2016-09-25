@@ -9,7 +9,7 @@ import { UrlTrackingService } from "../../services/url-tracking.service";
 @Component({
     moduleId: module.id,
     selector: 'login-form',
-    templateUrl: 'login.template.html',
+    templateUrl: 'login.component.html',
     providers: [AuthenticationService, MenuProvider]
 })
 export class LoginComponent implements OnInit{

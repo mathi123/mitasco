@@ -4,7 +4,7 @@ import { MenuProvider } from "../../providers/menu.provider";
 @Component({
     moduleId: module.id,
     selector: 'menu',
-    templateUrl: 'menu.template.html'
+    templateUrl: 'menu.component.html'
 })
 export class MenuComponent {
     public isOpen:boolean = true;

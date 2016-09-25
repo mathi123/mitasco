@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 @Component({
     moduleId: module.id,
     selector: 'permission-code-list',
-    templateUrl: 'permission-code-list.template.html'
+    templateUrl: 'permission-code-list.component.html'
 })
 export class PermissionCodeListComponent implements OnInit {
     private records: PermissionCode[];

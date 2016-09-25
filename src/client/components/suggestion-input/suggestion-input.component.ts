@@ -12,7 +12,7 @@ const noop = () => {};
 @Component({
     moduleId: module.id,
     selector: 'suggestion-input',
-    templateUrl: 'suggestion-input.template.html'
+    templateUrl: 'suggestion-input.component.html'
 })
 export class SuggestionInputComponent implements OnInit, ControlValueAccessor {
     /**

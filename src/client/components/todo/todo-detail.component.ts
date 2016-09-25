@@ -5,7 +5,7 @@ import { TodoService } from "../../services/todo.service";
 @Component({
     moduleId: module.id,
     selector: 'todo-detail',
-    templateUrl: 'todo-detail.template.html'
+    templateUrl: 'todo-detail.component.html'
 })
 export class TodoDetailComponent{
     @Input()
