@@ -8,7 +8,7 @@
             <td>Permissies</td>
             <td>Acties</td>
         </tr>
-        <tr *ngFor="let record of records">
+        <tr *ngFor="let record of records" class="simple-table-row">
             <td><a (click)="open(record)" class="link">{{record.description}}</a></td>
             <td>{{record.userCount}}</td>
             <td>{{record.permissionCount}}</td>
