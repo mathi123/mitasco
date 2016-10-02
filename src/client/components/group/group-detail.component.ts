@@ -10,6 +10,7 @@ import { User } from "../../shared/user";
 import { UserService } from "../../services/user.service";
 import { SearchArgument } from "../../shared/search-argument";
 import { PartialResultList } from "../../shared/partial-result-list";
+import { PermissionCodeService } from "../../services/permission-code.service";
 
 @Component({
     moduleId: module.id,
@@ -28,9 +29,13 @@ export class GroupDetailComponent implements OnInit {
     private users: User[];
     private selectedUser: User;
 
+    // Permission search
+    private permissions: PermissionCode[];
+    private selectedPermission: PermissionCode;
+
     constructor(private service: GroupService, private route: ActivatedRoute,
                 private configuration: ConfigurationProvider, private router: Router,
-                private userService: UserService) {
+                private userService: UserService, private permissionService: PermissionCodeService) {
     }
 
     ngOnInit() {
@@ -125,6 +130,15 @@ export class GroupDetailComponent implements OnInit {
             newUser.value = user.fullname;
             this.record.users.push(newUser);
             this.selectedUser = null;
+            this.hasChanged = true;
+        }
+    }
+
+    permissionSelected(permission: PermissionCode) {
+        if (permission && permission.id !== 0) {
+            this.record.permissionCodes.push(permission);
+            this.selectedPermission = null;
+            this.hasChanged = true;
         }
     }
 
@@ -135,6 +149,7 @@ export class GroupDetailComponent implements OnInit {
                 this.hasChanged = false;
             });
         this.searchUsers();
+        this.loadPermissions();
     }
 
     private searchUsers() {
@@ -147,5 +162,11 @@ export class GroupDetailComponent implements OnInit {
             .then((result: PartialResultList<User>) => {
                 this.users = result.results;
             }).catch((err) => console.log(err));
+    }
+
+    private loadPermissions() {
+        this.permissionService.getAll()
+            .then((result: PermissionCode[]) => this.permissions = result)
+            .catch((err) => console.log(err));
     }
 }
