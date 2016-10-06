@@ -10,14 +10,13 @@
            (keyup)="inputKeyUp($event)"
            (keydown)="inputKeyDown($event)"
            (focus)="inputFocus($event)"
-           (blur)="inputBlur($event)">
+           (blur)="inputBlur($event)"/>
     <input type="text"
            class="suggestion-input-typeahead"
            [(ngModel)]="typeahead"
            typeahead="off"
            spellcheck="false"
-           disabled="true">
-
+           disabled="true"/>
     <div #suggestionsContainer
          class="suggestion-input-suggestions"
          [hidden]="!areSuggestionsVisible">
@@ -25,11 +24,9 @@
             <li *ngFor="let suggestion of suggestions"
                 (mouseover)="suggestionMouseOver(suggestion)"
                 (mousedown)="suggestionMouseDown(suggestion)"
-
-                [ngClass]="{'suggestion-input-suggestion-active': activeSuggestion===suggestion}">{{
-                suggestion[displayProperty] }}
+                [ngClass]="{'suggestion-input-suggestion-active': activeSuggestion===suggestion}">
+                {{suggestion[displayProperty]}}
             </li>
         </ul>
     </div>
-
 </div>
