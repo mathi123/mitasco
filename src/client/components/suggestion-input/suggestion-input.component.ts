@@ -1,13 +1,20 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from "@angular/core";
-import { ControlValueAccessor } from "@angular/forms";
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, forwardRef } from "@angular/core";
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from "@angular/forms";
 
 const emptyFunction = () => {
+};
+
+export const SUGGESTION_INPUT_COMPONENT_VALUE_ACCESSOR: any = {
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => SuggestionInputComponent),
+    multi: true
 };
 
 @Component({
     moduleId: module.id,
     selector: 'suggestion-input',
-    templateUrl: 'suggestion-input.component.html'
+    templateUrl: 'suggestion-input.component.html',
+    providers: [SUGGESTION_INPUT_COMPONENT_VALUE_ACCESSOR]
 })
 export class SuggestionInputComponent implements OnInit, ControlValueAccessor {
     private _list: any[];
@@ -432,6 +439,7 @@ export class SuggestionInputComponent implements OnInit, ControlValueAccessor {
      * Selects a suggestion.
      */
     public selectSuggestion(suggestion: any) {
+        console.debug(suggestion);
         // Set the variable
         this.selectedSuggestion = suggestion;
 

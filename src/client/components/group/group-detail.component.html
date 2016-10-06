@@ -20,7 +20,7 @@
         </table>
 
         <suggestion-input [(ngModel)]="selectedUser" [parentControlsSuggestions]="true"
-                          [list]="users" ngDefaultControl
+                          [list]="users"
                           [searchProperty]="'fullname'" [displayProperty]="'fullname'"
                           (suggestionSelected)="userSelected($event)"
                           (inputChanged)="searchUsers($event)"
@@ -46,7 +46,7 @@
         </table>
 
         <suggestion-input [(ngModel)]="selectedPermission"
-                          [list]="permissions" ngDefaultControl
+                          [list]="permissions"
                           [searchProperty]="'code'" [displayProperty]="'code'"
                           [maxSuggestions]="5"
                           (suggestionSelected)="permissionSelected($event)"

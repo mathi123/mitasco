@@ -124,6 +124,9 @@ export class GroupDetailComponent implements OnInit {
     }
 
     userSelected(user: User) {
+        console.info("user picked");
+        console.info(this.selectedUser);
+
         if (user && user.id !== 0) {
             var existing = this.record.users
                 .find(usr => usr.key == user.id);
@@ -133,20 +136,23 @@ export class GroupDetailComponent implements OnInit {
                 newUser.key = user.id;
                 newUser.value = user.fullname;
                 this.record.users.push(newUser);
-                this.selectedUser = null;
+                //this.selectedUser = null;
                 this.hasChanged = true;
             }
         }
     }
 
     permissionSelected(permission: PermissionCode) {
+        console.info("permission picked");
+        console.info(this.selectedPermission);
+
         if (permission && permission.id !== 0) {
             var existing = this.record.permissionCodes
                 .find(per => per.id == permission.id);
 
             if (!existing) {
                 this.record.permissionCodes.push(permission);
-                this.selectedPermission = null;
+                //this.selectedPermission = null;
                 this.hasChanged = true;
             }
         }
