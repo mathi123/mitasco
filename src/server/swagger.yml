@@ -1,0 +1,162 @@
+swagger: '2.0'
+info:
+  version: '0.0.1'
+  title: Mitasco API
+  description: API documentation to interact with Mitasco backend.
+host: localhost:3000
+basePath: /api/v1
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /user:
+    get:
+      description: returns all users matching a search query
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: query
+          in: query
+          description: search text
+          required: false
+          type: string
+        - name: take
+          in: query
+          description: maximum number of results to return
+          required: false
+          type: integer
+        - name: skip
+          in: query
+          description: users to skip in result
+          required: false
+          type: integer
+        - name: sortColumn
+          in: query
+          description: the property to sort the results by
+          required: false
+          type: string
+          enum: ["fullName", "email"]
+        - name: sortDirection
+          in: query
+          description: direction to sort the results, ascending (0) or descending (1)
+          required: false
+          type: integer
+          format: int32
+          enum: ["0", "1"]
+      responses:
+        '200':
+          description: search results
+          schema:
+            type: object
+            required:
+              - resultCount
+              - skipped
+              - results
+            properties:
+              resultCount:
+                type: integer
+              skipped:
+                type: integer
+              results:
+                type: object
+                required:
+                  - id
+                  - email
+                  - fullName
+                properties:
+                  id:
+                    type: integer
+                  email:
+                    type: string
+                  fullName:
+                    type: string
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+    put:
+      description: creates a new user and returns the id
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: user
+          in: body
+          description: user to add to the store
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: new user id
+          schema:
+            type: integer
+    post:
+      description: updates a user
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: user
+          in: body
+          description: user to update
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: ok
+  /user/{id}:
+    get:
+      description: Returns a user based on a single id.
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: id
+          in: path
+          description: id of user to fetch
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: user response
+          schema:
+            $ref: '#/definitions/User'
+    delete:
+      description: deletes a single user based on the id supplied
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: id
+          in: path
+          description: id of user to delete
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: user deleted
+parameters:
+  authenticationToken:
+    name: token
+    in: header
+    description: jwt authorization token
+    required: true
+    type: string
+definitions:
+  User:
+    type: object
+    required:
+      - id
+      - fullname
+      - email
+    properties:
+      id:
+        type: integer
+      fullname:
+        type: string
+      email:
+        type: string
