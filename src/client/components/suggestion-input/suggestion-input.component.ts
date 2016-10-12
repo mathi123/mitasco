@@ -439,7 +439,6 @@ export class SuggestionInputComponent implements OnInit, ControlValueAccessor {
      * Selects a suggestion.
      */
     public selectSuggestion(suggestion: any) {
-        console.debug(suggestion);
         // Set the variable
         this.selectedSuggestion = suggestion;
 

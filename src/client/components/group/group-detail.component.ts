@@ -27,7 +27,7 @@ export class GroupDetailComponent implements OnInit {
 
     // User search
     private users: User[];
-    private selectedUser: User;
+    private selectedUser: KeyValuePair;
 
     // Permission search
     private permissions: PermissionCode[];
