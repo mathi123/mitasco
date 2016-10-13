@@ -42,6 +42,7 @@ gulp.task('watch', ['build-and-start'], function (cb) {
     gulp.watch([config.src_files.client.ts], ['compile-client', 'build-restart-server']);
     gulp.watch(other_client_files, ['copy-other']);
     gulp.watch(config.src_files.client.sass, ['sass']);
+    gulp.watch(config.src_files.server.apiDocumentation, ['copy-api-docs']);
 });
 
 gulp.task('build-and-start', function (callback) {
@@ -140,12 +141,17 @@ gulp.task('run-server-tests', function () {
         .pipe(mocha({reporter: 'mocha-circleci-reporter'}));
 });
 
+gulp.task('copy-api-docs', function () {
+    return gulp.src(config.src_files.server.apiDocumentation)
+        .pipe(gulp.dest(path.join(config[environment].buildDir, 'app/documentation')));
+});
+
 ////////////////////////
 // CLIENT CONFIGURATION
 ////////////////////////
 
 gulp.task('build-client', function (callback) {
-   runSequence('clean-client', 'copy-imwa', 'copy-rxjs', 'copy-libs', 'copy-shared-files', 'copy-angular-libs', 'copy-other', 'sass', 'compile-client', callback);
+    runSequence('clean-client', 'copy-imwa', 'copy-rxjs', 'copy-libs', 'copy-shared-files', 'copy-angular-libs', 'copy-other', 'sass', 'compile-client', 'copy-api-docs', callback);
 });
 gulp.task('clean-client', function () {
     return del([path.join(config[environment].buildDir, 'app')], {force: true});
