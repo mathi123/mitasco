@@ -1,10 +1,10 @@
 swagger: '2.0'
 info:
-  version: '0.0.1'
+  version: '1.0.0'
   title: Mitasco API
   description: API documentation to interact with Mitasco backend.
 host: localhost:3000
-basePath: /api/v1
+basePath: /api
 schemes:
   - https
 consumes:
@@ -12,11 +12,34 @@ consumes:
 produces:
   - application/json
 paths:
+  /token:
+    post:
+      description: authorizes given credentials and authenticates user
+      parameters:
+        - name: Credentials
+          in: body
+          description: authentication credentials
+          required: true
+          schema:
+            type: object
+            required:
+              - email
+              - password
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        '200':
+          description: json web token (jwt), pass this token in the headers of next requests
+          schema:
+            type: string
+        '401':
+          description: unauthorized, the authentication failed
   /user:
     get:
       description: returns all users matching a search query
-      produces:
-        - application/json
       parameters:
         - $ref: "#/parameters/authenticationToken"
         - name: query
@@ -83,10 +106,9 @@ paths:
       produces:
         - application/json
       parameters:
-        - $ref: "#/parameters/authenticationToken"
         - name: user
           in: body
-          description: user to add to the store
+          description: user to add
           required: true
           schema:
             $ref: '#/definitions/User'
@@ -109,7 +131,11 @@ paths:
             $ref: '#/definitions/User'
       responses:
         '200':
-          description: ok
+          description: user updated
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
   /user/{id}:
     get:
       description: Returns a user based on a single id.
@@ -127,18 +153,97 @@ paths:
           description: user response
           schema:
             $ref: '#/definitions/User'
-    delete:
-      description: deletes a single user based on the id supplied
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+  /permissioncode:
+    get:
+      description: returns all permissioncodes
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+      responses:
+        '200':
+          description: list of all the permissioncodes
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/PermissionCode"
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+    put:
+      description: creates a new permissioncode
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: permissioncode
+          in: body
+          description: permissioncode to add
+          required: true
+          schema:
+            $ref: "#/definitions/PermissionCode"
+      responses:
+        '200':
+          description: new permissioncode id
+          schema:
+            type: integer
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+    post:
+      description: Updates a permissioncode description.
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: permissioncode
+          in: body
+          description: permissioncode to update
+          required: true
+          schema:
+            $ref: "#/definitions/PermissionCode"
+      responses:
+        '200':
+          description: permissioncode updated
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+  /permissioncode/{id}:
+    get:
+      description: returns permissioncode by id
       parameters:
         - $ref: "#/parameters/authenticationToken"
         - name: id
           in: path
-          description: id of user to delete
+          description: id of permissioncode to fetch
           required: true
           type: integer
       responses:
         '200':
-          description: user deleted
+          description: permissioncode data
+          schema:
+            $ref: "#/definitions/PermissionCode"
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+    delete:
+      description: deletes permissioncode by id
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: id
+          in: path
+          description: id of permissioncode to delete
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: permissioncode deleted
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
 parameters:
   authenticationToken:
     name: token
@@ -159,4 +264,17 @@ definitions:
       fullname:
         type: string
       email:
+        type: string
+  PermissionCode:
+    type: object
+    required:
+      - id
+      - code
+      - description
+    properties:
+      id:
+        type: integer
+      code:
+        type: string
+      description:
         type: string
