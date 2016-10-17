@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { MenuProvider } from "../../providers/menu.provider";
-import { UrlTrackingService } from "../../services/url-tracking.service";
 
 @Component({
     moduleId: module.id,
@@ -8,7 +7,7 @@ import { UrlTrackingService } from "../../services/url-tracking.service";
     templateUrl: 'application-root.component.html'
 })
 export class ApplicationRootComponent {
-    constructor(private menu: MenuProvider, private urlTracker: UrlTrackingService) {
+    constructor(private menu: MenuProvider) {
     }
 
     public toggleMenu() {

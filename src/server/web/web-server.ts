@@ -37,6 +37,7 @@ export class WebServer {
         };
 
         this._app.use('/app', express.static(__dirname + '/../app'));
+        this._app.use('/documentation', express.static(__dirname + '/../documentation'));
         this._app.all('/app/*', (req: Request, res: Response)=> {
             res.sendFile(path.resolve(__dirname + '/../app/index.html'));
         });
