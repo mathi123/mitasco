@@ -46,3 +46,16 @@ h4{
   color: #8a6d3b;
   padding:5px;
 }
+
+.api-link {
+  text-decoration: underline;
+  color: darkblue;
+  font-size: 12px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  &:hover {
+    color: $accentColor;
+    cursor: pointer;
+  }
+}

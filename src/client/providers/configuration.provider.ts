@@ -3,7 +3,7 @@ import { Headers, RequestOptions } from "@angular/http";
 
 @Injectable()
 export class ConfigurationProvider {
-    private _baseUrl: string = 'https://localhost:3000/api';
+    private _baseUrl: string = 'https://localhost:3000';
     private _headers: Headers = new Headers();
     private _options: RequestOptions = new RequestOptions();
     private _token: string;
@@ -16,7 +16,12 @@ export class ConfigurationProvider {
     }
 
     public getBaseUrl(): string {
-        return this._baseUrl;
+        return `${this._baseUrl}/api`;
+    }
+
+    public getDocumentationUrl(): string {
+        let swaggerUrl = `${this._baseUrl}/documentation/swagger.yml`;
+        return `${this._baseUrl}/documentation/index.html?url=${encodeURIComponent(swaggerUrl)}#/default`;
     }
 
     public getHttpOptions(): RequestOptions {
