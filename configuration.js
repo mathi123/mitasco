@@ -79,5 +79,7 @@ module.exports = {
             ],
         vendor_folder: "lib",
         path_tests: "test/client/**/*.test.js"
-    }
+    },
+    docs_url: "https://github.com/swagger-api/swagger-ui/archive/v2.2.6.zip",
+    docs: "documentation"
 };

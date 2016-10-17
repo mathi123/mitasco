@@ -8,7 +8,9 @@ var gulp = require('gulp'),
     path = require('path'),
     config = require('./configuration.js'),
     sass = require('gulp-sass'),
-    server = require('gulp-develop-server');
+    server = require('gulp-develop-server'),
+    download = require("gulp-download"),
+    unzip = require("gulp-unzip");
 
 /////////////////////////
 // GENERAL CONFIGURATION
@@ -60,6 +62,37 @@ gulp.task('start', function () {
 
 gulp.task('restart', function () {
     server.restart();
+});
+
+gulp.task('build-swagger', function (callback) {
+    runSequence('download-swagger', 'copy-swagger', 'delete-swagger-zip', 'copy-api-docs', callback);
+});
+
+gulp.task('download-swagger', function () {
+    var documentationPath = path.join(config[environment].buildDir, config.docs);
+
+    return download(config.docs_url)
+        .pipe(unzip({
+            filter: function (entry) {
+                return entry.path.indexOf("/dist/") > 0;
+            }
+        }))
+        .pipe(gulp.dest(documentationPath));
+});
+
+gulp.task('copy-swagger', function () {
+    var documentationPath = path.join(config[environment].buildDir, config.docs);
+
+    var docFiles = [path.join(documentationPath, "swagger-ui-2.2.6/dist/**")];
+
+    return gulp.src(docFiles)
+        .pipe(gulp.dest(documentationPath));
+});
+
+gulp.task('delete-swagger-zip', function () {
+    var documentationPath = path.join(config[environment].buildDir, config.docs);
+
+    del(path.join(documentationPath, "swagger-ui-2.2.6"), {force: true});
 });
 
 /////////////////////////
@@ -143,7 +176,7 @@ gulp.task('run-server-tests', function () {
 
 gulp.task('copy-api-docs', function () {
     return gulp.src(config.src_files.server.apiDocumentation)
-        .pipe(gulp.dest(path.join(config[environment].buildDir, 'app/documentation')));
+        .pipe(gulp.dest(path.join(config[environment].buildDir, config.docs)));
 });
 
 ////////////////////////

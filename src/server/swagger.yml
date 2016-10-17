@@ -157,6 +157,94 @@ paths:
           description: permission denied
         '500':
           description: internal server error
+  /group:
+    get:
+      description: returns all groups
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+      responses:
+        '200':
+          description: all groups
+          schema:
+            type: array
+            items:
+              - $ref: "#/definitions/GroupListRecord"
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+    put:
+      description: creates a new group and returns the id
+      produces:
+        - application/json
+      parameters:
+        - name: group
+          in: body
+          description: group to add
+          required: true
+          schema:
+            $ref: '#/definitions/Group'
+      responses:
+        '200':
+          description: new group id
+          schema:
+            type: integer
+    post:
+      description: updates a group
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: group
+          in: body
+          description: group to update
+          required: true
+          schema:
+            $ref: '#/definitions/Group'
+      responses:
+        '200':
+          description: group updated
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+  /group/{id}:
+    get:
+      description: Returns a group based on a single id.
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: id
+          in: path
+          description: id of group to fetch
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: group response
+          schema:
+            $ref: '#/definitions/Group'
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+    delete:
+      description: deletes group by id
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: id
+          in: path
+          description: id of group to delete
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: group deleted
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
   /permissioncode:
     get:
       description: returns all permissioncodes
@@ -278,3 +366,49 @@ definitions:
         type: string
       description:
         type: string
+  KeyValuePair:
+    type: object
+    required:
+      - key
+      - value
+    properties:
+      key:
+        type: integer
+      value:
+        type: string
+  GroupListRecord:
+    type: object
+    required:
+      - id
+      - description
+      - userCount
+      - permissionCount
+    properties:
+      id:
+        type: integer
+      description:
+        type: string
+      userCount:
+        type: integer
+      permissionCount:
+        type: integer
+  Group:
+    type: object
+    required:
+      - id
+      - description
+      - users
+      - permissions
+    properties:
+      id:
+        type: integer
+      description:
+        type: string
+      users:
+        type: array
+        items:
+          $ref: "#/definitions/KeyValuePair"
+      permissions:
+        type: array
+        items:
+          $ref: "#/definitions/PermissionCode"
