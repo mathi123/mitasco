@@ -4,7 +4,8 @@ module.exports = {
             all: "./src/server/**/*",
             ts: "./src/server/**/*.ts",
             shared: "./src/server/shared/**/*.ts", // Define shared files here
-            tests: ["./test/server/**/*.test.js", "./test/rest-api/**/*.test.js"]
+            tests: ["./test/server/**/*.test.js", "./test/rest-api/**/*.test.js"],
+            apiDocumentation: ["./src/server/swagger.yml"]
         },
         client: {
             all: "./src/client/**/*",
@@ -78,5 +79,7 @@ module.exports = {
             ],
         vendor_folder: "lib",
         path_tests: "test/client/**/*.test.js"
-    }
+    },
+    docs_url: "https://github.com/swagger-api/swagger-ui/archive/v2.2.6.zip",
+    docs: "documentation"
 };

@@ -8,7 +8,9 @@ var gulp = require('gulp'),
     path = require('path'),
     config = require('./configuration.js'),
     sass = require('gulp-sass'),
-    server = require('gulp-develop-server');
+    server = require('gulp-develop-server'),
+    download = require("gulp-download"),
+    unzip = require("gulp-unzip");
 
 /////////////////////////
 // GENERAL CONFIGURATION
@@ -42,6 +44,7 @@ gulp.task('watch', ['build-and-start'], function (cb) {
     gulp.watch([config.src_files.client.ts], ['compile-client', 'build-restart-server']);
     gulp.watch(other_client_files, ['copy-other']);
     gulp.watch(config.src_files.client.sass, ['sass']);
+    gulp.watch(config.src_files.server.apiDocumentation, ['copy-api-docs']);
 });
 
 gulp.task('build-and-start', function (callback) {
@@ -59,6 +62,37 @@ gulp.task('start', function () {
 
 gulp.task('restart', function () {
     server.restart();
+});
+
+gulp.task('build-swagger', function (callback) {
+    runSequence('download-swagger', 'copy-swagger', 'delete-swagger-zip', 'copy-api-docs', callback);
+});
+
+gulp.task('download-swagger', function () {
+    var documentationPath = path.join(config[environment].buildDir, config.docs);
+
+    return download(config.docs_url)
+        .pipe(unzip({
+            filter: function (entry) {
+                return entry.path.indexOf("/dist/") > 0;
+            }
+        }))
+        .pipe(gulp.dest(documentationPath));
+});
+
+gulp.task('copy-swagger', function () {
+    var documentationPath = path.join(config[environment].buildDir, config.docs);
+
+    var docFiles = [path.join(documentationPath, "swagger-ui-2.2.6/dist/**")];
+
+    return gulp.src(docFiles)
+        .pipe(gulp.dest(documentationPath));
+});
+
+gulp.task('delete-swagger-zip', function () {
+    var documentationPath = path.join(config[environment].buildDir, config.docs);
+
+    del(path.join(documentationPath, "swagger-ui-2.2.6"), {force: true});
 });
 
 /////////////////////////
@@ -140,12 +174,17 @@ gulp.task('run-server-tests', function () {
         .pipe(mocha({reporter: 'mocha-circleci-reporter'}));
 });
 
+gulp.task('copy-api-docs', function () {
+    return gulp.src(config.src_files.server.apiDocumentation)
+        .pipe(gulp.dest(path.join(config[environment].buildDir, config.docs)));
+});
+
 ////////////////////////
 // CLIENT CONFIGURATION
 ////////////////////////
 
 gulp.task('build-client', function (callback) {
-   runSequence('clean-client', 'copy-imwa', 'copy-rxjs', 'copy-libs', 'copy-shared-files', 'copy-angular-libs', 'copy-other', 'sass', 'compile-client', callback);
+    runSequence('clean-client', 'copy-imwa', 'copy-rxjs', 'copy-libs', 'copy-shared-files', 'copy-angular-libs', 'copy-other', 'sass', 'compile-client', 'copy-api-docs', callback);
 });
 gulp.task('clean-client', function () {
     return del([path.join(config[environment].buildDir, 'app')], {force: true});

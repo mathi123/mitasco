@@ -1,0 +1,414 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Mitasco API
+  description: API documentation to interact with Mitasco backend.
+host: localhost:3000
+basePath: /api
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /token:
+    post:
+      description: authorizes given credentials and authenticates user
+      parameters:
+        - name: Credentials
+          in: body
+          description: authentication credentials
+          required: true
+          schema:
+            type: object
+            required:
+              - email
+              - password
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        '200':
+          description: json web token (jwt), pass this token in the headers of next requests
+          schema:
+            type: string
+        '401':
+          description: unauthorized, the authentication failed
+  /user:
+    get:
+      description: returns all users matching a search query
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: query
+          in: query
+          description: search text
+          required: false
+          type: string
+        - name: take
+          in: query
+          description: maximum number of results to return
+          required: false
+          type: integer
+        - name: skip
+          in: query
+          description: users to skip in result
+          required: false
+          type: integer
+        - name: sortColumn
+          in: query
+          description: the property to sort the results by
+          required: false
+          type: string
+          enum: ["fullName", "email"]
+        - name: sortDirection
+          in: query
+          description: direction to sort the results, ascending (0) or descending (1)
+          required: false
+          type: integer
+          format: int32
+          enum: ["0", "1"]
+      responses:
+        '200':
+          description: search results
+          schema:
+            type: object
+            required:
+              - resultCount
+              - skipped
+              - results
+            properties:
+              resultCount:
+                type: integer
+              skipped:
+                type: integer
+              results:
+                type: object
+                required:
+                  - id
+                  - email
+                  - fullName
+                properties:
+                  id:
+                    type: integer
+                  email:
+                    type: string
+                  fullName:
+                    type: string
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+    put:
+      description: creates a new user and returns the id
+      produces:
+        - application/json
+      parameters:
+        - name: user
+          in: body
+          description: user to add
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: new user id
+          schema:
+            type: integer
+    post:
+      description: updates a user
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: user
+          in: body
+          description: user to update
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: user updated
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+  /user/{id}:
+    get:
+      description: Returns a user based on a single id.
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: id
+          in: path
+          description: id of user to fetch
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: user response
+          schema:
+            $ref: '#/definitions/User'
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+  /group:
+    get:
+      description: returns all groups
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+      responses:
+        '200':
+          description: all groups
+          schema:
+            type: array
+            items:
+              - $ref: "#/definitions/GroupListRecord"
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+    put:
+      description: creates a new group and returns the id
+      produces:
+        - application/json
+      parameters:
+        - name: group
+          in: body
+          description: group to add
+          required: true
+          schema:
+            $ref: '#/definitions/Group'
+      responses:
+        '200':
+          description: new group id
+          schema:
+            type: integer
+    post:
+      description: updates a group
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: group
+          in: body
+          description: group to update
+          required: true
+          schema:
+            $ref: '#/definitions/Group'
+      responses:
+        '200':
+          description: group updated
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+  /group/{id}:
+    get:
+      description: Returns a group based on a single id.
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: id
+          in: path
+          description: id of group to fetch
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: group response
+          schema:
+            $ref: '#/definitions/Group'
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+    delete:
+      description: deletes group by id
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: id
+          in: path
+          description: id of group to delete
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: group deleted
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+  /permissioncode:
+    get:
+      description: returns all permissioncodes
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+      responses:
+        '200':
+          description: list of all the permissioncodes
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/PermissionCode"
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+    put:
+      description: creates a new permissioncode
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: permissioncode
+          in: body
+          description: permissioncode to add
+          required: true
+          schema:
+            $ref: "#/definitions/PermissionCode"
+      responses:
+        '200':
+          description: new permissioncode id
+          schema:
+            type: integer
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+    post:
+      description: Updates a permissioncode description.
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: permissioncode
+          in: body
+          description: permissioncode to update
+          required: true
+          schema:
+            $ref: "#/definitions/PermissionCode"
+      responses:
+        '200':
+          description: permissioncode updated
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+  /permissioncode/{id}:
+    get:
+      description: returns permissioncode by id
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: id
+          in: path
+          description: id of permissioncode to fetch
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: permissioncode data
+          schema:
+            $ref: "#/definitions/PermissionCode"
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+    delete:
+      description: deletes permissioncode by id
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: id
+          in: path
+          description: id of permissioncode to delete
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: permissioncode deleted
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+parameters:
+  authenticationToken:
+    name: token
+    in: header
+    description: jwt authorization token
+    required: true
+    type: string
+definitions:
+  User:
+    type: object
+    required:
+      - id
+      - fullname
+      - email
+    properties:
+      id:
+        type: integer
+      fullname:
+        type: string
+      email:
+        type: string
+  PermissionCode:
+    type: object
+    required:
+      - id
+      - code
+      - description
+    properties:
+      id:
+        type: integer
+      code:
+        type: string
+      description:
+        type: string
+  KeyValuePair:
+    type: object
+    required:
+      - key
+      - value
+    properties:
+      key:
+        type: integer
+      value:
+        type: string
+  GroupListRecord:
+    type: object
+    required:
+      - id
+      - description
+      - userCount
+      - permissionCount
+    properties:
+      id:
+        type: integer
+      description:
+        type: string
+      userCount:
+        type: integer
+      permissionCount:
+        type: integer
+  Group:
+    type: object
+    required:
+      - id
+      - description
+      - users
+      - permissions
+    properties:
+      id:
+        type: integer
+      description:
+        type: string
+      users:
+        type: array
+        items:
+          $ref: "#/definitions/KeyValuePair"
+      permissions:
+        type: array
+        items:
+          $ref: "#/definitions/PermissionCode"

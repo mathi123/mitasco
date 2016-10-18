@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, forwardRef } from "@angular/core";
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from "@angular/forms";
 
-const emptyFunction = () => {
-};
-
-export const SUGGESTION_INPUT_COMPONENT_VALUE_ACCESSOR: any = {
+export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => SuggestionInputComponent),
     multi: true
+};
+
+const emptyFunction = () => {
 };
 
 @Component({

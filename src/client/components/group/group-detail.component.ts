@@ -27,7 +27,7 @@ export class GroupDetailComponent implements OnInit {
 
     // User search
     private users: User[];
-    private selectedUser: KeyValuePair;
+    private selectedUser: User;
 
     // Permission search
     private permissions: PermissionCode[];
@@ -124,9 +124,6 @@ export class GroupDetailComponent implements OnInit {
     }
 
     userSelected(user: User) {
-        console.info("user picked");
-        console.info(this.selectedUser);
-
         if (user && user.id !== 0) {
             var existing = this.record.users
                 .find(usr => usr.key == user.id);
