@@ -2,21 +2,28 @@
 @import '../globals';
 
 .simple-table{
-  @include border;
-  @include round-borders(2px);
-  border-collapse: separate;
   margin: $defaultMargin;
   tr{
     td{
       padding: 5px;
     }
   }
-}
 
-.simple-table-header{
-  font-weight: bold;
-  background-color: $primaryColor;
-  color: $lightBackGround;
+  &-header {
+    @include border;
+    font-weight: bold;
+    background-color: $primaryColor;
+    color: $lightBackGround;
+  }
+
+  &-row {
+    border-bottom: 1px solid $lightPrimaryColor;
+    border-left: 1px solid $lightPrimaryColor;
+    border-right: 1px solid $lightPrimaryColor;
+    &:hover {
+      background-color: $lightPrimaryColor;
+    }
+  }
 }
 
 

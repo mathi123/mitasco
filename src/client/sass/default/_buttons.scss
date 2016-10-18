@@ -19,6 +19,18 @@ $defaultHeight: 28px;
     color: $primaryTextColor;
     background-color: $lightPrimaryColor;
   }
+
+  &:disabled {
+    color: $secondaryTextColor;
+    background-color: $lightBackGround;
+    border-color: $primaryTextColor;
+    opacity: 0.7;
+
+    &:hover {
+      color: $secondaryTextColor;
+      background-color: $lightBackGround;
+    }
+  }
 }
 
 input{

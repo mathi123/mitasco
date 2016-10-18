@@ -7,7 +7,7 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
     multi: true
 };
 
-const noop = () => {
+const emptyFunction = () => {
 };
 
 @Component({
@@ -107,12 +107,12 @@ export class SuggestionInputComponent implements OnInit, ControlValueAccessor {
     /**
      * Placeholder for a callback which is later provided by the Control Value Accessor.
      */
-    private onTouchedCallback: () => void = noop;
+    private onTouchedCallback: () => void = emptyFunction;
 
     /**
      * Placeholder for a callback which is later provided by the Control Value Accessor.
      */
-    private onChangeCallback: (_: any) => void = noop;
+    private onChangeCallback: (_: any) => void = emptyFunction;
 
     /**
      * Get accessor.

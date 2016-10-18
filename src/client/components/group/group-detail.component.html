@@ -11,7 +11,7 @@
                 <td>Naam</td>
                 <td>Wissen</td>
             </tr>
-            <tr *ngFor="let user of record.users">
+            <tr *ngFor="let user of record.users" class="simple-table-row">
                 <td>{{user.value}}</td>
                 <td>
                     <a (click)="removeUser(user)">x</a>
@@ -32,15 +32,24 @@
         <table border="1" *ngIf="record.permissionCodes.length > 0" class="simple-table">
             <tr class="simple-table-header">
                 <td>Code</td>
+                <td>Omschrijving</td>
                 <td>Wissen</td>
             </tr>
-            <tr *ngFor="let permission of record.permissionCodes">
+            <tr *ngFor="let permission of record.permissionCodes" class="simple-table-row">
                 <td>{{permission.code}}</td>
+                <td>{{permission.description}}</td>
                 <td>
                     <a (click)="removePermission(permisson)">x</a>
                 </td>
             </tr>
         </table>
+
+        <suggestion-input [(ngModel)]="selectedPermission"
+                          [list]="permissions" ngDefaultControl
+                          [searchProperty]="'code'" [displayProperty]="'code'"
+                          [maxSuggestions]="5"
+                          (suggestionSelected)="permissionSelected($event)"
+                          placeholder="permissie toevoegen..."></suggestion-input>
     </div>
 
     <button type="button" (click)="cancel()" [disabled]="isSaving || !hasChanged " class="btn-normal">Cancel</button>
