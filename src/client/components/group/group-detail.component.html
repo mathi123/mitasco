@@ -22,12 +22,11 @@
         <suggestion-input [(ngModel)]="selectedUser"
                           [list]="users" ngDefaultControl
                           [searchProperty]="'fullname'" [displayProperty]="'fullname'"
-                          [maxSuggestions]="5"
                           (suggestionSelected)="userSelected($event)"
                           placeholder="gebruiker toevoegen..."></suggestion-input>
 
         <h2>Permissies</h2>
-        <p *ngIf="record.permissionCodes.length == 0">Er zijn nog geen permissies toegekend aan deze groep.</p>
+        <p *ngIf="record.permissionCodes.length === 0">Er zijn nog geen permissies toegekend aan deze groep.</p>
 
         <table border="1" *ngIf="record.permissionCodes.length > 0" class="simple-table">
             <tr class="simple-table-header">
@@ -45,11 +44,12 @@
         </table>
 
         <suggestion-input [(ngModel)]="selectedPermission"
-                          [list]="permissions" ngDefaultControl
+                          [list]="permissions"
                           [searchProperty]="'code'" [displayProperty]="'code'"
                           [maxSuggestions]="5"
                           (suggestionSelected)="permissionSelected($event)"
-                          placeholder="permissie toevoegen..."></suggestion-input>
+                          placeholder="permissie toevoegen...">
+        </suggestion-input>
     </div>
 
     <button type="button" (click)="cancel()" [disabled]="isSaving || !hasChanged " class="btn-normal">Cancel</button>

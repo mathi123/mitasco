@@ -125,20 +125,33 @@ export class GroupDetailComponent implements OnInit {
 
     userSelected(user: User) {
         if (user && user.id !== 0) {
-            let newUser = new KeyValuePair();
-            newUser.key = user.id;
-            newUser.value = user.fullname;
-            this.record.users.push(newUser);
-            this.selectedUser = null;
-            this.hasChanged = true;
+            var existing = this.record.users
+                .find(usr => usr.key == user.id);
+
+            if (!existing) {
+                let newUser = new KeyValuePair();
+                newUser.key = user.id;
+                newUser.value = user.fullname;
+                this.record.users.push(newUser);
+                //this.selectedUser = null;
+                this.hasChanged = true;
+            }
         }
     }
 
     permissionSelected(permission: PermissionCode) {
+        console.info("permission picked");
+        console.info(this.selectedPermission);
+
         if (permission && permission.id !== 0) {
-            this.record.permissionCodes.push(permission);
-            this.selectedPermission = null;
-            this.hasChanged = true;
+            var existing = this.record.permissionCodes
+                .find(per => per.id == permission.id);
+
+            if (!existing) {
+                this.record.permissionCodes.push(permission);
+                //this.selectedPermission = null;
+                this.hasChanged = true;
+            }
         }
     }
 
@@ -152,20 +165,25 @@ export class GroupDetailComponent implements OnInit {
         this.loadPermissions();
     }
 
-    private searchUsers() {
-        let arg = new SearchArgument();
-        arg.query = '';
-        arg.skip = 0;
-        arg.take = 15;
+    private searchUsers(query: string = '') {
+        if (this.userService) {
+            let arg = new SearchArgument();
+            arg.query = query;
+            arg.skip = 0;
+            arg.take = 8;
 
-        this.userService.search(arg)
-            .then((result: PartialResultList<User>) => {
-                this.users = result.results;
-            }).catch((err) => console.log(err));
+            this.userService
+                .search(arg)
+                .then((result: PartialResultList<User>) => {
+                    this.users = result.results;
+                })
+                .catch((err) => console.log(err));
+        }
     }
 
     private loadPermissions() {
-        this.permissionService.getAll()
+        this.permissionService
+            .getAll()
             .then((result: PermissionCode[]) => this.permissions = result)
             .catch((err) => console.log(err));
     }

@@ -13,13 +13,28 @@ const emptyFunction = () => {
 @Component({
     moduleId: module.id,
     selector: 'suggestion-input',
-    templateUrl: 'suggestion-input.component.html'
+    templateUrl: 'suggestion-input.component.html',
+    providers: [TYPEAHEAD_CONTROL_VALUE_ACCESSOR]
 })
 export class SuggestionInputComponent implements OnInit, ControlValueAccessor {
+    private _list: any[];
+
     /**
      * The complete list of items.
      */
-    @Input() list: any[] = [];
+    @Input()
+    set list(list: any[]) {
+        this._list = list;
+
+        if (this.parentControlsSuggestions && this._list) {
+            this.suggestions = this.list;
+            this.areSuggestionsVisible = this.input && this.suggestions.length > 0;
+        }
+    }
+
+    get list() {
+        return this._list;
+    }
 
     /**
      * Input element placeholder text.
@@ -42,9 +57,19 @@ export class SuggestionInputComponent implements OnInit, ControlValueAccessor {
     @Input() maxSuggestions: number = -1;
 
     /**
+     * The parent component controls the suggestions, using the inputChanged event.
+     */
+    @Input() parentControlsSuggestions: boolean = false;
+
+    /**
      * Event that occurs when a suggestion is selected.
      */
     @Output() suggestionSelected = new EventEmitter<any>();
+
+    /**
+     * Event that occurs when user input changes.
+     */
+    @Output() inputChanged = new EventEmitter<string>();
 
     /**
      * Handle to the input element.
@@ -276,7 +301,7 @@ export class SuggestionInputComponent implements OnInit, ControlValueAccessor {
         }
 
         // If the suggestion matches the input, then return
-        if (this.selectedSuggestion != null) {
+        if (this.selectedSuggestion != null && !this.parentControlsSuggestions) {
             console.debug(`If the suggestion matches the input, then return`);
             if (this.selectedSuggestion[this.displayProperty] === this.input) {
                 return;
@@ -285,8 +310,12 @@ export class SuggestionInputComponent implements OnInit, ControlValueAccessor {
 
         // Repopulate the suggestions
         this.previousInput = this.input;
-        this.populateSuggestions();
-        this.populateTypeahead();
+        this.inputChanged.emit(this.input);
+
+        if (!this.parentControlsSuggestions) {
+            this.populateSuggestions();
+            this.populateTypeahead();
+        }
     }
 
     /**
