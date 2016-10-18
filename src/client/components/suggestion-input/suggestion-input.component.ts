@@ -14,7 +14,7 @@ const emptyFunction = () => {
     moduleId: module.id,
     selector: 'suggestion-input',
     templateUrl: 'suggestion-input.component.html',
-    providers: [SUGGESTION_INPUT_COMPONENT_VALUE_ACCESSOR]
+    providers: [TYPEAHEAD_CONTROL_VALUE_ACCESSOR]
 })
 export class SuggestionInputComponent implements OnInit, ControlValueAccessor {
     private _list: any[];
