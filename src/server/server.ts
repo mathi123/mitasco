@@ -5,6 +5,7 @@ import * as todoRoutes from "./routes/todo.route";
 import * as permissionCodeRoutes from "./routes/permission-code.route";
 import * as authenticationRoutes from "./routes/authentication.route";
 import * as groupRoutes from "./routes/group.route";
+import * as countryRoutes from "./routes/country.route";
 
 class StartUp {
     public static main(): number {
@@ -40,6 +41,9 @@ class StartUp {
         server.configureRoute(RouteType.POST, 'group', groupRoutes.update);
         server.configureRoute(RouteType.PUT, 'group', groupRoutes.create);
         server.configureRoute(RouteType.DELETE, 'group', groupRoutes.remove, ':id');
+
+        // country routes
+        server.configureRoute(RouteType.GET, 'country', countryRoutes.getAll);
 
         server.start();
 

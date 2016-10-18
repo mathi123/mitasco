@@ -332,6 +332,29 @@ paths:
           description: permission denied
         '500':
           description: internal server error
+  /country:
+    get:
+      description: returns all (priority) countries
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: priority
+          in: query
+          description: only get priority countries
+          required: false
+          type: string
+          enum:
+            - 1
+      responses:
+        '200':
+          description: result countries
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Country"
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
 parameters:
   authenticationToken:
     name: token
@@ -412,3 +435,17 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/PermissionCode"
+  Country:
+    type: object
+    required:
+      - id
+      - name
+      - priority
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      priority:
+        type: boolean
+        description: indicates this is a commonly used country
