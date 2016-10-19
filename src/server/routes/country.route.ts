@@ -4,7 +4,10 @@ import { WebRequest } from "../web/web-request";
 import { CountryController } from "../controllers/country.controller";
 
 export async function getAll(req: WebRequest, resp: Response) {
-    let priority = req.query.priority && req.query.priority === '1';
+    let priority = false;
+
+    if (req.query.priority)
+        priority = req.query.priority === '1';
 
     let databaseSource = new CountryController();
 

@@ -30,6 +30,7 @@ describe('Country', function () {
                     done(err);
                 }
                 expect(res).to.have.status(200);
+                expect(res.body.length).to.be.above(20);
                 done();
             });
     });
@@ -44,6 +45,8 @@ describe('Country', function () {
                     done(err);
                 }
                 expect(res).to.have.status(200);
+                expect(res.body.length).to.be.below(10);
+                expect(res.body.length).to.be.above(0);
                 done();
             });
     });
