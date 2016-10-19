@@ -8,7 +8,7 @@ var json = 'application/json';
 
 chai.use(chaiHttp);
 
-describe('Country', function () {
+describe('Language', function () {
     var token;
     var userId;
 
@@ -21,32 +21,15 @@ describe('Country', function () {
             });
     });
 
-    it('GET /api/country', function (done) {
+    it('GET /api/language', function (done) {
         chai.request(localhost)
-            .get('/api/country')
+            .get('/api/language')
             .set('token', token)
             .end(function (err, res) {
                 if (err) {
                     done(err);
                 }
                 expect(res).to.have.status(200);
-                expect(res.body.length).to.be.above(20);
-                done();
-            });
-    });
-
-    it('GET /api/country?priority=1', function (done) {
-        chai.request(localhost)
-            .get('/api/country')
-            .set('token', token)
-            .query({priority: '1'})
-            .end(function (err, res) {
-                if (err) {
-                    done(err);
-                }
-                expect(res).to.have.status(200);
-                expect(res.body.length).to.be.below(10);
-                expect(res.body.length).to.be.above(0);
                 done();
             });
     });

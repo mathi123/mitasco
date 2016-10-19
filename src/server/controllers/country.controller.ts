@@ -5,12 +5,13 @@ import { Country } from "../shared/country";
 
 export class CountryController {
     public async getAll(filterPriority: boolean): Promise<Country[]> {
+        console.info(filterPriority);
         let query: QueryConfig = {
             name: QueryNames.CountryGetAll,
             text: `
             SELECT cnt.id, cnt.name_nl, cnt.priority 
             FROM country cnt
-            WHERE $1 = FALSE OR cnt.priority = TRUE
+            WHERE NOT $1 OR cnt.priority = TRUE
             ORDER BY cnt.name_nl ASC`,
             values: [filterPriority]
         };

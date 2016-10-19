@@ -1,18 +1,13 @@
 import { Response } from "express-serve-static-core";
 import { Logger } from "../logger";
 import { WebRequest } from "../web/web-request";
-import { CountryController } from "../controllers/country.controller";
+import { LanguageController } from "../controllers/language.controller";
 
 export async function getAll(req: WebRequest, resp: Response) {
-    let priority = false;
-
-    if (req.query.priority)
-        priority = req.query.priority === '1';
-
-    let databaseSource = new CountryController();
+    let databaseSource = new LanguageController();
 
     try {
-        let results = await databaseSource.getAll(priority);
+        let results = await databaseSource.getAll();
         resp.json(results);
     } catch (error) {
         Logger.routeException(req, error);
