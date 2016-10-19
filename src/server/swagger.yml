@@ -355,6 +355,22 @@ paths:
           description: permission denied
         '500':
           description: internal server error
+  /language:
+    get:
+      description: returns all languages
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+      responses:
+        '200':
+          description: result languages
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Language"
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
 parameters:
   authenticationToken:
     name: token
@@ -449,3 +465,13 @@ definitions:
       priority:
         type: boolean
         description: indicates this is a commonly used country
+  Language:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
