@@ -17,4 +17,6 @@ export class QueryNames {
     public static GroupGetSingle: string = "GroupGetSingle";
 
     public static CountryGetAll: string = "CountryGetAll";
+
+    public static LanguageGetAll: string = "LanguageGetAll";
 }

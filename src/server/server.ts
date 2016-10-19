@@ -6,6 +6,7 @@ import * as permissionCodeRoutes from "./routes/permission-code.route";
 import * as authenticationRoutes from "./routes/authentication.route";
 import * as groupRoutes from "./routes/group.route";
 import * as countryRoutes from "./routes/country.route";
+import * as languageRoutes from "./routes/language.route";
 
 class StartUp {
     public static main(): number {
@@ -44,6 +45,9 @@ class StartUp {
 
         // country routes
         server.configureRoute(RouteType.GET, 'country', countryRoutes.getAll);
+
+        // language routes
+        server.configureRoute(RouteType.GET, 'language', languageRoutes.getAll);
 
         server.start();
 
