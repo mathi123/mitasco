@@ -9,6 +9,7 @@ import { LoginComponent } from "./components/login/login.component";
 import { PermissionCodeListComponent } from "./components/permission-code/permission-code-list.component";
 import { UserListComponent } from "./components/user/user-list.component";
 import { RegisterComponent } from "./components/register/register.component";
+import { LanguageListComponent } from "./components/language/language-list.component";
 
 const appRoutes: Routes = [
     {path: '', component: DashboardComponent},
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
     {path: 'group-list', component: GroupListComponent},
     {path: 'group-detail/:id', component: GroupDetailComponent},
     {path: 'permission-code-list', component: PermissionCodeListComponent},
+    {path: 'language-list', component: LanguageListComponent},
     {path: 'user-list', component: UserListComponent},
     {path: '**', component: PageNotFoundComponent}
 ];

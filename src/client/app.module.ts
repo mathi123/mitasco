@@ -26,14 +26,17 @@ import { PermissionCodeService } from "./services/permission-code.service";
 import { PermissionCodeListComponent } from "./components/permission-code/permission-code-list.component";
 import { UserListComponent } from "./components/user/user-list.component";
 import { RegisterComponent } from "./components/register/register.component";
+import { LanguageListComponent } from "./components/language/language-list.component";
+import { LanguageService } from "./services/language.service";
+import { CountryService } from "./services/country.service";
 
 @NgModule({
     imports: [BrowserModule, FormsModule, HttpModule, routing],
     declarations: [LoginComponent, RegisterComponent, ApplicationRootComponent, MenuComponent, TodoListComponent, TodoDetailComponent,
         DashboardComponent, GroupListComponent, GroupDetailComponent, AccordionComponent, AccordionGroupComponent,
-        PageNotFoundComponent, SuggestionInputComponent, PermissionCodeListComponent, UserListComponent],
+        PageNotFoundComponent, SuggestionInputComponent, PermissionCodeListComponent, UserListComponent, LanguageListComponent],
     providers: [TodoService, GroupService, appRoutingProviders, ConfigurationProvider,
-        AuthenticationService, MenuProvider, UrlTrackingService, UserService, PermissionCodeService],
+        AuthenticationService, MenuProvider, UrlTrackingService, UserService, PermissionCodeService, LanguageService, CountryService],
     bootstrap: [ApplicationRootComponent]
 })
 export class AppModule {
