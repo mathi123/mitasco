@@ -13,7 +13,6 @@ import { GroupDetailComponent } from "./components/group/group-detail.component"
 import { AccordionComponent } from "./components/accordion/accordion.component";
 import { AccordionGroupComponent } from "./components/accordion/accordion-group.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
-import { MenuService } from "./services/menu.service";
 import { MenuComponent } from "./components/menu/menu.component";
 import { SuggestionInputComponent } from "./components/suggestion-input/suggestion-input.component";
 import { PermissionCodeListComponent } from "./components/permission-code/permission-code-list.component";
@@ -26,7 +25,7 @@ import { ServicesModule } from "./services/services.module";
     declarations: [LoginComponent, RegisterComponent, ApplicationRootComponent, MenuComponent, TodoListComponent, TodoDetailComponent,
         DashboardComponent, GroupListComponent, GroupDetailComponent, AccordionComponent, AccordionGroupComponent,
         PageNotFoundComponent, SuggestionInputComponent, PermissionCodeListComponent, UserListComponent],
-    providers: [appRoutingProviders, MenuService],
+    providers: [appRoutingProviders],
     bootstrap: [ApplicationRootComponent]
 })
 export class AppModule {
