@@ -4,7 +4,7 @@ import { TodoDetailComponent } from "./todo-detail.component";
 import { TodoService } from "../../services/todo.service";
 import { SearchArgument } from "../../shared/search-argument";
 import { PartialResultList } from "../../shared/partial-result-list";
-import { ConfigurationProvider } from "../../providers/configuration.provider";
+import { ConfigurationService } from "../../services/configuration.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -19,7 +19,7 @@ export class TodoListComponent implements OnInit {
     todos: Todo[] = [];
     selected: Todo;
 
-    constructor(private todoService: TodoService, private configuration: ConfigurationProvider,
+    constructor(private todoService: TodoService, private configuration: ConfigurationService,
                 private router: Router) {
 
     }

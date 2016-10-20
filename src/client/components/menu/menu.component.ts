@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
-import { MenuProvider } from "../../providers/menu.provider";
-import { ConfigurationProvider } from "../../providers/configuration.provider";
+import { MenuService } from "../../services/menu.service";
+import { ConfigurationService } from "../../services/configuration.service";
 
 @Component({
     moduleId: module.id,
@@ -11,7 +11,7 @@ export class MenuComponent {
     public isOpen: boolean = true;
     public docsUrl: string;
 
-    constructor(private menu: MenuProvider, private configuration: ConfigurationProvider) {
+    constructor(private menu: MenuService, private configuration: ConfigurationService) {
         this.docsUrl = configuration.getDocumentationUrl();
 
         menu.menuToggled.asObservable().subscribe((isOpen: boolean) => {

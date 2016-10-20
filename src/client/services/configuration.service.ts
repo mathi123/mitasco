@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Headers, RequestOptions } from "@angular/http";
 
 @Injectable()
-export class ConfigurationProvider {
+export class ConfigurationService {
     private _baseUrl: string = 'https://localhost:3000';
     private _headers: Headers = new Headers();
     private _options: RequestOptions = new RequestOptions();

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ConfigurationProvider } from "../../providers/configuration.provider";
+import { ConfigurationService } from "../../services/configuration.service";
 import { Router } from "@angular/router";
 import { UserService } from "../../services/user.service";
 import { User } from "../../shared/user";
@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
     public passwordIsValid: boolean = false;
     public password2IsValid: boolean = false;
 
-    constructor(private config: ConfigurationProvider, private router: Router,
+    constructor(private config: ConfigurationService, private router: Router,
                 private service: UserService, private authenticationService: AuthenticationService) {
     }
 

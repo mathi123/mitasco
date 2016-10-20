@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService } from "../../services/user.service";
 import { Router } from "@angular/router";
-import { ConfigurationProvider } from "../../providers/configuration.provider";
+import { ConfigurationService } from "../../services/configuration.service";
 import { SearchArgument } from "../../shared/search-argument";
 import { PartialResultList } from "../../shared/partial-result-list";
 import { User } from "../../shared/user";
@@ -15,7 +15,7 @@ export class UserListComponent implements OnInit {
     public query: string = 'test';
     public records: User[];
 
-    constructor(private service: UserService, private router: Router, private configuration: ConfigurationProvider) {
+    constructor(private service: UserService, private router: Router, private configuration: ConfigurationService) {
     }
 
     ngOnInit() {

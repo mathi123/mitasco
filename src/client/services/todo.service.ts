@@ -5,12 +5,12 @@ import { PartialResultList } from "../shared/partial-result-list";
 import { Http, Response } from "@angular/http";
 import "rxjs/add/operator/toPromise";
 import { TodoServiceInterface } from "../shared/todo-service-interface";
-import { ConfigurationProvider } from "../providers/configuration.provider";
+import { ConfigurationService } from "./configuration.service";
 
 @Injectable()
 export class TodoService implements TodoServiceInterface {
 
-    public constructor(private http: Http, private config: ConfigurationProvider) {
+    public constructor(private http: Http, private config: ConfigurationService) {
 
     }
 

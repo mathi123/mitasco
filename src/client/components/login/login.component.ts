@@ -1,23 +1,23 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthenticationService } from "../../services/authentication.service";
 import { Credentials } from "../../shared/credentials";
-import { MenuProvider } from "../../providers/menu.provider";
+import { MenuService } from "../../services/menu.service";
 import { Router } from "@angular/router";
-import { ConfigurationProvider } from "../../providers/configuration.provider";
+import { ConfigurationService } from "../../services/configuration.service";
 import { UrlTrackingService } from "../../services/url-tracking.service";
 
 @Component({
     moduleId: module.id,
     selector: 'login-form',
     templateUrl: 'login.component.html',
-    providers: [AuthenticationService, MenuProvider]
+    providers: [AuthenticationService, MenuService]
 })
 export class LoginComponent implements OnInit {
     public username: string = "0.0485660610351879@gmail.com";
     public password: string = "test";
 
-    constructor(private authenticationService: AuthenticationService, private menu: MenuProvider,
-                private router: Router, private config: ConfigurationProvider, private urlTracking: UrlTrackingService) {
+    constructor(private authenticationService: AuthenticationService, private menu: MenuService,
+                private router: Router, private config: ConfigurationService, private urlTracking: UrlTrackingService) {
 
     }
 

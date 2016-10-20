@@ -4,13 +4,13 @@ import { User } from "../shared/user";
 import { PartialResultList } from "../shared/partial-result-list";
 import { SearchArgument } from "../shared/search-argument";
 import { Http, Response } from "@angular/http";
-import { ConfigurationProvider } from "../providers/configuration.provider";
+import { ConfigurationService } from "./configuration.service";
 import { RegistrationData } from "../shared/registration-data";
 
 @Injectable()
 export class UserService implements UserServiceInterface {
 
-    constructor(private http: Http, private config: ConfigurationProvider) {
+    constructor(private http: Http, private config: ConfigurationService) {
 
     }
 

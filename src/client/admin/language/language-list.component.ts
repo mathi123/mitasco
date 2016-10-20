@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { LanguageService } from "../../services/language.service";
 import { Language } from "../../shared/language";
-import { ConfigurationProvider } from "../../providers/configuration.provider";
+import { ConfigurationService } from "../../services/configuration.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 export class LanguageListComponent implements OnInit {
     private records: Language[];
 
-    constructor(private service: LanguageService, private configuration: ConfigurationProvider, private router: Router) {
+    constructor(private service: LanguageService, private configuration: ConfigurationService, private router: Router) {
     }
 
     ngOnInit() {
@@ -29,6 +29,4 @@ export class LanguageListComponent implements OnInit {
             .then((data: Language[]) => this.records = data)
             .catch((err) => console.log(err));
     }
-
-
 }

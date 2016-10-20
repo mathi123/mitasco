@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Http, Response } from "@angular/http";
-import { ConfigurationProvider } from "../providers/configuration.provider";
+import { ConfigurationService } from "./configuration.service";
 import { Language } from "../shared/language";
 
 @Injectable()
 export class LanguageService {
-    constructor(private http: Http, private config: ConfigurationProvider) {
+    constructor(private http: Http, private config: ConfigurationService) {
     }
 
     getAll(): Promise<Language[]> {

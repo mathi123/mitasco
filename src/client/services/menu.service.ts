@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Subject } from "rxjs/Subject";
 
 @Injectable()
-export class MenuProvider {
+export class MenuService {
     private isOpen: boolean = true;
 
     public menuToggled = new Subject<boolean>();
