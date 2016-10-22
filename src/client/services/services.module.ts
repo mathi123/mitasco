@@ -16,7 +16,7 @@ export class ServicesModule {
         return {
             ngModule: ServicesModule,
             providers: [AuthenticationService, ConfigurationService, CountryService, GroupService, LanguageService, MenuService,
-                PermissionCodeService, TodoService, UrlTrackingService, UserService]
+                PermissionCodeService, TodoService, UserService, UrlTrackingService]
         }
     }
 }

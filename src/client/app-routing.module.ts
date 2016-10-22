@@ -9,8 +9,9 @@ import { LoginComponent } from "./components/login/login.component";
 import { PermissionCodeListComponent } from "./components/permission-code/permission-code-list.component";
 import { UserListComponent } from "./components/user/user-list.component";
 import { RegisterComponent } from "./components/register/register.component";
+import { NgModule } from "@angular/core";
 
-const appRoutes: Routes = [
+const routes: Routes = [
     {path: '', component: DashboardComponent},
     {path: 'dashboard', component: DashboardComponent},
     {path: 'login', component: LoginComponent},
@@ -23,6 +24,10 @@ const appRoutes: Routes = [
     {path: 'user-list', component: UserListComponent},
     {path: '**', component: PageNotFoundComponent}
 ];
-export const appRoutingProviders: any[] = [];
 
-export const routing = RouterModule.forRoot(appRoutes);
+@NgModule({
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
+})
+export class AppRoutingModule {
+}

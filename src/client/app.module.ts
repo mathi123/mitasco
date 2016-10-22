@@ -3,7 +3,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { ApplicationRootComponent } from "./components/application-root/application-root.component";
-import { routing, appRoutingProviders } from "./routing";
 import { TodoDetailComponent } from "./components/todo/todo-detail.component";
 import { TodoListComponent } from "./components/todo/todo-list.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
@@ -19,13 +18,14 @@ import { PermissionCodeListComponent } from "./components/permission-code/permis
 import { UserListComponent } from "./components/user/user-list.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { ServicesModule } from "./services/services.module";
+import { AppRoutingModule } from "./app-routing.module";
+import { AdminModule } from "./admin/admin.module";
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, HttpModule, routing, ServicesModule.forRoot()],
+    imports: [BrowserModule, FormsModule, HttpModule, AppRoutingModule, ServicesModule.forRoot(), AdminModule],
     declarations: [LoginComponent, RegisterComponent, ApplicationRootComponent, MenuComponent, TodoListComponent, TodoDetailComponent,
         DashboardComponent, GroupListComponent, GroupDetailComponent, AccordionComponent, AccordionGroupComponent,
         PageNotFoundComponent, SuggestionInputComponent, PermissionCodeListComponent, UserListComponent],
-    providers: [appRoutingProviders],
     bootstrap: [ApplicationRootComponent]
 })
 export class AppModule {
