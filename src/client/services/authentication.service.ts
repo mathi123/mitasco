@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Credentials } from "../shared/credentials";
 import { Http, Response } from "@angular/http";
-import { ConfigurationProvider } from "../providers/configuration.provider";
+import { ConfigurationService } from "./configuration.service";
 
 @Injectable()
 export class AuthenticationService {
-    public constructor(private http: Http, private config: ConfigurationProvider) {
+    public constructor(private http: Http, private config: ConfigurationService) {
 
     }
 

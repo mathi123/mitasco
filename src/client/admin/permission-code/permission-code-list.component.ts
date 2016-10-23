@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { PermissionCodeService } from "../../services/permission-code.service";
 import { PermissionCode } from "../../shared/permission-code";
-import { ConfigurationProvider } from "../../providers/configuration.provider";
+import { ConfigurationService } from "../../services/configuration.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 export class PermissionCodeListComponent implements OnInit {
     private records: PermissionCode[];
 
-    constructor(private service: PermissionCodeService, private configuration: ConfigurationProvider, private router: Router) {
+    constructor(private service: PermissionCodeService, private configuration: ConfigurationService, private router: Router) {
 
     }
 

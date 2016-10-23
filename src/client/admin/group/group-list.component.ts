@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { GroupService } from "../../services/group.service";
 import { Group } from "../../shared/group";
 import { Router } from "@angular/router";
-import { ConfigurationProvider } from "../../providers/configuration.provider";
+import { ConfigurationService } from "../../services/configuration.service";
 
 @Component({
     moduleId: module.id,
@@ -13,7 +13,7 @@ export class GroupListComponent implements OnInit {
     public records: Group[] = [];
 
     constructor(private service: GroupService, private router: Router,
-                private configuration: ConfigurationProvider) {
+                private configuration: ConfigurationService) {
     }
 
     ngOnInit() {
@@ -25,11 +25,11 @@ export class GroupListComponent implements OnInit {
     }
 
     open(group: Group) {
-        this.router.navigate(['/group-detail', group.id]);
+        this.router.navigate(['/admin/group-detail', group.id]);
     }
 
     create() {
-        this.router.navigate(['/group-detail', 0]);
+        this.router.navigate(['/admin/group-detail', 0]);
     }
 
     remove(group: Group) {

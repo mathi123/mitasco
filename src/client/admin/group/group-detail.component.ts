@@ -5,7 +5,7 @@ import { Subscription } from "rxjs";
 import { ActivatedRoute, Router } from "@angular/router";
 import { KeyValuePair } from "../../shared/key-value-pair";
 import { PermissionCode } from "../../shared/permission-code";
-import { ConfigurationProvider } from "../../providers/configuration.provider";
+import { ConfigurationService } from "../../services/configuration.service";
 import { User } from "../../shared/user";
 import { UserService } from "../../services/user.service";
 import { SearchArgument } from "../../shared/search-argument";
@@ -34,7 +34,7 @@ export class GroupDetailComponent implements OnInit {
     private selectedPermission: PermissionCode;
 
     constructor(private service: GroupService, private route: ActivatedRoute,
-                private configuration: ConfigurationProvider, private router: Router,
+                private configuration: ConfigurationService, private router: Router,
                 private userService: UserService, private permissionService: PermissionCodeService) {
     }
 

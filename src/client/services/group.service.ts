@@ -2,12 +2,12 @@ import { Injectable } from "@angular/core";
 import { GroupServiceInterface } from "../shared/group-service-interface";
 import { Group } from "../shared/group";
 import { Http, Response } from "@angular/http";
-import { ConfigurationProvider } from "../providers/configuration.provider";
+import { ConfigurationService } from "./configuration.service";
 
 @Injectable()
 export class GroupService implements GroupServiceInterface {
 
-    constructor(private http: Http, private config: ConfigurationProvider) {
+    constructor(private http: Http, private config: ConfigurationService) {
     }
 
     getAll(): Promise<Group[]> {
