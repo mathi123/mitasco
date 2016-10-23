@@ -11,7 +11,7 @@ const routes: Routes = [
     {
         path: 'admin',
         children: [
-            {path: 'group-detail', component: GroupDetailComponent},
+            {path: 'group-detail/:id', component: GroupDetailComponent},
             {path: 'group-list', component: GroupListComponent},
             {path: 'language-list', component: LanguageListComponent},
             {path: 'permission-code-list', component: PermissionCodeListComponent},

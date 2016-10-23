@@ -25,11 +25,11 @@ export class GroupListComponent implements OnInit {
     }
 
     open(group: Group) {
-        this.router.navigate(['/group-detail', group.id]);
+        this.router.navigate(['/admin/group-detail', group.id]);
     }
 
     create() {
-        this.router.navigate(['/group-detail', 0]);
+        this.router.navigate(['/admin/group-detail', 0]);
     }
 
     remove(group: Group) {

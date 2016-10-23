@@ -16,7 +16,7 @@ import { AdminModule } from "./admin/admin.module";
 import { WidgetModule } from "./widgets/widget.module";
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, HttpModule, ServicesModule.forRoot(), WidgetModule, AdminModule, AppRoutingModule],
+    imports: [BrowserModule, FormsModule, HttpModule, ServicesModule, WidgetModule, AdminModule, AppRoutingModule],
     declarations: [LoginComponent, RegisterComponent, ApplicationRootComponent, MenuComponent, TodoListComponent, TodoDetailComponent,
         DashboardComponent, PageNotFoundComponent],
     bootstrap: [ApplicationRootComponent]

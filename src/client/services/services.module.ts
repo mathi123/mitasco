@@ -10,13 +10,10 @@ import { UserService } from "./user.service";
 import { ConfigurationService } from "./configuration.service";
 import { MenuService } from "./menu.service";
 
-@NgModule({})
+@NgModule({
+    providers: [AuthenticationService, ConfigurationService, CountryService, GroupService, LanguageService, MenuService,
+        PermissionCodeService, TodoService, UserService, UrlTrackingService]
+})
 export class ServicesModule {
-    static forRoot() {
-        return {
-            ngModule: ServicesModule,
-            providers: [AuthenticationService, ConfigurationService, CountryService, GroupService, LanguageService, MenuService,
-                PermissionCodeService, TodoService, UserService, UrlTrackingService]
-        }
-    }
+
 }
