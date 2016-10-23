@@ -22,7 +22,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AdminModule } from "./admin/admin.module";
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, HttpModule, AppRoutingModule, ServicesModule.forRoot(), AdminModule],
+    imports: [BrowserModule, FormsModule, HttpModule, ServicesModule.forRoot(), AdminModule, AppRoutingModule],
     declarations: [LoginComponent, RegisterComponent, ApplicationRootComponent, MenuComponent, TodoListComponent, TodoDetailComponent,
         DashboardComponent, GroupListComponent, GroupDetailComponent, AccordionComponent, AccordionGroupComponent,
         PageNotFoundComponent, SuggestionInputComponent, PermissionCodeListComponent, UserListComponent],
