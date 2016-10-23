@@ -8,9 +8,10 @@ import { GroupListComponent } from "./group/group-list.component";
 import { GroupDetailComponent } from "./group/group-detail.component";
 import { PermissionCodeListComponent } from "./permission-code/permission-code-list.component";
 import { UserListComponent } from "./user/user-list.component";
+import { WidgetModule } from "../widgets/widget.module";
 
 @NgModule({
-    imports: [CommonModule, AdminRoutingModule],
+    imports: [CommonModule, WidgetModule, AdminRoutingModule],
     declarations: [DashboardComponent, GroupListComponent, GroupDetailComponent, LanguageListComponent, PermissionCodeListComponent, UserListComponent],
     exports: [CommonModule, RouterModule]
 })
