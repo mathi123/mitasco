@@ -1,21 +1,25 @@
 @import '../colors';
-
-$sideBarWidth: 175px;
-$topBarHeight: 40px;
+@import '../globals';
 
 html{
   -webkit-text-size-adjust: none;
 }
 
 body {
-  margin: 0;
   font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
   font-size: 14px;
 }
 
+@media only screen and (min-device-width: $mobileMaxWidth) {
+  .body-menu-open-desktop {
+    margin-left: $sideBarWidth;
+  }
+}
+
 #header{
+  //margin-left: -$sideBarWidth;
   height: $topBarHeight;
-  width: 100%;
+  //width: 100%;
   background-color: $accentColor;
   padding: 5px;
   font-size:20pt;
@@ -28,6 +32,9 @@ body {
 }
 
 #menu{
+  @media only screen and (min-device-width: $mobileMaxWidth) {
+    margin-left: -$sideBarWidth;
+  }
   nav{
     background-color: $darkPrimaryColor;
     color: $textColor;
@@ -47,6 +54,7 @@ body {
 }
 
 #content{
+  width: 100%;
   float: left;
   padding: 15px;
 }
