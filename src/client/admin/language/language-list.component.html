@@ -1,15 +1,17 @@
 <div>
     <h1>Talen</h1>
-    <table class="simple-table colspan6">
-        <tr class="simple-table-header">
-            <td>
-                <p>Taal</p>
-            </td>
-        </tr>
-        <tr *ngFor="let record of records" class="simple-table-row">
-            <td>
-                <p>{{record.name}}</p>
-            </td>
-        </tr>
-    </table>
+    <div class="row">
+        <table class="simple-table colspan6">
+            <tr class="simple-table-header">
+                <td>
+                    <p>Taal</p>
+                </td>
+            </tr>
+            <tr *ngFor="let record of records" class="simple-table-row">
+                <td>
+                    <p>{{record.name}}</p>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
