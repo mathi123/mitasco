@@ -1,5 +1,5 @@
 <div>
-    <header id="header">
+    <header id="header" [ngClass]="{'header-menu-open':menuIsOpen}">
         <button type="button" (click)="toggleMenu()">menu</button>
     </header>
 

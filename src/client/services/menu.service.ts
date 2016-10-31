@@ -3,7 +3,7 @@ import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class MenuService {
-    private isOpen: boolean = true;
+    public isOpen: boolean = true;
 
     public menuToggled = new Subject<boolean>();
 
