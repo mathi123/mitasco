@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { MenuService } from "../../services/menu.service";
 import { UrlTrackingService } from "../../services/url-tracking.service";
 
@@ -7,8 +7,18 @@ import { UrlTrackingService } from "../../services/url-tracking.service";
     selector: 'application-root',
     templateUrl: 'application-root.component.html'
 })
-export class ApplicationRootComponent {
+export class ApplicationRootComponent implements OnInit {
+    public menuIsOpen: boolean = false;
+
     constructor(private menu: MenuService, private urlTracker: UrlTrackingService) {
+    }
+
+    ngOnInit(): void {
+        this.menu.menuToggled.asObservable().subscribe((isOpen: boolean) => {
+            this.menuIsOpen = isOpen;
+        }, err => {
+            console.error(err)
+        });
     }
 
     public toggleMenu() {
