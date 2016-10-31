@@ -11,3 +11,11 @@
     @include grid-span($i);
   }
 }
+
+.row {
+  width: 100%;
+}
+
+.container {
+  padding: 10px;
+}

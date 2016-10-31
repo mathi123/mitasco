@@ -16,10 +16,6 @@ body {
   }
 }
 
-.row {
-  width: 100%;
-}
-
 #header{
   //margin-left: -$sideBarWidth;
   height: $topBarHeight;
@@ -59,6 +55,4 @@ body {
 
 #content{
   width: 100%;
-  float: left;
-  padding: 15px;
 }
