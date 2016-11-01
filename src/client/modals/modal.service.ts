@@ -1,27 +1,38 @@
-import { Injectable, Injector, ViewContainerRef, Compiler, ComponentRef, ReflectiveInjector } from "@angular/core";
+import { Injectable, Compiler, ComponentRef, ReflectiveInjector } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { ReplaySubject } from "rxjs/ReplaySubject";
+import { Placeholder } from "./modal-placeholder/placeholder";
 
 @Injectable()
 export class ModalService {
-    private viewContainerRef: ViewContainerRef;
-    private injector: Injector;
+    private placeholders: any = {};
     public activeModals: number = 0;
 
     constructor(private compiler: Compiler) {
     }
 
-    registerViewContainerRef(viewContainerRef: ViewContainerRef) {
-        this.viewContainerRef = viewContainerRef;
+    registerPlaceholder(placeholder: Placeholder) {
+        this.placeholders[placeholder.id] = placeholder;
     }
 
-    registerInjector(injector: Injector) {
-        this.injector = injector;
+    create<T>(placeholderId: string, module: any, component: any, parameters?: Object): Observable<ComponentRef<T>> {
+        let placeholder = this.placeholders[placeholderId];
+
+        if (placeholder === undefined) {
+            console.error("placeholder not found");
+            return;
+        }
+
+        if (placeholder.stackModals) {
+            // TODO
+        } else {
+            return this.createFromPlaceholder<T>(placeholder, module, component, parameters);
+        }
     }
 
-    create<T>(module: any, component: any, parameters?: Object): Observable<ComponentRef<T>> {
+    createFromPlaceholder<T>(placeholder: Placeholder, module: any, component: any, parameters?: Object): Observable<ComponentRef<T>> {
         // we return a stream so we can  access the componentref
-        let componentRefObservable = new ReplaySubject<ComponentRef<T>>();
+        let componentRef$ = new ReplaySubject<ComponentRef<T>>();
         // compile the component based on its type and
         // create a component factory
         this.compiler.compileModuleAndAllComponentsAsync(module)
@@ -32,9 +43,9 @@ export class ModalService {
                 // the injector will be needed for DI in
                 // the custom component
                 const childInjector = ReflectiveInjector
-                    .resolveAndCreate([], this.injector);
+                    .resolveAndCreate([], placeholder.injector);
                 // create the actual component
-                let componentRef = this.viewContainerRef
+                let componentRef = placeholder.viewContainerRef
                     .createComponent(componentFactory, 0, childInjector);
                 // pass the @Input parameters to the instance
                 Object.assign(componentRef.instance, parameters);
@@ -47,9 +58,9 @@ export class ModalService {
                 };
                 // the component is rendered into the ViewContainerRef
                 // so we can update and complete the stream
-                componentRefObservable.next(componentRef);
-                componentRefObservable.complete();
+                componentRef$.next(componentRef);
+                componentRef$.complete();
             });
-        return componentRefObservable;
+        return componentRef$;
     }
 }

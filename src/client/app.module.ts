@@ -15,11 +15,12 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AdminModule } from "./admin/admin.module";
 import { WidgetModule } from "./widgets/widget.module";
 import { ModalsModule } from "./modals/modals.module";
+import { TestModalComponent } from "./components/test-modal/test-modal.component";
 
 @NgModule({
     imports: [BrowserModule, FormsModule, HttpModule, ServicesModule, WidgetModule, ModalsModule, AdminModule, AppRoutingModule],
     declarations: [LoginComponent, RegisterComponent, ApplicationRootComponent, MenuComponent, TodoListComponent, TodoDetailComponent,
-        DashboardComponent, PageNotFoundComponent],
+        DashboardComponent, PageNotFoundComponent, TestModalComponent],
     bootstrap: [ApplicationRootComponent]
 })
 export class AppModule {
