@@ -10,8 +10,11 @@ import * as languageRoutes from "./routes/language.route";
 
 class StartUp {
     public static main(): number {
+        let input = StartUp.getArgument("p");
+        let port = input != '' ? Number(input) : 3000;
+
         let server = new WebServer();
-        server.init(3000);
+        server.init(port);
 
         // token
         server.configureRoute(RouteType.POST, 'token', authenticationRoutes.getToken, '', false);
@@ -52,6 +55,17 @@ class StartUp {
         server.start();
 
         return 0;
+    }
+
+    public static getArgument(identifier: string): string {
+        let id = `-${identifier}`;
+        let index = process.argv.indexOf(id);
+
+        if (index >= 0 && process.argv.length > index + 1) {
+            return process.argv[index + 1];
+        } else {
+            return '';
+        }
     }
 }
 

@@ -190,8 +190,14 @@ gulp.task('clean-client', function () {
     return del([path.join(config[environment].buildDir, 'app')], {force: true});
 });
 gulp.task('copy-angular-libs', function () {
-    return gulp.src(['node_modules/@angular/**'])
-        .pipe(gulp.dest(path.join(config[environment].buildDirClient, 'libs', 'angular2')));
+    var base = path.join(config[environment].buildDirClient, config.client.vendor_folder, 'angular2');
+
+    for (var i = 0; i < config.client.ngPackageNames.length; i++) {
+        var source = path.join('node_modules/@angular/', config.client.ngPackageNames[i], 'bundles', config.client.ngPackageNames[i] + '.umd.min.js');
+        var target = path.join(base, config.client.ngPackageNames[i]);
+        gulp.src(source)
+            .pipe(gulp.dest(target));
+    }
 });
 gulp.task('copy-imwa', function () {
     return gulp.src(['node_modules/angular2-in-memory-web-api/**/*.js'])
