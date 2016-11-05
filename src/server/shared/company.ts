@@ -1,4 +1,5 @@
-import { Deserializable } from "deserialize-json-strict";
+import { Deserializable, DeserializeUtil } from "deserialize-json-strict";
+import { Country } from "./country";
 
 export class Company implements Deserializable {
     public id: number;
@@ -6,48 +7,31 @@ export class Company implements Deserializable {
     public email: string;
     public phone: string;
     public fax: string;
-    public gsm: string;
-    public isCustomer: boolean;
-    public isSupplier: boolean;
-    public isCompetitor: boolean;
-    public vat: string;
+    public cell: string;
+    public url: string;
+    public street: string;
+    public zip: string;
+    public city: string;
+    public country: Country;
 
     constructor() {
-
-    }
-
-    public validate(): boolean {
-        if (this.name) {
-            return this.name.length > 3;
-        }
-        else {
-            return false;
-        }
-    }
-
-    public toString(): string {
-        let nummer: string = "";
-
-        if (this.gsm) {
-            nummer = ` (${this.gsm})`
-        }
-        else if (this.phone) {
-            nummer = ` (${this.phone})`;
-        }
-
-        return this.name + nummer;
     }
 
     public deserialize(values: any) {
-        this.id = values.id;
-        this.name = values.name;
-        this.email = values.email;
-        this.phone = values.phone;
-        this.fax = values.fax;
-        this.gsm = values.gsm;
-        this.isCustomer = values.isCustomer;
-        this.isSupplier = values.isSupplier;
-        this.isCompetitor = values.isCompetitor;
-        this.vat = values.vat;
+        this.id = DeserializeUtil.StrictNumber(values.id);
+        this.name = DeserializeUtil.StrictString(values.name);
+        this.email = DeserializeUtil.StrictString(values.email);
+        this.phone = DeserializeUtil.StrictString(values.phone);
+        this.fax = DeserializeUtil.StrictString(values.fax);
+        this.cell = DeserializeUtil.StrictString(values.cell);
+        this.url = DeserializeUtil.StrictString(values.url);
+        this.street = DeserializeUtil.StrictString(values.street);
+        this.zip = DeserializeUtil.StrictString(values.zip);
+        this.city = DeserializeUtil.StrictString(values.city);
+
+        if (values.country) {
+            this.country = new Country();
+            this.country.deserialize(values.country);
+        }
     }
 }
