@@ -9,10 +9,11 @@ import { TodoService } from "./todo.service";
 import { UserService } from "./user.service";
 import { ConfigurationService } from "./configuration.service";
 import { MenuService } from "./menu.service";
+import { UserSettingsService } from "./user-settings.service";
 
 @NgModule({
     providers: [AuthenticationService, ConfigurationService, CountryService, GroupService, LanguageService, MenuService,
-        PermissionCodeService, TodoService, UserService, UrlTrackingService]
+        PermissionCodeService, TodoService, UserService, UrlTrackingService, UserSettingsService]
 })
 export class ServicesModule {
 

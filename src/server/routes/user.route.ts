@@ -5,12 +5,12 @@ import { SortDirection } from "../shared/sort-direction";
 import { Utils } from "../utils";
 import { User } from "../shared/user";
 import { WebRequest } from "../web/web-request";
-import { Permissions } from "../security/permissions";
+import { PermissionCodes } from "../shared/permissions-codes";
 import { RegistrationData } from "../shared/registration-data";
 import { Logger } from "../logger";
 
 export async function search(req: WebRequest, resp: Response) {
-    if (req.permissions.indexOf(Permissions.Admin) < 0) {
+    if (req.permissions.indexOf(PermissionCodes.Admin) < 0) {
         resp.sendStatus(550);
         return;
     }
@@ -52,7 +52,7 @@ export async function search(req: WebRequest, resp: Response) {
 }
 
 export async function read(req: WebRequest, resp: Response) {
-    if (req.permissions.indexOf(Permissions.Admin) < 0) {
+    if (req.permissions.indexOf(PermissionCodes.Admin) < 0) {
         resp.sendStatus(550);
         return;
     }
@@ -68,7 +68,7 @@ export async function read(req: WebRequest, resp: Response) {
 }
 
 export async function create(req: WebRequest, resp: Response) {
-    if (req.permissions.indexOf(Permissions.Admin) < 0) {
+    if (req.permissions.indexOf(PermissionCodes.Admin) < 0) {
         resp.sendStatus(550);
         return;
     }

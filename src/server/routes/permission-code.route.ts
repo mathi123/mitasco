@@ -4,10 +4,10 @@ import { Logger } from "../logger";
 import { PermissionCode } from "../shared/permission-code";
 import { Utils } from "../utils";
 import { WebRequest } from "../web/web-request";
-import { Permissions } from "../security/permissions";
+import { PermissionCodes } from "../shared/permissions-codes";
 
 export async function getAll(req: WebRequest, resp: Response) {
-    if (req.permissions.indexOf(Permissions.Admin) < 0) {
+    if (req.permissions.indexOf(PermissionCodes.Admin) < 0) {
         resp.sendStatus(550);
         return;
     }
@@ -24,7 +24,7 @@ export async function getAll(req: WebRequest, resp: Response) {
 }
 
 export async function create(req: WebRequest, resp: Response) {
-    if (req.permissions.indexOf(Permissions.Admin) < 0) {
+    if (req.permissions.indexOf(PermissionCodes.Admin) < 0) {
         resp.sendStatus(550);
         return;
     }
@@ -44,7 +44,7 @@ export async function create(req: WebRequest, resp: Response) {
 }
 
 export async function read(req: WebRequest, resp: Response) {
-    if (req.permissions.indexOf(Permissions.Admin) < 0) {
+    if (req.permissions.indexOf(PermissionCodes.Admin) < 0) {
         resp.sendStatus(550);
         return;
     }
@@ -69,7 +69,7 @@ export async function read(req: WebRequest, resp: Response) {
 }
 
 export async function update(req: WebRequest, resp: Response) {
-    if (req.permissions.indexOf(Permissions.Admin)) {
+    if (req.permissions.indexOf(PermissionCodes.Admin)) {
         resp.sendStatus(550);
         return;
     }
@@ -89,7 +89,7 @@ export async function update(req: WebRequest, resp: Response) {
 }
 
 export async function remove(req: WebRequest, resp: Response) {
-    if (req.permissions.indexOf(Permissions.Admin) < 0) {
+    if (req.permissions.indexOf(PermissionCodes.Admin) < 0) {
         resp.sendStatus(550);
         return;
     }
