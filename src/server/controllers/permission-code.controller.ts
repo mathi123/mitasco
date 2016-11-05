@@ -58,6 +58,24 @@ export class PermissionCodeController implements PermissionCodeServiceInterface 
         return result[0]['id'];
     }
 
+    public async getUserPermissionCodes(userId: number): Promise<string[]> {
+        let query: QueryConfig = {
+            name: "PermissionController.GetUserPermissionCodes",
+            text: `select DISTINCT(code) from permissioncode
+                   where id in
+                      (select permissioncode_id
+                       from group_permission
+                       where group_id in (
+                         select group_id from group_user
+                         where user_id = $1))`,
+            values: [userId]
+        };
+
+        let queryResult = await DbClient.Instance().query(query);
+
+        return queryResult.map((permission) => permission['code']);
+    }
+
     private ParseArray(row: any): PermissionCode {
         let rec = new PermissionCode();
         rec.id = row['id'];
