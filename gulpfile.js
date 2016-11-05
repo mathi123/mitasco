@@ -193,7 +193,7 @@ gulp.task('copy-angular-libs', function () {
     var base = path.join(config[environment].buildDirClient, config.client.vendor_folder, 'angular2');
 
     for (var i = 0; i < config.client.ngPackageNames.length; i++) {
-        var source = path.join('node_modules/@angular/', config.client.ngPackageNames[i], 'bundles', config.client.ngPackageNames[i] + '.umd.min.js');
+        var source = path.join('node_modules/@angular/', config.client.ngPackageNames[i], 'bundles', config.client.ngPackageNames[i] + '.umd.js');
         var target = path.join(base, config.client.ngPackageNames[i]);
         gulp.src(source)
             .pipe(gulp.dest(target));
