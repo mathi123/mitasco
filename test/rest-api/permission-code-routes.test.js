@@ -34,9 +34,9 @@ describe('Permission Codes', function () {
     });
 
     var data = {id: 0, description: "test new todo", code: randomPermissionCode};
-    it('PUT /api/permissioncode', function (done) {
+    it('POST /api/permissioncode', function (done) {
         chai.request(localhost)
-            .put('/api/permissioncode')
+            .post('/api/permissioncode')
             .set('content-type', json)
             .set('token', token)
             .send(data)
@@ -52,10 +52,10 @@ describe('Permission Codes', function () {
             });
     });
 
-    it('POST /api/permissioncode', function (done) {
+    it('PUT /api/permissioncode', function (done) {
         data.code = data.code + 'changed';
         chai.request(localhost)
-            .post('/api/permissioncode')
+            .put('/api/permissioncode')
             .set('content-type', json)
             .set('token', token)
             .send(data)
