@@ -54,6 +54,7 @@ export async function createOrUpdate(req: WebRequest, resp: Response) {
     } catch (error) {
         Logger.routeException(req, error);
         resp.sendStatus(400);
+        return;
     }
 
     let databaseSource = new CompanyController();

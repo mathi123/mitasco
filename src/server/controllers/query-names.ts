@@ -1,27 +1,27 @@
 export class QueryNames {
-    public static UserTableSearch: string = "UserTableSearch";
-    public static UserTableSearchCount: string = "UserTableSearchCount";
-    public static UserTableCreate: string = "UserTableCreate";
-    public static UserTableRemove: string = "UserTableRemove";
-    public static UserTable_Read: string = "UserTable_Read";
-    public static UserTableUpdate: string = "UserTableUpdate";
+    public static UserTableSearch = "UserTableSearch";
+    public static UserTableSearchCount = "UserTableSearchCount";
+    public static UserTableCreate = "UserTableCreate";
+    public static UserTableRemove = "UserTableRemove";
+    public static UserTable_Read = "UserTable_Read";
+    public static UserTableUpdate = "UserTableUpdate";
 
-    public static TodoTableSearch: string = "TodoTableSearch";
-    public static TodoTableSearchCount: string = "TodoTableSearchCount";
-    public static TodoTableCreate: string = "TodoTableCreate";
-    public static TodoTableRemove: string = "TodoTableRemove";
-    public static TodoTableRead: string = "TodoTableRead";
-    public static TodoTableUpdate: string = "TodoTableUpdate";
+    public static TodoTableSearch = "TodoTableSearch";
+    public static TodoTableSearchCount = "TodoTableSearchCount";
+    public static TodoTableCreate = "TodoTableCreate";
+    public static TodoTableRemove = "TodoTableRemove";
+    public static TodoTableRead = "TodoTableRead";
+    public static TodoTableUpdate = "TodoTableUpdate";
 
-    public static GroupGetAll: string = "GroupGetAll";
-    public static GroupGetSingle: string = "GroupGetSingle";
+    public static GroupGetAll = "GroupGetAll";
+    public static GroupGetSingle = "GroupGetSingle";
 
-    public static CountryGetAll: string = "CountryGetAll";
+    public static CountryGetAll = "CountryGetAll";
 
-    public static LanguageGetAll: string = "LanguageGetAll";
-    public static CustomerTableSearchCount: string = "CustomerTableSearchCount";
-    static CompanyTableCreate;
-    static CompanyTableRemove;
-    static CompanyTableRead;
-    static CompanyTableUpdate;
+    public static LanguageGetAll = "LanguageGetAll";
+    public static CustomerTableSearchCount = "CustomerTableSearchCount";
+    public static CompanyTableCreate = "CompanyTableCreate";
+    public static CompanyTableRemove = "CompanyTableRemove";
+    public static CompanyTableRead = "CompanyTableRead";
+    public static CompanyTableUpdate = "CompanyTableUpdate";
 }
