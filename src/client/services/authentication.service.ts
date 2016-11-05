@@ -2,10 +2,12 @@ import { Injectable } from "@angular/core";
 import { Credentials } from "../shared/credentials";
 import { Http, Response } from "@angular/http";
 import { ConfigurationService } from "./configuration.service";
+import { LoginResult } from "../shared/login-result";
+import { UserSettingsService } from "./user-settings.service";
 
 @Injectable()
 export class AuthenticationService {
-    public constructor(private http: Http, private config: ConfigurationService) {
+    public constructor(private http: Http, private config: ConfigurationService, private userSettings: UserSettingsService) {
 
     }
 
@@ -13,8 +15,9 @@ export class AuthenticationService {
         return this.http.post(`${this.config.getBaseUrl()}/token`, JSON.stringify(credentials), this.config.getHttpOptions())
             .toPromise()
             .then((r: Response) => {
-                let token = r.json() as string;
-                this.config.setToken(token);
+                let loginResult = r.json() as LoginResult;
+                this.config.setToken(loginResult.token);
+                this.userSettings.initialize(loginResult);
                 return true;
             })
             .catch((err: Error) => {
