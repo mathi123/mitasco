@@ -36,7 +36,7 @@ export class TodoService implements TodoServiceInterface {
     }
 
     public update(todo: Todo): Promise<boolean> {
-        return this.http.post(`${this.config.getBaseUrl()}/todo`, JSON.stringify(todo), this.config.getHttpOptions())
+        return this.http.put(`${this.config.getBaseUrl()}/todo`, JSON.stringify(todo), this.config.getHttpOptions())
             .toPromise()
             .then((r: Response) => r.json() as boolean)
             .catch((err: Error) => console.log(err));

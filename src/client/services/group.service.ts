@@ -25,14 +25,14 @@ export class GroupService implements GroupServiceInterface {
     }
 
     update(group: Group): Promise<boolean> {
-        return this.http.post(`${this.config.getBaseUrl()}/group`, JSON.stringify(group), this.config.getHttpOptions())
+        return this.http.put(`${this.config.getBaseUrl()}/group`, JSON.stringify(group), this.config.getHttpOptions())
             .toPromise()
             .then((r: Response) => r.json() as boolean)
             .catch((err: Error) => console.log(err));
     }
 
     create(group: Group): Promise<number> {
-        return this.http.put(`${this.config.getBaseUrl()}/group`, JSON.stringify(group), this.config.getHttpOptions())
+        return this.http.post(`${this.config.getBaseUrl()}/group`, JSON.stringify(group), this.config.getHttpOptions())
             .toPromise()
             .then((r: Response) => r.json() as number)
             .catch((err: Error) => console.log(err));
