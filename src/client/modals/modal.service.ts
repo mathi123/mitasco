@@ -23,11 +23,7 @@ export class ModalService {
             return;
         }
 
-        if (placeholder.stackModals) {
-            // TODO
-        } else {
-            return this.createFromPlaceholder<T>(placeholder, module, component, parameters);
-        }
+        return this.createFromPlaceholder<T>(placeholder, module, component, parameters);
     }
 
     createFromPlaceholder<T>(placeholder: Placeholder, module: any, component: any, parameters?: Object): Observable<ComponentRef<T>> {

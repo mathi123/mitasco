@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ComponentRef } from "@angular/core";
 import { Group } from "../../shared/group";
 import { GroupService } from "../../services/group.service";
 import { Subscription } from "rxjs";
@@ -11,6 +11,10 @@ import { UserService } from "../../services/user.service";
 import { SearchArgument } from "../../shared/search-argument";
 import { PartialResultList } from "../../shared/partial-result-list";
 import { PermissionCodeService } from "../../services/permission-code.service";
+import { ModalService } from "../../modals/modal.service";
+import { ModalsModule } from "../../modals/modals.module";
+import { YesNoDialogComponent } from "../../modals/yes-no-dialog/yes-no-dialog-component";
+import { DialogResult } from "../../modals/yes-no-dialog/dialog-result";
 
 @Component({
     moduleId: module.id,
@@ -35,7 +39,8 @@ export class GroupDetailComponent implements OnInit {
 
     constructor(private service: GroupService, private route: ActivatedRoute,
                 private configuration: ConfigurationService, private router: Router,
-                private userService: UserService, private permissionService: PermissionCodeService) {
+                private userService: UserService, private permissionService: PermissionCodeService,
+                private modalService: ModalService) {
     }
 
     ngOnInit() {
@@ -73,12 +78,16 @@ export class GroupDetailComponent implements OnInit {
     removeUser(user: KeyValuePair) {
         let index = this.record.users.indexOf(user);
         if (index >= 0) {
-            let confirmed: boolean = window.confirm("Weet u zeker dat u deze wil wissen?");
-
-            if (confirmed) {
-                this.record.users.splice(index, 1);
-                this.hasChanged = true;
-            }
+            this.modalService.create('default-placeholder', ModalsModule, YesNoDialogComponent, {
+                question: 'Weet u zeker dat u wilt wissen?'
+            }).subscribe((comp: ComponentRef<YesNoDialogComponent>) => {
+                comp.instance.dialogClosed.subscribe((dialogResult: DialogResult) => {
+                    if (dialogResult == DialogResult.Yes) {
+                        this.record.users.splice(index, 1);
+                        this.hasChanged = true;
+                    }
+                });
+            });
         }
     }
 

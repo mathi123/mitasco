@@ -11,9 +11,6 @@ export class ModalPlaceholderComponent implements OnInit {
     @Input()
     private id: string;
 
-    @Input()
-    private stackModals: boolean = false;
-
     @ViewChild("modalplaceholder", {read: ViewContainerRef})
     private viewContainerRef: ViewContainerRef;
 
@@ -23,7 +20,6 @@ export class ModalPlaceholderComponent implements OnInit {
     ngOnInit() {
         let placeholder = new Placeholder();
         placeholder.id = this.id;
-        placeholder.stackModals = this.stackModals;
         placeholder.viewContainerRef = this.viewContainerRef;
         placeholder.injector = this.injector;
 
