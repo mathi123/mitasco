@@ -3,7 +3,7 @@ import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class MenuService {
-    private isOpen: boolean = true;
+    public isOpen: boolean = true;
 
     public menuToggled = new Subject<boolean>();
 
@@ -18,6 +18,18 @@ export class MenuService {
         if (this.isOpen != state) {
             this.isOpen = state;
             this.menuToggled.next(this.isOpen);
+            this.updateDom();
+        }
+    }
+
+    private updateDom() {
+        let body = document.getElementsByTagName('body')[0];
+        if (body) {
+            if (this.isOpen) {
+                (body as any).classList.add("body-menu-open-desktop");
+            } else {
+                (body as any).classList.remove("body-menu-open-desktop");
+            }
         }
     }
 }

@@ -1,0 +1,21 @@
+@import '../../../node_modules/singularitygs/stylesheets/_singularitygs';
+
+// @include sgs-change('mobile first', false);
+
+@include add-grid(12);
+@include add-gutter(1/3);
+@include sgs-change('output', 'float');
+
+@for $i from 1 through 12 {
+  .colspan#{$i} {
+    @include grid-span($i);
+  }
+}
+
+.row {
+  width: 100%;
+}
+
+.container {
+  padding: 10px;
+}

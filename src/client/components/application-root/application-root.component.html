@@ -1,11 +1,11 @@
 <div>
-    <header id="header">
+    <header id="header" [ngClass]="{'header-menu-open':menuIsOpen}">
         <button type="button" (click)="toggleMenu()">menu</button>
     </header>
 
     <menu id="menu"></menu>
 
-    <div id="content">
+    <div id="content" class="container">
         <router-outlet></router-outlet>
     </div>
 </div>
