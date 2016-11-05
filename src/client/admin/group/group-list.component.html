@@ -1,18 +1,20 @@
 <div>
     <h1>Groepen</h1>
     <button type="button" class="btn-normal" (click)="create()">Nieuw</button>
-    <table class="simple-table">
-        <tr class="simple-table-header">
-            <td>Omschrijving</td>
-            <td>Gebruikers</td>
-            <td>Permissies</td>
-            <td>Acties</td>
-        </tr>
-        <tr *ngFor="let record of records" class="simple-table-row">
-            <td><a (click)="open(record)" class="link">{{record.description}}</a></td>
-            <td>{{record.userCount}}</td>
-            <td>{{record.permissionCount}}</td>
-            <td><a (click)="remove(record)" class="link">wis</a></td>
-        </tr>
-    </table>
+    <div class="row">
+        <table class="simple-table colspan6">
+            <tr class="simple-table-header">
+                <td>Omschrijving</td>
+                <td>Gebruikers</td>
+                <td>Permissies</td>
+                <td>Acties</td>
+            </tr>
+            <tr *ngFor="let record of records" class="simple-table-row">
+                <td><a (click)="open(record)" class="link">{{record.description}}</a></td>
+                <td>{{record.userCount}}</td>
+                <td>{{record.permissionCount}}</td>
+                <td><a (click)="remove(record)" class="link">wis</a></td>
+            </tr>
+        </table>
+    </div>
 </div>
