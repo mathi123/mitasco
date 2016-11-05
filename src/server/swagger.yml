@@ -101,7 +101,7 @@ paths:
           description: permission denied
         '500':
           description: internal server error
-    put:
+    post:
       description: creates a new user and returns the id
       produces:
         - application/json
@@ -117,7 +117,7 @@ paths:
           description: new user id
           schema:
             type: integer
-    post:
+    put:
       description: updates a user
       produces:
         - application/json
@@ -173,7 +173,7 @@ paths:
           description: permission denied
         '500':
           description: internal server error
-    put:
+    post:
       description: creates a new group and returns the id
       produces:
         - application/json
@@ -189,7 +189,7 @@ paths:
           description: new group id
           schema:
             type: integer
-    post:
+    put:
       description: updates a group
       produces:
         - application/json
@@ -261,7 +261,7 @@ paths:
           description: permission denied
         '500':
           description: internal server error
-    put:
+    post:
       description: creates a new permissioncode
       parameters:
         - $ref: "#/parameters/authenticationToken"
@@ -280,7 +280,7 @@ paths:
           description: permission denied
         '500':
           description: internal server error
-    post:
+    put:
       description: Updates a permissioncode description.
       parameters:
         - $ref: "#/parameters/authenticationToken"
