@@ -371,6 +371,120 @@ paths:
           description: permission denied
         '500':
           description: internal server error
+  /company:
+    get:
+      description: returns all companies matching a search query
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: query
+          in: query
+          description: search text
+          required: false
+          type: string
+        - name: take
+          in: query
+          description: maximum number of results to return
+          required: false
+          type: integer
+        - name: skip
+          in: query
+          description: users to skip in result
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: search results
+          schema:
+            type: object
+            required:
+              - resultCount
+              - skipped
+              - results
+            properties:
+              resultCount:
+                type: integer
+              skipped:
+                type: integer
+              results:
+                type: array
+                items:
+                  $ref: "#/definitions/Company"
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+    post:
+      description: creates a new company and returns the id
+      produces:
+        - application/json
+      parameters:
+        - name: company
+          in: body
+          description: company to add
+          required: true
+          schema:
+            $ref: '#/definitions/Company'
+      responses:
+        '200':
+          description: new company id
+          schema:
+            type: integer
+    put:
+      description: updates a company
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: company
+          in: body
+          description: company to update
+          required: true
+          schema:
+            $ref: '#/definitions/Company'
+      responses:
+        '200':
+          description: group updated
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+  /company/{id}:
+    get:
+      description: Returns a company based on a single id.
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: id
+          in: path
+          description: id of company to fetch
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: company response
+          schema:
+            $ref: '#/definitions/Company'
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
+    delete:
+      description: deletes company by id
+      parameters:
+        - $ref: "#/parameters/authenticationToken"
+        - name: id
+          in: path
+          description: id of company to delete
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: company deleted
+        '550':
+          description: permission denied
+        '500':
+          description: internal server error
 parameters:
   authenticationToken:
     name: token
@@ -492,3 +606,40 @@ definitions:
         description: permissions of the logged user, e.g. visible menu items etc.
         items:
           type: string
+  Company:
+    type: object
+    required:
+      - id
+      - name
+      - email
+      - phone
+      - fax
+      - cell
+      - url
+      - street
+      - zip
+      - city
+      - country
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      email:
+        type: string
+      phone:
+        type: string
+      fax:
+        type: string
+      cell:
+        type: string
+      url:
+        type: string
+      street:
+        type: string
+      zip:
+        type: string
+      city:
+        type: string
+      country:
+        $ref: "#/definitions/Country"

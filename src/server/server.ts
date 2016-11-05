@@ -7,6 +7,7 @@ import * as authenticationRoutes from "./routes/authentication.route";
 import * as groupRoutes from "./routes/group.route";
 import * as countryRoutes from "./routes/country.route";
 import * as languageRoutes from "./routes/language.route";
+import * as companyRoutes from "./routes/company.route";
 
 class StartUp {
     public static main(): number {
@@ -48,6 +49,13 @@ class StartUp {
 
         // language routes
         server.configureRoute(RouteType.GET, 'language', languageRoutes.getAll);
+
+        // company routes
+        server.configureRoute(RouteType.GET, 'company', companyRoutes.search, '');
+        server.configureRoute(RouteType.GET, 'company', companyRoutes.read, ':id');
+        server.configureRoute(RouteType.PUT, 'company', companyRoutes.createOrUpdate, '');
+        server.configureRoute(RouteType.POST, 'company', companyRoutes.createOrUpdate, '');
+        server.configureRoute(RouteType.DELETE, 'company', companyRoutes.remove, ':id');
 
         server.start();
 

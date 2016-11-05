@@ -19,4 +19,9 @@ export class QueryNames {
     public static CountryGetAll: string = "CountryGetAll";
 
     public static LanguageGetAll: string = "LanguageGetAll";
+    public static CustomerTableSearchCount: string = "CustomerTableSearchCount";
+    static CompanyTableCreate;
+    static CompanyTableRemove;
+    static CompanyTableRead;
+    static CompanyTableUpdate;
 }
