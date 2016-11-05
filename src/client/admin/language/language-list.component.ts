@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { LanguageService } from "../../services/language.service";
+import { LanguageService } from "../../server-api/language.service";
 import { Language } from "../../shared/language";
-import { ConfigurationService } from "../../services/configuration.service";
+import { ConfigurationService } from "../../server-api/configuration.service";
 import { Router } from "@angular/router";
 
 @Component({

@@ -10,14 +10,18 @@ import { LoginComponent } from "./components/login/login.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { MenuComponent } from "./components/menu/menu.component";
 import { RegisterComponent } from "./components/register/register.component";
-import { ServicesModule } from "./services/services.module";
+import { ServicesModule } from "./server-api/services.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { AdminModule } from "./admin/admin.module";
 import { WidgetModule } from "./widgets/widget.module";
 import { ModalsModule } from "./modals/modals.module";
+import { UrlTrackingService } from "./services/url-tracking.service";
+import { MenuService } from "./services/menu.service";
+import { UserSettingsService } from "./services/user-settings.service";
 
 @NgModule({
     imports: [BrowserModule, FormsModule, HttpModule, ServicesModule, WidgetModule, ModalsModule, AdminModule, AppRoutingModule],
+    providers: [UrlTrackingService, MenuService, UserSettingsService],
     declarations: [LoginComponent, RegisterComponent, ApplicationRootComponent, MenuComponent, TodoListComponent, TodoDetailComponent,
         DashboardComponent, PageNotFoundComponent],
     bootstrap: [ApplicationRootComponent]

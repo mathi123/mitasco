@@ -1,5 +1,4 @@
-<nav [class.open]="isOpen"
-     [class.closed]="!isOpen">
+<nav [ngClass]="{open: isOpen, closed: !isOpen}">
     <accordion>
         <accordion-group *ngFor="let group of groups" heading="{{group.description}}" isGroupOpen="true">
             <ul>

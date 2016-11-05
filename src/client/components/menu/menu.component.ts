@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { MenuService } from "../../services/menu.service";
-import { ConfigurationService } from "../../services/configuration.service";
+import { ConfigurationService } from "../../server-api/configuration.service";
 import { UserSettingsService } from "../../services/user-settings.service";
 import { MenuGroup } from "./menu-group";
 import { MenuItem } from "./menu-item";
@@ -12,18 +12,12 @@ import { PermissionCodes } from "../../shared/permissions-codes";
     templateUrl: 'menu.component.html'
 })
 export class MenuComponent implements OnInit {
-    public isOpen: boolean = false;
+    public isOpen: boolean;
     public docsUrl: string;
     private groups: MenuGroup[];
 
-    constructor(private menu: MenuService, private configuration: ConfigurationService, private userSettings: UserSettingsService) {
+    constructor(private menuService: MenuService, configuration: ConfigurationService, private userSettings: UserSettingsService) {
         this.docsUrl = configuration.getDocumentationUrl();
-
-        menu.menuToggled.asObservable().subscribe((isOpen: boolean) => {
-            this.isOpen = isOpen;
-        }, err => {
-            console.error(err)
-        });
     }
 
     ngOnInit(): void {
@@ -31,10 +25,14 @@ export class MenuComponent implements OnInit {
             .subscribe(() => {
                 this.rebuildMenu();
             });
+
+        this.menuService.menuToggled
+            .subscribe(() => {
+                this.isOpen = this.menuService.isOpen;
+            });
     }
 
     private rebuildMenu() {
-        console.debug("rebuilding menu");
         this.groups = [];
 
         let generalMenu = new MenuGroup();
