@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { PermissionCodeService } from "../../services/permission-code.service";
+import { PermissionCodeService } from "../../server-api/permission-code.service";
 import { PermissionCode } from "../../shared/permission-code";
-import { ConfigurationService } from "../../services/configuration.service";
+import { ConfigurationService } from "../../server-api/configuration.service";
 import { Router } from "@angular/router";
 
 @Component({

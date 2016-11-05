@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Todo } from "../../shared/todo";
 import { TodoDetailComponent } from "./todo-detail.component";
-import { TodoService } from "../../services/todo.service";
+import { TodoService } from "../../server-api/todo.service";
 import { SearchArgument } from "../../shared/search-argument";
 import { PartialResultList } from "../../shared/partial-result-list";
-import { ConfigurationService } from "../../services/configuration.service";
+import { ConfigurationService } from "../../server-api/configuration.service";
 import { Router } from "@angular/router";
 
 @Component({

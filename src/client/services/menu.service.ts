@@ -3,9 +3,9 @@ import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class MenuService {
-    public isOpen: boolean = true;
+    public isOpen: boolean = false;
 
-    public menuToggled = new Subject<boolean>();
+    public menuToggled = new Subject();
 
     constructor() {
     }
@@ -15,11 +15,9 @@ export class MenuService {
     }
 
     public showMenu(state: boolean) {
-        if (this.isOpen != state) {
-            this.isOpen = state;
-            this.menuToggled.next(this.isOpen);
-            this.updateDom();
-        }
+        this.isOpen = state;
+        this.menuToggled.next();
+        this.updateDom();
     }
 
     private updateDom() {

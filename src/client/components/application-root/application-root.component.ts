@@ -10,14 +10,12 @@ import { UrlTrackingService } from "../../services/url-tracking.service";
 export class ApplicationRootComponent implements OnInit {
     public menuIsOpen: boolean = false;
 
-    constructor(private menu: MenuService, private urlTracker: UrlTrackingService) {
+    constructor(private menu: MenuService, private urlTrackingService: UrlTrackingService) {
     }
 
     ngOnInit(): void {
-        this.menu.menuToggled.asObservable().subscribe((isOpen: boolean) => {
-            this.menuIsOpen = isOpen;
-        }, err => {
-            console.error(err)
+        this.menu.menuToggled.subscribe(() => {
+            this.menuIsOpen = this.menu.isOpen;
         });
     }
 

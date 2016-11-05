@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { ConfigurationService } from "../../services/configuration.service";
+import { ConfigurationService } from "../../server-api/configuration.service";
 import { Router } from "@angular/router";
-import { UserService } from "../../services/user.service";
+import { UserService } from "../../server-api/user.service";
 import { User } from "../../shared/user";
-import { AuthenticationService } from "../../services/authentication.service";
+import { AuthenticationService } from "../../server-api/authentication.service";
 import { Credentials } from "../../shared/credentials";
+import { LoginResult } from "../../shared/login-result";
 
 @Component({
     moduleId: module.id,
@@ -49,8 +50,8 @@ export class RegisterComponent implements OnInit {
         credentials.password = password;
 
         this.authenticationService.Authenticate(credentials)
-            .then((success: Boolean) => {
-                if (success) {
+            .then((loginResult: LoginResult) => {
+                if (loginResult) {
                     this.router.navigate(['dashboard']);
                 } else {
                     console.log("error!")

@@ -1,7 +1,7 @@
 import { User } from "./shared/user";
 import { UserController } from "./controllers/user.controller";
 import { GroupController } from "./controllers/group.controller";
-import { Permissions } from "./security/permissions";
+import { PermissionCodes } from "./shared/permissions-codes";
 import { KeyValuePair } from "./shared/key-value-pair";
 import { PermissionCodeController } from "./controllers/permission-code.controller";
 import { PermissionCode } from "./shared/permission-code";
@@ -37,7 +37,7 @@ export class TestHelpers {
             for (let perm of fullgroup.permissionCodes) {
                 if (found) break;
 
-                if (perm.code == Permissions.Admin) {
+                if (perm.code == PermissionCodes.Admin) {
                     found = true;
                     fullgroup.users.push(userKv);
                     await controller.update(fullgroup);
@@ -50,7 +50,7 @@ export class TestHelpers {
             let groupController = new GroupController();
             let permissions: PermissionCode[] = await(new PermissionCodeController()).getAll();
             for (let perm of permissions) {
-                if (perm.code == Permissions.Admin) {
+                if (perm.code == PermissionCodes.Admin) {
                     let adminGroup = new Group();
                     adminGroup.description = Math.random() + "testgroup";
 
