@@ -46,7 +46,7 @@ export class CompanyController {
             text: `INSERT INTO company (name, email, phone, cell, fax, url, street, zip, city, country_id) 
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id`,
             values: [company.name, company.email, company.phone, company.cell, company.fax, company.url, company.street,
-                company.zip, company.city, company.country.id == 0 ? null : company.country.id]
+                company.zip, company.city, company.country ? company.country.id : null]
         };
         let result = await DbClient.Instance().query(query);
         return result[0]['id'];
@@ -92,7 +92,7 @@ export class CompanyController {
                         country_id = $11
                     WHERE id = $1`,
             values: [company.id, company.name, company.email, company.phone, company.cell, company.fax,
-                company.url, company.street, company.zip, company.city, company.country.id == 0 ? null : company.country.id]
+                company.url, company.street, company.zip, company.city, company.country ? company.country.id : null]
         };
 
         try {

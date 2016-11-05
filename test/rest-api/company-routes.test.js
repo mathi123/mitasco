@@ -46,12 +46,7 @@ describe('Company', function () {
             url: "",
             street: "",
             zip: "",
-            city: "",
-            country: {
-                id: 0,
-                name: "",
-                priority: false
-            }
+            city: ""
         };
         chai.request(localhost)
             .post('/api/company')
@@ -82,12 +77,7 @@ describe('Company', function () {
             url: "",
             street: "",
             zip: "",
-            city: "",
-            country: {
-                id: 0,
-                name: "",
-                priority: false
-            }
+            city: ""
         };
         chai.request(localhost)
             .put('/api/company')

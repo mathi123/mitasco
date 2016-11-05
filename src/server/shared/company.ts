@@ -28,8 +28,9 @@ export class Company implements Deserializable {
         this.street = DeserializeUtil.StrictString(values.street);
         this.zip = DeserializeUtil.StrictString(values.zip);
         this.city = DeserializeUtil.StrictString(values.city);
-        this.country = new Country();
+
         if (values.country) {
+            this.country = new Country();
             this.country.deserialize(values.country);
         }
     }
