@@ -18,9 +18,10 @@ import { ModalsModule } from "./modals/modals.module";
 import { UrlTrackingService } from "./services/url-tracking.service";
 import { MenuService } from "./services/menu.service";
 import { UserSettingsService } from "./services/user-settings.service";
+import { SalesModule } from "./sales/sales.module";
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, HttpModule, ServicesModule, WidgetModule, ModalsModule, AdminModule, AppRoutingModule],
+    imports: [BrowserModule, FormsModule, HttpModule, ServicesModule, WidgetModule, ModalsModule, AdminModule, SalesModule, AppRoutingModule],
     providers: [UrlTrackingService, MenuService, UserSettingsService],
     declarations: [LoginComponent, RegisterComponent, ApplicationRootComponent, MenuComponent, TodoListComponent, TodoDetailComponent,
         DashboardComponent, PageNotFoundComponent],
