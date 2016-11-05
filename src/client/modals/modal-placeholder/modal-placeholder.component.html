@@ -1,3 +1,3 @@
-<div class="modal-placeholder" [hidden]="modalService.activeModals == 0">
+<div class="modal-placeholder" [hidden]="modalService.activeModals == 0" [ngClass]="{'modal-menu-open': menuIsOpen}">
     <div #modalplaceholder></div>
 </div>

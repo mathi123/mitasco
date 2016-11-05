@@ -28,6 +28,10 @@ export class YesNoDialogComponent extends ModalBase implements OnInit {
         this.closeWithResult(DialogResult.No);
     }
 
+    private cancel() {
+        this.closeWithResult(DialogResult.Cancel);
+    }
+
     private closeWithResult(result: DialogResult) {
         this.dialogClosed.emit(result);
         this.closeModal();

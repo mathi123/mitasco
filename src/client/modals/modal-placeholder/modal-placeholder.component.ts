@@ -11,6 +11,9 @@ export class ModalPlaceholderComponent implements OnInit {
     @Input()
     private id: string;
 
+    @Input()
+    private menuIsOpen: boolean = false;
+
     @ViewChild("modalplaceholder", {read: ViewContainerRef})
     private viewContainerRef: ViewContainerRef;
 
