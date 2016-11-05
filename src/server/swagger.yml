@@ -32,9 +32,9 @@ paths:
                 type: string
       responses:
         '200':
-          description: json web token (jwt), pass this token in the headers of next requests
+          description: login success information
           schema:
-            type: string
+            $ref: "#/definitions/LoginResult"
         '401':
           description: unauthorized, the authentication failed
   /user:
@@ -475,3 +475,20 @@ definitions:
         type: integer
       name:
         type: string
+  LoginResult:
+    type: object
+    required:
+      - token
+      - user
+      - permissions
+    properties:
+      token:
+        description: json web token (jwt), pass this token in the headers of next requests
+        type: string
+      user:
+        $ref: "#/definitions/User"
+      permissions:
+        type: array
+        description: permissions of the logged user, e.g. visible menu items etc.
+        items:
+          type: string

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Todo } from "../shared/Todo";
+import { Todo } from "../shared/todo";
 import { SearchArgument } from "../shared/search-argument";
 import { PartialResultList } from "../shared/partial-result-list";
 import { Http, Response } from "@angular/http";

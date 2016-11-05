@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { GroupService } from "../../services/group.service";
+import { GroupService } from "../../server-api/group.service";
 import { Group } from "../../shared/group";
 import { Router } from "@angular/router";
-import { ConfigurationService } from "../../services/configuration.service";
+import { ConfigurationService } from "../../server-api/configuration.service";
 
 @Component({
     moduleId: module.id,

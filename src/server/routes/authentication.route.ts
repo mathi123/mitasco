@@ -13,9 +13,8 @@ export async function getToken(req: Request, res: Response) {
         let isValid = await controller.credentialsAreValid(credentials);
 
         if (isValid) {
-            let userId = await controller.getUserIdByEmail(credentials.email);
-            let token = await controller.createToken(userId);
-            res.json(token);
+            let result = await controller.createLoginResult(credentials.email);
+            res.json(result);
         } else {
             Logger.log("invalid credentials!!");
             res.sendStatus(401);

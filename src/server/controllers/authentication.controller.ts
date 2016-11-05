@@ -4,6 +4,9 @@ import { Credentials } from "../shared/credentials";
 import { QueryConfig } from "pg";
 import { DbClient } from "../db-client";
 import { TokenPayload } from "../security/token-payload";
+import { LoginResult } from "../shared/login-result";
+import { UserController } from "./user.controller";
+import { PermissionCodeController } from "./permission-code.controller";
 
 export class AuthenticationController {
     private _secretKey: string = "KJ2kjJK32LKJA'/.SD[]";
@@ -31,7 +34,7 @@ export class AuthenticationController {
         }
     }
 
-    public async getUserIdByEmail(email: string) {
+    public async getUserIdByEmail(email: string): Promise<number> {
         let query: QueryConfig = {
             name: "Authentication.GetUserIdByEmail",
             text: `SELECT id FROM users 
@@ -44,22 +47,10 @@ export class AuthenticationController {
     }
 
     public async createToken(userId: number): Promise<string> {
+        let permissionController = new PermissionCodeController();
         let payload = new TokenPayload(userId);
 
-        let query: QueryConfig = {
-            name: "Authentication.GetUserPermissionCodes",
-            text: `select DISTINCT(code) from permissioncode
-                   where id in
-                      (select permissioncode_id
-                       from group_permission
-                       where group_id in (
-                         select group_id from group_user
-                         where user_id = $1))`,
-            values: [userId]
-        };
-
-        let queryResult = await DbClient.Instance().query(query);
-        payload.per = queryResult.map(res => res['code']);
+        payload.per = await permissionController.getUserPermissionCodes(userId);
 
         let token = await jwt.sign(payload, this._secretKey);
 
@@ -68,5 +59,22 @@ export class AuthenticationController {
 
     public async verifyToken(token: string): Promise<TokenPayload> {
         return await jwt.verify(token, this._secretKey);
+    }
+
+    public async createLoginResult(email: string): Promise<LoginResult> {
+        let userController = new UserController();
+        let permissionCodeController = new PermissionCodeController();
+
+        let userId = await this.getUserIdByEmail(email);
+        let token = await this.createToken(userId);
+        let user = await userController.read(userId);
+        let permissionCodes = await permissionCodeController.getUserPermissionCodes(userId);
+
+        let result = new LoginResult();
+        result.user = user;
+        result.token = token;
+        result.permissions = permissionCodes;
+
+        return result;
     }
 }
