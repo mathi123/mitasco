@@ -35,9 +35,9 @@ describe('Group', function () {
             });
     });
 
-    it('PUT /api/group', function (done) {
+    it('POST /api/group', function (done) {
         chai.request(localhost)
-            .put('/api/group')
+            .post('/api/group')
             .set('content-type', json)
             .set('token', token)
             .send(data)
@@ -54,9 +54,9 @@ describe('Group', function () {
     });
 
     var permissionCodeId;
-    it('POST /api/group', function (done) {
+    it('PUT /api/group', function (done) {
         chai.request(localhost)
-            .put('/api/permissioncode')
+            .post('/api/permissioncode')
             .set('content-type', json)
             .set('token', token)
             .send({id:0, description:"testUser",code:Math.random()+"test4groups"})
@@ -71,7 +71,7 @@ describe('Group', function () {
                 data.permissionCodes = [{id:permissionCodeId,code:"",description:""}];
 
                 chai.request(localhost)
-                    .post('/api/group')
+                    .put('/api/group')
                     .set('content-type', json)
                     .set('token', token)
                     .send(data)
