@@ -26,14 +26,14 @@ export class PermissionCodeService implements PermissionCodeServiceInterface {
     }
 
     update(permissionCode: PermissionCode): Promise<boolean> {
-        return this.http.post(`${this.config.getBaseUrl()}/permissioncode`, JSON.stringify(permissionCode), this.config.getHttpOptions())
+        return this.http.put(`${this.config.getBaseUrl()}/permissioncode`, JSON.stringify(permissionCode), this.config.getHttpOptions())
             .toPromise()
             .then((r: Response) => r.json() as boolean)
             .catch((err: Error) => console.log(err));
     }
 
     create(permissionCode: PermissionCode): Promise<number> {
-        return this.http.put(`${this.config.getBaseUrl()}/permissioncode`, JSON.stringify(permissionCode), this.config.getHttpOptions())
+        return this.http.post(`${this.config.getBaseUrl()}/permissioncode`, JSON.stringify(permissionCode), this.config.getHttpOptions())
             .toPromise()
             .then((r: Response) => r.json() as number)
             .catch((err: Error) => console.log(err));

@@ -19,28 +19,28 @@ class StartUp {
         // user routes
         server.configureRoute(RouteType.GET, 'user', userRoutes.search);
         server.configureRoute(RouteType.GET, 'user', userRoutes.read, ':id');
-        server.configureRoute(RouteType.POST, 'user', userRoutes.create);
-        server.configureRoute(RouteType.PUT, 'user', userRoutes.register, '', false);
+        server.configureRoute(RouteType.PUT, 'user', userRoutes.create);
+        server.configureRoute(RouteType.POST, 'user', userRoutes.register, '', false);
 
         // todo routes
         server.configureRoute(RouteType.GET, 'todo', todoRoutes.search, '');
         server.configureRoute(RouteType.GET, 'todo', todoRoutes.read, ':id');
-        server.configureRoute(RouteType.POST, 'todo', todoRoutes.create, '');
         server.configureRoute(RouteType.PUT, 'todo', todoRoutes.create, '');
+        server.configureRoute(RouteType.POST, 'todo', todoRoutes.create, '');
         server.configureRoute(RouteType.DELETE, 'todo', todoRoutes.remove, ':id');
 
         // permissionCode routes
         server.configureRoute(RouteType.GET, 'permissioncode', permissionCodeRoutes.getAll);
         server.configureRoute(RouteType.GET, 'permissioncode', permissionCodeRoutes.read, ':id');
-        server.configureRoute(RouteType.POST, 'permissioncode', permissionCodeRoutes.update);
-        server.configureRoute(RouteType.PUT, 'permissioncode', permissionCodeRoutes.create);
+        server.configureRoute(RouteType.PUT, 'permissioncode', permissionCodeRoutes.update);
+        server.configureRoute(RouteType.POST, 'permissioncode', permissionCodeRoutes.create);
         server.configureRoute(RouteType.DELETE, 'permissioncode', permissionCodeRoutes.remove, ':id');
 
         // group routes
         server.configureRoute(RouteType.GET, 'group', groupRoutes.getAll);
         server.configureRoute(RouteType.GET, 'group', groupRoutes.read, ':id');
-        server.configureRoute(RouteType.POST, 'group', groupRoutes.update);
-        server.configureRoute(RouteType.PUT, 'group', groupRoutes.create);
+        server.configureRoute(RouteType.PUT, 'group', groupRoutes.update);
+        server.configureRoute(RouteType.POST, 'group', groupRoutes.create);
         server.configureRoute(RouteType.DELETE, 'group', groupRoutes.remove, ':id');
 
         // country routes

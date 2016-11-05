@@ -36,7 +36,7 @@ export class UserService implements UserServiceInterface {
     }
 
     update(user: User): Promise<boolean> {
-        return this.http.post(`${this.config.getBaseUrl()}/user`, JSON.stringify(user), this.config.getHttpOptions())
+        return this.http.put(`${this.config.getBaseUrl()}/user`, JSON.stringify(user), this.config.getHttpOptions())
             .toPromise()
             .then((r: Response) => r.json() as boolean)
             .catch((err: Error) => console.log(err));
@@ -48,7 +48,7 @@ export class UserService implements UserServiceInterface {
         data.email = user.email;
         data.password = password;
 
-        return this.http.put(`${this.config.getBaseUrl()}/user`, JSON.stringify(data), this.config.getHttpOptions())
+        return this.http.post(`${this.config.getBaseUrl()}/user`, JSON.stringify(data), this.config.getHttpOptions())
             .toPromise()
             .then((r: Response) => r.json() as number)
             .catch((err: Error) => console.log(err));

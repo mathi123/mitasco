@@ -33,10 +33,10 @@ describe('Todo', function () {
             });
     });
 
-    it('POST /api/todo', function (done) {
+    it('PUT /api/todo', function (done) {
         var data = {id: 0, description: "test new todo", isDone: false};
         chai.request(localhost)
-            .post('/api/todo')
+            .put('/api/todo')
             .send(data)
             .set('content-type', json)
             .set('token', token)
