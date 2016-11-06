@@ -1,6 +1,6 @@
 <div class="row">
     <h2>Todo's</h2>
-    <button (click)="addTodo()" class="btn-normal">Nieuw</button>
+    <button (click)="addTodo()" class="btn btn-primary">Nieuw</button>
     <input [(ngModel)]="query" (keyup)="queryChanged()" placeholder="zoeken..."/>
     <ul>
         <li *ngFor="let todo of todos"

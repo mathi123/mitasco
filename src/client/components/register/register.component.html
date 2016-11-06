@@ -20,5 +20,6 @@
         <input type="password" [(ngModel)]="password2" (keyup)="change()"/>
         <p class="validation-error" [hidden]="!isValidating || password2IsValid">Paswoorden komen niet overeen!</p>
     </div>
-    <button type="button" class="btn-normal" (click)="create()" [disabled]="isValidating && !isValid">Aanmaken</button>
+    <button type="button" class="btn btn-primary" (click)="create()" [disabled]="isValidating && !isValid">Aanmaken
+    </button>
 </div>
