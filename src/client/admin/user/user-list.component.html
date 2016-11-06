@@ -1,22 +1,30 @@
-<div class="row">
-    <h1>Gebruikers</h1>
-
-    <input [(ngModel)]="query" (keyup)="queryChanged()" placeholder="zoeken..."/>
-
+<div>
     <div class="row">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>Naam</th>
-                <th>Email</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let record of records">
-                <td>{{record.fullname}}</td>
-                <td>{{record.email}}</td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="col-md-12">
+            <h1>Gebruikers</h1>
+        </div>
+    </div>
+    <div clas="row">
+        <div class="col-md-12">
+            <input [(ngModel)]="query" (keyup)="queryChanged()" placeholder="zoeken..."/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <table class="table table-sm table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th>Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let record of records">
+                    <td>{{record.fullname}}</td>
+                    <td>{{record.email}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

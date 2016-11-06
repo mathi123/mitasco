@@ -1,0 +1,45 @@
+@import 'colors';
+@import 'globals';
+
+.body-menu-open-desktop {
+  margin-left: $sideBarWidth;
+}
+
+.header-menu-open {
+  margin-left: -$sideBarWidth;
+}
+
+.modal-menu-open {
+  margin-left: -$sideBarWidth;
+}
+
+#header{
+  height: $topBarHeight;
+  background-color: $accentColor;
+
+  &:hover{
+    color: $primaryColor;
+    cursor: pointer;
+  }
+}
+
+#menu{
+  margin-left: -$sideBarWidth;
+  //position: fixed;
+
+  nav{
+    background-color: $darkPrimaryColor;
+    color: $textColor;
+    width: $sideBarWidth;
+    height: 100%;
+  }
+
+  .open{
+    -webkit-transition: width 0.5s linear;
+    transition: width 0.5s linear;
+  }
+
+  .closed{
+    display: none;
+  }
+}

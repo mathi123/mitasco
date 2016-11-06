@@ -105,7 +105,7 @@ export class GroupDetailComponent implements OnInit {
 
     cancel() {
         if (this.record.id == 0) {
-            this.router.navigate(['/group-list']);
+            this.router.navigate(['/admin/group-list']);
         } else if (this.hasChanged) {
             let confirmed: boolean = window.confirm("Wilt u de wijzigingen ongedaan maken?");
 
@@ -121,7 +121,7 @@ export class GroupDetailComponent implements OnInit {
         if (this.record.id == 0) {
             this.service.create(this.record)
                 .then((id: number) => {
-                    this.router.navigate(['/group-detail', id]);
+                    this.router.navigate(['/admin/group-detail', id]);
                 }).catch((err) => console.log(err));
         } else {
             this.service.update(this.record)

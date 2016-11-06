@@ -1,68 +1,100 @@
-<div class="row">
-    <h1>Groep aanpassen</h1>
-    <p>Naam van de groep:</p>
-    <input type="text" [(ngModel)]="record.description" (input)="changed()"/>
-
-    <div [hidden]="record.id == 0">
-        <h2>Gebruikers</h2>
-        <p *ngIf="record.users.length == 0">Er zitten nog geen gebruikers in deze groep.</p>
-
-        <table border="1" *ngIf="record.users.length > 0" class="table table-hover">
-            <thead>
-            <tr>
-                <th>Naam</th>
-                <th>Wissen</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let user of record.users">
-                <td>{{user.value}}</td>
-                <td>
-                    <a (click)="removeUser(user)">x</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-        <suggestion-input [(ngModel)]="selectedUser"
-                          [list]="users" ngDefaultControl
-                          [searchProperty]="'fullname'" [displayProperty]="'fullname'"
-                          (suggestionSelected)="userSelected($event)"
-                          placeholder="gebruiker toevoegen..."></suggestion-input>
-
-        <h2>Permissies</h2>
-        <p *ngIf="record.permissionCodes.length === 0">Er zijn nog geen permissies toegekend aan deze groep.</p>
-
-        <table border="1" *ngIf="record.permissionCodes.length > 0" class="table table-hover">
-            <thead>
-            <tr>
-                <th>Code</th>
-                <th>Omschrijving</th>
-                <th>Wissen</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let permission of record.permissionCodes">
-                <td>{{permission.code}}</td>
-                <td>{{permission.description}}</td>
-                <td>
-                    <a (click)="removePermission(permisson)">x</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-        <suggestion-input [(ngModel)]="selectedPermission"
-                          [list]="permissions"
-                          [searchProperty]="'code'" [displayProperty]="'code'"
-                          [maxSuggestions]="5"
-                          (suggestionSelected)="permissionSelected($event)"
-                          placeholder="permissie toevoegen...">
-        </suggestion-input>
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Groep aanpassen</h1>
+        </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p>Naam van de groep:</p>
+            <input type="text" [(ngModel)]="record.description" (input)="changed()"/>
+        </div>
+    </div>
+    <div [hidden]="record.id == 0">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Gebruikers</h2>
+                <p *ngIf="record.users.length == 0">Er zitten nog geen gebruikers in deze groep.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <table border="1" *ngIf="record.users.length > 0" class="table table-sm table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>Naam</th>
+                        <th>Wissen</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let user of record.users">
+                        <td>{{user.value}}</td>
+                        <td>
+                            <a (click)="removeUser(user)">x</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <suggestion-input [(ngModel)]="selectedUser"
+                                  [list]="users" ngDefaultControl
+                                  [searchProperty]="'fullname'" [displayProperty]="'fullname'"
+                                  (suggestionSelected)="userSelected($event)"
+                                  placeholder="gebruiker toevoegen..."></suggestion-input>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Permissies</h2>
+                <p *ngIf="record.permissionCodes.length === 0">Er zijn nog geen permissies toegekend aan deze groep.</p>
+            </div>
+        </div>
+        <div class="row" *ngIf="record.permissionCodes.length > 0">
+            <div class="col-md-6">
+                <table class="table table-sm table-hovered table-hover">
+                    <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Omschrijving</th>
+                        <th>Wissen</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let permission of record.permissionCodes">
+                        <td>{{permission.code}}</td>
+                        <td>{{permission.description}}</td>
+                        <td>
+                            <a (click)="removePermission(permisson)">x</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <suggestion-input [(ngModel)]="selectedPermission"
+                                  [list]="permissions"
+                                  [searchProperty]="'code'" [displayProperty]="'code'"
+                                  [maxSuggestions]="5"
+                                  (suggestionSelected)="permissionSelected($event)"
+                                  placeholder="permissie toevoegen...">
+                </suggestion-input>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" (click)="cancel()" [disabled]="isSaving || !hasChanged " class="btn btn-primary">
+                Annuleren
+            </button>
 
-    <button type="button" (click)="cancel()" [disabled]="isSaving || !hasChanged " class="btn btn-primary">Cancel
-    </button>
-
-    <button type="button" (click)="save()" [disabled]="!hasChanged || isSaving" class="btn btn-primary">Opslaan</button>
+            <button type="button" (click)="save()" [disabled]="!hasChanged || isSaving" class="btn btn-primary">
+                Opslaan
+            </button>
+        </div>
+    </div>
 </div>
