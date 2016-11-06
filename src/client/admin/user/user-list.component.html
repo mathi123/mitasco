@@ -4,23 +4,19 @@
     <input [(ngModel)]="query" (keyup)="queryChanged()" placeholder="zoeken..."/>
 
     <div class="row">
-        <table class="simple-table colspan6">
-            <tr class="simple-table-header">
-                <td>
-                    <p>Naam</p>
-                </td>
-                <td>
-                    <p>Email</p>
-                </td>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Email</th>
             </tr>
-            <tr *ngFor="let record of records" class="simple-table-row">
-                <td>
-                    <p>{{record.fullname}}</p>
-                </td>
-                <td>
-                    <p>{{record.email}}</p>
-                </td>
+            </thead>
+            <tbody>
+            <tr *ngFor="let record of records">
+                <td>{{record.fullname}}</td>
+                <td>{{record.email}}</td>
             </tr>
+            </tbody>
         </table>
     </div>
 </div>

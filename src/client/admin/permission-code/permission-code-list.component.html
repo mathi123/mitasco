@@ -1,21 +1,17 @@
 <div class="row">
     <h1>Permissies</h1>
-    <table class="simple-table colspan6">
-        <tr class="simple-table-header">
-            <td>
-                <p>code</p>
-            </td>
-            <td>
-                <p>Omschrijving</p>
-            </td>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>code</th>
+            <th>Omschrijving</th>
         </tr>
-        <tr *ngFor="let record of records" class="simple-table-row">
-            <td>
-                <p>{{record.code}}</p>
-            </td>
-            <td>
-                <p>{{record.description}}</p>
-            </td>
+        </thead>
+        <tbody>
+        <tr *ngFor="let record of records">
+            <td>{{record.code}}</td>
+            <td>{{record.description}}</td>
         </tr>
+        </tbody>
     </table>
 </div>
