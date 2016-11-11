@@ -1,6 +1,10 @@
 @import 'colors';
 @import 'globals';
 
+body {
+  background-color: #eee;
+}
+
 .body-menu-open-desktop {
   margin-left: $sideBarWidth;
 }
@@ -25,16 +29,18 @@
 
 #menu{
   margin-left: -$sideBarWidth;
-  //position: fixed;
-
+  width: $sideBarWidth;
+  padding: 0;
+  position: absolute;
   nav{
     background-color: $darkPrimaryColor;
     color: $textColor;
-    width: $sideBarWidth;
-    height: 100%;
   }
 
   .open{
+    float: left;
+    width: $sideBarWidth;
+    height: 100%;
     -webkit-transition: width 0.5s linear;
     transition: width 0.5s linear;
   }
