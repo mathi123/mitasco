@@ -5,10 +5,11 @@
             <h2 class="form-signin-header">Aanmelden</h2>
 
             <label for="login" class="sr-only">Login</label>
-            <input type="text" class="form-control" id="login" name="login" [(ngModel)]="username"/>
+            <input type="text" class="form-control" id="login" name="login" [(ngModel)]="username" autocomplete="off"/>
 
             <label for="password" class="sr-only">Paswoord</label>
-            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password"/>
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password"
+                   autocomplete="off"/>
 
             <button type="button" (click)="login()" class="btn btn-outline-primary btn-block btn-first">Inloggen
             </button>

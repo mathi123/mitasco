@@ -19,22 +19,24 @@ body {
 
 #header{
   height: $topBarHeight;
-  background-color: $accentColor;
-
-  &:hover{
-    color: $primaryColor;
-    cursor: pointer;
-  }
+  background-color: $primaryColor;
+  color: $lightBackGround;
+  padding: 5px;
 }
 
 #menu{
   margin-left: -$sideBarWidth;
+  margin-top: 0px;
   width: $sideBarWidth;
   padding: 0;
   position: absolute;
+  height: 100%;
+  background-color: #565656;
+  border-right: 1px solid black;
+
   nav{
-    background-color: $darkPrimaryColor;
-    color: $textColor;
+    //background-color: $darkPrimaryColor;
+    color: #eee;
   }
 
   .open{
@@ -52,4 +54,8 @@ body {
 
 #content {
   padding-top: 10px;
+}
+
+.table-bordered-color, .table-bordered-color td, .table-bordered-color th {
+  border-color: black;
 }

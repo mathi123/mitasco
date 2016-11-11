@@ -2,7 +2,9 @@
     <modal-placeholder [id]="'default-placeholder'" [menuIsOpen]="menuIsOpen"></modal-placeholder>
 
     <header id="header" [ngClass]="{'header-menu-open':menuIsOpen}">
-        <button type="button" class="btn btn-primary" (click)="toggleMenu()">menu</button>
+        <h4 class="menu-item" (click)="toggleMenu()">
+            Mitasco
+        </h4>
     </header>
 
     <menu id="menu"></menu>
