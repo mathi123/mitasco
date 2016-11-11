@@ -19,9 +19,10 @@ body {
 
 #header{
   height: $topBarHeight;
-  background-color: $primaryColor;
+  //background-color: $primaryColor;
   color: $lightBackGround;
-  padding: 5px;
+  //padding: 5px;
+  border-radius: 0px;
 }
 
 #menu{

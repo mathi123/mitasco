@@ -2,10 +2,12 @@
     <accordion>
         <accordion-group *ngFor="let group of groups" heading="{{group.description}}" isGroupOpen="true">
             <ul>
-                <li *ngFor="let item of group.items"><p routerLink="{{item.link}}" routerLinkActive="active-menu">
-                    {{item.description}}</p></li>
+                <li *ngFor="let item of group.items">
+                    <p *ngIf="item.isRouterLink" routerLink="{{item.link}}" routerLinkActive="active-menu">
+                        {{item.description}}</p>
+                    <p *ngIf="!item.isRouterLink"><a target="{{item.target}}"
+                                                     href="{{item.href}}">{{item.description}}</a></p></li>
             </ul>
         </accordion-group>
     </accordion>
-    <span class="align-text-bottom"><a class="api-link" target="_blank" href="{{docsUrl}}">documentation</a></span>
 </nav>
