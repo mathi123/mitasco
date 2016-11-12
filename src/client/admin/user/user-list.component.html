@@ -5,14 +5,15 @@
         </div>
     </div>
     <div clas="row">
-        <div class="col-md-2">
-            <input [(ngModel)]="query" (keyup)="queryChanged()" placeholder="zoeken..." class="form-control"/>
+        <div class="col-md-6">
+            <input [(ngModel)]="query" (keyup)="queryChanged()" placeholder="zoeken..." autocomplete="off"
+                   class="form-control"/>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2">
-            <table class="table table-sm table-hover table-bordered">
-                <thead>
+        <div class="col-md-6">
+            <table class="table table-sm table-hover">
+                <thead class="thead-default">
                 <tr>
                     <th>Naam</th>
                     <th>Email</th>
