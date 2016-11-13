@@ -1,65 +1,66 @@
 <div>
     <div class="row">
         <div class="col-md-12">
-            <h1>Groep aanpassen</h1>
+            <h2 *ngIf="record.id != 0">Groep aanpassen</h2>
+            <h2 *ngIf="record.id == 0">Groep aanmaken</h2>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <p>Naam van de groep:</p>
-            <input type="text" [(ngModel)]="record.description" (input)="changed()"/>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="name">Naam</label>
+                <input id="name" name="name" type="text" class="form-control"
+                       [(ngModel)]="record.description" (input)="changed()"/>
+            </div>
         </div>
     </div>
     <div [hidden]="record.id == 0">
         <div class="row">
-            <div class="col-md-12">
-                <h2>Gebruikers</h2>
-                <p *ngIf="record.users.length == 0">Er zitten nog geen gebruikers in deze groep.</p>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-md-6">
-                <table border="1" *ngIf="record.users.length > 0" class="table table-sm table-bordered table-hover">
-                    <thead>
+                <h4>Gebruikers</h4>
+
+                <div class="alert alert-info" *ngIf="record.users.length == 0">Er zitten nog geen gebruikers in deze
+                    groep.
+                </div>
+
+                <table *ngIf="record.users.length > 0" class="table table-sm table-hover table-striped">
+                    <thead class="thead-inverse">
                     <tr>
                         <th>Naam</th>
-                        <th>Wissen</th>
+                        <th>Acties</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr *ngFor="let user of record.users">
                         <td>{{user.value}}</td>
                         <td>
-                            <a (click)="removeUser(user)">x</a>
+                            <button type="button" class="btn btn-sm btn-outline-danger" (click)="removeUser(user)">wis
+                            </button>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
+
                 <suggestion-input [(ngModel)]="selectedUser"
                                   [list]="users" ngDefaultControl
                                   [searchProperty]="'fullname'" [displayProperty]="'fullname'"
                                   (suggestionSelected)="userSelected($event)"
                                   placeholder="gebruiker toevoegen..."></suggestion-input>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Permissies</h2>
-                <p *ngIf="record.permissionCodes.length === 0">Er zijn nog geen permissies toegekend aan deze groep.</p>
-            </div>
-        </div>
-        <div class="row" *ngIf="record.permissionCodes.length > 0">
+
             <div class="col-md-6">
-                <table class="table table-sm table-hovered table-hover">
-                    <thead>
+                <h4>Permissies</h4>
+
+                <div class="alert alert-info" *ngIf="record.permissionCodes.length === 0">Er zijn nog geen permissies
+                    toegekend aan deze groep.
+                </div>
+
+                <table *ngIf="record.permissionCodes.length > 0" class="table table-sm table-hovered table-hover">
+                    <thead class="thead-inverse">
                     <tr>
                         <th>Code</th>
                         <th>Omschrijving</th>
-                        <th>Wissen</th>
+                        <th>Acties</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -67,22 +68,27 @@
                         <td>{{permission.code}}</td>
                         <td>{{permission.description}}</td>
                         <td>
-                            <a (click)="removePermission(permisson)">x</a>
+                            <button type="button" class="btn btn-sm btn-outline-danger"
+                                    (click)="removePermission(permisson)">wis
+                            </button>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                <suggestion-input [(ngModel)]="selectedPermission"
-                                  [list]="permissions"
-                                  [searchProperty]="'code'" [displayProperty]="'code'"
-                                  [maxSuggestions]="5"
-                                  (suggestionSelected)="permissionSelected($event)"
-                                  placeholder="permissie toevoegen...">
-                </suggestion-input>
+
+                <div class="form-group">
+                    <label for="add-permission" class="col-md-6">Toevoegen</label>
+                    <suggestion-input
+                            id="add-permission"
+                            class="col-md-6"
+                            [(ngModel)]="selectedPermission"
+                            [list]="permissions"
+                            [searchProperty]="'code'" [displayProperty]="'code'"
+                            [maxSuggestions]="5"
+                            (suggestionSelected)="permissionSelected($event)"
+                            placeholder="permissie toevoegen...">
+                    </suggestion-input>
+                </div>
             </div>
         </div>
     </div>

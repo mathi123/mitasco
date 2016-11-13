@@ -3,6 +3,7 @@
 
 body {
   background-color: #eee;
+  margin-top: $topBarHeight;
 }
 
 .body-menu-open-desktop {
@@ -18,11 +19,13 @@ body {
 }
 
 #header{
+  margin-top: -$topBarHeight;
   height: $topBarHeight;
-  //background-color: $primaryColor;
   color: $lightBackGround;
-  //padding: 5px;
   border-radius: 0px;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 }
 
 #menu{
@@ -30,7 +33,7 @@ body {
   margin-top: 0px;
   width: $sideBarWidth;
   padding: 0;
-  position: absolute;
+  position: fixed;
   height: 100%;
   background-color: #565656;
   border-right: 1px solid black;
@@ -54,6 +57,7 @@ body {
 }
 
 #content {
+  //margin-top: $topBarHeight;
   padding-top: 10px;
 }
 

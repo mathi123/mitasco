@@ -1,18 +1,18 @@
 <div>
     <div class="row">
         <div class="col-md-12">
-            <h1>Groepen</h1>
+            <h2>Groepen</h2>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
-            <button type="button" class="btn btn-primary" (click)="create()">Nieuw</button>
+            <button type="button" class="btn btn-success" (click)="create()">Nieuw</button>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
-            <table class="table table-sm table-hover">
-                <thead class="thead-default">
+            <table class="table table-sm table-hover table-striped mt-1">
+                <thead class="thead-inverse">
                 <tr>
                     <th>Omschrijving</th>
                     <th>Gebruikers</th>
@@ -22,10 +22,13 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let record of records">
-                    <td><a (click)="open(record)">{{record.description}}</a></td>
+                    <td><a (click)="open(record)"><u>{{record.description}}</u></a></td>
                     <td>{{record.userCount}}</td>
                     <td>{{record.permissionCount}}</td>
-                    <td><a (click)="remove(record)">wis</a></td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-outline-danger" (click)="remove(record)">wis
+                        </button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
