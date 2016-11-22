@@ -1,0 +1,10 @@
+ul {
+  &.todo-list {
+    list-style-type: none;
+    padding: 0px;
+
+    li {
+      margin-top: 5px;
+    }
+  }
+}

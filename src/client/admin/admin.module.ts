@@ -9,12 +9,13 @@ import { GroupDetailComponent } from "./group/group-detail.component";
 import { PermissionCodeListComponent } from "./permission-code/permission-code-list.component";
 import { UserListComponent } from "./user/user-list.component";
 import { WidgetModule } from "../widgets/widget.module";
+import { ServicesModule } from "../server-api/services.module";
+import { ModalsModule } from "../modals/modals.module";
 
 @NgModule({
-    imports: [CommonModule, WidgetModule, AdminRoutingModule],
+    imports: [CommonModule, WidgetModule, AdminRoutingModule, ServicesModule, ModalsModule],
     declarations: [DashboardComponent, GroupListComponent, GroupDetailComponent, LanguageListComponent, PermissionCodeListComponent, UserListComponent],
     exports: [CommonModule, RouterModule]
 })
 export class AdminModule {
-
 }

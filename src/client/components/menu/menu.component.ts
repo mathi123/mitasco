@@ -13,7 +13,7 @@ import { PermissionCodes } from "../../shared/permissions-codes";
 })
 export class MenuComponent implements OnInit {
     public isOpen: boolean;
-    public docsUrl: string;
+    private docsUrl: string;
     private groups: MenuGroup[];
 
     constructor(private menuService: MenuService, configuration: ConfigurationService, private userSettings: UserSettingsService) {
@@ -38,7 +38,7 @@ export class MenuComponent implements OnInit {
         let generalMenu = new MenuGroup();
 
         generalMenu.description = "Algemeen";
-        generalMenu.add(new MenuItem("Todo's", "/todo-list"));
+        generalMenu.add(new MenuItem("Todo's", "/todo-list", true, null, null));
 
         this.groups.push(generalMenu);
 
@@ -46,10 +46,11 @@ export class MenuComponent implements OnInit {
             let adminMenu = new MenuGroup();
             adminMenu.description = "Admin";
 
-            adminMenu.add(new MenuItem("Groepen", "/admin/group-list"));
-            adminMenu.add(new MenuItem("Gebruikers", "/admin/user-list"));
-            adminMenu.add(new MenuItem("Permissies", "/admin/permission-code-list"));
-            adminMenu.add(new MenuItem("Talen", "/admin/language-list"));
+            adminMenu.add(new MenuItem("Groepen", "/admin/group-list", true, null, null));
+            adminMenu.add(new MenuItem("Gebruikers", "/admin/user-list", true, null, null));
+            adminMenu.add(new MenuItem("Permissies", "/admin/permission-code-list", true, null, null));
+            adminMenu.add(new MenuItem("Talen", "/admin/language-list", true, null, null));
+            adminMenu.add(new MenuItem("API docs", null, false, "_blank", this.docsUrl));
 
             this.groups.push(adminMenu);
         }

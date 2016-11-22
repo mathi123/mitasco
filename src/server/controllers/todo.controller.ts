@@ -95,7 +95,7 @@ export class TodoController implements TodoServiceInterface {
         let rec = new Todo();
         rec.id = row['id'];
         rec.description = row['description'];
-        rec.isDone = row['isDone'];
+        rec.isDone = row['isdone'];
         return rec;
     }
 }

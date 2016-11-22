@@ -243,3 +243,16 @@ gulp.task('sass', function () {
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest(targetPath));
 });
+gulp.task('copy-bootstrap', function () {
+    var paths = ['css/bootstrap.min.css', 'js/bootstrap.min.js'];
+    var basePath = 'node_modules/bootstrap/dist';
+    var targetPath = path.join(config[environment].buildDirClient, "styles");
+
+    for (var i = 0; i < paths.length; i++) {
+        var source = path.join(basePath, paths[i]);
+
+        gulp.src(source)
+            .pipe(gulp.dest(targetPath));
+    }
+
+});

@@ -12,7 +12,7 @@ import { User } from "../../shared/user";
     templateUrl: 'user-list.component.html'
 })
 export class UserListComponent implements OnInit {
-    public query: string = 'test';
+    public query: string = '';
     public records: User[];
 
     constructor(private service: UserService, private router: Router, private configuration: ConfigurationService) {

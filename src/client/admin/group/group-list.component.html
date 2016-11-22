@@ -1,20 +1,37 @@
 <div>
-    <h1>Groepen</h1>
-    <button type="button" class="btn-normal" (click)="create()">Nieuw</button>
     <div class="row">
-        <table class="simple-table colspan6">
-            <tr class="simple-table-header">
-                <td>Omschrijving</td>
-                <td>Gebruikers</td>
-                <td>Permissies</td>
-                <td>Acties</td>
-            </tr>
-            <tr *ngFor="let record of records" class="simple-table-row">
-                <td><a (click)="open(record)" class="link">{{record.description}}</a></td>
-                <td>{{record.userCount}}</td>
-                <td>{{record.permissionCount}}</td>
-                <td><a (click)="remove(record)" class="link">wis</a></td>
-            </tr>
-        </table>
+        <div class="col-md-12">
+            <h2>Groepen</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-success" (click)="create()">Nieuw</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-sm table-hover table-striped mt-1">
+                <thead class="thead-inverse">
+                <tr>
+                    <th>Omschrijving</th>
+                    <th>Gebruikers</th>
+                    <th>Permissies</th>
+                    <th>Acties</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let record of records">
+                    <td><a (click)="open(record)"><u>{{record.description}}</u></a></td>
+                    <td>{{record.userCount}}</td>
+                    <td>{{record.permissionCount}}</td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-outline-danger" (click)="remove(record)">wis
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

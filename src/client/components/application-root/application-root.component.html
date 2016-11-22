@@ -1,13 +1,15 @@
 <div>
     <modal-placeholder [id]="'default-placeholder'" [menuIsOpen]="menuIsOpen"></modal-placeholder>
 
-    <header id="header" [ngClass]="{'header-menu-open':menuIsOpen}">
-        <button type="button" (click)="toggleMenu()">menu</button>
-    </header>
+    <nav id="header" class="navbar navbar-dark bg-inverse" [ngClass]="{'header-menu-open':menuIsOpen}">
+        <h4 (click)="toggleMenu()">
+            Mitasco
+        </h4>
+    </nav>
 
     <menu id="menu"></menu>
 
-    <div id="content">
+    <div id="content" class="container">
         <router-outlet></router-outlet>
     </div>
 </div>

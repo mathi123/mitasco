@@ -16,8 +16,8 @@
     "mime": "registry:dt/mime#0.0.0+20160316155526",
     "mocha": "registry:dt/mocha#2.2.5+20160720003353",
     "node": "registry:env/node#6.0.0+20160723033700",
-    "pg-promise": "github:vitaly-t/pg-promise",
+    "pg-promise": "github:vitaly-t/pg-promise#17b740042a05462725ef388448147f4b00a21dc8",
     "serve-static": "registry:dt/serve-static#0.0.0+20160606155157",
-    "spex": "github:vitaly-t/spex"
+    "spex": "github:vitaly-t/spex#3f36c74343e7775e9ed0d342ca65fade2ac2cdcd"
   }
 }

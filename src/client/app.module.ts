@@ -3,7 +3,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { ApplicationRootComponent } from "./components/application-root/application-root.component";
-import { TodoDetailComponent } from "./components/todo/todo-detail.component";
 import { TodoListComponent } from "./components/todo/todo-list.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { LoginComponent } from "./components/login/login.component";
@@ -18,11 +17,12 @@ import { ModalsModule } from "./modals/modals.module";
 import { UrlTrackingService } from "./services/url-tracking.service";
 import { MenuService } from "./services/menu.service";
 import { UserSettingsService } from "./services/user-settings.service";
+import { SalesModule } from "./sales/sales.module";
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, HttpModule, ServicesModule, WidgetModule, ModalsModule, AdminModule, AppRoutingModule],
+    imports: [BrowserModule, FormsModule, HttpModule, ServicesModule, WidgetModule, ModalsModule, AdminModule, SalesModule, AppRoutingModule],
     providers: [UrlTrackingService, MenuService, UserSettingsService],
-    declarations: [LoginComponent, RegisterComponent, ApplicationRootComponent, MenuComponent, TodoListComponent, TodoDetailComponent,
+    declarations: [LoginComponent, RegisterComponent, ApplicationRootComponent, MenuComponent, TodoListComponent,
         DashboardComponent, PageNotFoundComponent],
     bootstrap: [ApplicationRootComponent]
 })

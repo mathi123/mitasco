@@ -1,24 +1,34 @@
-<div>
-    <table>
-        <tr>
-            <td>Login</td>
-            <td>
-                <input type="text" [(ngModel)]="username"/>
-            </td>
-        </tr>
-        <tr>
-            <td>Paswoord</td>
-            <td>
-                <input type="password" [(ngModel)]="password"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button type="button" (click)="register()" class="btn-normal">Registreer</button>
-            </td>
-            <td>
-                <button type="button" (click)="login()" name="btnClick" class="btn-normal">Inloggen</button>
-            </td>
-        </tr>
-    </table>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form class="form-signin">
+            <h2 class="form-signin-header">Aanmelden</h2>
+
+            <div class="form-group login-div"
+                 [ngClass]="{'has-danger': isValidating && !usernameIsValid}">
+                <label for="login" class="sr-only">Login</label>
+                <input type="text" class="form-control form-control-danger" id="login" name="login" placeholder="e-mail"
+                       [(ngModel)]="username" (keyup)="validateIfNeeded()" autocomplete="off"/>
+            </div>
+
+            <div class="form-group password-div"
+                 [ngClass]="{'has-danger': isValidating && !passwordIsValid}">
+            <label for="password" class="sr-only">Paswoord</label>
+                <input type="password" class="form-control form-control-danger" id="password" name="password"
+                       [(ngModel)]="password"
+                       (keyup)="validateIfNeeded()" autocomplete="off" placeholder="paswoord"/>
+            </div>
+
+            <div class="alert alert-warning" *ngIf="credentialsAreInvalid && !isLoggingIn">
+                Controleer uw <strong>login</strong> en <strong>paswoord</strong>!
+            </div>
+
+            <button type="button" [disabled]="isValidating && !isValid" (click)="login()"
+                    class="btn btn-outline-primary btn-block btn-first">Inloggen
+            </button>
+            <button type="button" (click)="register()" class="btn btn-outline-primary btn-block btn-last">Registreer
+            </button>
+        </form>
+    </div>
+    <div class="col-md-4"></div>
 </div>

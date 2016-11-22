@@ -1,15 +1,34 @@
-<h2>Todo's</h2>
-<button (click)="addTodo()" class="btn-normal">Nieuw</button>
-<input [(ngModel)]="query" (keyup)="queryChanged()" placeholder="zoeken..."/>
-<ul>
-    <li *ngFor="let todo of todos"
-        (click)="onSelect(todo)">
-        <input type="checkbox" [(ngModel)]="todo.isDone"/>
-        {{todo.description}}
-        <a (click)="remove(todo)">x</a>
-    </li>
-</ul>
-<div *ngIf="selected">
-    <h3>Edit</h3>
-    <todo-detail [todo]="selected"></todo-detail>
+<div class="row">
+    <div class="col-md-12">
+        <h2>Todo's</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="input-group">
+          <span class="input-group-btn">
+            <button class="btn btn-success" type="button" (click)="addTodo()">Nieuw</button>
+          </span>
+            <input type="text" class="form-control" [(ngModel)]="query" (keyup)="queryChanged()" placeholder="zoeken..."
+                   autocomplete="off"/>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <ul class="todo-list">
+            <li *ngFor="let todo of todos">
+                <div class="input-group">
+                      <span class="input-group-addon">
+                        <input type="checkbox" [(ngModel)]="todo.isDone" (click)="todoChanged(todo)"/>
+                      </span>
+                    <input type="text" class="form-control" [(ngModel)]="todo.description" (input)="todoChanged(todo)"
+                           autocomplete="off"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger" type="button" (click)="remove(todo)">x</button>
+                    </span>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
