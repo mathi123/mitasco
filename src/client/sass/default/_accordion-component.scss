@@ -1,6 +1,6 @@
 @import '../colors';
 
-$accordionHeadingHeight: 18px;
+$accordionHeadingHeight: 30px;
 $accordionHeadingPadding: 3px;
 $accordionLeftPadding: 10px;
 $accordionBorderThickness: 1px;
@@ -36,13 +36,21 @@ $accordionBorderThickness: 1px;
     &-body{
       ul{
         list-style-type: none;
+        padding-left: 0px;
+        margin-bottom: 0px;
 
         li{
           margin-top: $accordionHeadingPadding;
+          padding-top: 2px;
           height: $accordionHeadingHeight;
+          margin-left: 0px;
+          padding-left: 28px;
+
           cursor: pointer;
           &:hover{
-            color: $primaryTextColor;
+            color: white;
+            background: #283747;
+            border-right: 5px white solid;
           }
         }
       }
@@ -72,5 +80,5 @@ $accordionBorderThickness: 1px;
   }
 }
 .active-menu{
-  color: $primaryTextColor;
+  font-weight: bold;
 }

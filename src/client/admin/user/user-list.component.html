@@ -1,13 +1,17 @@
-<div class="container">
+<div>
     <div class="row">
         <div class="col-md-12">
-            <h1>Gebruikers</h1>
+            <h2>Gebruikers</h2>
         </div>
     </div>
     <div clas="row">
-        <div class="col-md-6">
-            <input [(ngModel)]="query" (keyup)="queryChanged()" placeholder="zoeken..." autocomplete="off"
-                   class="form-control"/>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input [(ngModel)]="query" (keyup)="queryChanged()" placeholder="zoeken..."
+                           autocomplete="off" class="form-control"/>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
