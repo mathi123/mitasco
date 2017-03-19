@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
     private validate() {
         this.emailIsValid = !(this.user.email == null || this.user.email == '');
         this.fullNameIsValid = !(this.user.fullname == null || this.user.fullname == '');
-        this.passwordIsValid = !(this.password == null || this.password == '');
+        this.passwordIsValid = !(this.password == null || this.password == '' || this.password.length < 5);
         this.password2IsValid = !(this.password2 != this.password);
 
         this.isValid = this.emailIsValid && this.fullNameIsValid && this.passwordIsValid && this.password2IsValid;

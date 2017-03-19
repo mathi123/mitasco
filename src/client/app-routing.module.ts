@@ -1,5 +1,4 @@
 import { TodoListComponent } from "./components/todo/todo-list.component";
-import { TodoDetailComponent } from "./components/todo/todo-detail.component";
 import { Routes, RouterModule } from "@angular/router";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
@@ -13,7 +12,6 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'todo-list', component: TodoListComponent},
-    {path: 'todo/:id', component: TodoDetailComponent},
     {path: '**', component: PageNotFoundComponent}
 ];
 

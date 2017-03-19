@@ -1,0 +1,66 @@
+@import 'colors';
+@import 'globals';
+
+body {
+  background-color: #eee;
+  margin-top: $topBarHeight;
+}
+
+.body-menu-open-desktop {
+  margin-left: $sideBarWidth;
+}
+
+.header-menu-open {
+  margin-left: -$sideBarWidth;
+}
+
+.modal-menu-open {
+  margin-left: -$sideBarWidth;
+}
+
+#header{
+  margin-top: -$topBarHeight;
+  height: $topBarHeight;
+  color: $lightBackGround;
+  border-radius: 0px;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+
+#menu{
+  margin-left: -$sideBarWidth;
+  margin-top: 0px;
+  width: $sideBarWidth;
+  padding: 0;
+  position: fixed;
+  height: 100%;
+  background-color: #565656;
+  border-right: 1px solid black;
+
+  nav{
+    //background-color: $darkPrimaryColor;
+    color: #eee;
+  }
+
+  .open{
+    float: left;
+    width: $sideBarWidth;
+    height: 100%;
+    -webkit-transition: width 0.5s linear;
+    transition: width 0.5s linear;
+  }
+
+  .closed{
+    display: none;
+  }
+}
+
+#content {
+  //margin-top: $topBarHeight;
+  padding-top: 10px;
+}
+
+.table-bordered-color, .table-bordered-color td, .table-bordered-color th {
+  border-color: black;
+}

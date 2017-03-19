@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Todo } from "../../shared/todo";
-import { TodoDetailComponent } from "./todo-detail.component";
 import { TodoService } from "../../server-api/todo.service";
 import { SearchArgument } from "../../shared/search-argument";
 import { PartialResultList } from "../../shared/partial-result-list";
@@ -11,7 +10,6 @@ import { Router } from "@angular/router";
     moduleId: module.id,
     selector: 'todo-list',
     templateUrl: 'todo-list.component.html',
-    viewProviders: [TodoDetailComponent],
     providers: [TodoService]
 })
 export class TodoListComponent implements OnInit {
@@ -76,5 +74,9 @@ export class TodoListComponent implements OnInit {
 
                 this.selected = this.todos[0];
             });
+    }
+
+    private todoChanged(todo: Todo) {
+        this.todoService.update(todo);
     }
 }

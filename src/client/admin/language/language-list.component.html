@@ -1,17 +1,23 @@
 <div>
-    <h1>Talen</h1>
     <div class="row">
-        <table class="simple-table colspan6">
-            <tr class="simple-table-header">
-                <td>
-                    <p>Taal</p>
-                </td>
-            </tr>
-            <tr *ngFor="let record of records" class="simple-table-row">
-                <td>
-                    <p>{{record.name}}</p>
-                </td>
-            </tr>
-        </table>
+        <div class="col-md-12">
+            <h1>Talen</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-sm table-hover table-striped">
+                <thead class="thead-inverse">
+                <tr>
+                    <th>Taal</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let record of records">
+                    <td>{{record.name}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
