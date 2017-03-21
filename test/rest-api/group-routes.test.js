@@ -1,7 +1,7 @@
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var expect = require('chai').expect;
-var testHelpers = require('../test-helpers').TestHelpers;
+var testHelpers = require('../../bin/test-helpers').TestHelpers;
 
 var localhost = 'https://localhost:3000';
 var json = 'application/json';

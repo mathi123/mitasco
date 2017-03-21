@@ -1,0 +1,7 @@
+{
+  "driver": "pg",
+  "user": "mitasco",
+  "password": "mitasco",
+  "database": "mitasco",
+  "host": "localhost"
+}

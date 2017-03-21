@@ -1,4 +1,4 @@
-var Todo = new require("../shared/todo").Todo;
+var Todo = new require("../../bin/shared/todo").Todo;
 var expect = require("chai").expect;
 
 describe("Chai testing suite", function () {

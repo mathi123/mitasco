@@ -7,28 +7,17 @@
     "test_node": "app.js"
   },
   "dependencies": {
-    "@angular/common": "2.0.0",
-    "@angular/compiler": "2.0.0",
-    "@angular/core": "2.0.0",
-    "@angular/forms": "2.0.0",
-    "@angular/http": "2.0.0",
-    "@angular/platform-browser": "2.0.0",
-    "@angular/platform-browser-dynamic": "2.0.0",
-    "@angular/router": "^3.0.0",
-    "@angular/upgrade": "2.0.0",
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
     "core-js": "^2.4.1",
     "deserialize-json-strict": "0.0.6",
     "express": "^4.13.4",
+    "gulp": "^3.9.1",
     "jsonwebtoken": "^7.1.9",
     "pg": "^4.5.3",
     "pg-promise": "^5.2.5",
     "reflect-metadata": "^0.1.8",
-    "request": "^2.72.0",
-    "rxjs": "^5.0.0-beta.12",
-    "systemjs": "^0.19.37",
-    "zone.js": "^0.6.23"
+    "request": "^2.72.0"
   },
   "devDependencies": {
     "bootstrap": "^4.0.0-alpha.5",
@@ -40,7 +29,6 @@
     "gulp-environments": "^0.1.1",
     "gulp-mocha": "^2.2.0",
     "gulp-sass": "^2.3.2",
-    "gulp-typescript": "^2.13.6",
     "gulp-unzip": "^0.1.4",
     "mocha": "^2.4.5",
     "mocha-circleci-reporter": "0.0.1",

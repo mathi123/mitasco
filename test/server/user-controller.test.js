@@ -1,4 +1,4 @@
-var UserController = require("../controllers/user.controller").UserController;
+var UserController = require("../../bin/controllers/user.controller").UserController;
 var should = require("should");
 
 describe("UserController class", function () {
