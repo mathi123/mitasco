@@ -6,12 +6,5 @@
     "database": "mitasco",
     "host": "localhost"
   },
-  "test": {
-    "driver": "pg",
-    "user": "postgres",
-    "password": "",
-    "database": "mitasco_test",
-    "host": "localhost"
-  },
   "sql-file": true
 }

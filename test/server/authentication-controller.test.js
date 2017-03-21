@@ -1,5 +1,5 @@
-var UserController = require("../controllers/user.controller").UserController;
-var AuthenticationController = require("../controllers/authentication.controller").AuthenticationController;
+var UserController = require("../../bin/controllers/user.controller").UserController;
+var AuthenticationController = require("../../bin/controllers/authentication.controller").AuthenticationController;
 var should = require("should");
 var jwt = require("jsonwebtoken");
 
