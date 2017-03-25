@@ -9,6 +9,7 @@ export async function getToken(req: Request, res: Response) {
     let controller = new AuthenticationController();
 
     try {
+        Logger.log("getting token");
         credentials.deserialize(data);
         let isValid = await controller.credentialsAreValid(credentials);
 

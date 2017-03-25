@@ -16,6 +16,9 @@ gulp.task('default', function (callback) {
 });
 
 gulp.task('start', function () {
+    // allow self signed certificates
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
     let options = {path: config.runScript};
     server.listen(options);
 });
@@ -94,8 +97,6 @@ gulp.task('test', function (callback) {
 });
 
 gulp.task('run-tests', function () {
-    // allow self signed certificates
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
     return gulp.src(config.path_tests, {read: false})
         .pipe(mocha({reporter: 'mocha-circleci-reporter'}));

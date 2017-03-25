@@ -1,6 +1,7 @@
 import * as express from "express";
 import { Request, Response } from "express";
 import * as bodyParser from "body-parser";
+import * as cors from "cors";
 import * as https from "https";
 import * as fs from "fs";
 import * as path from "path";
@@ -24,6 +25,7 @@ export class WebServer {
     public init(port: number) {
         this._port = port;
         this._app.set('port', port);
+        this._app.use(cors());
         this._app.use(bodyParser.json());
     }
 

@@ -10,6 +10,7 @@
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
     "core-js": "^2.4.1",
+    "cors": "^2.8.1",
     "deserialize-json-strict": "0.0.6",
     "express": "^4.13.4",
     "gulp": "^3.9.1",
